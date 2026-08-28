@@ -1,0 +1,199 @@
+table malt_quality_results
+	lineageTag: e1a16e83-2a7f-43bf-9f19-4b8e6b42c647
+
+	column malt_soluble_beta_glucan
+		dataType: double
+		lineageTag: ea568aa9-f92f-42ff-88e0-bae6f33b2105
+		summarizeBy: none
+		sourceColumn: malt_soluble_beta_glucan
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column malt_viscosity
+		dataType: double
+		lineageTag: f93ff438-7f2a-4a3d-9d66-f519fbe1276e
+		summarizeBy: none
+		sourceColumn: malt_viscosity
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column malt_moisture
+		dataType: double
+		lineageTag: 6e5269d8-a3fe-4005-92d9-3ff82850592b
+		summarizeBy: none
+		sourceColumn: malt_moisture
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column malt_friability
+		dataType: double
+		lineageTag: 09a7c615-9d4c-4b7a-8803-e9b9e322f0d5
+		summarizeBy: none
+		sourceColumn: malt_friability
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column malt_free_amino_nitrogen
+		dataType: double
+		lineageTag: 800d9e7f-6ef9-4977-824d-7371897930c0
+		summarizeBy: none
+		sourceColumn: malt_free_amino_nitrogen
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column malt_color_ebc
+		dataType: double
+		lineageTag: 5c062b13-546d-4a52-804a-599a3b5861e3
+		summarizeBy: none
+		sourceColumn: malt_color_ebc
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column fabrication_order
+		dataType: int64
+		formatString: 0
+		lineageTag: 1d940747-975d-4d47-8f1a-bafc2ca1f052
+		summarizeBy: none
+		sourceColumn: fabrication_order
+
+		annotation SummarizationSetBy = Automatic
+
+	column malt_soluble_protein
+		dataType: double
+		lineageTag: b01dc950-5d2f-4e04-9664-3d0b26764ac1
+		summarizeBy: none
+		sourceColumn: malt_soluble_protein
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column malt_broken_kernels
+		dataType: double
+		lineageTag: 6aed1edb-0526-4b70-93db-54da9487dd9d
+		summarizeBy: none
+		sourceColumn: malt_broken_kernels
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column malt_turbidity_ebc
+		dataType: double
+		lineageTag: f689014e-771b-4b3d-9491-90a7aa4b788a
+		summarizeBy: none
+		sourceColumn: malt_turbidity_ebc
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column malt_partly_unmodified_grains
+		dataType: double
+		lineageTag: 51933c73-bf04-4b3b-a8ae-0772ef53d746
+		summarizeBy: none
+		sourceColumn: malt_partly_unmodified_grains
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column malt_fine_extract
+		dataType: double
+		lineageTag: 9ff6d9d0-a138-424f-82cc-f7dab3e44b87
+		summarizeBy: none
+		sourceColumn: malt_fine_extract
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column malt_ph
+		dataType: double
+		lineageTag: 7c6bea2a-acc6-45ed-bab9-bff4fa7cb04a
+		summarizeBy: none
+		sourceColumn: malt_ph
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column malt_kolbach_index
+		dataType: double
+		lineageTag: 883cc313-14e9-4afc-a079-836e5498a170
+		summarizeBy: none
+		sourceColumn: malt_kolbach_index
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column malt_boiled_wort_colour_ebc
+		dataType: double
+		lineageTag: a0be05a7-dbc7-4387-8221-255fe1f4eedd
+		summarizeBy: none
+		sourceColumn: malt_boiled_wort_colour_ebc
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column malt_hartong_45
+		dataType: double
+		lineageTag: bc9e7285-d905-4324-8b61-2e752ff9cafa
+		summarizeBy: none
+		sourceColumn: malt_hartong_45
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column malt_protein_content
+		dataType: double
+		lineageTag: 7153e7ee-3807-4964-aa75-da7bd9c8e53c
+		summarizeBy: none
+		sourceColumn: malt_protein_content
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column malt_whole_grains
+		dataType: double
+		lineageTag: bce38e6c-2f4d-42ac-9eb7-6b0610f4f26b
+		summarizeBy: none
+		sourceColumn: malt_whole_grains
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition malt_quality_results = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_common_prd_Database = Source{[Name="mal_maite_common_prd",Kind="Database"]}[Data],
+				    gold_Schema = mal_maite_common_prd_Database{[Name="gold",Kind="Schema"]}[Data],
+				    malt_quality_results_View = gold_Schema{[Name="malt_quality_results",Kind="View"]}[Data],
+				    #"Autres colonnes supprimées" = Table.SelectColumns(malt_quality_results_View,{"fabrication_order", "malt_color_ebc", "malt_free_amino_nitrogen", "malt_friability", "malt_moisture", "malt_soluble_beta_glucan", "malt_viscosity", "malt_soluble_protein", "malt_broken_kernels", "malt_turbidity_ebc","malt_partly_unmodified_grains", "malt_fine_extract", "malt_ph", "malt_kolbach_index", "malt_boiled_wort_colour_ebc","malt_hartong_45", "malt_protein_content", "malt_whole_grains"}),
+				    #"Doublons supprimés" = Table.Distinct(#"Autres colonnes supprimées", {"fabrication_order"})
+				in
+				    #"Doublons supprimés"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

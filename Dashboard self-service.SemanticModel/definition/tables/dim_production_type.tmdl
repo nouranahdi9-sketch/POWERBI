@@ -1,0 +1,89 @@
+table dim_production_type
+	lineageTag: 02323364-36ca-4705-aeba-6abc5ba41366
+
+	column id_parameter_production_type
+		dataType: int64
+		formatString: 0
+		lineageTag: 8738d7f7-bd02-48d5-926f-00d8454b47ce
+		summarizeBy: none
+		sourceColumn: id_parameter_production_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column code
+		dataType: string
+		lineageTag: 7f2e887b-b834-4c87-b4b8-e860b7377e3d
+		summarizeBy: none
+		sourceColumn: code
+		sortByColumn: id_parameter_production_type
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: f05c6de2-0465-4bbf-99a6-5c4f5dbafb1f
+		summarizeBy: none
+		sourceColumn: deleted
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: ff4b0371-7ace-4e04-a9f0-8ffe55c23f53
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 695e5597-9779-4719-97fc-3e38c599a571
+			defaultHierarchy: LocalDateTable_cfa884bc-f2ff-46cc-a1bc-355e01349510.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c0e52a1b-6b4e-4db0-8d70-4d97fb19f1d9
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: 8314df88-c566-460a-8ff3-04b53a8716d9
+			defaultHierarchy: LocalDateTable_e90b9fa9-32ab-4074-963c-c5dc8fde649b.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8981af22-1220-4e35-a8cb-105c65902b31
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 17e60bb1-53d9-4971-bb8f-552cd0465920
+			defaultHierarchy: LocalDateTable_55ba2e8c-efa2-45d1-bf18-947f4d8980e3.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_production_type = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    ext_mal_psql_maite_vision_board_prd_Database = Source{[Name="ext_mal_psql_maite_vision_board_prd",Kind="Database"]}[Data],
+				    public_Schema = ext_mal_psql_maite_vision_board_prd_Database{[Name="public",Kind="Schema"]}[Data],
+				    parameters_production_types_Table = public_Schema{[Name="parameters_production_types",Kind="Table"]}[Data]
+				in
+				    parameters_production_types_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

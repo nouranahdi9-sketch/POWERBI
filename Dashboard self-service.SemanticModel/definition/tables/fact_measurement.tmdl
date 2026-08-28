@@ -1,0 +1,105 @@
+table fact_measurement
+	lineageTag: 28635b75-5be3-4a50-ba74-ae9a07fc0cbb
+
+	measure 'Current Culture' = USERCULTURE()
+		lineageTag: f750dfb3-7cc5-4a68-acae-3c374ab130c1
+
+	column batch_id
+		dataType: string
+		lineageTag: 1f4b4cc2-31b8-4f92-bb41-a9db6212feb2
+		summarizeBy: none
+		sourceColumn: batch_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column measure_name
+		dataType: string
+		lineageTag: 8f75e26c-eac0-4465-817b-5d7663280e9a
+		summarizeBy: none
+		sourceColumn: measure_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column value
+		dataType: double
+		lineageTag: cc99c798-cb60-4309-8d39-d0cfbe510581
+		summarizeBy: sum
+		sourceColumn: value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column status
+		dataType: string
+		lineageTag: ae574543-6740-487d-a9a7-b2774b1f6dad
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column label
+		dataType: string
+		lineageTag: 3f643cbd-3b59-4a0e-ab5a-43e4c3e62526
+		summarizeBy: none
+		sourceColumn: label
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: ed8921b8-4415-4683-a912-80af0d98ffb4
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 64029100-4a90-4f6c-a367-f2c595455d3b
+			defaultHierarchy: LocalDateTable_9745db87-a1a0-4a24-bf3b-60f229f78cc1.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 7f2e339e-cbb5-45f8-8f69-60cad22e21e4
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: e578b455-7ed4-4ead-9686-b766a3f3aa11
+			defaultHierarchy: LocalDateTable_a46a4292-cf3e-4de8-a7bc-28ccef9941b8.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 3c5b56ed-0d00-44fd-9f72-a15a91558267
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: d50d3e6c-d59c-461b-91ac-20ab21530cfd
+			defaultHierarchy: LocalDateTable_1cc1f2c5-b1b8-4c09-95e8-84b3932b2929.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_measurement = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    self_service_Schema = mal_maite_bi_prd_Database{[Name="self_service",Kind="Schema"]}[Data],
+				    fact_measurement_Table = self_service_Schema{[Name="fact_measurement",Kind="Table"]}[Data]
+				in
+				    fact_measurement_Table
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

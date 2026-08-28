@@ -1,0 +1,93 @@
+model Model
+	culture: fr-FR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: fr-FR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["batch_report","manual_entries","localisation","dim_batch","dim_site","dim_specification","dim_variety_specy","dim_production_type","malt_quality_results","goods_quality_results","parameters_variables_translations","parameters_variables","phase","fact_weather","fact_energy","fact_measurement","Translation"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation __TEdtr = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table batch_report
+ref table DateTableTemplate_c1e80ec9-ad5f-4ff0-8987-ae6c2c733f65
+ref table manual_entries
+ref table localisation
+ref table dim_batch
+ref table LocalDateTable_ac05d0f1-1f0a-4649-9535-65661b40ebd0
+ref table LocalDateTable_5f882eb9-9c0c-40d6-bd82-d378aa38ce47
+ref table dim_site
+ref table LocalDateTable_e5141b66-c505-490d-a5fa-dd6682c00983
+ref table LocalDateTable_0e80cdc0-98f1-49a2-bfb2-b254621a9151
+ref table LocalDateTable_91ad223c-d1e6-4be2-ba2b-9a8da37e15f5
+ref table dim_specification
+ref table LocalDateTable_301a010c-a47f-4399-a1a3-a9a98e8d39b2
+ref table LocalDateTable_d159cbad-f9ae-4ec3-83a8-c26a45bb4173
+ref table LocalDateTable_f9fe0c7f-f5f9-4dc7-a098-cfc1f9851ba5
+ref table dim_variety_specy
+ref table LocalDateTable_087e9be0-af0d-4411-aaa3-921becff0797
+ref table LocalDateTable_275cf636-5b4d-4eaa-8a4a-42394694c618
+ref table LocalDateTable_82fac5a9-335e-452f-a58c-0b3ac0e532c7
+ref table dim_production_type
+ref table LocalDateTable_cfa884bc-f2ff-46cc-a1bc-355e01349510
+ref table LocalDateTable_e90b9fa9-32ab-4074-963c-c5dc8fde649b
+ref table LocalDateTable_55ba2e8c-efa2-45d1-bf18-947f4d8980e3
+ref table malt_quality_results
+ref table goods_quality_results
+ref table LocalDateTable_0d35227f-0dc2-4f27-9e82-894c9b373074
+ref table LocalDateTable_c09951b5-832b-40cf-b220-650d7bfb66f5
+ref table LocalDateTable_f78c2941-1d0f-4f81-bb9c-5be3144a53f5
+ref table LocalDateTable_cbe4233b-c87e-4a19-8b36-f2431fedf236
+ref table LocalDateTable_7eb4423c-1715-4e2d-9611-10bf8a8d0952
+ref table LocalDateTable_32e1a0bc-64f1-46da-b136-2e355dcda1e7
+ref table LocalDateTable_ad58a1e5-336c-4030-876a-2b963c6c4437
+ref table LocalDateTable_7109a621-4378-46f8-85d0-9e98265ae5c7
+ref table LocalDateTable_c58c4c0a-06d6-4ab7-9b56-dc2975bacaea
+ref table parameters_variables_translations
+ref table LocalDateTable_1c31f3bb-e91a-4d8d-93d6-ed84daa2081b
+ref table LocalDateTable_d98f99aa-a826-4ffc-99d5-bdaa4180c916
+ref table LocalDateTable_d3a41267-1b3d-477e-b433-4eef606a5ddc
+ref table parameters_variables
+ref table LocalDateTable_1514b3f1-1ff2-4be4-a621-c024588416ca
+ref table LocalDateTable_185b076f-2dcd-41fc-bda8-211c75309164
+ref table LocalDateTable_7a3019dd-372b-4ef9-9dee-e94d1e86fe3d
+ref table LocalDateTable_06288084-a2d4-4bfa-a43e-c691f9c15807
+ref table phase
+ref table LocalDateTable_892d9490-cb9d-40f6-94a7-3bba10aa46d7
+ref table LocalDateTable_7ba9cd9b-cf47-4219-8375-92ebf4f06dd0
+ref table LocalDateTable_ad42d3e5-ccbb-482a-a8eb-26729dd77a36
+ref table LocalDateTable_5e1f0104-178d-4c2a-8854-47fba9182dd4
+ref table fact_weather
+ref table LocalDateTable_caf54ca0-c341-4a0d-9704-4fea1a6e33a1
+ref table LocalDateTable_b9a6567d-91cf-4728-9275-8bca9201149a
+ref table LocalDateTable_6d703739-cb55-4441-9b4d-069492812c02
+ref table LocalDateTable_69470445-425f-4271-b238-db1a5795e02b
+ref table LocalDateTable_01db014d-3eda-442e-90e4-c0a7b4012bf9
+ref table LocalDateTable_790ea477-f5d8-42b8-9330-58ecacc48c4b
+ref table LocalDateTable_6d5159e7-c89d-4f98-8a78-01011277ae31
+ref table LocalDateTable_579c8cb1-b3ae-457f-a6ef-cfb0f264028b
+ref table LocalDateTable_d950234d-8797-4ee5-977e-ba643603a114
+ref table LocalDateTable_9b79bfd9-acd7-48b0-990e-f3d7a9841808
+ref table LocalDateTable_7c097121-2f0e-40be-9690-f201f159049a
+ref table LocalDateTable_2d239e07-a400-4c3e-a84c-434b679213f8
+ref table LocalDateTable_ef2c91b2-16d0-4a0d-bb2f-769cd05c0bf6
+ref table fact_energy
+ref table LocalDateTable_f41795c1-2ffd-4339-95c7-138f29b84a25
+ref table LocalDateTable_4e01ea97-e80f-43c4-ad54-588437ccab7b
+ref table LocalDateTable_5615668b-fa50-4805-9842-8732e0e5a7f1
+ref table fact_measurement
+ref table LocalDateTable_9745db87-a1a0-4a24-bf3b-60f229f78cc1
+ref table LocalDateTable_a46a4292-cf3e-4de8-a7bc-28ccef9941b8
+ref table LocalDateTable_1cc1f2c5-b1b8-4c09-95e8-84b3932b2929
+ref table Translation
+
+ref cultureInfo fr-FR
+ref cultureInfo en-US
+ref cultureInfo ro-RO
+ref cultureInfo cs-CZ
+

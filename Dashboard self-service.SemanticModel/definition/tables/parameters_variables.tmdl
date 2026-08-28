@@ -1,0 +1,166 @@
+table parameters_variables
+	lineageTag: a0be1046-6b84-4045-bd6a-4926fc033a47
+
+	column id_parameter_variable
+		dataType: int64
+		formatString: 0
+		lineageTag: 04b9e8e6-363b-40c1-84bb-edf35901b975
+		summarizeBy: none
+		sourceColumn: id_parameter_variable
+
+		annotation SummarizationSetBy = Automatic
+
+	column code
+		dataType: string
+		lineageTag: cc5d781b-2b29-4611-b28f-eae753861507
+		summarizeBy: none
+		sourceColumn: code
+
+		annotation SummarizationSetBy = Automatic
+
+	column unit
+		dataType: int64
+		formatString: 0
+		lineageTag: 2b388fd8-1d79-4cef-a3ef-e18c8a83ba27
+		summarizeBy: sum
+		sourceColumn: unit
+
+		annotation SummarizationSetBy = Automatic
+
+	column phase
+		dataType: int64
+		formatString: 0
+		lineageTag: 3766f843-592c-452e-bbc7-916d7613ac17
+		summarizeBy: sum
+		sourceColumn: phase
+
+		annotation SummarizationSetBy = Automatic
+
+	column activity
+		dataType: int64
+		formatString: 0
+		lineageTag: 4b388c3e-d372-49f8-8485-7b0286867267
+		summarizeBy: sum
+		sourceColumn: activity
+
+		annotation SummarizationSetBy = Automatic
+
+	column task
+		dataType: int64
+		formatString: 0
+		lineageTag: a420dd63-dd8b-46fa-b05a-a3a7e74b0bf2
+		summarizeBy: sum
+		sourceColumn: task
+
+		annotation SummarizationSetBy = Automatic
+
+	column sequence
+		dataType: int64
+		formatString: 0
+		lineageTag: d8adda03-b865-418a-a37b-332dd0bbdc75
+		summarizeBy: sum
+		sourceColumn: sequence
+
+		annotation SummarizationSetBy = Automatic
+
+	column category
+		dataType: int64
+		formatString: 0
+		lineageTag: a8168d5a-2b37-4ca4-970a-b1dde4a50596
+		summarizeBy: sum
+		sourceColumn: category
+
+		annotation SummarizationSetBy = Automatic
+
+	column manual_entry
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 8dd0a582-8e80-43f5-9dfa-dfe9cec69783
+		summarizeBy: none
+		sourceColumn: manual_entry
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 2a53e29d-e653-435b-86fd-3d0d4cfd483a
+		summarizeBy: none
+		sourceColumn: deleted
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 245d2f7e-4392-41a2-9ee3-8e6bef2c3d2f
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 651d8b6b-9e9e-4849-888e-a765947882da
+			defaultHierarchy: LocalDateTable_1514b3f1-1ff2-4be4-a621-c024588416ca.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 7a67a6b0-c7af-4957-b742-19006907c4c3
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: ca179fcb-e0d5-4698-9383-18b56c14bd13
+			defaultHierarchy: LocalDateTable_185b076f-2dcd-41fc-bda8-211c75309164.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 73e72308-bf41-4df3-b0d6-b05c0b2457dc
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: f45bf695-e080-45dc-a132-bf39ea7fcd21
+			defaultHierarchy: LocalDateTable_7a3019dd-372b-4ef9-9dee-e94d1e86fe3d.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column description
+		dataType: string
+		lineageTag: 60a5646d-18c7-410c-810f-c7fcd72994ac
+		summarizeBy: none
+		sourceColumn: description
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_total
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: be8a3944-7b31-498b-83a3-f539ac8f9382
+		summarizeBy: none
+		sourceColumn: is_total
+
+		annotation SummarizationSetBy = Automatic
+
+	partition parameters_variables = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    ext_mal_psql_maite_vision_board_prd_Database = Source{[Name="ext_mal_psql_maite_vision_board_prd",Kind="Database"]}[Data],
+				    public_Schema = ext_mal_psql_maite_vision_board_prd_Database{[Name="public",Kind="Schema"]}[Data],
+				    parameters_variables_Table = public_Schema{[Name="parameters_variables",Kind="Table"]}[Data]
+				in
+				    parameters_variables_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

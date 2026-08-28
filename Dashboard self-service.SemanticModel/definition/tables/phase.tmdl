@@ -1,0 +1,139 @@
+table phase
+	lineageTag: 379b35cf-d1d7-43fe-8812-0c87608f71d1
+
+	column batch_id
+		dataType: string
+		lineageTag: 4065df0b-4199-4754-8c69-f7cd12a74472
+		summarizeBy: none
+		sourceColumn: batch_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column prd_line
+		dataType: string
+		lineageTag: 8f708df1-a11f-49b8-9968-17f9ea0aecfe
+		summarizeBy: none
+		sourceColumn: prd_line
+
+		annotation SummarizationSetBy = Automatic
+
+	column prd_workshop
+		dataType: string
+		lineageTag: d9d13140-8970-4c22-8af6-7de13aadda54
+		summarizeBy: none
+		sourceColumn: prd_workshop
+
+		annotation SummarizationSetBy = Automatic
+
+	column prd_cell
+		dataType: int64
+		formatString: 0
+		lineageTag: 888361af-fdf2-4b85-8d0a-67df7d7c5e5e
+		summarizeBy: sum
+		sourceColumn: prd_cell
+
+		annotation SummarizationSetBy = Automatic
+
+	column mes_number
+		dataType: string
+		lineageTag: 27cfc086-0f20-48c1-b13f-144ffb9e680e
+		summarizeBy: none
+		sourceColumn: mes_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column batch_number
+		dataType: string
+		lineageTag: f830c763-27b9-40d8-9ca7-3d5601e47a78
+		summarizeBy: none
+		sourceColumn: batch_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column start
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 077523d1-c006-4a1d-8478-79672ec23542
+		summarizeBy: none
+		sourceColumn: start
+
+		variation Variation
+			isDefault
+			relationship: 38220aec-bec6-4fe1-b9fa-cec3fbdefd91
+			defaultHierarchy: LocalDateTable_892d9490-cb9d-40f6-94a7-3bba10aa46d7.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column end
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 1966bc0e-ef0d-48a9-b674-1d2b7a87cedc
+		summarizeBy: none
+		sourceColumn: end
+
+		variation Variation
+			isDefault
+			relationship: 9660475e-1007-4229-af17-3a3e3e0faf7c
+			defaultHierarchy: LocalDateTable_7ba9cd9b-cf47-4219-8375-92ebf4f06dd0.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column prd_type
+		dataType: string
+		lineageTag: 13a177a7-1c0d-4b53-bf76-798bb3b8e4ad
+		summarizeBy: none
+		sourceColumn: prd_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: fc382e9a-b080-4f47-94a7-43c84892f545
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: d4f0d47b-3466-4154-a500-1d0c4f6ee0c8
+			defaultHierarchy: LocalDateTable_ad42d3e5-ccbb-482a-a8eb-26729dd77a36.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column modified_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e0962b7f-a154-45e1-8d72-9dd8120fd772
+		summarizeBy: none
+		sourceColumn: modified_at
+
+		variation Variation
+			isDefault
+			relationship: a84fa676-ae40-44c8-a190-0f4569c30fe0
+			defaultHierarchy: LocalDateTable_5e1f0104-178d-4c2a-8854-47fba9182dd4.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column status
+		dataType: string
+		lineageTag: 62b7defd-6bc1-43be-826b-b892020db7f2
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition phase = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_common_prd_Database = Source{[Name="mal_maite_common_prd",Kind="Database"]}[Data],
+				    gold_Schema = mal_maite_common_prd_Database{[Name="gold",Kind="Schema"]}[Data],
+				    phases_View = gold_Schema{[Name="phases",Kind="View"]}[Data]
+				in
+				    phases_View
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,117 @@
+table batch_report
+	lineageTag: 354e3567-eed9-4307-9618-d783fe625f28
+
+	column batch
+		dataType: string
+		lineageTag: 29d34fd7-54f4-4dc6-83f7-a876bcf0e341
+		summarizeBy: none
+		sourceColumn: batch
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_batch
+		dataType: string
+		lineageTag: 3939cbcf-2924-4f39-8adb-3bc135edbe12
+		summarizeBy: none
+		sourceColumn: id_batch
+
+		annotation SummarizationSetBy = Automatic
+
+	column parameter
+		dataType: string
+		lineageTag: 5609888a-a9c5-4d46-b1d5-7b4a655280bd
+		summarizeBy: none
+		sourceColumn: parameter
+		sortByColumn: custom_order
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column value
+		dataType: string
+		lineageTag: 8d09d147-222f-4111-b3d3-9e6304e9506f
+		summarizeBy: none
+		sourceColumn: value
+
+		annotation SummarizationSetBy = Automatic
+
+	column custom_order
+		dataType: int64
+		formatString: 0
+		lineageTag: aa7d4404-2051-4e18-8257-6d6dbd71dd82
+		summarizeBy: sum
+		sourceColumn: custom_order
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: fa243265-643f-46cb-9fb6-33f4148282d8
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 3e93eecc-db25-4751-9db7-b57c32947a8a
+			defaultHierarchy: LocalDateTable_0d35227f-0dc2-4f27-9e82-894c9b373074.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: b4cb6f98-f492-4932-ad83-3144467579ff
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: 95e44950-096a-4480-9b01-2170517970d0
+			defaultHierarchy: LocalDateTable_c09951b5-832b-40cf-b220-650d7bfb66f5.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 4fa12308-9561-4ac4-b9ab-4c9bee06890e
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 3a23a0f0-bd36-458a-8020-1aabca9e1519
+			defaultHierarchy: LocalDateTable_f78c2941-1d0f-4f81-bb9c-5be3144a53f5.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Filtre DesiredFields'
+		dataType: string
+		lineageTag: 066a64c9-f222-42fd-a615-95165fd5877b
+		summarizeBy: none
+		sourceColumn: Filtre DesiredFields
+
+		annotation SummarizationSetBy = Automatic
+
+	partition batch_report = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    self_service_Schema = mal_maite_bi_prd_Database{[Name="self_service",Kind="Schema"]}[Data],
+				    fact_batch_report_Table = self_service_Schema{[Name="fact_batch_report",Kind="Table"]}[Data],
+				    #"Lignes triées" = Table.Sort(fact_batch_report_Table,{{"custom_order", Order.Ascending}}),
+				    #"Duplication de la colonne" = Table.DuplicateColumn(#"Lignes triées", "parameter", "parameter - Copier"),
+				    #"Colonnes renommées" = Table.RenameColumns(#"Duplication de la colonne",{{"parameter - Copier", "Filtre DesiredFields"}})
+				in
+				    #"Colonnes renommées"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

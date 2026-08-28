@@ -1,0 +1,197 @@
+table Translation
+	lineageTag: 521440a1-73b0-4952-9316-915096f19b3d
+
+	measure 'Title Measurement by batch' =
+			
+			VAR CurrentCulture = USERCULTURE()
+			
+			VAR TitleTranslated =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "SelfService",
+			        Translation[TranslationKey] = "TITLE_MEASUREMENTS",
+			        Translation[LanguageCode] = CurrentCulture
+			    )
+			
+			VAR TitleDefault =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "SelfService",
+			        Translation[TranslationKey] = "TITLE_MEASUREMENTS",
+			        Translation[LanguageCode] = "en-US"
+			    )
+			
+			RETURN
+			COALESCE ( TitleTranslated, TitleDefault )
+		lineageTag: 4358cb4e-7f9b-4bad-b244-213bd10c1c99
+
+	measure 'Title Energy by batch' =
+			
+			VAR CurrentCulture = USERCULTURE()
+			
+			VAR TitleTranslated =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "SelfService",
+			        Translation[TranslationKey] = "TITLE_ENERGY",
+			        Translation[LanguageCode] = CurrentCulture
+			    )
+			
+			VAR TitleDefault =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "SelfService",
+			        Translation[TranslationKey] = "TITLE_ENERGY",
+			        Translation[LanguageCode] = "en-US"
+			    )
+			
+			RETURN
+			COALESCE ( TitleTranslated, TitleDefault )
+		lineageTag: d61382ed-2e5c-48e6-ab21-73bdf2764595
+
+	measure 'Title Weather by batch' =
+			
+			VAR CurrentCulture = USERCULTURE()
+			
+			VAR TitleTranslated =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "SelfService",
+			        Translation[TranslationKey] = "TITLE_WEATHER",
+			        Translation[LanguageCode] = CurrentCulture
+			    )
+			
+			VAR TitleDefault =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "SelfService",
+			        Translation[TranslationKey] = "TITLE_WEATHER",
+			        Translation[LanguageCode] = "en-US"
+			    )
+			
+			RETURN
+			COALESCE ( TitleTranslated, TitleDefault )
+		lineageTag: 5b62cbc1-3009-4b97-8959-78bbb266f9c0
+
+	measure 'Title Location by batch' =
+			
+			VAR CurrentCulture = USERCULTURE()
+			
+			VAR TitleTranslated =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "SelfService",
+			        Translation[TranslationKey] = "TITLE_LOCATION",
+			        Translation[LanguageCode] = CurrentCulture
+			    )
+			
+			VAR TitleDefault =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "SelfService",
+			        Translation[TranslationKey] = "TITLE_LOCATION",
+			        Translation[LanguageCode] = "en-US"
+			    )
+			
+			RETURN
+			COALESCE ( TitleTranslated, TitleDefault )
+		lineageTag: 187046cb-7f51-4a9d-b033-f19eeee3af3d
+
+	measure 'Title Vessel by batch' =
+			
+			VAR CurrentCulture = USERCULTURE()
+			
+			VAR TitleTranslated =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "SelfService",
+			        Translation[TranslationKey] = "TITLE_VESSEL",
+			        Translation[LanguageCode] = CurrentCulture
+			    )
+			
+			VAR TitleDefault =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "SelfService",
+			        Translation[TranslationKey] = "TITLE_VESSEL",
+			        Translation[LanguageCode] = "en-US"
+			    )
+			
+			RETURN
+			COALESCE ( TitleTranslated, TitleDefault )
+		lineageTag: 1efaa2c9-2733-453c-ba35-aec40ffafc5a
+
+	measure CLEAR_FILTERS =
+			
+			VAR CurrentCulture = USERCULTURE()
+			
+			VAR TitleTranslated =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "SelfService",
+			        Translation[TranslationKey] = "CLEAR_FILTERS",
+			        Translation[LanguageCode] = CurrentCulture
+			    )
+			
+			VAR TitleDefault =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "SelfService",
+			        Translation[TranslationKey] = "CLEAR_FILTERS",
+			        Translation[LanguageCode] = "en-US"
+			    )
+			
+			RETURN
+			COALESCE ( TitleTranslated, TitleDefault )
+		lineageTag: b96c9862-6aa4-4d4f-a86c-e5d17237f176
+
+	measure 'Test Title' = "Mesures par batch"
+		lineageTag: b64d7ad4-6ba6-4ece-a959-20ef2f0e4be9
+
+	column ReportCode
+		dataType: string
+		lineageTag: ce7fabd6-6ca1-4c3c-9024-ca372eab74ed
+		summarizeBy: none
+		sourceColumn: ReportCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column TranslationKey
+		dataType: string
+		lineageTag: 8f5f999f-a802-4575-b0ea-f60ac49af107
+		summarizeBy: none
+		sourceColumn: TranslationKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column LanguageCode
+		dataType: string
+		lineageTag: 6032563e-ea8d-438d-b251-eb7030cab3f5
+		summarizeBy: none
+		sourceColumn: LanguageCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column TranslationText
+		dataType: string
+		lineageTag: a6801490-6f75-49c1-89c9-6f8103d8b123
+		summarizeBy: none
+		sourceColumn: TranslationText
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Translation = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    common_Schema = mal_maite_bi_prd_Database{[Name="common",Kind="Schema"]}[Data],
+				    translation_Table = common_Schema{[Name="translation",Kind="Table"]}[Data]
+				in
+				    translation_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

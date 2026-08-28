@@ -1,0 +1,87 @@
+table fact_energy
+	lineageTag: 2c0d2814-5b90-48f6-91cf-ea1ecc361bae
+
+	column id_batch
+		dataType: string
+		lineageTag: 90aa0589-1203-4bd6-b3f4-d7ec9f2e7753
+		summarizeBy: none
+		sourceColumn: id_batch
+
+		annotation SummarizationSetBy = Automatic
+
+	column value
+		dataType: double
+		lineageTag: 36147b86-57b7-4865-a74b-1170b83600a4
+		summarizeBy: sum
+		sourceColumn: value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 97297b40-fa95-42d4-9217-4e01dee465f9
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 2f65b67d-ff75-408a-85b8-31c299eaf84f
+			defaultHierarchy: LocalDateTable_f41795c1-2ffd-4339-95c7-138f29b84a25.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 9ea3ca19-78e3-4f52-8c4e-ae36d21b83ac
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: 132335f6-7270-4138-8509-645506e8daa5
+			defaultHierarchy: LocalDateTable_4e01ea97-e80f-43c4-ad54-588437ccab7b.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: cf17e01a-1507-47b4-bf15-a56d8d68a2bc
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 8ea06070-a804-468b-884f-8377a570f9ee
+			defaultHierarchy: LocalDateTable_5615668b-fa50-4805-9842-8732e0e5a7f1.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_parameter
+		dataType: int64
+		formatString: 0
+		lineageTag: fba2cd7d-11aa-41fd-9f50-cd00b518a35d
+		summarizeBy: none
+		sourceColumn: id_parameter
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_energy = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    self_service_Schema = mal_maite_bi_prd_Database{[Name="self_service",Kind="Schema"]}[Data],
+				    fact_energy_Table = self_service_Schema{[Name="fact_energy",Kind="Table"]}[Data]
+				in
+				    fact_energy_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

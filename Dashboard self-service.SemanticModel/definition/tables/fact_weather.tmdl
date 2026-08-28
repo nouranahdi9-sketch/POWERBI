@@ -1,0 +1,585 @@
+table fact_weather
+	lineageTag: 111ebfdd-e348-4db0-8d96-f1d56ac131b7
+
+	column id_batch
+		dataType: string
+		lineageTag: bab009cc-e50d-45cb-a059-ed86cd3de0c3
+		summarizeBy: none
+		sourceColumn: id_batch
+
+		annotation SummarizationSetBy = Automatic
+
+	column production_line
+		dataType: string
+		lineageTag: dd1c791d-4d9f-4263-baed-89dfafa0b1d9
+		summarizeBy: none
+		sourceColumn: production_line
+
+		annotation SummarizationSetBy = Automatic
+
+	column fabrication_order
+		dataType: int64
+		formatString: 0
+		lineageTag: 8b6ef78a-47ff-4538-b3eb-2c75ca967826
+		summarizeBy: sum
+		sourceColumn: fabrication_order
+
+		annotation SummarizationSetBy = Automatic
+
+	column production_planned_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c2851e81-d8cd-43d8-a86b-89fd6aedc26d
+		summarizeBy: none
+		sourceColumn: production_planned_date
+
+		variation Variation
+			isDefault
+			relationship: a72d9f92-e52f-431b-ad33-4944b363d9e7
+			defaultHierarchy: LocalDateTable_caf54ca0-c341-4a0d-9704-4fea1a6e33a1.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column steep_c1_start_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: ad216faf-7bf0-4206-876b-59685ce99a8d
+		summarizeBy: none
+		sourceColumn: steep_c1_start_date
+
+		variation Variation
+			isDefault
+			relationship: 6ae8f2c8-8b71-48ce-bf53-fefc4c8637b4
+			defaultHierarchy: LocalDateTable_b9a6567d-91cf-4728-9275-8bca9201149a.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column steep_c1_weather_temperature
+		dataType: double
+		lineageTag: e1e415f6-0748-4bcd-a9db-82e96eef4b07
+		summarizeBy: sum
+		sourceColumn: steep_c1_weather_temperature
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column steep_c1_weather_hygrometry
+		dataType: double
+		lineageTag: 06fd06b0-2912-4522-be6d-eb81618f4c75
+		summarizeBy: sum
+		sourceColumn: steep_c1_weather_hygrometry
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column steep_c1_weather_temperature_predicted
+		dataType: double
+		lineageTag: f0df7b3e-c9f1-47a5-8da6-f602152bd5cd
+		summarizeBy: sum
+		sourceColumn: steep_c1_weather_temperature_predicted
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column steep_c1_weather_hygrometry_predicted
+		dataType: double
+		lineageTag: ef404b73-a886-4606-b7c9-570acdb7c51d
+		summarizeBy: sum
+		sourceColumn: steep_c1_weather_hygrometry_predicted
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column steep_c2_start_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 662ded0f-727d-4024-b462-710786f938b6
+		summarizeBy: none
+		sourceColumn: steep_c2_start_date
+
+		variation Variation
+			isDefault
+			relationship: b71e13d0-f915-48e4-91d4-6fac5fcd7415
+			defaultHierarchy: LocalDateTable_6d703739-cb55-4441-9b4d-069492812c02.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column steep_c2_weather_temperature
+		dataType: double
+		lineageTag: 214a550d-978d-4d3b-90c2-637aa1d0d0e1
+		summarizeBy: sum
+		sourceColumn: steep_c2_weather_temperature
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column steep_c2_weather_hygrometry
+		dataType: double
+		lineageTag: 19efffca-4bf5-4f58-b28c-3cd6c4e633e7
+		summarizeBy: sum
+		sourceColumn: steep_c2_weather_hygrometry
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column steep_c2_weather_temperature_predicted
+		dataType: double
+		lineageTag: 5e84fe45-b687-4a8a-ad53-f4b54d6d4f38
+		summarizeBy: sum
+		sourceColumn: steep_c2_weather_temperature_predicted
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column steep_c2_weather_hygrometry_predicted
+		dataType: double
+		lineageTag: 0d48f600-1253-45af-bfb8-aef73707a546
+		summarizeBy: sum
+		sourceColumn: steep_c2_weather_hygrometry_predicted
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column germ_c1_start_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 45759e2e-d6f5-4b40-ab6f-be603590431b
+		summarizeBy: none
+		sourceColumn: germ_c1_start_date
+
+		variation Variation
+			isDefault
+			relationship: 02548856-eb8a-4a80-b07a-0c7403b912f4
+			defaultHierarchy: LocalDateTable_69470445-425f-4271-b238-db1a5795e02b.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column germ_c1_weather_temperature
+		dataType: double
+		lineageTag: 96781d59-425d-4b1e-8ae1-54bc6a56d92c
+		summarizeBy: sum
+		sourceColumn: germ_c1_weather_temperature
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column germ_c1_weather_hygrometry
+		dataType: double
+		lineageTag: a6064520-cdc9-41a1-9f32-f9efbe2e9fb1
+		summarizeBy: sum
+		sourceColumn: germ_c1_weather_hygrometry
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column germ_c1_weather_temperature_predicted
+		dataType: double
+		lineageTag: 8881272e-74db-4f45-906b-4b9bb37d5e98
+		summarizeBy: sum
+		sourceColumn: germ_c1_weather_temperature_predicted
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column germ_c1_weather_hygrometry_predicted
+		dataType: double
+		lineageTag: 9ec69042-85aa-4d80-b00f-1e4ac48aa3c9
+		summarizeBy: sum
+		sourceColumn: germ_c1_weather_hygrometry_predicted
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column germ_c2_start_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d9589df9-6331-467e-82d3-6fcd18b10a99
+		summarizeBy: none
+		sourceColumn: germ_c2_start_date
+
+		variation Variation
+			isDefault
+			relationship: cd86b09e-7e2c-45ef-8d96-b05576c56a7f
+			defaultHierarchy: LocalDateTable_01db014d-3eda-442e-90e4-c0a7b4012bf9.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column germ_c2_weather_temperature
+		dataType: double
+		lineageTag: 25fa8dd7-3c00-4b43-9227-2856dfc3cf35
+		summarizeBy: sum
+		sourceColumn: germ_c2_weather_temperature
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column germ_c2_weather_hygrometry
+		dataType: double
+		lineageTag: dfdf85dd-f62d-4975-8195-0b60d30e0604
+		summarizeBy: sum
+		sourceColumn: germ_c2_weather_hygrometry
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column germ_c2_weather_temperature_predicted
+		dataType: double
+		lineageTag: b389118d-919b-4389-8071-c1d0f92a7481
+		summarizeBy: sum
+		sourceColumn: germ_c2_weather_temperature_predicted
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column germ_c2_weather_hygrometry_predicted
+		dataType: double
+		lineageTag: 4639106b-50fb-4c47-a1ad-67c6614eb8de
+		summarizeBy: sum
+		sourceColumn: germ_c2_weather_hygrometry_predicted
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column germ_c3_start_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f7f8bcff-3e53-4a2c-8a6d-5a19a0c57677
+		summarizeBy: none
+		sourceColumn: germ_c3_start_date
+
+		variation Variation
+			isDefault
+			relationship: dbd009bc-721b-4f78-a142-8e4a6059f9c6
+			defaultHierarchy: LocalDateTable_790ea477-f5d8-42b8-9330-58ecacc48c4b.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column germ_c3_weather_temperature
+		dataType: double
+		lineageTag: 4a88d166-95ad-4057-b176-70dee0bd3150
+		summarizeBy: sum
+		sourceColumn: germ_c3_weather_temperature
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column germ_c3_weather_hygrometry
+		dataType: double
+		lineageTag: 23b330ed-7b14-4a78-a985-c59a143038e6
+		summarizeBy: sum
+		sourceColumn: germ_c3_weather_hygrometry
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column germ_c3_weather_temperature_predicted
+		dataType: double
+		lineageTag: f2b16ecd-bac2-487f-8c27-36f61cb529b7
+		summarizeBy: sum
+		sourceColumn: germ_c3_weather_temperature_predicted
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column germ_c3_weather_hygrometry_predicted
+		dataType: double
+		lineageTag: dff7704d-14c6-48d7-8d0b-03d809b9f4cf
+		summarizeBy: sum
+		sourceColumn: germ_c3_weather_hygrometry_predicted
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column germ_c4_start_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a904e187-af9d-4988-b811-ec10f8803bbe
+		summarizeBy: none
+		sourceColumn: germ_c4_start_date
+
+		variation Variation
+			isDefault
+			relationship: 383ca99f-5189-4a66-a184-01842dbe5540
+			defaultHierarchy: LocalDateTable_6d5159e7-c89d-4f98-8a78-01011277ae31.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column germ_c4_weather_temperature
+		dataType: double
+		lineageTag: a9a31bc1-598a-4199-968e-f81e46b86f27
+		summarizeBy: sum
+		sourceColumn: germ_c4_weather_temperature
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column germ_c4_weather_hygrometry
+		dataType: double
+		lineageTag: bf8e16fa-92ad-41b0-9b40-0c77d01b6f5e
+		summarizeBy: sum
+		sourceColumn: germ_c4_weather_hygrometry
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column germ_c4_weather_temperature_predicted
+		dataType: double
+		lineageTag: 0caea343-7029-4c87-b5ef-12ec487eee1c
+		summarizeBy: sum
+		sourceColumn: germ_c4_weather_temperature_predicted
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column germ_c4_weather_hygrometry_predicted
+		dataType: double
+		lineageTag: 4b02a394-0f9a-4589-b14c-c4c3976d18f8
+		summarizeBy: sum
+		sourceColumn: germ_c4_weather_hygrometry_predicted
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column germ_c5_start_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a8774d1b-cff4-41a0-ab0a-7224a7e90fda
+		summarizeBy: none
+		sourceColumn: germ_c5_start_date
+
+		variation Variation
+			isDefault
+			relationship: b3da7fde-6342-4c8e-8156-ece7edb1f9a2
+			defaultHierarchy: LocalDateTable_579c8cb1-b3ae-457f-a6ef-cfb0f264028b.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column germ_c5_weather_temperature
+		dataType: double
+		lineageTag: 0aca22eb-9b84-42db-951c-724b1ba2639e
+		summarizeBy: sum
+		sourceColumn: germ_c5_weather_temperature
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column germ_c5_weather_hygrometry
+		dataType: double
+		lineageTag: 97fb3cb2-f4c8-4537-bb6e-4d15f948ea4b
+		summarizeBy: sum
+		sourceColumn: germ_c5_weather_hygrometry
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column germ_c5_weather_temperature_predicted
+		dataType: double
+		lineageTag: 25d09cec-1ccd-4740-bf44-c61618a8b7a0
+		summarizeBy: sum
+		sourceColumn: germ_c5_weather_temperature_predicted
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column germ_c5_weather_hygrometry_predicted
+		dataType: double
+		lineageTag: 3f01995d-4b4c-42d0-9c93-640a156d4ea3
+		summarizeBy: sum
+		sourceColumn: germ_c5_weather_hygrometry_predicted
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column kiln_c1_start_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e877dafe-90ee-4e3b-8b79-4533254ff8b0
+		summarizeBy: none
+		sourceColumn: kiln_c1_start_date
+
+		variation Variation
+			isDefault
+			relationship: b7e8ca55-d2e0-4b9b-9552-bbfacaead1d3
+			defaultHierarchy: LocalDateTable_d950234d-8797-4ee5-977e-ba643603a114.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column kiln_c1_weather_temperature
+		dataType: double
+		lineageTag: 6e9d9955-98a2-4611-98ea-42aeedf0caf9
+		summarizeBy: sum
+		sourceColumn: kiln_c1_weather_temperature
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column kiln_c1_weather_hygrometry
+		dataType: double
+		lineageTag: 9e15fe2b-64e5-40ca-9d05-e7434e5334ee
+		summarizeBy: sum
+		sourceColumn: kiln_c1_weather_hygrometry
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column kiln_c1_weather_temperature_predicted
+		dataType: double
+		lineageTag: 7dd360f8-56f9-420d-bec1-93fb77c7714c
+		summarizeBy: sum
+		sourceColumn: kiln_c1_weather_temperature_predicted
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column kiln_c1_weather_hygrometry_predicted
+		dataType: double
+		lineageTag: 3afc12f1-310e-4bfa-b358-dac5ccdaef61
+		summarizeBy: sum
+		sourceColumn: kiln_c1_weather_hygrometry_predicted
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column kiln_c2_start_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 72017fda-9f4a-4de5-a7f9-192993bf0f92
+		summarizeBy: none
+		sourceColumn: kiln_c2_start_date
+
+		variation Variation
+			isDefault
+			relationship: ac0321c6-d6f3-4676-be8f-4e32df67a93d
+			defaultHierarchy: LocalDateTable_9b79bfd9-acd7-48b0-990e-f3d7a9841808.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column kiln_c2_weather_temperature
+		dataType: double
+		lineageTag: 12cf7585-b7ef-4e3d-9804-7e4c1d9610ee
+		summarizeBy: sum
+		sourceColumn: kiln_c2_weather_temperature
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column kiln_c2_weather_hygrometry
+		dataType: double
+		lineageTag: f66ecff2-5088-44ce-90ff-3eb15a9557e1
+		summarizeBy: sum
+		sourceColumn: kiln_c2_weather_hygrometry
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column kiln_c2_weather_temperature_predicted
+		dataType: double
+		lineageTag: c23caa88-7be6-469b-8005-2530b74cb011
+		summarizeBy: sum
+		sourceColumn: kiln_c2_weather_temperature_predicted
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column kiln_c2_weather_hygrometry_predicted
+		dataType: double
+		lineageTag: 1c4a341c-915e-414b-b091-0be32e355dff
+		summarizeBy: sum
+		sourceColumn: kiln_c2_weather_hygrometry_predicted
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 4df5f9ad-a7d1-4af7-aa92-1eeaa575dcc5
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 8704efc9-57cf-4d65-a824-6da4fd9a9225
+			defaultHierarchy: LocalDateTable_7c097121-2f0e-40be-9690-f201f159049a.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 67517970-5264-4943-a7fc-72a256bdd4a3
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: f9b5bed0-e966-49f8-ac7a-210092c71388
+			defaultHierarchy: LocalDateTable_2d239e07-a400-4c3e-a84c-434b679213f8.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: fe9ac637-af01-44ec-b75a-cc4307fa5644
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 59c09fe9-3421-48e8-8e95-68f937dd4254
+			defaultHierarchy: LocalDateTable_ef2c91b2-16d0-4a0d-bb2f-769cd05c0bf6.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_weather = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    self_service_Schema = mal_maite_bi_prd_Database{[Name="self_service",Kind="Schema"]}[Data],
+				    fact_weather_Table = self_service_Schema{[Name="fact_weather",Kind="Table"]}[Data]
+				in
+				    fact_weather_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+

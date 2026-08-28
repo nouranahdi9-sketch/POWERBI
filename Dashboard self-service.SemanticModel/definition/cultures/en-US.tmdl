@@ -1,0 +1,68 @@
+cultureInfo en-US
+	translations
+		model Model
+			table batch_report
+				column 'Filtre DesiredFields'
+					caption: Desired fields
+			table localisation
+				column Attribut
+					caption: Parameter
+				column Valeur
+					caption: Value
+			table dim_batch
+				column batch_number
+					caption: Batch
+				column ordre_fabrication
+					caption: Fabrication order
+				column annee_recolte
+					caption: Harvest
+				column debut_de_production
+					caption: Start of production
+				column fin_de_production
+					caption: End of production
+				column mes_number
+					caption: MES number
+			table dim_site
+				column plant
+					caption: Production line
+			table dim_specification
+				column cdc
+					caption: Specifications
+			table dim_variety_specy
+				column variety
+					caption: Variety
+				column specy
+					caption: Species
+			table dim_production_type
+				column code
+					caption: Production type
+			table parameters_variables
+				column code
+					caption: Parameter
+			table phase
+				column prd_workshop
+					caption: Workshop
+				column prd_cell
+					caption: Cell
+				column start
+					caption: Start
+				column end
+					caption: End
+			table fact_weather
+				column fabrication_order
+					caption: Fabrication order
+				column production_planned_date
+					caption: Planned date
+			table fact_energy
+				column value
+					caption: Value
+			table fact_measurement
+				column measure_name
+					caption: Parameter
+				column value
+					caption: Value
+				column status
+					caption: Data quality
+				column label
+					caption: Label
+

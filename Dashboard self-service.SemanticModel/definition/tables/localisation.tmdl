@@ -1,0 +1,51 @@
+table localisation
+	lineageTag: 9685b6dc-e9b4-435c-acbb-f82fde1baaec
+
+	column batch_id
+		dataType: string
+		lineageTag: 0afc7627-2bea-412b-9724-326979f77af2
+		summarizeBy: none
+		sourceColumn: batch_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Attribut
+		dataType: string
+		lineageTag: af2f1e3f-560d-4f56-bb24-c74fc6c40d58
+		summarizeBy: none
+		sourceColumn: Attribut
+
+		annotation SummarizationSetBy = Automatic
+
+	column Valeur
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 981e4d84-0723-425a-b8dd-b868b2dd1487
+		summarizeBy: none
+		sourceColumn: Valeur
+
+		variation Variation
+			isDefault
+			relationship: d25c68bc-0c60-478e-ab6d-8e388b954bcd
+			defaultHierarchy: LocalDateTable_06288084-a2d4-4bfa-a43e-c691f9c15807.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition localisation = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_common_prd_Database = Source{[Name="mal_maite_common_prd",Kind="Database"]}[Data],
+				    gold_Schema = mal_maite_common_prd_Database{[Name="gold",Kind="Schema"]}[Data],
+				    localizations_pivot_View = gold_Schema{[Name="localizations_pivot",Kind="View"]}[Data],
+				    #"Colonnes supprimées" = Table.RemoveColumns(localizations_pivot_View,{"mes_number", "process_status", "batch_status", "prd_line", "prd_type", "error_messages", "created_at", "modified_at"}),
+				    #"Supprimer le tableau croisé dynamique des autres colonnes" = Table.UnpivotOtherColumns(#"Colonnes supprimées", {"batch_id"}, "Attribut", "Valeur"),
+				    #"Type modifié" = Table.TransformColumnTypes(#"Supprimer le tableau croisé dynamique des autres colonnes",{{"Valeur", type datetime}})
+				in
+				    #"Type modifié"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

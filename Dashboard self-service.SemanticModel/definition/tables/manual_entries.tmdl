@@ -1,0 +1,94 @@
+table manual_entries
+	lineageTag: b06fea17-97fa-419c-ba6e-7130439730ff
+
+	column parameter_variable
+		dataType: string
+		lineageTag: d5c4a11c-9cb2-4a81-828c-321bba1df4b4
+		summarizeBy: none
+		sourceColumn: parameter_variable
+
+		annotation SummarizationSetBy = Automatic
+
+	column value
+		dataType: double
+		lineageTag: 3fe2b776-5b72-429b-bc87-52d58e9e35a5
+		summarizeBy: sum
+		sourceColumn: value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column unit
+		dataType: string
+		lineageTag: 39f62579-a5aa-4f62-93fe-77ed5ee51e29
+		summarizeBy: none
+		sourceColumn: unit
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_batch
+		dataType: string
+		lineageTag: a17023df-5152-473f-9f1e-6d60502417be
+		summarizeBy: none
+		sourceColumn: id_batch
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a6e5e57e-852a-4341-8292-8ea822bf6198
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 1daa74a1-3f18-482b-ab7c-63225e7afab2
+			defaultHierarchy: LocalDateTable_cbe4233b-c87e-4a19-8b36-f2431fedf236.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 4e60e6b7-0e72-40d7-9287-68f0e57c4f52
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: b6b4fe02-c2cc-4125-87f1-8c1ad4fe7cef
+			defaultHierarchy: LocalDateTable_7eb4423c-1715-4e2d-9611-10bf8a8d0952.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c9b2dc02-d936-46a7-82ab-6270f6cec6b3
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 6dce81c0-d8f7-456d-b296-25777e5f4362
+			defaultHierarchy: LocalDateTable_32e1a0bc-64f1-46da-b136-2e355dcda1e7.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition manual_entries = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    self_service_Schema = mal_maite_bi_prd_Database{[Name="self_service",Kind="Schema"]}[Data],
+				    fact_manual_entries_Table = self_service_Schema{[Name="fact_manual_entries",Kind="Table"]}[Data]
+				in
+				    fact_manual_entries_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+

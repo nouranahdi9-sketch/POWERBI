@@ -1,0 +1,335 @@
+relationship b95fb3ff-03c5-4b52-b83d-8e4d8c4e1593
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_batch.debut_de_production
+	toColumn: LocalDateTable_ac05d0f1-1f0a-4649-9535-65661b40ebd0.Date
+
+relationship 21d589e8-cdff-4d79-8ab2-c236a4e2c266
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_batch.fin_de_production
+	toColumn: LocalDateTable_5f882eb9-9c0c-40d6-bd82-d378aa38ce47.Date
+
+relationship 4c678dc1-25bb-452d-8870-d78a7468d60a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_site.created_at
+	toColumn: LocalDateTable_e5141b66-c505-490d-a5fa-dd6682c00983.Date
+
+relationship 6b4efe19-7bf0-4e2c-8c9d-45afb9c4016d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_site.updated_at
+	toColumn: LocalDateTable_0e80cdc0-98f1-49a2-bfb2-b254621a9151.Date
+
+relationship 99a0bfba-a186-45fe-aa81-b37b4dc892cc
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_site.deleted_at
+	toColumn: LocalDateTable_91ad223c-d1e6-4be2-ba2b-9a8da37e15f5.Date
+
+relationship 251313f0-bcec-4596-b782-8aa7189afa90
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_specification.created_at
+	toColumn: LocalDateTable_301a010c-a47f-4399-a1a3-a9a98e8d39b2.Date
+
+relationship 18d709ff-a2b4-4c1f-baf8-73dcf93e7d6d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_specification.updated_at
+	toColumn: LocalDateTable_d159cbad-f9ae-4ec3-83a8-c26a45bb4173.Date
+
+relationship 28cb871f-a6b2-49ce-a721-4c5a4928388c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_specification.deleted_at
+	toColumn: LocalDateTable_f9fe0c7f-f5f9-4dc7-a098-cfc1f9851ba5.Date
+
+relationship 4627a08f-b19f-4136-9899-b332fc87d462
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_variety_specy.created_at
+	toColumn: LocalDateTable_087e9be0-af0d-4411-aaa3-921becff0797.Date
+
+relationship efb29b14-1ca5-47f6-8192-df1eda95dbe7
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_variety_specy.updated_at
+	toColumn: LocalDateTable_275cf636-5b4d-4eaa-8a4a-42394694c618.Date
+
+relationship f3584af3-5f54-4c8b-bf46-0f4e33bb1a37
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_variety_specy.deleted_at
+	toColumn: LocalDateTable_82fac5a9-335e-452f-a58c-0b3ac0e532c7.Date
+
+relationship AutoDetected_1f2866ec-2e7b-4a83-806d-7f617c1f9cce
+	fromColumn: manual_entries.id_batch
+	toColumn: dim_batch.id_batch
+
+relationship AutoDetected_75bfc0e4-7aa3-4394-9793-96688ddbc8ee
+	crossFilteringBehavior: bothDirections
+	fromColumn: dim_batch.id_cdc
+	toColumn: dim_specification.id_cdc
+
+relationship AutoDetected_49457617-7c36-4d6d-bd5e-95925d5084a1
+	fromColumn: localisation.batch_id
+	toColumn: dim_batch.id_batch
+
+relationship 695e5597-9779-4719-97fc-3e38c599a571
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_production_type.created_at
+	toColumn: LocalDateTable_cfa884bc-f2ff-46cc-a1bc-355e01349510.Date
+
+relationship 8314df88-c566-460a-8ff3-04b53a8716d9
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_production_type.updated_at
+	toColumn: LocalDateTable_e90b9fa9-32ab-4074-963c-c5dc8fde649b.Date
+
+relationship 17e60bb1-53d9-4971-bb8f-552cd0465920
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_production_type.deleted_at
+	toColumn: LocalDateTable_55ba2e8c-efa2-45d1-bf18-947f4d8980e3.Date
+
+relationship 7e0cb81d-dcd0-3c2c-8958-ac186cd15364
+	crossFilteringBehavior: bothDirections
+	fromColumn: dim_batch.id_site
+	toColumn: dim_site.id_plant
+
+relationship 9140585b-7f98-63a4-5684-efd450c314b3
+	crossFilteringBehavior: bothDirections
+	fromColumn: dim_batch.id_variete
+	toColumn: dim_variety_specy.id_variety
+
+relationship a9c7bec0-2f2f-f57b-0af7-bcd38055c6ba
+	crossFilteringBehavior: bothDirections
+	fromColumn: dim_batch.id_type
+	toColumn: dim_production_type.id_parameter_production_type
+
+relationship 6b5788ce-b0a0-1872-d835-b48d71ac80d1
+	fromColumn: batch_report.id_batch
+	toColumn: dim_batch.id_batch
+
+relationship e89806c3-9f6f-a51b-0f01-f094da301a34
+	crossFilteringBehavior: bothDirections
+	fromColumn: dim_batch.ordre_fabrication
+	toColumn: malt_quality_results.fabrication_order
+
+relationship fba2d8f1-565e-26ec-0755-6705ada9ab9d
+	crossFilteringBehavior: bothDirections
+	fromColumn: dim_batch.ordre_fabrication
+	toColumn: goods_quality_results.fabrication_order
+
+relationship 3e93eecc-db25-4751-9db7-b57c32947a8a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: batch_report.created_at
+	toColumn: LocalDateTable_0d35227f-0dc2-4f27-9e82-894c9b373074.Date
+
+relationship 95e44950-096a-4480-9b01-2170517970d0
+	joinOnDateBehavior: datePartOnly
+	fromColumn: batch_report.updated_at
+	toColumn: LocalDateTable_c09951b5-832b-40cf-b220-650d7bfb66f5.Date
+
+relationship 3a23a0f0-bd36-458a-8020-1aabca9e1519
+	joinOnDateBehavior: datePartOnly
+	fromColumn: batch_report.deleted_at
+	toColumn: LocalDateTable_f78c2941-1d0f-4f81-bb9c-5be3144a53f5.Date
+
+relationship 1daa74a1-3f18-482b-ab7c-63225e7afab2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: manual_entries.created_at
+	toColumn: LocalDateTable_cbe4233b-c87e-4a19-8b36-f2431fedf236.Date
+
+relationship b6b4fe02-c2cc-4125-87f1-8c1ad4fe7cef
+	joinOnDateBehavior: datePartOnly
+	fromColumn: manual_entries.updated_at
+	toColumn: LocalDateTable_7eb4423c-1715-4e2d-9611-10bf8a8d0952.Date
+
+relationship 6dce81c0-d8f7-456d-b296-25777e5f4362
+	joinOnDateBehavior: datePartOnly
+	fromColumn: manual_entries.deleted_at
+	toColumn: LocalDateTable_32e1a0bc-64f1-46da-b136-2e355dcda1e7.Date
+
+relationship 647653b5-de38-40aa-9f51-be5c966f5554
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_batch.created_at
+	toColumn: LocalDateTable_ad58a1e5-336c-4030-876a-2b963c6c4437.Date
+
+relationship 8527df59-d90c-4341-b684-e4109ddb7411
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_batch.updated_at
+	toColumn: LocalDateTable_7109a621-4378-46f8-85d0-9e98265ae5c7.Date
+
+relationship 54573322-3293-4d86-b1e3-9ddf57b5f306
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_batch.deleted_at
+	toColumn: LocalDateTable_c58c4c0a-06d6-4ab7-9b56-dc2975bacaea.Date
+
+relationship e99b916d-70e7-44a4-98ef-9419187c23d3
+	joinOnDateBehavior: datePartOnly
+	fromColumn: parameters_variables_translations.created_at
+	toColumn: LocalDateTable_1c31f3bb-e91a-4d8d-93d6-ed84daa2081b.Date
+
+relationship 4a446a75-c342-499d-a2b9-0555f4ad7d12
+	joinOnDateBehavior: datePartOnly
+	fromColumn: parameters_variables_translations.updated_at
+	toColumn: LocalDateTable_d98f99aa-a826-4ffc-99d5-bdaa4180c916.Date
+
+relationship cde65637-7b1e-4a42-b0ad-1f0741114f00
+	joinOnDateBehavior: datePartOnly
+	fromColumn: parameters_variables_translations.deleted_at
+	toColumn: LocalDateTable_d3a41267-1b3d-477e-b433-4eef606a5ddc.Date
+
+relationship 651d8b6b-9e9e-4849-888e-a765947882da
+	joinOnDateBehavior: datePartOnly
+	fromColumn: parameters_variables.created_at
+	toColumn: LocalDateTable_1514b3f1-1ff2-4be4-a621-c024588416ca.Date
+
+relationship ca179fcb-e0d5-4698-9383-18b56c14bd13
+	joinOnDateBehavior: datePartOnly
+	fromColumn: parameters_variables.updated_at
+	toColumn: LocalDateTable_185b076f-2dcd-41fc-bda8-211c75309164.Date
+
+relationship f45bf695-e080-45dc-a132-bf39ea7fcd21
+	joinOnDateBehavior: datePartOnly
+	fromColumn: parameters_variables.deleted_at
+	toColumn: LocalDateTable_7a3019dd-372b-4ef9-9dee-e94d1e86fe3d.Date
+
+relationship AutoDetected_a111d1ca-dabb-4e0f-aa2c-c0475fc25dae
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: parameters_variables_translations.parameter_variable
+	toColumn: parameters_variables.id_parameter_variable
+
+relationship d25c68bc-0c60-478e-ab6d-8e388b954bcd
+	joinOnDateBehavior: datePartOnly
+	fromColumn: localisation.Valeur
+	toColumn: LocalDateTable_06288084-a2d4-4bfa-a43e-c691f9c15807.Date
+
+relationship AutoDetected_97cb0d8d-9e65-4ff5-b0a1-b15f5d0b2df1
+	fromColumn: phase.batch_id
+	toColumn: dim_batch.id_batch
+
+relationship 38220aec-bec6-4fe1-b9fa-cec3fbdefd91
+	joinOnDateBehavior: datePartOnly
+	fromColumn: phase.start
+	toColumn: LocalDateTable_892d9490-cb9d-40f6-94a7-3bba10aa46d7.Date
+
+relationship 9660475e-1007-4229-af17-3a3e3e0faf7c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: phase.end
+	toColumn: LocalDateTable_7ba9cd9b-cf47-4219-8375-92ebf4f06dd0.Date
+
+relationship d4f0d47b-3466-4154-a500-1d0c4f6ee0c8
+	joinOnDateBehavior: datePartOnly
+	fromColumn: phase.created_at
+	toColumn: LocalDateTable_ad42d3e5-ccbb-482a-a8eb-26729dd77a36.Date
+
+relationship a84fa676-ae40-44c8-a190-0f4569c30fe0
+	joinOnDateBehavior: datePartOnly
+	fromColumn: phase.modified_at
+	toColumn: LocalDateTable_5e1f0104-178d-4c2a-8854-47fba9182dd4.Date
+
+relationship a72d9f92-e52f-431b-ad33-4944b363d9e7
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_weather.production_planned_date
+	toColumn: LocalDateTable_caf54ca0-c341-4a0d-9704-4fea1a6e33a1.Date
+
+relationship 6ae8f2c8-8b71-48ce-bf53-fefc4c8637b4
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_weather.steep_c1_start_date
+	toColumn: LocalDateTable_b9a6567d-91cf-4728-9275-8bca9201149a.Date
+
+relationship b71e13d0-f915-48e4-91d4-6fac5fcd7415
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_weather.steep_c2_start_date
+	toColumn: LocalDateTable_6d703739-cb55-4441-9b4d-069492812c02.Date
+
+relationship 02548856-eb8a-4a80-b07a-0c7403b912f4
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_weather.germ_c1_start_date
+	toColumn: LocalDateTable_69470445-425f-4271-b238-db1a5795e02b.Date
+
+relationship cd86b09e-7e2c-45ef-8d96-b05576c56a7f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_weather.germ_c2_start_date
+	toColumn: LocalDateTable_01db014d-3eda-442e-90e4-c0a7b4012bf9.Date
+
+relationship dbd009bc-721b-4f78-a142-8e4a6059f9c6
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_weather.germ_c3_start_date
+	toColumn: LocalDateTable_790ea477-f5d8-42b8-9330-58ecacc48c4b.Date
+
+relationship 383ca99f-5189-4a66-a184-01842dbe5540
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_weather.germ_c4_start_date
+	toColumn: LocalDateTable_6d5159e7-c89d-4f98-8a78-01011277ae31.Date
+
+relationship b3da7fde-6342-4c8e-8156-ece7edb1f9a2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_weather.germ_c5_start_date
+	toColumn: LocalDateTable_579c8cb1-b3ae-457f-a6ef-cfb0f264028b.Date
+
+relationship b7e8ca55-d2e0-4b9b-9552-bbfacaead1d3
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_weather.kiln_c1_start_date
+	toColumn: LocalDateTable_d950234d-8797-4ee5-977e-ba643603a114.Date
+
+relationship ac0321c6-d6f3-4676-be8f-4e32df67a93d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_weather.kiln_c2_start_date
+	toColumn: LocalDateTable_9b79bfd9-acd7-48b0-990e-f3d7a9841808.Date
+
+relationship 8704efc9-57cf-4d65-a824-6da4fd9a9225
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_weather.created_at
+	toColumn: LocalDateTable_7c097121-2f0e-40be-9690-f201f159049a.Date
+
+relationship f9b5bed0-e966-49f8-ac7a-210092c71388
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_weather.updated_at
+	toColumn: LocalDateTable_2d239e07-a400-4c3e-a84c-434b679213f8.Date
+
+relationship 59c09fe9-3421-48e8-8e95-68f937dd4254
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_weather.deleted_at
+	toColumn: LocalDateTable_ef2c91b2-16d0-4a0d-bb2f-769cd05c0bf6.Date
+
+relationship da369b4e-2df4-006d-2de7-de543b56f645
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: fact_weather.id_batch
+	toColumn: dim_batch.id_batch
+
+relationship 2f65b67d-ff75-408a-85b8-31c299eaf84f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_energy.created_at
+	toColumn: LocalDateTable_f41795c1-2ffd-4339-95c7-138f29b84a25.Date
+
+relationship 132335f6-7270-4138-8509-645506e8daa5
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_energy.updated_at
+	toColumn: LocalDateTable_4e01ea97-e80f-43c4-ad54-588437ccab7b.Date
+
+relationship 8ea06070-a804-468b-884f-8377a570f9ee
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_energy.deleted_at
+	toColumn: LocalDateTable_5615668b-fa50-4805-9842-8732e0e5a7f1.Date
+
+relationship 1983c1ce-ef43-26fb-54eb-429f21d7face
+	fromColumn: fact_energy.id_batch
+	toColumn: dim_batch.id_batch
+
+relationship 474f0da4-c4a8-0e74-b77f-92384b2e24b9
+	fromColumn: fact_energy.id_parameter
+	toColumn: parameters_variables.id_parameter_variable
+
+relationship 64029100-4a90-4f6c-a367-f2c595455d3b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_measurement.created_at
+	toColumn: LocalDateTable_9745db87-a1a0-4a24-bf3b-60f229f78cc1.Date
+
+relationship e578b455-7ed4-4ead-9686-b766a3f3aa11
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_measurement.updated_at
+	toColumn: LocalDateTable_a46a4292-cf3e-4de8-a7bc-28ccef9941b8.Date
+
+relationship d50d3e6c-d59c-461b-91ac-20ab21530cfd
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_measurement.deleted_at
+	toColumn: LocalDateTable_1cc1f2c5-b1b8-4c09-95e8-84b3932b2929.Date
+
+relationship AutoDetected_b6c56671-22d6-4182-9ca2-fbbddc3f9e23
+	fromColumn: fact_measurement.batch_id
+	toColumn: dim_batch.id_batch
+

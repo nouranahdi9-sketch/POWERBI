@@ -1,0 +1,68 @@
+cultureInfo ro-RO
+	translations
+		model Model
+			table batch_report
+				column 'Filtre DesiredFields'
+					caption: Câmpuri dorite
+			table localisation
+				column Attribut
+					caption: Parametru
+				column Valeur
+					caption: Valoare
+			table dim_batch
+				column batch_number
+					caption: Șarjă
+				column ordre_fabrication
+					caption: Ordin de producție
+				column annee_recolte
+					caption: Recoltă
+				column debut_de_production
+					caption: Începutul producției
+				column fin_de_production
+					caption: Sfârșitul producției
+				column mes_number
+					caption: Număr MES
+			table dim_site
+				column plant
+					caption: Linie de producție
+			table dim_specification
+				column cdc
+					caption: Specificații
+			table dim_variety_specy
+				column variety
+					caption: Varietate
+				column specy
+					caption: Soi
+			table dim_production_type
+				column code
+					caption: Tip de producție
+			table parameters_variables
+				column code
+					caption: Parametru
+			table phase
+				column prd_workshop
+					caption: Atelier
+				column prd_cell
+					caption: Celulă
+				column start
+					caption: Început
+				column end
+					caption: Sfârșit
+			table fact_weather
+				column fabrication_order
+					caption: Ordin de producție
+				column production_planned_date
+					caption: Dată planificată
+			table fact_energy
+				column value
+					caption: Valoare
+			table fact_measurement
+				column measure_name
+					caption: Parametru
+				column value
+					caption: Valoare
+				column status
+					caption: Calitatea datelor
+				column label
+					caption: Etichetă
+
