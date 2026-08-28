@@ -1,0 +1,418 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "d211bbd433f33cc0bc51",
+  "position": {
+    "x": 0,
+    "y": 210.14778325123152,
+    "z": 2000,
+    "height": 510.73891625615767,
+    "width": 1280.3940886699509,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_batch"
+                    }
+                  },
+                  "Property": "batch_number"
+                }
+              },
+              "queryRef": "dim_batch.batch_number",
+              "nativeQueryRef": "Batch",
+              "displayName": "Batch"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_batch"
+                    }
+                  },
+                  "Property": "mes_number"
+                }
+              },
+              "queryRef": "dim_batch.mes_number",
+              "nativeQueryRef": "Lot mes",
+              "displayName": "Lot mes"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_batch"
+                    }
+                  },
+                  "Property": "ordre_fabrication"
+                }
+              },
+              "queryRef": "dim_batch.ordre_fabrication",
+              "nativeQueryRef": "Ordre de fabrication",
+              "displayName": "Ordre de fabrication"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "malt_quality_results"
+                        }
+                      },
+                      "Property": "malt_color_ebc"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(malt_quality_results.malt_color_ebc)",
+              "nativeQueryRef": "malt_color_ebc",
+              "displayName": "malt_color_ebc"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "malt_quality_results"
+                        }
+                      },
+                      "Property": "malt_free_amino_nitrogen"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(malt_quality_results.malt_free_amino_nitrogen)",
+              "nativeQueryRef": "malt_free_amino_nitrogen",
+              "displayName": "malt_free_amino_nitrogen"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "malt_quality_results"
+                        }
+                      },
+                      "Property": "malt_friability"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(malt_quality_results.malt_friability)",
+              "nativeQueryRef": "malt_friability",
+              "displayName": "malt_friability"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "malt_quality_results"
+                        }
+                      },
+                      "Property": "malt_moisture"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(malt_quality_results.malt_moisture)",
+              "nativeQueryRef": "malt_moisture",
+              "displayName": "malt_moisture"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "malt_quality_results"
+                        }
+                      },
+                      "Property": "malt_soluble_beta_glucan"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(malt_quality_results.malt_soluble_beta_glucan)",
+              "nativeQueryRef": "malt_soluble_beta_glucan",
+              "displayName": "malt_soluble_beta_glucan"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "malt_quality_results"
+                        }
+                      },
+                      "Property": "malt_viscosity"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(malt_quality_results.malt_viscosity)",
+              "nativeQueryRef": "malt_viscosity",
+              "displayName": "malt_viscosity"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "goods_quality_results"
+                        }
+                      },
+                      "Property": "goods_bad_grains_percent"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(goods_quality_results.goods_bad_grains_percent)",
+              "nativeQueryRef": "goods_bad_grains_percent",
+              "displayName": "goods_bad_grains_percent"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "goods_quality_results"
+                        }
+                      },
+                      "Property": "goods_broken_grains_percent"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(goods_quality_results.goods_broken_grains_percent)",
+              "nativeQueryRef": "goods_broken_grains_percent",
+              "displayName": "goods_broken_grains_percent"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "malt_quality_results"
+                    }
+                  },
+                  "Property": "malt_turbidity_ebc"
+                }
+              },
+              "queryRef": "malt_quality_results.malt_turbidity_ebc",
+              "nativeQueryRef": "malt_turbidity_ebc"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "malt_quality_results"
+                    }
+                  },
+                  "Property": "malt_soluble_protein"
+                }
+              },
+              "queryRef": "malt_quality_results.malt_soluble_protein",
+              "nativeQueryRef": "malt_soluble_protein"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "malt_quality_results"
+                    }
+                  },
+                  "Property": "malt_partly_unmodified_grains"
+                }
+              },
+              "queryRef": "malt_quality_results.malt_partly_unmodified_grains",
+              "nativeQueryRef": "malt_partly_unmodified_grains"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "malt_quality_results"
+                    }
+                  },
+                  "Property": "malt_borken_kernels"
+                }
+              },
+              "queryRef": "malt_quality_results.malt_borken_kernels",
+              "nativeQueryRef": "malt_borken_kernels"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "dim_batch"
+                  }
+                },
+                "Property": "batch_number"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "total": [
+        {
+          "properties": {
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Left'"
+                }
+              }
+            },
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": -0.1
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "grid": [
+        {
+          "properties": {
+            "gridVertical": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "outlineColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": -0.6
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "87.15928985734863D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "dim_batch.batch_number"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "92.01727099933998D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "dim_batch.ordre_fabrication"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "99.11330067923095D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(malt_quality_results.malt_color_ebc)"
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

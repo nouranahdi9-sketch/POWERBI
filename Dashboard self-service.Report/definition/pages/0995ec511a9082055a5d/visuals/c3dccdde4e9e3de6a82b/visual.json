@@ -1,0 +1,279 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "c3dccdde4e9e3de6a82b",
+  "position": {
+    "x": 553.53261995167406,
+    "y": 0,
+    "z": 0,
+    "height": 720.54677252329986,
+    "width": 726.90921643079037,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_batch"
+                    }
+                  },
+                  "Property": "batch_number"
+                }
+              },
+              "queryRef": "dim_batch.batch_number",
+              "nativeQueryRef": "Batch",
+              "displayName": "Batch"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_batch"
+                    }
+                  },
+                  "Property": "mes_number"
+                }
+              },
+              "queryRef": "dim_batch.mes_number",
+              "nativeQueryRef": "Lot mes",
+              "displayName": "Lot mes"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_batch"
+                    }
+                  },
+                  "Property": "ordre_fabrication"
+                }
+              },
+              "queryRef": "dim_batch.ordre_fabrication",
+              "nativeQueryRef": "Ordre de fabrication",
+              "displayName": "Ordre de fabrication"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "manual_entries"
+                    }
+                  },
+                  "Property": "parameter_variable"
+                }
+              },
+              "queryRef": "manual_entries.parameter_variable",
+              "nativeQueryRef": "Paramètre variable",
+              "displayName": "Paramètre variable"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "manual_entries"
+                        }
+                      },
+                      "Property": "value"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(manual_entries.value)",
+              "nativeQueryRef": "Valeur",
+              "displayName": "Valeur"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "manual_entries"
+                    }
+                  },
+                  "Property": "unit"
+                }
+              },
+              "queryRef": "manual_entries.unit",
+              "nativeQueryRef": "Unité",
+              "displayName": "Unité"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "dim_batch"
+                  }
+                },
+                "Property": "batch_number"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "total": [
+        {
+          "properties": {
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Left'"
+                }
+              }
+            },
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": -0.1
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "grid": [
+        {
+          "properties": {
+            "gridVertical": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "outlineColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": -0.6
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "171.69641212032863D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "manual_entries.parameter_variable"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "90.89209228954262D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(manual_entries.value)"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "61.47969093202143D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "manual_entries.unit"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "96.28590938778554D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "dim_batch.batch_number"
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

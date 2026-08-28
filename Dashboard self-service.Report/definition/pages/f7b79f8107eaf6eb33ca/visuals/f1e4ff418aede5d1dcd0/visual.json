@@ -1,0 +1,751 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "f1e4ff418aede5d1dcd0",
+  "position": {
+    "x": 0,
+    "y": 129.34092897224178,
+    "z": 0,
+    "height": 590.773432332672,
+    "width": 1279.4264865902837,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_batch"
+                    }
+                  },
+                  "Property": "batch_number"
+                }
+              },
+              "queryRef": "dim_batch.batch_number",
+              "nativeQueryRef": "batch_number"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "fabrication_order"
+                }
+              },
+              "queryRef": "Sum(fact_weather.fabrication_order)",
+              "nativeQueryRef": "fabrication_order"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "production_planned_date"
+                }
+              },
+              "queryRef": "fact_weather.production_planned_date",
+              "nativeQueryRef": "production_planned_date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "steep_c1_start_date"
+                }
+              },
+              "queryRef": "fact_weather.steep_c1_start_date",
+              "nativeQueryRef": "steep_c1_start_date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "steep_c1_weather_hygrometry"
+                }
+              },
+              "queryRef": "Sum(fact_weather.steep_c1_weather_hygrometry)",
+              "nativeQueryRef": "steep_c1_weather_hygrometry"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "steep_c1_weather_hygrometry_predicted"
+                }
+              },
+              "queryRef": "Sum(fact_weather.steep_c1_weather_hygrometry_predicted)",
+              "nativeQueryRef": "steep_c1_weather_hygrometry_predicted"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "steep_c1_weather_temperature"
+                }
+              },
+              "queryRef": "Sum(fact_weather.steep_c1_weather_temperature)",
+              "nativeQueryRef": "steep_c1_weather_temperature"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "steep_c1_weather_temperature_predicted"
+                }
+              },
+              "queryRef": "Sum(fact_weather.steep_c1_weather_temperature_predicted)",
+              "nativeQueryRef": "steep_c1_weather_temperature_predicted"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "steep_c2_start_date"
+                }
+              },
+              "queryRef": "fact_weather.steep_c2_start_date",
+              "nativeQueryRef": "steep_c2_start_date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "steep_c2_weather_hygrometry"
+                }
+              },
+              "queryRef": "Sum(fact_weather.steep_c2_weather_hygrometry)",
+              "nativeQueryRef": "steep_c2_weather_hygrometry"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "steep_c2_weather_hygrometry_predicted"
+                }
+              },
+              "queryRef": "Sum(fact_weather.steep_c2_weather_hygrometry_predicted)",
+              "nativeQueryRef": "steep_c2_weather_hygrometry_predicted"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "steep_c2_weather_temperature"
+                }
+              },
+              "queryRef": "Sum(fact_weather.steep_c2_weather_temperature)",
+              "nativeQueryRef": "steep_c2_weather_temperature"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "steep_c2_weather_temperature_predicted"
+                }
+              },
+              "queryRef": "Sum(fact_weather.steep_c2_weather_temperature_predicted)",
+              "nativeQueryRef": "steep_c2_weather_temperature_predicted"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "germ_c1_start_date"
+                }
+              },
+              "queryRef": "fact_weather.germ_c1_start_date",
+              "nativeQueryRef": "germ_c1_start_date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "germ_c1_weather_hygrometry"
+                }
+              },
+              "queryRef": "Sum(fact_weather.germ_c1_weather_hygrometry)",
+              "nativeQueryRef": "germ_c1_weather_hygrometry"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "germ_c1_weather_hygrometry_predicted"
+                }
+              },
+              "queryRef": "Sum(fact_weather.germ_c1_weather_hygrometry_predicted)",
+              "nativeQueryRef": "germ_c1_weather_hygrometry_predicted"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "germ_c1_weather_temperature"
+                }
+              },
+              "queryRef": "Sum(fact_weather.germ_c1_weather_temperature)",
+              "nativeQueryRef": "germ_c1_weather_temperature"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "germ_c1_weather_temperature_predicted"
+                }
+              },
+              "queryRef": "Sum(fact_weather.germ_c1_weather_temperature_predicted)",
+              "nativeQueryRef": "germ_c1_weather_temperature_predicted"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "germ_c2_start_date"
+                }
+              },
+              "queryRef": "fact_weather.germ_c2_start_date",
+              "nativeQueryRef": "germ_c2_start_date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "germ_c2_weather_hygrometry"
+                }
+              },
+              "queryRef": "Sum(fact_weather.germ_c2_weather_hygrometry)",
+              "nativeQueryRef": "germ_c2_weather_hygrometry"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "germ_c2_weather_hygrometry_predicted"
+                }
+              },
+              "queryRef": "Sum(fact_weather.germ_c2_weather_hygrometry_predicted)",
+              "nativeQueryRef": "germ_c2_weather_hygrometry_predicted"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "germ_c2_weather_temperature"
+                }
+              },
+              "queryRef": "Sum(fact_weather.germ_c2_weather_temperature)",
+              "nativeQueryRef": "germ_c2_weather_temperature"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "germ_c2_weather_temperature_predicted"
+                }
+              },
+              "queryRef": "Sum(fact_weather.germ_c2_weather_temperature_predicted)",
+              "nativeQueryRef": "germ_c2_weather_temperature_predicted"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "germ_c3_start_date"
+                }
+              },
+              "queryRef": "fact_weather.germ_c3_start_date",
+              "nativeQueryRef": "germ_c3_start_date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "germ_c3_weather_hygrometry"
+                }
+              },
+              "queryRef": "Sum(fact_weather.germ_c3_weather_hygrometry)",
+              "nativeQueryRef": "germ_c3_weather_hygrometry"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "germ_c3_weather_hygrometry_predicted"
+                }
+              },
+              "queryRef": "Sum(fact_weather.germ_c3_weather_hygrometry_predicted)",
+              "nativeQueryRef": "germ_c3_weather_hygrometry_predicted"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "germ_c3_weather_temperature"
+                }
+              },
+              "queryRef": "Sum(fact_weather.germ_c3_weather_temperature)",
+              "nativeQueryRef": "germ_c3_weather_temperature"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "germ_c3_weather_temperature_predicted"
+                }
+              },
+              "queryRef": "Sum(fact_weather.germ_c3_weather_temperature_predicted)",
+              "nativeQueryRef": "germ_c3_weather_temperature_predicted"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "germ_c4_start_date"
+                }
+              },
+              "queryRef": "fact_weather.germ_c4_start_date",
+              "nativeQueryRef": "germ_c4_start_date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "germ_c4_weather_hygrometry"
+                }
+              },
+              "queryRef": "Sum(fact_weather.germ_c4_weather_hygrometry)",
+              "nativeQueryRef": "germ_c4_weather_hygrometry"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "germ_c4_weather_hygrometry_predicted"
+                }
+              },
+              "queryRef": "Sum(fact_weather.germ_c4_weather_hygrometry_predicted)",
+              "nativeQueryRef": "germ_c4_weather_hygrometry_predicted"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "germ_c4_weather_temperature"
+                }
+              },
+              "queryRef": "Sum(fact_weather.germ_c4_weather_temperature)",
+              "nativeQueryRef": "germ_c4_weather_temperature"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "germ_c4_weather_temperature_predicted"
+                }
+              },
+              "queryRef": "Sum(fact_weather.germ_c4_weather_temperature_predicted)",
+              "nativeQueryRef": "germ_c4_weather_temperature_predicted"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "germ_c5_start_date"
+                }
+              },
+              "queryRef": "fact_weather.germ_c5_start_date",
+              "nativeQueryRef": "germ_c5_start_date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "germ_c5_weather_hygrometry"
+                }
+              },
+              "queryRef": "Sum(fact_weather.germ_c5_weather_hygrometry)",
+              "nativeQueryRef": "germ_c5_weather_hygrometry"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "germ_c5_weather_hygrometry_predicted"
+                }
+              },
+              "queryRef": "Sum(fact_weather.germ_c5_weather_hygrometry_predicted)",
+              "nativeQueryRef": "germ_c5_weather_hygrometry_predicted"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "germ_c5_weather_temperature"
+                }
+              },
+              "queryRef": "Sum(fact_weather.germ_c5_weather_temperature)",
+              "nativeQueryRef": "germ_c5_weather_temperature"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "germ_c5_weather_temperature_predicted"
+                }
+              },
+              "queryRef": "Sum(fact_weather.germ_c5_weather_temperature_predicted)",
+              "nativeQueryRef": "germ_c5_weather_temperature_predicted"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "kiln_c1_start_date"
+                }
+              },
+              "queryRef": "fact_weather.kiln_c1_start_date",
+              "nativeQueryRef": "kiln_c1_start_date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "kiln_c1_weather_hygrometry"
+                }
+              },
+              "queryRef": "Sum(fact_weather.kiln_c1_weather_hygrometry)",
+              "nativeQueryRef": "kiln_c1_weather_hygrometry"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "kiln_c1_weather_hygrometry_predicted"
+                }
+              },
+              "queryRef": "Sum(fact_weather.kiln_c1_weather_hygrometry_predicted)",
+              "nativeQueryRef": "kiln_c1_weather_hygrometry_predicted"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "kiln_c1_weather_temperature"
+                }
+              },
+              "queryRef": "Sum(fact_weather.kiln_c1_weather_temperature)",
+              "nativeQueryRef": "kiln_c1_weather_temperature"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "kiln_c1_weather_temperature_predicted"
+                }
+              },
+              "queryRef": "Sum(fact_weather.kiln_c1_weather_temperature_predicted)",
+              "nativeQueryRef": "kiln_c1_weather_temperature_predicted"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "kiln_c2_start_date"
+                }
+              },
+              "queryRef": "fact_weather.kiln_c2_start_date",
+              "nativeQueryRef": "kiln_c2_start_date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "kiln_c2_weather_hygrometry"
+                }
+              },
+              "queryRef": "Sum(fact_weather.kiln_c2_weather_hygrometry)",
+              "nativeQueryRef": "kiln_c2_weather_hygrometry"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "kiln_c2_weather_hygrometry_predicted"
+                }
+              },
+              "queryRef": "Sum(fact_weather.kiln_c2_weather_hygrometry_predicted)",
+              "nativeQueryRef": "kiln_c2_weather_hygrometry_predicted"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "kiln_c2_weather_temperature"
+                }
+              },
+              "queryRef": "Sum(fact_weather.kiln_c2_weather_temperature)",
+              "nativeQueryRef": "kiln_c2_weather_temperature"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_weather"
+                    }
+                  },
+                  "Property": "kiln_c2_weather_temperature_predicted"
+                }
+              },
+              "queryRef": "Sum(fact_weather.kiln_c2_weather_temperature_predicted)",
+              "nativeQueryRef": "kiln_c2_weather_temperature_predicted"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "columnHeaders": [
+        {
+          "properties": {
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "grid": [
+        {
+          "properties": {
+            "rowPadding": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "stylePreset": [
+        {
+          "properties": {
+            "name": {
+              "expr": {
+                "Literal": {
+                  "Value": "'None'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
