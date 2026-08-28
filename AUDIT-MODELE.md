@@ -347,3 +347,42 @@ notebook laisse explicitement passer les lignes où `parameter` est nul
 tableau de la page MEASUREMENT affiche la colonne `label` : ces lignes
 s'affichent donc avec un libellé vide. Problème de complétude du référentiel
 `parameters_variables_translations`, antérieur et indépendant.
+
+## Préconditions vérifiées avant application du correctif
+
+Le retrait de `label` de la clé n'est sûr que si `(batch_id, measure_name)` est
+unique dans `df_measurement`. Sinon le MERGE échoue en « multiple source rows
+matched ». Les trois sources de démultiplication possibles ont été contrôlées,
+toutes renvoient zéro ligne :
+
+```sql
+-- 1. une seule traduction anglaise par variable
+SELECT parameter_variable, COUNT(*) FROM ext_..._prd.public.parameters_variables_translations
+WHERE language = 2 AND deleted = false GROUP BY parameter_variable HAVING COUNT(*) > 1;
+
+-- 2. un seul enregistrement par code
+SELECT code, COUNT(*) FROM ext_..._prd.public.parameters_variables
+WHERE deleted = false GROUP BY code HAVING COUNT(*) > 1;
+
+-- 3. unicité dans la table source, hors batch_id nuls
+SELECT batch_id, measure_name, COUNT(*) FROM mal_maite_common_prd.gold.measurements
+WHERE batch_id IS NOT NULL GROUP BY batch_id, measure_name HAVING COUNT(*) > 1;
+```
+
+Le contrôle 3 renvoie des doublons si l'on n'exclut pas les `batch_id` nuls,
+mais la cellule 12 du notebook les filtre déjà
+(`filter(F.col("batch_id").isNotNull())`) : ils n'atteignent jamais le MERGE.
+
+Aucun `dropDuplicates` n'est donc nécessaire.
+
+## Contrôle après reconstruction
+
+```sql
+SELECT COUNT(*) AS lignes,
+       (SELECT COUNT(*) FROM (SELECT DISTINCT batch_id, measure_name
+        FROM mal_maite_bi_prd.self_service.fact_measurement)) AS couples
+FROM mal_maite_bi_prd.self_service.fact_measurement
+```
+
+Attendu : les deux comptes égaux, autour de 6,4 M. Un écart signale un doublon
+résiduel.
