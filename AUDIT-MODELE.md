@@ -272,3 +272,78 @@ La déduplication à la lecture soulage le rapport mais ne traite pas la cause.
 Une table `appendOnly` qui réempile 54 fois la même mesure croît indéfiniment.
 Le correctif durable est un `MERGE` à l'écriture dans le notebook amont — à
 étudier, il bénéficierait à tous les consommateurs de la table.
+
+---
+
+# Cause racine identifiée — notebook `import_self_service`
+
+La duplication de `fact_measurement` ne vient pas du modèle Power BI ni d'un
+choix de volumétrie : c'est un défaut de clé de MERGE dans le notebook amont.
+
+## Le défaut
+
+```python
+primary_key = [
+    'batch_id',
+    'measure_name',
+    'label']      # <- ne doit pas etre la
+```
+
+`label` est produit par deux LEFT JOIN successifs (`parameters_variables`, puis
+`parameters_variables_translations` filtrée sur `language = 2`). Elle vaut donc
+NULL dès qu'une `measure_name` n'a pas de code correspondant ou pas de
+traduction anglaise.
+
+En SQL, `NULL = NULL` est faux. La condition de MERGE ne rapproche jamais ces
+lignes d'une ligne existante : `handle_table_update` insère au lieu de mettre à
+jour, à chaque exécution.
+
+## Preuve
+
+```
+label      lignes         couples      ratio
+NULL       343 425 605    2 627 159    130,7
+renseigné    4 207 967    4 178 593      1,0
+```
+
+Le ratio de 1,0 sur les lignes à label renseigné établit que la logique de
+MERGE est correcte. Seule la nullité de `label` la met en défaut.
+
+343 425 605 lignes sur 347 633 572, soit **98,8 % de la table**, sont le produit
+de ce seul élément de clé.
+
+Les autres tables du notebook ont des clés non nullables (`fact_weather` sur
+`id_batch`, `fact_energy` sur `id_batch, id_parameter`, `dim_batch` sur
+`id_batch`) et ne présentent pas ce gonflement.
+
+## Correctif
+
+```python
+primary_key = [
+    'batch_id',
+    'measure_name']
+```
+
+`label` est un libellé de traduction dérivé de `measure_name`, pas un élément
+d'identité. `get_additional_columns()` le reclassera automatiquement en colonne
+suivie.
+
+Séquence : corriger la clé, valider en `dev`, puis exécuter en production avec
+`execution_mode = 'full'`. Le mode `update` ne suffit pas — 417 360 couples
+existent en double, une version à label nul et une version renseignée, et
+resteraient tels quels.
+
+Attendu après correction : ~6,4 M de lignes au lieu de 347,6 M.
+
+## À vérifier de la même façon
+
+`fact_batch_report` a pour clé `['id_batch', 'parameter']`, et la cellule 28 du
+notebook laisse explicitement passer les lignes où `parameter` est nul
+(`col("parameter").isNull() | ...`). Même mécanisme potentiel.
+
+## Hors sujet performance, mais relevé au passage
+
+2 627 159 couples sur 6 388 392 (41 %) n'ont aucune traduction anglaise. Le
+tableau de la page MEASUREMENT affiche la colonne `label` : ces lignes
+s'affichent donc avec un libellé vide. Problème de complétude du référentiel
+`parameters_variables_translations`, antérieur et indépendant.
