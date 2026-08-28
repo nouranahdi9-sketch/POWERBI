@@ -206,3 +206,69 @@ Ce diagnostic est établi sur la structure du modèle. Pour chiffrer le coût r�
 chaque colonne — taille en mémoire, cardinalité, ratio de compression — il faut un
 export **VertiPaq Analyzer** : DAX Studio → Advanced → Export Metrics → fichier
 `.vpax`, à déposer sur cette branche.
+
+---
+
+# Addendum — mesures relevées sur la source Databricks
+
+Investigation menée après le premier audit, sur `fact_measurement`.
+
+## Volumétrie réelle
+
+```
+lignes     347 633 572
+batches         10 686
+mesures            659
+couples      6 388 392   (batch_id + measure_name distincts)
+```
+
+**Ratio lignes / couples = 54,4.** Chaque couple (batch, mesure) est stocké
+54 fois en moyenne. La table « utile » fait 6,4 millions de lignes ; les
+341 millions restants (98,2 % du volume) sont de la redondance accumulée par
+un pipeline en `appendOnly` qui réempile à chaque exécution au lieu de
+consolider.
+
+## Stockage à la source
+
+`DESCRIBE DETAIL` :
+
+```
+partitionColumns    []            aucune partition
+clusteringColumns   []            aucun Z-order
+numFiles            74
+sizeInBytes         742 415 523   (~742 Mo, zstd)
+```
+
+742 Mo pour 347 millions de lignes, soit ~2 octets par ligne : la compression
+Delta absorbe déjà très bien la redondance. La lecture à la source n'est donc
+pas le goulot d'étranglement, et un `OPTIMIZE … ZORDER` ne se justifie pas.
+Le coût du refresh est proportionnel au **nombre de lignes transférées puis
+encodées dans VertiPaq**, pas à leur taille sur disque.
+
+## Usage réel dans le rapport
+
+`fact_measurement` n'alimente que **2 visuels sur une seule page** (MEASUREMENT) :
+un tableau et un segment sur `measure_name`, dont la valeur par défaut est
+`steep_process_duration`. Aucun autre visuel des 8 pages n'y touche.
+
+## Leviers, par ordre de rendement
+
+1. **Déduplication** (`ROW_NUMBER` sur `batch_id, measure_name`) : 347 M -> 6,4 M,
+   soit -98 %. À matérialiser en vue ou table dans `gold`, pas dans Power Query.
+   À valider d'abord : les 54 copies portent-elles la même `value` ?
+2. **Année glissante** sur `dim_batch.debut_de_production` : conserve 23 % des
+   lignes (mesuré : 79 942 394 sur 347 633 572). Cumulé avec la déduplication,
+   amène le modèle autour de 1,5 M de lignes.
+3. **Filtre sur les `measure_name` réellement consultées** : à arbitrer avec le
+   métier, devient secondaire une fois les deux premiers appliqués.
+
+Ne pas filtrer sur `created_at` : c'est l'horodatage d'insertion, et la table a
+été créée le 29/01/2026 par reprise d'un historique de plusieurs années. Le
+filtre métier est `dim_batch.debut_de_production`.
+
+## Correctif de fond
+
+La déduplication à la lecture soulage le rapport mais ne traite pas la cause.
+Une table `appendOnly` qui réempile 54 fois la même mesure croît indéfiniment.
+Le correctif durable est un `MERGE` à l'écriture dans le notebook amont — à
+étudier, il bénéficierait à tous les consommateurs de la table.
