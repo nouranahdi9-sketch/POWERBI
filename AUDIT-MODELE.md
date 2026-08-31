@@ -386,3 +386,24 @@ FROM mal_maite_bi_prd.self_service.fact_measurement
 
 Attendu : les deux comptes égaux, autour de 6,4 M. Un écart signale un doublon
 résiduel.
+
+## Résultat validé en preprod
+
+Correctif appliqué en preprod (retrait de `label` de la clé, reconstruction) :
+
+```
+mal_maite_bi_preprd.self_service.fact_measurement : 6 653 385 lignes
+```
+
+contre 347 633 572 en production. Refresh Power BI testé en pointant la seule
+requête `fact_measurement` sur le catalogue preprod, les 16 autres restant en
+production : temps de chargement redevenu négligeable.
+
+Ce montage est un banc de mesure, pas une configuration viable — les `batch_id`
+diffèrent entre environnements, donc les visuels croisant `fact_measurement` et
+`dim_batch` sont incohérents. La requête doit être remise sur
+`mal_maite_bi_prd` avant toute publication.
+
+Reste à faire en production : appliquer le correctif, exécuter une fois en
+`execution_mode = 'full'`, repasser en `update`, puis chronométrer un refresh
+complet.
