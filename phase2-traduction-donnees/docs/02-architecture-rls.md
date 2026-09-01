@@ -261,6 +261,30 @@ non plus `variety_name` / `specy_name` / `production_type`. Les colonnes
 d'origine restent dans le modèle (masquées) : elles servent de clé de tri
 (`Trier par colonne`) pour que l'ordre reste stable d'une langue à l'autre.
 
+## Étape 3 bis — Contraintes imposées par `delta_function`
+
+La lecture de `delta_function.ipynb` impose trois adaptations, toutes intégrées
+aux notebooks livrés :
+
+1. **`handle_table_update` ne crée pas de table.** Ses deux modes appellent
+   `DeltaTable.forName(...)`, qui échoue si la table est absente. Les 13 tables
+   nouvelles de la phase 2 ont donc besoin d'un bootstrap : `ensure_delta_table()`
+   crée la table vide (schéma du DataFrame + `created_at`) au premier passage.
+2. **Aucune évolution de schéma, dans aucun mode.** En `update`, le
+   `whenNotMatchedInsert` référence `source.<colonne>` pour toutes les colonnes du
+   DataFrame et échoue si la cible ne les a pas. En `full`, le
+   `write.mode("append")` échoue tout autant. Les colonnes ajoutées à
+   `dim_batches_specifications` et `fact_batch_note` demandent donc un
+   `ALTER TABLE ADD COLUMNS` préalable → notebook `phase2_migration_schema`,
+   à exécuter une fois par environnement avant le premier run.
+3. **Le mode `update` ne supprime jamais.** Le MERGE n'a ni
+   `whenNotMatchedBySourceDelete` ni purge : une clé retirée à la source reste
+   indéfiniment dans la table du modèle. Pour des tables de traduction, cela
+   signifie des libellés fantômes persistants dans les slicers. Les tables de
+   traduction et `dim_language` sont donc écrites en **`mode="full"` imposé**
+   (et non `execution_mode`) : elles sont petites et entièrement redérivées à
+   chaque run.
+
 ## Étape 4 — Recette
 
 - [ ] Un utilisateur par langue via **« Afficher comme »** dans le service.
