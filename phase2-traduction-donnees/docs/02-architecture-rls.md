@@ -270,13 +270,17 @@ aux notebooks livrés :
    `DeltaTable.forName(...)`, qui échoue si la table est absente. Les 13 tables
    nouvelles de la phase 2 ont donc besoin d'un bootstrap : `ensure_delta_table()`
    crée la table vide (schéma du DataFrame + `created_at`) au premier passage.
-2. **Aucune évolution de schéma, dans aucun mode.** En `update`, le
-   `whenNotMatchedInsert` référence `source.<colonne>` pour toutes les colonnes du
-   DataFrame et échoue si la cible ne les a pas. En `full`, le
-   `write.mode("append")` échoue tout autant. Les colonnes ajoutées à
-   `dim_batches_specifications` et `fact_batch_note` demandent donc un
-   `ALTER TABLE ADD COLUMNS` préalable → notebook `phase2_migration_schema`,
-   à exécuter une fois par environnement avant le premier run.
+2. **Aucune évolution de schéma demandée explicitement** — mais le comportement
+   réel dépend d'un réglage du cluster. `handle_table_update` ne pose ni
+   `option("mergeSchema", "true")` sur l'append du mode `full`, ni
+   `withSchemaEvolution()` sur le MERGE du mode `update`. En revanche
+   `spark.databricks.delta.schema.autoMerge.enabled`, s'il est actif sur le
+   workspace, active l'évolution pour les deux. C'est apparemment le cas sur
+   l'environnement de développement actuel, où des colonnes ont déjà été
+   ajoutées par un simple run en mode `full`.
+   Le notebook `phase2_migration_schema` reste livré comme **filet de sécurité** :
+   idempotent, il ne fait rien quand les colonnes existent, et garantit le
+   démarrage sur un environnement où le réglage serait inactif.
 3. **Le mode `update` ne supprime jamais.** Le MERGE n'a ni
    `whenNotMatchedBySourceDelete` ni purge : une clé retirée à la source reste
    indéfiniment dans la table du modèle. Pour des tables de traduction, cela
