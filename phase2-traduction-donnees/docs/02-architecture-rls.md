@@ -168,6 +168,17 @@ relation vers les tables de traduction.
 
 ### Limites à valider en recette
 
+- **La culture arrive bien jusqu'au rapport** : les traductions statiques de la
+  phase 1 (métadonnées Tabular Editor) fonctionnent déjà en embed, ce qui prouve
+  que la locale est correctement transmise par la configuration d'embed.
+  Nuance à lever malgré tout : les traductions de métadonnées sont résolues par
+  la **couche de rendu du rapport** à partir de la culture de l'embed, alors que
+  `USERCULTURE()` est résolue par le **moteur tabulaire** à partir de la locale
+  de la connexion/requête. Les deux valeurs coïncident en pratique, mais ce
+  n'est pas le même chemin de code. Test de 5 minutes pour lever le doute avant
+  toute industrialisation : publier une mesure `Culture debug = USERCULTURE()`
+  sur une carte dans le rapport embarqué et vérifier la valeur retournée pour
+  deux langues.
 - **Power BI Desktop** : `USERCULTURE()` y renvoie la locale de Desktop, pas
   celle d'un utilisateur simulé. « Afficher comme » ne permet donc **pas** de
   tester les langues : il faut changer la langue du modèle/de Desktop, ou tester
