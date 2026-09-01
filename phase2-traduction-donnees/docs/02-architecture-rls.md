@@ -155,10 +155,15 @@ Le référentiel existe : **`ext_mal_psql_maite_vision_board_<env>.public.parame
 |---|---|---|---|---|
 | 1 | Français | `FR` | `fr-FR` | `fr` ✅ |
 | 2 | English | `EN` | `en-GB` / `en-US` | `en` ✅ |
-| 3 | Polski | `PL` | `pl-PL` | `pl` ✅ |
-| 4 | українська | `UA` | `uk-UA` | **`uk` ❌** |
+| 3 | Polski | `PL` | `pl-PL` | `pl` — *hors périmètre* |
+| 4 | українська | `UA` | `uk-UA` | `uk` — *hors périmètre* |
 | 5 | Romanian | `RO` | `ro-RO` | `ro` ✅ |
 | 6 | Czech | `CZ` | `cs-CZ` | **`cs` ❌** |
+
+**Périmètre du projet : 4 langues — FR, EN, RO, CZ.** Le polonais et l'ukrainien
+existent en base mais ne sont pas traités. `CULTURE_MAP` dans `dim_language`
+déclare le périmètre : une langue qui n'y figure pas n'entre pas dans le modèle.
+Si l'ukrainien est ajouté un jour, attention à mapper `UA` vers `uk` et non `ua`.
 
 > ⚠️ **Le rapprochement direct `code` ↔ `USERCULTURE()` ne fonctionne pas.**
 > La colonne `code` mélange des codes **langue** ISO 639-1 (`FR`, `EN`, `PL`, `RO`)
