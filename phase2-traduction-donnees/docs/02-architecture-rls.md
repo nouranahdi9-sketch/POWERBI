@@ -24,6 +24,7 @@ par le RLS. On construit donc, pour chaque table de traduction, une table
 
 ```python
 # Patron générique, à appliquer aux 8 tables
+# languages_df = dim_language (les 6 langues actives), lang_en = 2 (English)
 def build_translation_dim(df_trad, key_cols, languages_df, lang_en=2):
     actives = df_trad.filter(F.col("deleted") == False)
     keys    = actives.select(*key_cols).distinct()
@@ -87,15 +88,9 @@ Ces clés doivent également être propagées à `dim_batches_specifications` et
 ### `dim_language`
 Une petite table de référence, **une seule ligne par langue** :
 
-| `language` (int) | `code` | `label` |
-|---|---|---|
-| 1 | fr | Français |
-| 2 | en | English |
-| 5 | ro | Română |
-| 6 | cs | Čeština |
-
-(structure définitive en attente ; voir « Conséquence sur `dim_language` »
-ci-dessous pour la colonne de rapprochement avec `USERCULTURE()`).
+Alimentée depuis `parameters_languages` (voir « `dim_language` — source réelle
+et piège de codification » ci-dessous : la colonne `code` de la source ne peut
+pas être rapprochée directement de `USERCULTURE()`).
 
 ### Relations
 - `dim_language[language]` **1 → \*** chaque table de traduction `[language]`,
@@ -151,20 +146,85 @@ Trois choses à noter dans cette expression :
    et **toutes les langues s'affichent en même temps** (lignes dupliquées dans
    tous les visuels) : c'est le symptôme à reconnaître en recette.
 
-### Conséquence sur `dim_language`
+### `dim_language` — source réelle et piège de codification
 
-La table doit porter une colonne de rapprochement avec la culture, en plus de
-l'identifiant entier attendu par les tables de traduction :
+Le référentiel existe : **`ext_mal_psql_maite_vision_board_<env>.public.parameters_languages`**
+`id_parameter_language (int) | name | code | deleted | created_at | updated_at | deleted_at`
 
-| `language` (int) | `code` | `culture` | `label` |
-|---|---|---|---|
-| 1 | fr | fr-FR | Français |
-| 2 | en | en-GB | English |
-| 5 | ro | ro-RO | Română |
-| 6 | cs | cs-CZ | Čeština |
+| `id_parameter_language` | `name` | `code` | culture attendue de `USERCULTURE()` | `LEFT(culture,2)` |
+|---|---|---|---|---|
+| 1 | Français | `FR` | `fr-FR` | `fr` ✅ |
+| 2 | English | `EN` | `en-GB` / `en-US` | `en` ✅ |
+| 3 | Polski | `PL` | `pl-PL` | `pl` ✅ |
+| 4 | українська | `UA` | `uk-UA` | **`uk` ❌** |
+| 5 | Romanian | `RO` | `ro-RO` | `ro` ✅ |
+| 6 | Czech | `CZ` | `cs-CZ` | **`cs` ❌** |
 
-`code` est la clé de rapprochement avec `USERCULTURE()`, `language` la clé de
-relation vers les tables de traduction.
+> ⚠️ **Le rapprochement direct `code` ↔ `USERCULTURE()` ne fonctionne pas.**
+> La colonne `code` mélange des codes **langue** ISO 639-1 (`FR`, `EN`, `PL`, `RO`)
+> et des codes **pays** ISO 3166 (`UA`, `CZ`). Or `USERCULTURE()` renvoie la
+> partie *langue* de la culture :
+> - ukrainien → `uk-UA`, donc `uk`, alors que la table dit `UA` ;
+> - tchèque → `cs-CZ`, donc `cs`, alors que la table dit `CZ`.
+>
+> Un `LEFT(USERCULTURE(),2) = LOWER(code)` naïf ferait donc **basculer
+> silencieusement les utilisateurs ukrainiens et tchèques sur le repli anglais**,
+> sans erreur ni message — le pire type de bug sur ce projet, parce qu'il donne
+> un rapport qui « marche » et qui est simplement dans la mauvaise langue.
+
+**Correctif : une colonne de rapprochement explicite**, construite dans le
+notebook et jamais dérivée de `code` :
+
+```python
+# mapping code métier → code langue ISO 639-1 attendu de USERCULTURE()
+culture_map = {
+    "FR": "fr",
+    "EN": "en",
+    "PL": "pl",
+    "UA": "uk",   # ukrainien : ISO 639-1 = uk, la table porte le code pays UA
+    "RO": "ro",
+    "CZ": "cs",   # tchèque   : ISO 639-1 = cs, la table porte le code pays CZ
+}
+culture_expr = F.create_map([F.lit(x) for x in sum(culture_map.items(), ())])
+
+dim_language = (
+    spark.table(f"{source_catalog}.parameters_languages")
+         .filter(F.col("deleted") == False)
+         .select(
+             F.col("id_parameter_language").alias("language"),
+             F.col("code"),
+             F.col("name").alias("label"),
+             culture_expr[F.col("code")].alias("culture_code"),
+         )
+)
+```
+
+Le rôle RLS compare alors `dim_language[culture_code]`, pas `dim_language[code]` :
+
+```dax
+VAR __culture   = LOWER ( LEFT ( USERCULTURE (), 2 ) )
+VAR __supported = NOT ISEMPTY (
+                      FILTER ( ALL ( dim_language ),
+                               dim_language[culture_code] = __culture )
+                  )
+RETURN
+    dim_language[culture_code] = IF ( __supported, __culture, "en" )
+```
+
+Toute nouvelle langue ajoutée par le front devra être ajoutée à `culture_map` :
+c'est le seul point de maintenance manuel de l'architecture. À défaut, la
+nouvelle langue tombera proprement sur le repli anglais grâce au garde-fou —
+dégradé, mais pas cassé.
+
+### Couverture réelle des traductions
+
+Les échantillons de `goods_species_translations` ne montrent que les langues
+`1`, `2`, `5` et `6`. Le polonais (`3`) et l'ukrainien (`4`) semblent **absents
+d'une partie des tables de traduction**. C'est exactement ce que la
+densification de l'étape 1 traite : le produit cartésien clés × langues doit se
+faire sur les **6 langues de `parameters_languages`**, pas sur les langues
+présentes dans chaque table de traduction. Sans cela, un utilisateur polonais
+verrait des lignes disparaître de ses visuels au lieu de voir le repli anglais.
 
 ### Limites à valider en recette
 
@@ -219,7 +279,8 @@ d'origine restent dans le modèle (masquées) : elles servent de clé de tri
    la culture étant pilotée par les `localeSettings` de l'embed. Reste à
    confirmer avec le front que le rôle `Translation` sera bien passé dans
    l'identité effective du jeton.
-2. **Référentiel des langues** : structure de la table `Langage` en attente.
+2. ~~Référentiel des langues~~ **Fourni** : `parameters_languages`, 6 langues.
+   Attention au mapping `UA`→`uk` et `CZ`→`cs` (voir ci-dessus).
 3. **`Parameter`** : quel discriminant permet de savoir s'il faut lire
    `parameters_variables_translations` ou
    `parameters_production_line_variables_translations` ?
