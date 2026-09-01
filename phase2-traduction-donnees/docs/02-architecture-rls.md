@@ -94,7 +94,8 @@ Une petite table de référence, **une seule ligne par langue** :
 | 5 | ro | Română |
 | 6 | cs | Čeština |
 
-(à compléter avec le référentiel officiel du front — il manque au dossier).
+(structure définitive en attente ; voir « Conséquence sur `dim_language` »
+ci-dessous pour la colonne de rapprochement avec `USERCULTURE()`).
 
 ### Relations
 - `dim_language[language]` **1 → \*** chaque table de traduction `[language]`,
@@ -113,20 +114,75 @@ Une petite table de référence, **une seule ligne par langue** :
 > Elle évite le filtrage de sécurité bidirectionnel, souvent coûteux. À arbitrer
 > par mesure sur le vrai volume, pas a priori.
 
-### Rôle RLS
-Un seul rôle, dynamique, sur `dim_language` :
+### Rôle RLS — pilotage par `USERCULTURE()`
+
+La langue n'est pas portée par l'identité de l'embed mais par la **culture** du
+contexte de consultation, que le front pilote via les `localeSettings` de la
+configuration d'embed. Un **seul rôle**, appliqué à tout le monde, avec un filtre
+sur `dim_language` :
 
 ```dax
-[code] = USERPRINCIPALNAME()
+VAR __culture   = LOWER ( LEFT ( USERCULTURE (), 2 ) )
+VAR __supported = NOT ISEMPTY (
+                      FILTER ( ALL ( dim_language ), dim_language[code] = __culture )
+                  )
+RETURN
+    dim_language[code] = IF ( __supported, __culture, "en" )
 ```
 
-Le front passe le code langue (`"fr"`, `"en"`…) comme identité effective dans le
-jeton d'embed. Avantage : **un seul rôle pour toutes les langues**, ajouter une
-langue = ajouter une ligne dans `dim_language`, aucune republication du modèle.
+Trois choses à noter dans cette expression :
 
-Alternative : un rôle statique par langue (`FR`, `EN`, …) avec le filtre
-`[language] = 1`, le front passant le nom du rôle. Plus lisible dans le service,
-mais N rôles à maintenir manuellement.
+1. **`LEFT ( ... , 2 )`** — `USERCULTURE()` renvoie une culture complète
+   (`fr-FR`, `en-GB`, `ro-RO`…). En ne comparant que les deux premiers
+   caractères, toutes les variantes régionales d'une même langue retombent sur
+   la même traduction, et le front n'a pas à normaliser ce qu'il envoie.
+   Si `dim_language` doit un jour distinguer `pt-BR` de `pt-PT`, il suffira de
+   comparer la culture entière.
+2. **Le garde-fou `__supported`** est indispensable. Sans lui, une culture
+   inconnue ne ramène aucune ligne dans `dim_language`, donc aucune ligne dans
+   les tables de traduction, donc **un rapport entièrement vide**. Le repli sur
+   `"en"` prolonge au niveau langue la règle de fallback que le PO a définie au
+   niveau ligne.
+3. **Un rôle reste nécessaire malgré tout.** En embed *app-owns-data*, le RLS
+   n'est appliqué que si le jeton d'embed porte une identité effective avec un
+   nom de rôle. Le front doit donc continuer à passer
+   `roles: ["Translation"]` — la langue vient de la culture, mais
+   l'activation du RLS vient du rôle. Sans ce rôle, aucun filtre ne s'applique
+   et **toutes les langues s'affichent en même temps** (lignes dupliquées dans
+   tous les visuels) : c'est le symptôme à reconnaître en recette.
+
+### Conséquence sur `dim_language`
+
+La table doit porter une colonne de rapprochement avec la culture, en plus de
+l'identifiant entier attendu par les tables de traduction :
+
+| `language` (int) | `code` | `culture` | `label` |
+|---|---|---|---|
+| 1 | fr | fr-FR | Français |
+| 2 | en | en-GB | English |
+| 5 | ro | ro-RO | Română |
+| 6 | cs | cs-CZ | Čeština |
+
+`code` est la clé de rapprochement avec `USERCULTURE()`, `language` la clé de
+relation vers les tables de traduction.
+
+### Limites à valider en recette
+
+- **Power BI Desktop** : `USERCULTURE()` y renvoie la locale de Desktop, pas
+  celle d'un utilisateur simulé. « Afficher comme » ne permet donc **pas** de
+  tester les langues : il faut changer la langue du modèle/de Desktop, ou tester
+  directement dans le service via un jeton d'embed. À prévoir dans le plan de
+  test.
+- **Cache de requêtes** : le service met en cache les résultats par identité RLS.
+  Comme ici la langue ne vient pas de l'identité mais de la culture, il faut
+  **vérifier explicitement** que deux consultations de cultures différentes avec
+  la même identité ne se servent pas mutuellement un résultat en cache. C'est le
+  risque principal de cette approche, et il se teste en quelques minutes une fois
+  le premier prototype publié.
+- **`USERCULTURE()` n'est pas utilisable en colonne calculée** (elle est évaluée
+  au rafraîchissement, pas à la requête). Toute la traduction doit donc passer
+  par le filtrage RLS et par des colonnes de table, jamais par une colonne
+  calculée DAX.
 
 ### Usage dans les visuels
 Les visuels et slicers pointent la colonne `label` de la table de traduction, et
@@ -148,10 +204,11 @@ d'origine restent dans le modèle (masquées) : elles servent de clé de tri
 
 ## Points ouverts
 
-1. **Comment le front transmet-il la langue ?** (identité effective de l'embed,
-   rôle statique, ou autre) — c'est le choix qui conditionne l'étape 3.
-2. **Référentiel des langues** : le mapping `language` (int) ↔ code ISO n'est
-   dans aucun des documents fournis.
+1. ~~Comment le front transmet-il la langue ?~~ **Tranché** : `USERCULTURE()`,
+   la culture étant pilotée par les `localeSettings` de l'embed. Reste à
+   confirmer avec le front que le rôle `Translation` sera bien passé dans
+   l'identité effective du jeton.
+2. **Référentiel des langues** : structure de la table `Langage` en attente.
 3. **`Parameter`** : quel discriminant permet de savoir s'il faut lire
    `parameters_variables_translations` ou
    `parameters_production_line_variables_translations` ?
