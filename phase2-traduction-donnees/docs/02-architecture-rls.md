@@ -45,6 +45,11 @@ def build_translation_dim(df_trad, key_cols, languages_df, lang_en=2):
         .select(*key_cols, "language", "label"))
 ```
 
+**Les clés viennent des nomenclatures**, pas des tables de traduction. Une clé
+jamais traduite dans aucune langue serait sinon absente du modèle, et son libellé
+s'afficherait vide — le repli « afficher la clé » du PO ne se déclencherait pas.
+Constat en preprd : 127 catégories de détail de notes sur 397 étaient dans ce cas.
+
 Bénéfices, au-delà du fallback :
 - le couple (clé, langue) est **unique et toujours présent** → après filtrage RLS
   il reste exactement une ligne par clé, donc pas de duplication de lignes ni de
