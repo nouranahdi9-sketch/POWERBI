@@ -294,6 +294,34 @@ aux notebooks livrés :
    (et non `execution_mode`) : elles sont petites et entièrement redérivées à
    chaque run.
 
+## Étape 3 ter — Organisation en job dédié
+
+Les tables de traduction sont des **référentiels partagés** : plusieurs projets
+les consommeront, un seul job les alimente. Elles vivent donc dans
+`mal_maite_common_<env>.gold` (variable `translations_schema` définie dans `env`)
+et non dans le schéma d'un projet.
+
+### Notebooks
+
+| Notebook | Rôle |
+|---|---|
+| `translation_function` | Les 3 fonctions, aucune table produite. Même rôle que `delta_function` |
+| `dim_language` | Le référentiel des langues, porteur du RLS |
+| `build_translations` | Les 11 appels + le contrôle de couverture |
+| `main_translations` | L'orchestrateur du job |
+
+`build_translations` ne dépend pas de `load_data` : il charge lui-même ses 8
+tables source, le job n'ayant aucun besoin des tables de mesures.
+`source_catalog` est remonté dans `env`, partagé entre les deux pipelines.
+
+### Planification
+
+Le rythme se cale sur l'apparition de **nouvelles clés** (variétés, catégories de
+notes, paramètres), pas sur les corrections de libellés : entre deux runs, une
+clé nouvellement créée s'affiche sans libellé. Le front a confirmé qu'un refresh
+séparé hebdomadaire est possible ; un run quotidien ramène le délai sous les 24 h
+pour quelques minutes de calcul.
+
 ## Étape 4 — Recette
 
 - [ ] Un utilisateur par langue via **« Afficher comme »** dans le service.
