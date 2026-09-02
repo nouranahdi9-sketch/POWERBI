@@ -298,7 +298,7 @@ aux notebooks livrés :
 
 Les tables de traduction sont des **référentiels partagés** : plusieurs projets
 les consommeront, un seul job les alimente. Elles vivent donc dans
-`mal_maite_common_<env>.gold` (variable `translations_schema` définie dans `env`)
+le schéma transverse `<catalogue>.common` (variable `translations_schema` définie dans `env`)
 et non dans le schéma d'un projet.
 
 ### Notebooks
