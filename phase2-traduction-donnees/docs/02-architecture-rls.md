@@ -231,6 +231,36 @@ faire sur les **6 langues de `parameters_languages`**, pas sur les langues
 présentes dans chaque table de traduction. Sans cela, un utilisateur polonais
 verrait des lignes disparaître de ses visuels au lieu de voir le repli anglais.
 
+### Cohabitation avec la phase 1 — vérifiée
+
+Les mesures statiques de la phase 1 (`TITLE_*`, `TEXTE_*`) comparent la **culture
+entière** contre la table `Translation` :
+
+```dax
+CALCULATE (
+    SELECTEDVALUE ( Translation[TranslationText] ),
+    Translation[LanguageCode] = USERCULTURE (),   -- "fr-FR"
+    ...
+)
+```
+avec un repli sur `"en-US"`.
+
+La phase 2 compare les **2 premières lettres**. Les deux approches coïncident
+tant que le front n'envoie que les cultures présentes dans `Translation`.
+
+**Relevé en preprd** : `Translation` contient exactement `fr-FR`, `en-US`,
+`ro-RO`, `cs-CZ` — les 4 cultures du projet. Aucune divergence possible.
+
+La comparaison sur 2 lettres est un **sur-ensemble** de la comparaison exacte :
+elle matche tout ce que la phase 1 matche, plus les variantes régionales
+(`fr-BE`, `en-GB`). Un écart n'apparaîtrait que si le front envoyait une telle
+variante — et ce serait alors la phase 1 qui se dégraderait (titres en anglais,
+données dans la bonne langue), pas la phase 2.
+
+> Amélioration possible de la phase 1, hors périmètre : comparer
+> `LEFT ( USERCULTURE (), 2 )` dans les mesures la rendrait tolérante aux
+> variantes régionales. Une trentaine de mesures à modifier.
+
 ### Limites à valider en recette
 
 - **La culture arrive bien jusqu'au rapport** : les traductions statiques de la
