@@ -45,6 +45,17 @@ def build_translation_dim(df_trad, key_cols, languages_df, lang_en=2):
         .select(*key_cols, "language", "label"))
 ```
 
+**Les clés viennent des nomenclatures**, pas des tables de traduction : la règle
+du PO ne peut s'appliquer qu'à une ligne qui existe. Une clé jamais traduite
+dans aucune langue n'aurait sinon aucune ligne, et s'afficherait vide.
+Constat en preprd : 127 catégories de détail de notes sur 397.
+
+**Le repli de dernier recours est le `code` métier** de la nomenclature
+(`ORGE_6RH`, `TCR`) et non l'identifiant technique (`42`, `detail_TCR`) : c'est
+l'interprétation la plus vraisemblable de « la clé » dans la règle du PO, et la
+seule qui produise quelque chose de lisible. **À confirmer avec lui**, ainsi que
+sa connaissance des clés jamais traduites.
+
 Bénéfices, au-delà du fallback :
 - le couple (clé, langue) est **unique et toujours présent** → après filtrage RLS
   il reste exactement une ligne par clé, donc pas de duplication de lignes ni de
