@@ -8,7 +8,7 @@ permet à deux utilisateurs de langues différentes de voir des libellés
 différents sur le même modèle publié. La chaîne :
 
 ```
-identité de l'embed  →  rôle RLS  →  filtre sur dim_language
+identité de l'embed  →  rôle RLS  →  filtre sur dim_trad_language
                                         ↓ (relation 1→*)
                               chaque table de traduction ne
                               conserve qu'une ligne par clé
@@ -24,7 +24,7 @@ par le RLS. On construit donc, pour chaque table de traduction, une table
 
 ```python
 # Patron générique, à appliquer aux 8 tables
-# languages_df = dim_language (les 6 langues actives), lang_en = 2 (English)
+# languages_df = dim_trad_language (les langues du périmètre), lang_en = 2 (English)
 def build_translation_dim(df_trad, key_cols, languages_df, lang_en=2):
     actives = df_trad.filter(F.col("deleted") == False)
     keys    = actives.select(*key_cols).distinct()
@@ -85,17 +85,17 @@ Ces clés doivent également être propagées à `dim_batches_specifications` et
 
 ## Étape 3 — Le modèle Power BI
 
-### `dim_language`
+### `dim_trad_language`
 Une petite table de référence, **une seule ligne par langue** :
 
-Alimentée depuis `parameters_languages` (voir « `dim_language` — source réelle
+Alimentée depuis `parameters_languages` (voir « `dim_trad_language` — source réelle
 et piège de codification » ci-dessous : la colonne `code` de la source ne peut
 pas être rapprochée directement de `USERCULTURE()`).
 
 ### Relations
-- `dim_language[language]` **1 → \*** chaque table de traduction `[language]`,
+- `dim_trad_language[language]` **1 → \*** chaque table de traduction `[language]`,
   direction simple. Le RLS n'a alors besoin d'être écrit **qu'une seule fois**,
-  sur `dim_language` : il se propage automatiquement à toutes les tables de
+  sur `dim_trad_language` : il se propage automatiquement à toutes les tables de
   traduction. C'est le point clé pour la maintenabilité — ajouter une table de
   traduction ne demande pas de toucher aux rôles.
 - Chaque table de traduction `[clé]` **\* → 1** la dimension/le fait porteur de
@@ -114,15 +114,15 @@ pas être rapprochée directement de `USERCULTURE()`).
 La langue n'est pas portée par l'identité de l'embed mais par la **culture** du
 contexte de consultation, que le front pilote via les `localeSettings` de la
 configuration d'embed. Un **seul rôle**, appliqué à tout le monde, avec un filtre
-sur `dim_language` :
+sur `dim_trad_language` :
 
 ```dax
 VAR __culture   = LOWER ( LEFT ( USERCULTURE (), 2 ) )
 VAR __supported = NOT ISEMPTY (
-                      FILTER ( ALL ( dim_language ), dim_language[code] = __culture )
+                      FILTER ( ALL ( dim_trad_language ), dim_trad_language[code] = __culture )
                   )
 RETURN
-    dim_language[code] = IF ( __supported, __culture, "en" )
+    dim_trad_language[code] = IF ( __supported, __culture, "en" )
 ```
 
 Trois choses à noter dans cette expression :
@@ -131,10 +131,10 @@ Trois choses à noter dans cette expression :
    (`fr-FR`, `en-GB`, `ro-RO`…). En ne comparant que les deux premiers
    caractères, toutes les variantes régionales d'une même langue retombent sur
    la même traduction, et le front n'a pas à normaliser ce qu'il envoie.
-   Si `dim_language` doit un jour distinguer `pt-BR` de `pt-PT`, il suffira de
+   Si `dim_trad_language` doit un jour distinguer `pt-BR` de `pt-PT`, il suffira de
    comparer la culture entière.
 2. **Le garde-fou `__supported`** est indispensable. Sans lui, une culture
-   inconnue ne ramène aucune ligne dans `dim_language`, donc aucune ligne dans
+   inconnue ne ramène aucune ligne dans `dim_trad_language`, donc aucune ligne dans
    les tables de traduction, donc **un rapport entièrement vide**. Le repli sur
    `"en"` prolonge au niveau langue la règle de fallback que le PO a définie au
    niveau ligne.
@@ -146,7 +146,7 @@ Trois choses à noter dans cette expression :
    et **toutes les langues s'affichent en même temps** (lignes dupliquées dans
    tous les visuels) : c'est le symptôme à reconnaître en recette.
 
-### `dim_language` — source réelle et piège de codification
+### `dim_trad_language` — source réelle et piège de codification
 
 Le référentiel existe : **`ext_mal_psql_maite_vision_board_<env>.public.parameters_languages`**
 `id_parameter_language (int) | name | code | deleted | created_at | updated_at | deleted_at`
@@ -161,7 +161,7 @@ Le référentiel existe : **`ext_mal_psql_maite_vision_board_<env>.public.parame
 | 6 | Czech | `CZ` | `cs-CZ` | **`cs` ❌** |
 
 **Périmètre du projet : 4 langues — FR, EN, RO, CZ.** Le polonais et l'ukrainien
-existent en base mais ne sont pas traités. `CULTURE_MAP` dans `dim_language`
+existent en base mais ne sont pas traités. `CULTURE_MAP` dans `dim_trad_language`
 déclare le périmètre : une langue qui n'y figure pas n'entre pas dans le modèle.
 Si l'ukrainien est ajouté un jour, attention à mapper `UA` vers `uk` et non `ua`.
 
@@ -192,7 +192,7 @@ culture_map = {
 }
 culture_expr = F.create_map([F.lit(x) for x in sum(culture_map.items(), ())])
 
-dim_language = (
+dim_trad_language = (
     spark.table(f"{source_catalog}.parameters_languages")
          .filter(F.col("deleted") == False)
          .select(
@@ -204,16 +204,16 @@ dim_language = (
 )
 ```
 
-Le rôle RLS compare alors `dim_language[culture_code]`, pas `dim_language[code]` :
+Le rôle RLS compare alors `dim_trad_language[culture_code]`, pas `dim_trad_language[code]` :
 
 ```dax
 VAR __culture   = LOWER ( LEFT ( USERCULTURE (), 2 ) )
 VAR __supported = NOT ISEMPTY (
-                      FILTER ( ALL ( dim_language ),
-                               dim_language[culture_code] = __culture )
+                      FILTER ( ALL ( dim_trad_language ),
+                               dim_trad_language[culture_code] = __culture )
                   )
 RETURN
-    dim_language[culture_code] = IF ( __supported, __culture, "en" )
+    dim_trad_language[culture_code] = IF ( __supported, __culture, "en" )
 ```
 
 Toute nouvelle langue ajoutée par le front devra être ajoutée à `culture_map` :
@@ -290,7 +290,7 @@ aux notebooks livrés :
    `whenNotMatchedBySourceDelete` ni purge : une clé retirée à la source reste
    indéfiniment dans la table du modèle. Pour des tables de traduction, cela
    signifie des libellés fantômes persistants dans les slicers. Les tables de
-   traduction et `dim_language` sont donc écrites en **`mode="full"` imposé**
+   traduction et `dim_trad_language` sont donc écrites en **`mode="full"` imposé**
    (et non `execution_mode`) : elles sont petites et entièrement redérivées à
    chaque run.
 
@@ -306,7 +306,7 @@ et non dans le schéma d'un projet.
 | Notebook | Rôle |
 |---|---|
 | `translation_function` | Les 3 fonctions, aucune table produite. Même rôle que `delta_function` |
-| `dim_language` | Le référentiel des langues, porteur du RLS |
+| `dim_trad_language` | Le référentiel des langues, porteur du RLS |
 | `build_translations` | Les 11 appels + le contrôle de couverture |
 | `main_translations` | L'orchestrateur du job |
 
