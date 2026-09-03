@@ -1,0 +1,698 @@
+table Translation
+	lineageTag: 188cb0ef-d302-4577-b1cd-ed66c073a011
+
+	measure TITLE_OVERVIEW_LAST_HOURS =
+			
+			VAR CurrentCulture = USERCULTURE()
+			
+			VAR TitleTranslated =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE_OVERVIEW_LAST_HOURS",
+			        Translation[LanguageCode] = CurrentCulture
+			    )
+			
+			VAR TitleDefault =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE_OVERVIEW_LAST_HOURS",
+			        Translation[LanguageCode] = "en-US"
+			    )
+			
+			RETURN
+			COALESCE ( TitleTranslated, TitleDefault )
+		lineageTag: 1d520ce9-6be1-47a8-81cb-402eebdc346a
+
+	measure TITLE1_OVERVIEW_LAST_HOURS =
+			
+			VAR CurrentCulture = USERCULTURE()
+			
+			VAR TitleTranslated =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE1_OVERVIEW_LAST_HOURS",
+			        Translation[LanguageCode] = CurrentCulture
+			    )
+			
+			VAR TitleDefault =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE1_OVERVIEW_LAST_HOURS",
+			        Translation[LanguageCode] = "en-US"
+			    )
+			
+			RETURN
+			COALESCE ( TitleTranslated, TitleDefault )
+		lineageTag: c6ad2928-80dd-45ba-afa8-79973a464210
+
+	measure TITLE2_OVERVIEW_LAST_HOURS =
+			
+			VAR CurrentCulture = USERCULTURE()
+			
+			VAR TitleTranslated =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE2_OVERVIEW_LAST_HOURS",
+			        Translation[LanguageCode] = CurrentCulture
+			    )
+			
+			VAR TitleDefault =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE2_OVERVIEW_LAST_HOURS",
+			        Translation[LanguageCode] = "en-US"
+			    )
+			
+			RETURN
+			COALESCE ( TitleTranslated, TitleDefault )
+		lineageTag: 4100fe40-2ac9-4497-9ce3-b92a5c82d67e
+
+	measure TITLE_CYCLE_TIME =
+			
+			VAR CurrentCulture = USERCULTURE()
+			
+			VAR TitleTranslated =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE_CYCLE_TIME",
+			        Translation[LanguageCode] = CurrentCulture
+			    )
+			
+			VAR TitleDefault =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE_CYCLE_TIME",
+			        Translation[LanguageCode] = "en-US"
+			    )
+			
+			RETURN
+			COALESCE ( TitleTranslated, TitleDefault )
+		lineageTag: f7d441b2-5d4f-41f2-a82c-016d86eba095
+
+	measure TITLE1_CYCLE_TIME =
+			
+			VAR CurrentCulture = USERCULTURE()
+			
+			VAR TitleTranslated =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE1_CYCLE_TIME",
+			        Translation[LanguageCode] = CurrentCulture
+			    )
+			
+			VAR TitleDefault =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE1_CYCLE_TIME",
+			        Translation[LanguageCode] = "en-US"
+			    )
+			
+			RETURN
+			COALESCE ( TitleTranslated, TitleDefault )
+		lineageTag: 51ee1943-0068-4474-b89f-3928c331a009
+
+	measure TITLE2_CYCLE_TIME =
+			
+			VAR CurrentCulture = USERCULTURE()
+			
+			VAR TitleTranslated =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE2_CYCLE_TIME",
+			        Translation[LanguageCode] = CurrentCulture
+			    )
+			
+			VAR TitleDefault =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE2_CYCLE_TIME",
+			        Translation[LanguageCode] = "en-US"
+			    )
+			
+			RETURN
+			COALESCE ( TitleTranslated, TitleDefault )
+		lineageTag: 323fffe2-7430-4bd5-84b5-740ed97c1a5b
+
+	measure TITLE3_CYCLE_TIME =
+			
+			VAR CurrentCulture = USERCULTURE()
+			
+			VAR TitleTranslated =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE3_CYCLE_TIME",
+			        Translation[LanguageCode] = CurrentCulture
+			    )
+			
+			VAR TitleDefault =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE3_CYCLE_TIME",
+			        Translation[LanguageCode] = "en-US"
+			    )
+			
+			RETURN
+			COALESCE ( TitleTranslated, TitleDefault )
+		lineageTag: 67e1af47-8072-487d-8b13-5929007addd8
+
+	measure TITLE_TRANSFER_TIME =
+			
+			VAR CurrentCulture = USERCULTURE()
+			
+			VAR TitleTranslated =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE_TRANSFER_TIME",
+			        Translation[LanguageCode] = CurrentCulture
+			    )
+			
+			VAR TitleDefault =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE_TRANSFER_TIME",
+			        Translation[LanguageCode] = "en-US"
+			    )
+			
+			RETURN
+			COALESCE ( TitleTranslated, TitleDefault )
+		lineageTag: e1f86cb9-18a2-4249-a7a8-c8a6333792fd
+
+	measure TITLE1_TRANSFER_TIME =
+			
+			VAR CurrentCulture = USERCULTURE()
+			
+			VAR TitleTranslated =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE1_TRANSFER_TIME",
+			        Translation[LanguageCode] = CurrentCulture
+			    )
+			
+			VAR TitleDefault =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE1_TRANSFER_TIME",
+			        Translation[LanguageCode] = "en-US"
+			    )
+			
+			RETURN
+			COALESCE ( TitleTranslated, TitleDefault )
+		lineageTag: 75c28c9f-3c6b-47e0-a63a-038548750e4f
+
+	measure TITLE2_TRANSFER_TIME =
+			
+			VAR CurrentCulture = USERCULTURE()
+			
+			VAR TitleTranslated =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE2_TRANSFER_TIME",
+			        Translation[LanguageCode] = CurrentCulture
+			    )
+			
+			VAR TitleDefault =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE2_TRANSFER_TIME",
+			        Translation[LanguageCode] = "en-US"
+			    )
+			
+			RETURN
+			COALESCE ( TitleTranslated, TitleDefault )
+		lineageTag: 2c80a245-8c8f-45ed-9c90-8c68f6d2ba71
+
+	measure TITLE_WAITING_TIME =
+			
+			VAR CurrentCulture = USERCULTURE()
+			
+			VAR TitleTranslated =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE_WAITING_TIME",
+			        Translation[LanguageCode] = CurrentCulture
+			    )
+			
+			VAR TitleDefault =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE_WAITING_TIME",
+			        Translation[LanguageCode] = "en-US"
+			    )
+			
+			RETURN
+			COALESCE ( TitleTranslated, TitleDefault )
+		lineageTag: aeac7eb4-b77d-44cc-8d5b-974153c207d7
+
+	measure TITLE1_WAITING_TIME =
+			
+			VAR CurrentCulture = USERCULTURE()
+			
+			VAR TitleTranslated =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE1_WAITING_TIME",
+			        Translation[LanguageCode] = CurrentCulture
+			    )
+			
+			VAR TitleDefault =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE1_WAITING_TIME",
+			        Translation[LanguageCode] = "en-US"
+			    )
+			
+			RETURN
+			COALESCE ( TitleTranslated, TitleDefault )
+		lineageTag: 567f8384-4089-4600-a39b-3ccf3a79019e
+
+	measure TITLE2_WAITING_TIME =
+			
+			VAR CurrentCulture = USERCULTURE()
+			
+			VAR TitleTranslated =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE2_WAITING_TIME",
+			        Translation[LanguageCode] = CurrentCulture
+			    )
+			
+			VAR TitleDefault =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE2_WAITING_TIME",
+			        Translation[LanguageCode] = "en-US"
+			    )
+			
+			RETURN
+			COALESCE ( TitleTranslated, TitleDefault )
+		lineageTag: de9019f5-9926-4e49-b1df-dfbaedadf7f7
+
+	measure TITLE1_MEASURES_ALL =
+			
+			VAR CurrentCulture = USERCULTURE()
+			
+			VAR TitleTranslated =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE1_MEASURES_ALL",
+			        Translation[LanguageCode] = CurrentCulture
+			    )
+			
+			VAR TitleDefault =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE1_MEASURES_ALL",
+			        Translation[LanguageCode] = "en-US"
+			    )
+			
+			RETURN
+			COALESCE ( TitleTranslated, TitleDefault )
+		lineageTag: 08383d5b-31e5-4c44-97a0-f7bde44a821e
+
+	measure TITLE2_MEASURES_ALL =
+			
+			VAR CurrentCulture = USERCULTURE()
+			
+			VAR TitleTranslated =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE2_MEASURES_ALL",
+			        Translation[LanguageCode] = CurrentCulture
+			    )
+			
+			VAR TitleDefault =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE2_MEASURES_ALL",
+			        Translation[LanguageCode] = "en-US"
+			    )
+			
+			RETURN
+			COALESCE ( TitleTranslated, TitleDefault )
+		lineageTag: 7b6112d3-54c2-4be6-844c-9aafb89d79ed
+
+	measure TEXTE_BATCH_CYCLE_ALL =
+			
+			VAR CurrentCulture = USERCULTURE()
+			
+			VAR TitleTranslated =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TEXTE_BATCH_CYCLE_ALL",
+			        Translation[LanguageCode] = CurrentCulture
+			    )
+			
+			VAR TitleDefault =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TEXTE_BATCH_CYCLE_ALL",
+			        Translation[LanguageCode] = "en-US"
+			    )
+			
+			RETURN
+			COALESCE ( TitleTranslated, TitleDefault )
+		lineageTag: 81b8c1c7-7d59-45da-8d41-edf0e48f9991
+
+	measure TITLE1_BATCH_CYCLE_ALL =
+			
+			VAR CurrentCulture = USERCULTURE()
+			
+			VAR TitleTranslated =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE1_BATCH_CYCLE_ALL",
+			        Translation[LanguageCode] = CurrentCulture
+			    )
+			
+			VAR TitleDefault =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE1_BATCH_CYCLE_ALL",
+			        Translation[LanguageCode] = "en-US"
+			    )
+			
+			RETURN
+			COALESCE ( TitleTranslated, TitleDefault )
+		lineageTag: c9412bb5-2670-47ac-b85a-5f5dcc110bb6
+
+	measure TITLE2_BATCH_CYCLE_ALL =
+			
+			VAR CurrentCulture = USERCULTURE()
+			
+			VAR TitleTranslated =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE2_BATCH_CYCLE_ALL",
+			        Translation[LanguageCode] = CurrentCulture
+			    )
+			
+			VAR TitleDefault =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE2_BATCH_CYCLE_ALL",
+			        Translation[LanguageCode] = "en-US"
+			    )
+			
+			RETURN
+			COALESCE ( TitleTranslated, TitleDefault )
+		lineageTag: 1e8845f4-b805-4a13-813a-c63ee36dba89
+
+	measure TITLE1_PARETO =
+			
+			VAR CurrentCulture = USERCULTURE()
+			
+			VAR TitleTranslated =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE1_PARETO",
+			        Translation[LanguageCode] = CurrentCulture
+			    )
+			
+			VAR TitleDefault =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE1_PARETO",
+			        Translation[LanguageCode] = "en-US"
+			    )
+			
+			RETURN
+			COALESCE ( TitleTranslated, TitleDefault )
+		lineageTag: 0936c52e-5d30-43fe-8925-d78eeb9496c8
+
+	measure TITLE2_PARETO =
+			
+			VAR CurrentCulture = USERCULTURE()
+			
+			VAR TitleTranslated =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE2_PARETO",
+			        Translation[LanguageCode] = CurrentCulture
+			    )
+			
+			VAR TitleDefault =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE2_PARETO",
+			        Translation[LanguageCode] = "en-US"
+			    )
+			
+			RETURN
+			COALESCE ( TitleTranslated, TitleDefault )
+		lineageTag: e3348da0-de74-4cd9-a067-e6fcab65e9bf
+
+	measure TITLE_PARETO_EVENTS_DETAILS =
+			
+			VAR CurrentCulture = USERCULTURE()
+			
+			VAR TitleTranslated =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE_PARETO_EVENTS_DETAILS",
+			        Translation[LanguageCode] = CurrentCulture
+			    )
+			
+			VAR TitleDefault =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE_PARETO_EVENTS_DETAILS",
+			        Translation[LanguageCode] = "en-US"
+			    )
+			
+			RETURN
+			COALESCE ( TitleTranslated, TitleDefault )
+		lineageTag: 1d26372e-efc7-4562-9e43-d6b9f0e9e057
+
+	measure TITLE1_PARETO_EVENTS_DETAILS =
+			
+			VAR CurrentCulture = USERCULTURE()
+			
+			VAR TitleTranslated =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE1_PARETO_EVENTS_DETAILS",
+			        Translation[LanguageCode] = CurrentCulture
+			    )
+			
+			VAR TitleDefault =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE1_PARETO_EVENTS_DETAILS",
+			        Translation[LanguageCode] = "en-US"
+			    )
+			
+			RETURN
+			COALESCE ( TitleTranslated, TitleDefault )
+		lineageTag: 7ca2d638-1e40-4c32-bbc3-4faec80dc437
+
+	measure TITLE2_PARETO_EVENTS_DETAILS =
+			
+			VAR CurrentCulture = USERCULTURE()
+			
+			VAR TitleTranslated =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE2_PARETO_EVENTS_DETAILS",
+			        Translation[LanguageCode] = CurrentCulture
+			    )
+			
+			VAR TitleDefault =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE2_PARETO_EVENTS_DETAILS",
+			        Translation[LanguageCode] = "en-US"
+			    )
+			
+			RETURN
+			COALESCE ( TitleTranslated, TitleDefault )
+		lineageTag: 89167672-671c-4429-9454-dc65faf438d0
+
+	measure TITLE_PRODUCTION_NOTES =
+			
+			VAR CurrentCulture = USERCULTURE()
+			
+			VAR TitleTranslated =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE_PRODUCTION_NOTES",
+			        Translation[LanguageCode] = CurrentCulture
+			    )
+			
+			VAR TitleDefault =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE_PRODUCTION_NOTES",
+			        Translation[LanguageCode] = "en-US"
+			    )
+			
+			RETURN
+			COALESCE ( TitleTranslated, TitleDefault )
+		lineageTag: 74883fdd-8c63-4f1a-b41f-59b83746e22b
+
+	measure TITLE_METADATA =
+			
+			VAR CurrentCulture = USERCULTURE()
+			
+			VAR TitleTranslated =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE_METADATA",
+			        Translation[LanguageCode] = CurrentCulture
+			    )
+			
+			VAR TitleDefault =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE_METADATA",
+			        Translation[LanguageCode] = "en-US"
+			    )
+			
+			RETURN
+			COALESCE ( TitleTranslated, TitleDefault )
+		lineageTag: b559a011-ef23-46d3-bbf6-81c9846408cb
+
+	measure TITLE_BOUTTON_METADATA_LIEN =
+			
+			VAR CurrentCulture = USERCULTURE()
+			
+			VAR TitleTranslated =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE_BOUTTON_METADATA_LIEN",
+			        Translation[LanguageCode] = CurrentCulture
+			    )
+			
+			VAR TitleDefault =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE_BOUTTON_METADATA_LIEN",
+			        Translation[LanguageCode] = "en-US"
+			    )
+			
+			RETURN
+			COALESCE ( TitleTranslated, TitleDefault )
+		lineageTag: 5c446d99-55b4-40ea-8f3d-201fe3ac947c
+
+	measure TEXTE_BOUTTON_METADATA_LIEN =
+			
+			VAR CurrentCulture = USERCULTURE()
+			
+			VAR TitleTranslated =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TEXTE_BOUTTON_METADATA_LIEN",
+			        Translation[LanguageCode] = CurrentCulture
+			    )
+			
+			VAR TitleDefault =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TEXTE_BOUTTON_METADATA_LIEN",
+			        Translation[LanguageCode] = "en-US"
+			    )
+			
+			RETURN
+			COALESCE ( TitleTranslated, TitleDefault )
+		lineageTag: 0ec8d204-01d3-452d-b112-f3d1cfa4efe3
+
+	column ReportCode
+		dataType: string
+		lineageTag: 6a68b488-99b5-4e3c-9110-96ba0c6fdc24
+		summarizeBy: none
+		sourceColumn: ReportCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column TranslationKey
+		dataType: string
+		lineageTag: a16a46cb-6597-4260-8b76-589c7db416c0
+		summarizeBy: none
+		sourceColumn: TranslationKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column LanguageCode
+		dataType: string
+		lineageTag: a736f22d-86ce-4f37-a4c8-0731479e2627
+		summarizeBy: none
+		sourceColumn: LanguageCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column TranslationText
+		dataType: string
+		lineageTag: 87f0eb10-0ff6-448a-8fff-67820aabd1a7
+		summarizeBy: none
+		sourceColumn: TranslationText
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Translation = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_preprd_Database = Source{[Name="mal_maite_bi_preprd",Kind="Database"]}[Data],
+				    common_Schema = mal_maite_bi_preprd_Database{[Name="common",Kind="Schema"]}[Data],
+				    translation_Table = common_Schema{[Name="translation",Kind="Table"]}[Data]
+				in
+				    translation_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+

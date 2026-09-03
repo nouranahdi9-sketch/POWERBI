@@ -1,0 +1,123 @@
+table dim_site
+	lineageTag: c2d86c9f-2e3b-4273-a469-2719b661874f
+
+	column id_plant_production_line
+		dataType: int64
+		formatString: 0
+		lineageTag: 2d5433cb-dd41-454b-9c8e-3f9dc976c1b7
+		summarizeBy: none
+		sourceColumn: id_plant_production_line
+
+		annotation SummarizationSetBy = Automatic
+
+	column plant
+		dataType: int64
+		formatString: 0
+		lineageTag: 0e7d9538-4df7-413d-acde-20411d81e67d
+		summarizeBy: sum
+		sourceColumn: plant
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 61e37552-d2f7-4e0b-8c35-ab13cbb0cc57
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a46eef9a-efb0-4c75-8a1a-29d3a6565930
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 6893f9ab-928c-4ee2-b979-ef9921050943
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: aa403cfc-da9d-4a47-be1e-c2cacc238560
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column process
+		dataType: int64
+		formatString: 0
+		lineageTag: b6bc7bae-da36-4e9a-bddd-13f8b549b40b
+		summarizeBy: sum
+		sourceColumn: process
+
+		annotation SummarizationSetBy = Automatic
+
+	column default_production_type
+		dataType: int64
+		formatString: 0
+		lineageTag: 0f5a4569-1614-45e0-9f2c-d6aa28b118ce
+		summarizeBy: sum
+		sourceColumn: default_production_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: d01b6f7c-f268-45b9-8ab7-9eb0760dd5b4
+		summarizeBy: none
+		sourceColumn: deleted
+
+		annotation SummarizationSetBy = Automatic
+
+	column default_batch_cycle
+		dataType: int64
+		formatString: 0
+		lineageTag: 729bbdab-1374-42d5-9bc9-5bd8d5694c31
+		summarizeBy: sum
+		sourceColumn: default_batch_cycle
+
+		annotation SummarizationSetBy = Automatic
+
+	column sap_code
+		dataType: string
+		lineageTag: d4547645-4cf2-4639-ae90-f4abe44cb7e6
+		summarizeBy: none
+		sourceColumn: sap_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column common_code
+		dataType: string
+		lineageTag: 5d8147c8-5466-429c-88f1-8ca4d1520305
+		summarizeBy: none
+		sourceColumn: common_code
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_site = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_preprd_Database = Source{[Name="mal_maite_bi_preprd",Kind="Database"]}[Data],
+				    common_Schema = mal_maite_bi_preprd_Database{[Name="common",Kind="Schema"]}[Data],
+				    dim_site_Table = common_Schema{[Name="dim_site",Kind="Table"]}[Data]
+				in
+				    dim_site_Table
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

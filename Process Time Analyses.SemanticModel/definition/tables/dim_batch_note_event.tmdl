@@ -1,0 +1,95 @@
+table dim_batch_note_event
+	lineageTag: 7756c5e5-d0ee-45cc-bc1e-8f47102c960f
+
+	column old_id_batch_note_category
+		dataType: string
+		lineageTag: b58e0e44-8bd1-440c-803d-82e17227257c
+		summarizeBy: none
+		sourceColumn: old_id_batch_note_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 3739f73d-18f2-4d51-8591-8463e2caa0ee
+		summarizeBy: none
+		sourceColumn: deleted
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 21b6fafe-e45c-457e-88e0-ace7526bf20d
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f2040994-5203-46ae-9d6d-c6a4b86bc31c
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 1ba82d5a-7614-41e4-be46-da4a9d2d2e4e
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_batch_note_category
+		dataType: string
+		lineageTag: c8eb8e62-c106-4ff8-b4d2-5bddff5fb0a8
+		summarizeBy: none
+		sourceColumn: id_batch_note_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_class
+		dataType: string
+		lineageTag: 0d464430-418f-422c-a419-b6d7cca38051
+		summarizeBy: none
+		sourceColumn: category_class
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_label
+		dataType: string
+		lineageTag: da3cba27-305d-4f3f-8e0e-ce69ae951626
+		summarizeBy: none
+		sourceColumn: category_label
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_order
+		dataType: int64
+		formatString: 0
+		lineageTag: 836ec689-e94a-4123-99e4-46ef213feba9
+		summarizeBy: sum
+		sourceColumn: category_order
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_batch_note_event = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_preprd_Database = Source{[Name="mal_maite_bi_preprd",Kind="Database"]}[Data],
+				    common_Schema = mal_maite_bi_preprd_Database{[Name="common",Kind="Schema"]}[Data],
+				    dim_batch_note_event_Table = common_Schema{[Name="dim_batch_note_event",Kind="Table"]}[Data]
+				in
+				    dim_batch_note_event_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

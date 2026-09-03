@@ -1,0 +1,30 @@
+relationship AutoDetected_af8be50c-8aba-43ff-9d21-aaa98e45da90
+	fromColumn: fact_process_time_analyses.id_plant_production_line
+	toColumn: dim_site.id_plant_production_line
+
+relationship AutoDetected_e6efcbaf-3c7d-4f1b-a18f-702a66540f38
+	fromColumn: fact_batch_note.id_plant_production_line
+	toColumn: dim_site.id_plant_production_line
+
+relationship AutoDetected_20110a20-f698-4157-a9d5-fcce515048d1
+	fromColumn: fact_batch_note.batch
+	toColumn: dim_batches_specifications.batch_id
+
+relationship 7be648fe-832a-4ebc-53da-ec5d92da462e
+	crossFilteringBehavior: bothDirections
+	fromColumn: fact_process_time_analyses.batch_id
+	toColumn: dim_batches_specifications.batch_id
+
+relationship 5b8f0a4a-0da8-306d-b534-9aa61aaa00d8
+	fromColumn: fact_process_time_analyses.start_date
+	toColumn: dim_calendar.day_date
+
+relationship fcd5f100-6f5c-ab07-a327-f769ebac4d1e
+	fromColumn: fact_batch_note.entry_date
+	toColumn: dim_calendar.day_date
+
+relationship 8ad5272a-a45c-2ac0-96ac-2b4ab30eb590
+	toCardinality: many
+	fromColumn: fact_process_time_analyses.batch_id
+	toColumn: fact_batch_note.batch
+

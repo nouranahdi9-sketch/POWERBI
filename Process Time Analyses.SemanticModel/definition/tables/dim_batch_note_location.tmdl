@@ -1,0 +1,95 @@
+table dim_batch_note_location
+	lineageTag: b98374fe-b918-4aa2-afa4-864b7df6ca3e
+
+	column old_id_batch_note_category
+		dataType: string
+		lineageTag: 95847445-eb87-4242-868f-3a8a92b72c17
+		summarizeBy: none
+		sourceColumn: old_id_batch_note_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 887b1ba5-6704-4b31-b9d7-3930b1258161
+		summarizeBy: none
+		sourceColumn: deleted
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 5e2692b9-c4fe-476e-b13f-95d00cea55eb
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 201589f4-40c9-4c96-80c8-6f1a18a8e6c2
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: b4fa4a73-bc35-4cec-bd96-a1085e49ef30
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_batch_note_category
+		dataType: string
+		lineageTag: 2dcc3748-ea7b-47cd-b26d-f18fe8d5b7c9
+		summarizeBy: none
+		sourceColumn: id_batch_note_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_class
+		dataType: string
+		lineageTag: 93410180-6119-4d73-883a-28c0c9985d8b
+		summarizeBy: none
+		sourceColumn: category_class
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_label
+		dataType: string
+		lineageTag: 00f8341c-72ad-431d-83dd-946504a590af
+		summarizeBy: none
+		sourceColumn: category_label
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_order
+		dataType: int64
+		formatString: 0
+		lineageTag: 4ccc2d81-939c-48eb-ae06-acf7a412f970
+		summarizeBy: sum
+		sourceColumn: category_order
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_batch_note_location = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_preprd_Database = Source{[Name="mal_maite_bi_preprd",Kind="Database"]}[Data],
+				    common_Schema = mal_maite_bi_preprd_Database{[Name="common",Kind="Schema"]}[Data],
+				    dim_batch_note_location_Table = common_Schema{[Name="dim_batch_note_location",Kind="Table"]}[Data]
+				in
+				    dim_batch_note_location_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
