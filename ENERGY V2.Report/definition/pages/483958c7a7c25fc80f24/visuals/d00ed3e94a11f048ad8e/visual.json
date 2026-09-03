@@ -2771,6 +2771,20 @@
               }
             }
           }
+        },
+        {
+          "properties": {
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "dim_batch.variety_code"
+          }
         }
       ],
       "general": [
