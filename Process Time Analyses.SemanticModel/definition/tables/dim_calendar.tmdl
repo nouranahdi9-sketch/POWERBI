@@ -1,0 +1,105 @@
+table dim_calendar
+	lineageTag: feb39d4f-7bfd-4f2c-9b26-6ae2bc0099cf
+
+	column month_num
+		dataType: int64
+		formatString: 0
+		lineageTag: c891351c-8c99-440b-a949-dec3546fe47e
+		summarizeBy: sum
+		sourceColumn: month_num
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: b2ecf5d9-cf54-4060-b195-d1a8cd74fa2a
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: 7091a132-08c9-4db1-b743-153c8d08aa5b
+			defaultHierarchy: LocalDateTable_60312c7e-ffa4-457b-adf4-da932e51d69f.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 3c10767b-5dc9-40e8-ab8c-225c5dd5ff13
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: de8df9ce-8a9f-46e1-ad32-84bd2c49242e
+			defaultHierarchy: LocalDateTable_8445410e-a9f6-45f2-b17e-b714af1426ae.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 66c8826b-a4bb-4013-9445-96e55e977c74
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 7f7c98dc-1367-42a4-8071-d2d23d4b73d6
+			defaultHierarchy: LocalDateTable_9ea17f80-edc6-4d93-a9c0-06823b1a3082.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column day_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 7a46d5e5-63f1-4eaf-a46a-cb0cfef402ea
+		summarizeBy: none
+		sourceColumn: day_date
+
+		variation Variation
+			isDefault
+			relationship: e2e974b0-fc1a-4809-a85a-542d73fa7eaa
+			defaultHierarchy: LocalDateTable_ecc7f12d-f201-4a89-863d-9a3756813c26.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column month_name
+		dataType: string
+		lineageTag: 6a2015dd-b6da-4502-aa2b-a6d5e9a96d97
+		summarizeBy: none
+		sourceColumn: month_name
+		sortByColumn: month_num
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column year_name
+		dataType: int64
+		formatString: 0
+		lineageTag: 5466ca66-6d4d-471c-9d1a-d6f92c551a51
+		summarizeBy: sum
+		sourceColumn: year_name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_calendar = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    process_time_analyses_Schema = mal_maite_bi_prd_Database{[Name="process_time_analyses",Kind="Schema"]}[Data],
+				    dim_calendar_Table = process_time_analyses_Schema{[Name="dim_calendar",Kind="Table"]}[Data]
+				in
+				    dim_calendar_Table
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

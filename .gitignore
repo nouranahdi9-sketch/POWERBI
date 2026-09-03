@@ -1,9 +1,2 @@
-# Fichiers temporaires Power BI / Office
-~$*
-*.tmp
-.DS_Store
-Thumbs.db
-
-# Caches Python / notebooks
-__pycache__/
-.ipynb_checkpoints/
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
