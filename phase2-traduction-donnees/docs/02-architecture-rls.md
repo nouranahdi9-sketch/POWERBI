@@ -401,10 +401,10 @@ pour quelques minutes de calcul.
    Vérifié de bout en bout : `COUNTROWS ( dim_trad_specy )` renvoie **4** en
    embed (une langue) contre 16 sans rôle (quatre langues).
 
-   Reste à confirmer avec le front qu'un **changement de langue régénère le
-   token** : la RLS est figée à la création du token, alors que les
-   `localeSettings` s'appliquent sans. Sans nouveau token, les titres
-   changeraient de langue mais pas les données.
+   Le **changement de langue régénère le token** : vérifié en séance, les
+   données suivent le sélecteur de langue au même titre que les titres. Ce
+   point était le dernier risque, la RLS étant figée à la création du token
+   alors que les `localeSettings` s'appliquent sans.
 2. ~~Référentiel des langues~~ **Fourni** : `parameters_languages`, 6 langues.
    Attention au mapping `UA`→`uk` et `CZ`→`cs` (voir ci-dessus).
 3. **`Parameter`** : quel discriminant permet de savoir s'il faut lire
