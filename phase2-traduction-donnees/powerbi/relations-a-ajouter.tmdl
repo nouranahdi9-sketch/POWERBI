@@ -1,31 +1,3 @@
-relationship trad_lang_specy
-	fromColumn: dim_trad_specy.language
-	toColumn: dim_trad_language.language
-
-relationship trad_lang_variety
-	fromColumn: dim_trad_variety.language
-	toColumn: dim_trad_language.language
-
-relationship trad_lang_production_type
-	fromColumn: dim_trad_production_type.language
-	toColumn: dim_trad_language.language
-
-relationship trad_lang_bn_location
-	fromColumn: dim_trad_batch_note_location.language
-	toColumn: dim_trad_language.language
-
-relationship trad_lang_bn_event
-	fromColumn: dim_trad_batch_note_event.language
-	toColumn: dim_trad_language.language
-
-relationship trad_lang_bn_detail
-	fromColumn: dim_trad_batch_note_detail.language
-	toColumn: dim_trad_language.language
-
-relationship trad_lang_bn_impact
-	fromColumn: dim_trad_batch_note_impact.language
-	toColumn: dim_trad_language.language
-
 relationship trad_specy_nom
 	crossFilteringBehavior: bothDirections
 	securityFilteringBehavior: bothDirections

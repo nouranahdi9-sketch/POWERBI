@@ -104,11 +104,16 @@ et piège de codification » ci-dessous : la colonne `code` de la source ne peut
 pas être rapprochée directement de `USERCULTURE()`).
 
 ### Relations
-- `dim_trad_language[language]` **1 → \*** chaque table de traduction `[language]`,
-  direction simple. Le RLS n'a alors besoin d'être écrit **qu'une seule fois**,
-  sur `dim_trad_language` : il se propage automatiquement à toutes les tables de
-  traduction. C'est le point clé pour la maintenabilité — ajouter une table de
-  traduction ne demande pas de toucher aux rôles.
+
+> **Correction apportée à la conception initiale.** Relier `dim_trad_language`
+> en 1 → * à chaque table de traduction créait des **chemins ambigus** : avec les
+> relations bidirectionnelles traduction ↔ nomenclature, plusieurs routes
+> menaient des faits à la langue, et Power BI refuse d'ouvrir le modèle.
+>
+> `dim_trad_language` est donc une table **déconnectée**, et le rôle porte un
+> `tablePermission` par table de traduction. Le filtre y est résolu par
+> `LOOKUPVALUE` sur `dim_trad_language`. On perd le « RLS écrit une seule fois »,
+> mais le modèle est valide et chaque filtre reste identique au mot près.
 - Chaque table de traduction `[clé]` **\* → 1** la dimension/le fait porteur de
   la clé, avec **cross-filter dans les deux sens** (`Both`) et l'option
   **« Appliquer le filtre de sécurité dans les deux directions »** activée sur la

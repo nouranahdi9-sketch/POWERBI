@@ -1,15 +1,121 @@
 role Translation
 	modelPermission: read
 
-	tablePermission dim_trad_language =
+	tablePermission dim_trad_specy =
 			VAR __culture =
 			    LOWER ( LEFT ( USERCULTURE (), 2 ) )
-			VAR __supported =
-			    NOT ISEMPTY (
-			        FILTER (
-			            ALL ( dim_trad_language ),
-			            dim_trad_language[culture_code] = __culture
+			VAR __lang =
+			    COALESCE (
+			        LOOKUPVALUE (
+			            dim_trad_language[language],
+			            dim_trad_language[culture_code], __culture
+			        ),
+			        LOOKUPVALUE (
+			            dim_trad_language[language],
+			            dim_trad_language[culture_code], "en"
 			        )
 			    )
 			RETURN
-			    dim_trad_language[culture_code] = IF ( __supported, __culture, "en" )
+			    dim_trad_specy[language] = __lang
+
+	tablePermission dim_trad_variety =
+			VAR __culture =
+			    LOWER ( LEFT ( USERCULTURE (), 2 ) )
+			VAR __lang =
+			    COALESCE (
+			        LOOKUPVALUE (
+			            dim_trad_language[language],
+			            dim_trad_language[culture_code], __culture
+			        ),
+			        LOOKUPVALUE (
+			            dim_trad_language[language],
+			            dim_trad_language[culture_code], "en"
+			        )
+			    )
+			RETURN
+			    dim_trad_variety[language] = __lang
+
+	tablePermission dim_trad_production_type =
+			VAR __culture =
+			    LOWER ( LEFT ( USERCULTURE (), 2 ) )
+			VAR __lang =
+			    COALESCE (
+			        LOOKUPVALUE (
+			            dim_trad_language[language],
+			            dim_trad_language[culture_code], __culture
+			        ),
+			        LOOKUPVALUE (
+			            dim_trad_language[language],
+			            dim_trad_language[culture_code], "en"
+			        )
+			    )
+			RETURN
+			    dim_trad_production_type[language] = __lang
+
+	tablePermission dim_trad_batch_note_location =
+			VAR __culture =
+			    LOWER ( LEFT ( USERCULTURE (), 2 ) )
+			VAR __lang =
+			    COALESCE (
+			        LOOKUPVALUE (
+			            dim_trad_language[language],
+			            dim_trad_language[culture_code], __culture
+			        ),
+			        LOOKUPVALUE (
+			            dim_trad_language[language],
+			            dim_trad_language[culture_code], "en"
+			        )
+			    )
+			RETURN
+			    dim_trad_batch_note_location[language] = __lang
+
+	tablePermission dim_trad_batch_note_event =
+			VAR __culture =
+			    LOWER ( LEFT ( USERCULTURE (), 2 ) )
+			VAR __lang =
+			    COALESCE (
+			        LOOKUPVALUE (
+			            dim_trad_language[language],
+			            dim_trad_language[culture_code], __culture
+			        ),
+			        LOOKUPVALUE (
+			            dim_trad_language[language],
+			            dim_trad_language[culture_code], "en"
+			        )
+			    )
+			RETURN
+			    dim_trad_batch_note_event[language] = __lang
+
+	tablePermission dim_trad_batch_note_detail =
+			VAR __culture =
+			    LOWER ( LEFT ( USERCULTURE (), 2 ) )
+			VAR __lang =
+			    COALESCE (
+			        LOOKUPVALUE (
+			            dim_trad_language[language],
+			            dim_trad_language[culture_code], __culture
+			        ),
+			        LOOKUPVALUE (
+			            dim_trad_language[language],
+			            dim_trad_language[culture_code], "en"
+			        )
+			    )
+			RETURN
+			    dim_trad_batch_note_detail[language] = __lang
+
+	tablePermission dim_trad_batch_note_impact =
+			VAR __culture =
+			    LOWER ( LEFT ( USERCULTURE (), 2 ) )
+			VAR __lang =
+			    COALESCE (
+			        LOOKUPVALUE (
+			            dim_trad_language[language],
+			            dim_trad_language[culture_code], __culture
+			        ),
+			        LOOKUPVALUE (
+			            dim_trad_language[language],
+			            dim_trad_language[culture_code], "en"
+			        )
+			    )
+			RETURN
+			    dim_trad_batch_note_impact[language] = __lang
