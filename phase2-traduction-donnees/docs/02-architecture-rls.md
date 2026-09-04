@@ -393,3 +393,91 @@ pour quelques minutes de calcul.
    `parameters_production_line_variables_translations` ?
 4. **`old_note_category`** : colonne de reprise, ou clé alternative à gérer ?
 5. **`Month`** et **`Workshop`** : hors périmètre RLS, à arbitrer avec le PO.
+
+## Branchement des libellés dans le rapport — deux cas
+
+La colonne `label` d'une table `dim_trad_*` vit du côté « plusieurs » de la
+relation : une ligne par clé **et par langue**. C'est ce qui permet à la RLS d'en
+retenir une seule à l'exécution, mais cela conditionne la façon de l'utiliser
+dans un visuel.
+
+### Cas 1 — slicers, graphiques, tableaux agrégés
+
+Remplacement direct de l'ancienne colonne par la colonne `label`. Le libellé sert
+de filtre, qui descend vers le fait par la nomenclature. Aucun coût
+supplémentaire.
+
+Concerne la grande majorité des visuels : les 9 slicers `specy_name` /
+`variety_name` / `production_type` / `location` / `event` / `detail` / `impact`,
+les graphiques `Gap_Heures` et l'arbre de décomposition.
+
+### Cas 2 — tableaux détail à la granularité de la ligne de fait
+
+Trois visuels `tableEx` affichent des colonnes de fait **non agrégées** à côté
+des libellés :
+
+| Page | Visuel | Libellés concernés |
+|---|---|---|
+| `490a406e0752c28c2e85` | `c51513a5669c210fc9b1` | `specy_name`, `variety_name`, `production_type` |
+| `dad332f6dad7d49815c8` | `d5bb64bc6639d0a9939b` | `location`, `event`, `detail`, `impact` |
+| `02505ab6f3fc1fb6e4ab` | `f759d34e07648838c008` | idem |
+
+Le remplacement direct y échoue : la colonne `label` deviendrait une seconde clé
+de regroupement, et le moteur refuse d'apparier une ligne de fait aux 4 libellés
+de sa clé (« impossible de déterminer les relations entre les champs »).
+
+**Solution retenue : une mesure par libellé, en `TREATAS`.**
+
+```dax
+Espèce =
+CALCULATE (
+    MIN ( dim_trad_specy[label] ),
+    TREATAS (
+        VALUES ( dim_batches_specifications[id_good_specy] ),
+        dim_trad_specy[id_good_specy]
+    )
+)
+```
+
+Une mesure n'ajoute pas de clé de regroupement, donc pas d'ambiguïté. `TREATAS`
+transpose l'ensemble des identifiants visibles vers la table de traduction en une
+seule opération ensembliste — testé performant sur la page « Measures (all
+batches) », non filtrée. Les variantes ligne à ligne (`SELECTEDVALUE` puis
+`CALCULATE` avec un filtre scalaire, `CONCATENATEX`) donnent le bon résultat mais
+sont trop lentes sur ce volume.
+
+`MIN` est légitime : sous le rôle, la RLS ne laisse qu'un libellé par clé. Sans le
+rôle, il en renvoie un des quatre — utile pour vérifier en développement que la
+mesure fonctionne et que seule la RLS manque.
+
+Les sept mesures : `Espèce`, `Variété`, `Type de production` (clés portées par
+`dim_batches_specifications`), `Emplacement`, `Événement`, `Détail`, `Impact`
+(clés `key_*` portées par `fact_batch_note`, rapprochées de
+`batch_note_category`).
+
+### Voie écartée — relation directe fait → traduction
+
+Relier `fact_batch_note[key_impact]` directement à `dim_trad_batch_note_impact`
+fait disparaître l'ambiguïté et les tableaux détail acceptent alors la colonne
+`label`. **Mais les totaux tombent** : les deux tables ayant plusieurs lignes de
+part et d'autre, Power BI impose une relation plusieurs-à-plusieurs, dite
+*limitée*, sur laquelle le filtre de RLS se propage dans les deux sens quel que
+soit le réglage de « Appliquer le filtre de sécurité dans les deux directions ».
+Les lignes de fait sans correspondance sont éliminées : notes dont la clé est
+vide, et notes pointant vers une catégorie supprimée (127 cas écartés par le
+filtre `deleted = false`).
+
+Testé et mesuré sur `key_impact` : `Test_NbNotes` baisse à l'activation du rôle.
+Relation supprimée, retour à 2,51 K.
+
+La nomenclature au milieu est donc structurellement nécessaire — c'est elle qui
+fournit le côté « un » :
+
+```
+fact / dim  --N:1-->  dim_specy  <--N:1--  dim_trad_specy
+                      (1 ligne              (4 lignes
+                       par espèce)           par espèce)
+```
+
+Les deux relations sont alors normales et non limitées : la RLS reste confinée à
+la table de traduction, et les totaux ne bougent pas.
