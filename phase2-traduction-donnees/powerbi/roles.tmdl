@@ -1,18 +1,3 @@
-/// Rôle unique de la phase 2 : il filtre dim_trad_language sur la culture de
-/// l'utilisateur, et ce filtre se propage aux 11 tables de traduction par les
-/// relations 1 -> * sur [language].
-///
-/// À placer dans :
-///   Process Time Analyses.SemanticModel/definition/roles.tmdl
-/// puis ajouter dans model.tmdl, à la suite des "ref table" :
-///   ref role Translation
-///
-/// IMPORTANT — côté embed : le RLS n'est appliqué que si le jeton porte une
-/// identité effective nommant ce rôle. Le front doit envoyer
-/// roles: ["Translation"], même si la langue vient de USERCULTURE().
-/// Sans ce rôle, aucun filtre ne s'applique et les 4 langues s'affichent
-/// simultanément : chaque ligne apparaît 4 fois dans les visuels.
-
 role Translation
 	modelPermission: read
 

@@ -1,19 +1,3 @@
-// =====================================================================
-// À COLLER à la fin de :
-//   Process Time Analyses.SemanticModel/definition/relationships.tmdl
-//
-// Noms de tables et de colonnes vérifiés sur l'export du modèle.
-// 22 relations, en trois familles.
-// =====================================================================
-
-
-// ---------------------------------------------------------------------
-// 1. dim_trad_language (1) -> traductions (*)   — 7 relations
-//
-// Direction simple : la langue filtre les traductions. C'est ce qui permet
-// de n'écrire le RLS qu'une seule fois, sur dim_trad_language.
-// ---------------------------------------------------------------------
-
 relationship trad_lang_specy
 	fromColumn: dim_trad_specy.language
 	toColumn: dim_trad_language.language
@@ -41,16 +25,6 @@ relationship trad_lang_bn_detail
 relationship trad_lang_bn_impact
 	fromColumn: dim_trad_batch_note_impact.language
 	toColumn: dim_trad_language.language
-
-
-// ---------------------------------------------------------------------
-// 2. Traduction (*) -> nomenclature (1)   — 7 relations, BIDIRECTIONNELLES
-//
-// Le libellé traduit est posé sur les axes et dans les slicers : il doit
-// donc filtrer les faits. Or il est du côté "plusieurs". Sans les deux
-// bothDirections, le filtre ne remonterait pas vers la nomenclature et les
-// visuels ne seraient pas filtrés.
-// ---------------------------------------------------------------------
 
 relationship trad_specy_nom
 	crossFilteringBehavior: bothDirections
@@ -94,11 +68,6 @@ relationship trad_bn_impact_nom
 	fromColumn: dim_trad_batch_note_impact.batch_note_category
 	toColumn: dim_batch_note_impact.id_batch_note_category
 
-
-// ---------------------------------------------------------------------
-// 3. Fait / dimension (*) -> nomenclature (1)   — 8 relations classiques
-// ---------------------------------------------------------------------
-
 relationship batches_specy
 	fromColumn: dim_batches_specifications.id_good_specy
 	toColumn: dim_specy.id_good_specy
@@ -114,16 +83,6 @@ relationship batches_production_type
 relationship batches_requirement_specification
 	fromColumn: dim_batches_specifications.id_requirement_specification
 	toColumn: dim_requirement_specification.id_requirement_specification
-
-
-// Notes de production : on relie sur les colonnes key_*, et non sur
-// location / event / detail / impact.
-//
-// batch_note_key() est IDEMPOTENTE : elle préfixe la valeur si elle ne
-// l'est pas, et la laisse telle quelle si elle l'est déjà. Les colonnes
-// key_* portent donc la clé correcte dans les deux cas, alors que les
-// colonnes d'origine ne conviendraient que si la source était préfixée.
-// C'est le choix sûr, sans avoir à trancher la question.
 
 relationship batch_note_location
 	fromColumn: fact_batch_note.key_location
