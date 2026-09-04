@@ -382,10 +382,29 @@ pour quelques minutes de calcul.
 
 ## Points ouverts
 
-1. ~~Comment le front transmet-il la langue ?~~ **Tranché** : `USERCULTURE()`,
-   la culture étant pilotée par les `localeSettings` de l'embed. Reste à
-   confirmer avec le front que le rôle `Translation` sera bien passé dans
-   l'identité effective du jeton.
+1. ~~Comment le front transmet-il la langue ?~~ **Tranché et validé en embed**
+   le 04/09/2026 : la culture vient des `localeSettings`, pilotées par le
+   sélecteur de langue de l'application (Čeština / English / Français /
+   Română), et le rôle `Translation` est passé dans l'identité effective de
+   l'appel `GenerateToken` :
+
+   ```json
+   "identities": [
+     { "username": "...", "roles": ["Translation"], "datasets": ["<id>"] }
+   ]
+   ```
+
+   Un dataset portant des rôles RLS **refuse** un token sans identité
+   effective (HTTP 400, `InvalidRequest`) : `identities` n'est donc pas une
+   option mais un passage obligé.
+
+   Vérifié de bout en bout : `COUNTROWS ( dim_trad_specy )` renvoie **4** en
+   embed (une langue) contre 16 sans rôle (quatre langues).
+
+   Reste à confirmer avec le front qu'un **changement de langue régénère le
+   token** : la RLS est figée à la création du token, alors que les
+   `localeSettings` s'appliquent sans. Sans nouveau token, les titres
+   changeraient de langue mais pas les données.
 2. ~~Référentiel des langues~~ **Fourni** : `parameters_languages`, 6 langues.
    Attention au mapping `UA`→`uk` et `CZ`→`cs` (voir ci-dessus).
 3. **`Parameter`** : quel discriminant permet de savoir s'il faut lire
