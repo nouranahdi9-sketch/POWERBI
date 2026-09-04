@@ -28,3 +28,145 @@ relationship 8ad5272a-a45c-2ac0-96ac-2b4ab30eb590
 	fromColumn: fact_process_time_analyses.batch_id
 	toColumn: fact_batch_note.batch
 
+// =====================================================================
+// À COLLER à la fin de :
+//   Process Time Analyses.SemanticModel/definition/relationships.tmdl
+//
+// Noms de tables et de colonnes vérifiés sur l'export du modèle.
+// 22 relations, en trois familles.
+// =====================================================================
+
+
+// ---------------------------------------------------------------------
+// 1. dim_trad_language (1) -> traductions (*)   — 7 relations
+//
+// Direction simple : la langue filtre les traductions. C'est ce qui permet
+// de n'écrire le RLS qu'une seule fois, sur dim_trad_language.
+// ---------------------------------------------------------------------
+
+relationship trad_lang_specy
+	fromColumn: dim_trad_specy.language
+	toColumn: dim_trad_language.language
+
+relationship trad_lang_variety
+	fromColumn: dim_trad_variety.language
+	toColumn: dim_trad_language.language
+
+relationship trad_lang_production_type
+	fromColumn: dim_trad_production_type.language
+	toColumn: dim_trad_language.language
+
+relationship trad_lang_bn_location
+	fromColumn: dim_trad_batch_note_location.language
+	toColumn: dim_trad_language.language
+
+relationship trad_lang_bn_event
+	fromColumn: dim_trad_batch_note_event.language
+	toColumn: dim_trad_language.language
+
+relationship trad_lang_bn_detail
+	fromColumn: dim_trad_batch_note_detail.language
+	toColumn: dim_trad_language.language
+
+relationship trad_lang_bn_impact
+	fromColumn: dim_trad_batch_note_impact.language
+	toColumn: dim_trad_language.language
+
+
+// ---------------------------------------------------------------------
+// 2. Traduction (*) -> nomenclature (1)   — 7 relations, BIDIRECTIONNELLES
+//
+// Le libellé traduit est posé sur les axes et dans les slicers : il doit
+// donc filtrer les faits. Or il est du côté "plusieurs". Sans les deux
+// bothDirections, le filtre ne remonterait pas vers la nomenclature et les
+// visuels ne seraient pas filtrés.
+// ---------------------------------------------------------------------
+
+relationship trad_specy_nom
+	crossFilteringBehavior: bothDirections
+	securityFilteringBehavior: bothDirections
+	fromColumn: dim_trad_specy.id_good_specy
+	toColumn: dim_specy.id_good_specy
+
+relationship trad_variety_nom
+	crossFilteringBehavior: bothDirections
+	securityFilteringBehavior: bothDirections
+	fromColumn: dim_trad_variety.id_good_variety
+	toColumn: dim_variety.id_good_variety
+
+relationship trad_production_type_nom
+	crossFilteringBehavior: bothDirections
+	securityFilteringBehavior: bothDirections
+	fromColumn: dim_trad_production_type.id_parameter_production_type
+	toColumn: dim_production_type.id_parameter_production_type
+
+relationship trad_bn_location_nom
+	crossFilteringBehavior: bothDirections
+	securityFilteringBehavior: bothDirections
+	fromColumn: dim_trad_batch_note_location.batch_note_category
+	toColumn: dim_batch_note_location.id_batch_note_category
+
+relationship trad_bn_event_nom
+	crossFilteringBehavior: bothDirections
+	securityFilteringBehavior: bothDirections
+	fromColumn: dim_trad_batch_note_event.batch_note_category
+	toColumn: dim_batch_note_event.id_batch_note_category
+
+relationship trad_bn_detail_nom
+	crossFilteringBehavior: bothDirections
+	securityFilteringBehavior: bothDirections
+	fromColumn: dim_trad_batch_note_detail.batch_note_category
+	toColumn: dim_batch_note_detail.id_batch_note_category
+
+relationship trad_bn_impact_nom
+	crossFilteringBehavior: bothDirections
+	securityFilteringBehavior: bothDirections
+	fromColumn: dim_trad_batch_note_impact.batch_note_category
+	toColumn: dim_batch_note_impact.id_batch_note_category
+
+
+// ---------------------------------------------------------------------
+// 3. Fait / dimension (*) -> nomenclature (1)   — 8 relations classiques
+// ---------------------------------------------------------------------
+
+relationship batches_specy
+	fromColumn: dim_batches_specifications.id_good_specy
+	toColumn: dim_specy.id_good_specy
+
+relationship batches_variety
+	fromColumn: dim_batches_specifications.id_good_variety
+	toColumn: dim_variety.id_good_variety
+
+relationship batches_production_type
+	fromColumn: dim_batches_specifications.id_parameter_production_type
+	toColumn: dim_production_type.id_parameter_production_type
+
+relationship batches_requirement_specification
+	fromColumn: dim_batches_specifications.id_requirement_specification
+	toColumn: dim_requirement_specification.id_requirement_specification
+
+
+// Notes de production : on relie sur les colonnes key_*, et non sur
+// location / event / detail / impact.
+//
+// batch_note_key() est IDEMPOTENTE : elle préfixe la valeur si elle ne
+// l'est pas, et la laisse telle quelle si elle l'est déjà. Les colonnes
+// key_* portent donc la clé correcte dans les deux cas, alors que les
+// colonnes d'origine ne conviendraient que si la source était préfixée.
+// C'est le choix sûr, sans avoir à trancher la question.
+
+relationship batch_note_location
+	fromColumn: fact_batch_note.key_location
+	toColumn: dim_batch_note_location.id_batch_note_category
+
+relationship batch_note_event
+	fromColumn: fact_batch_note.key_event
+	toColumn: dim_batch_note_event.id_batch_note_category
+
+relationship batch_note_detail
+	fromColumn: fact_batch_note.key_detail
+	toColumn: dim_batch_note_detail.id_batch_note_category
+
+relationship batch_note_impact
+	fromColumn: fact_batch_note.key_impact
+	toColumn: dim_batch_note_impact.id_batch_note_category
