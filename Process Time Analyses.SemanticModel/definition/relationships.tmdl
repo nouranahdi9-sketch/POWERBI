@@ -30,43 +30,36 @@ relationship 8ad5272a-a45c-2ac0-96ac-2b4ab30eb590
 
 relationship trad_specy_nom
 	crossFilteringBehavior: bothDirections
-	securityFilteringBehavior: bothDirections
 	fromColumn: dim_trad_specy.id_good_specy
 	toColumn: dim_specy.id_good_specy
 
 relationship trad_variety_nom
 	crossFilteringBehavior: bothDirections
-	securityFilteringBehavior: bothDirections
 	fromColumn: dim_trad_variety.id_good_variety
 	toColumn: dim_variety.id_good_variety
 
 relationship trad_production_type_nom
 	crossFilteringBehavior: bothDirections
-	securityFilteringBehavior: bothDirections
 	fromColumn: dim_trad_production_type.id_parameter_production_type
 	toColumn: dim_production_type.id_parameter_production_type
 
 relationship trad_bn_location_nom
 	crossFilteringBehavior: bothDirections
-	securityFilteringBehavior: bothDirections
 	fromColumn: dim_trad_batch_note_location.batch_note_category
 	toColumn: dim_batch_note_location.id_batch_note_category
 
 relationship trad_bn_event_nom
 	crossFilteringBehavior: bothDirections
-	securityFilteringBehavior: bothDirections
 	fromColumn: dim_trad_batch_note_event.batch_note_category
 	toColumn: dim_batch_note_event.id_batch_note_category
 
 relationship trad_bn_detail_nom
 	crossFilteringBehavior: bothDirections
-	securityFilteringBehavior: bothDirections
 	fromColumn: dim_trad_batch_note_detail.batch_note_category
 	toColumn: dim_batch_note_detail.id_batch_note_category
 
 relationship trad_bn_impact_nom
 	crossFilteringBehavior: bothDirections
-	securityFilteringBehavior: bothDirections
 	fromColumn: dim_trad_batch_note_impact.batch_note_category
 	toColumn: dim_batch_note_impact.id_batch_note_category
 
