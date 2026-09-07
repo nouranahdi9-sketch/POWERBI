@@ -85,6 +85,28 @@ mesure : `Espèce`, `Variété`, `Type de production`, `Emplacement`, `Événeme
 
 ---
 
+## Point d'attention — les filtres figés
+
+Certains visuels portent un **filtre au niveau du visuel ou de la page** sur les
+mêmes colonnes, invisible tant qu'on n'ouvre pas le volet Filtres. Remplacer le
+champ affiché sans reprendre le filtre laisse un montage incohérent.
+
+Cas rencontré, page **Pareto**, slicer `event` (x≈1058) : un filtre
+`fact_batch_note[event] est event_panne` restreignait le slicer à la seule
+catégorie « panne ». Une fois le champ basculé sur
+`dim_trad_batch_note_event[label]`, ce filtre ne joue plus son rôle — il filtre
+les lignes de faits, ce qui ne restreint pas la liste d'une dimension, la
+propagation n'allant pas dans ce sens. Le slicer proposait alors toutes les
+catégories.
+
+**Règle** : un filtre figé doit porter sur la **clé**, jamais sur le libellé.
+
+- à supprimer : `fact_batch_note[event] est event_panne`
+- à créer : `dim_trad_batch_note_event[batch_note_category] est event_panne`
+
+Filtrer sur `label` figerait une valeur traduite : « Panne » en français
+donnerait un slicer vide en tchèque et en roumain.
+
 ## Point d'attention — la table `dim_batch_note`
 
 Les visuels de **Pareto - events & details** et **Pareto - zoom location**
