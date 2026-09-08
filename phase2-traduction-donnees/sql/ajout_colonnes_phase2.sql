@@ -51,6 +51,24 @@ ADD COLUMNS (
 
 
 -- ---------------------------------------------------------------------
+-- 2 bis. Traduction des noms de mois
+--
+-- month_num était calculé par add_date_columns puis supprimé. Il est désormais
+-- conservé : c'est la clé qui relie dim_batches_specifications à dim_month, et
+-- donc aux libellés traduits de dim_trad_month.
+--
+-- Opération de métadonnées, instantanée. Les lignes existantes auront la
+-- colonne à null jusqu'au prochain run du notebook, qui la remplira.
+-- ---------------------------------------------------------------------
+
+ALTER TABLE mal_maite_bi_preprd.process_time_analyses.dim_batches_specifications
+ADD COLUMNS (month_num INT);
+
+-- fact_process_time_analyses n'a pas besoin d'ALTER : month_num_mesure existe
+-- déjà, seule sa valeur change (les nulls sont ramenés à 0).
+
+
+-- ---------------------------------------------------------------------
 -- 3. Contrôle
 -- ---------------------------------------------------------------------
 
