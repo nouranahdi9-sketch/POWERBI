@@ -1,0 +1,71 @@
+table dim_production_type
+	lineageTag: f771a8bc-d228-4fb4-b86c-1cb1e069e5ca
+
+	column id_parameter_production_type
+		dataType: int64
+		formatString: 0
+		lineageTag: ff162f47-710f-4ae1-8551-613315a0aa84
+		summarizeBy: sum
+		sourceColumn: id_parameter_production_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column code
+		dataType: string
+		lineageTag: 9c3086f6-70c8-4914-8ac5-fe6459af34ac
+		summarizeBy: none
+		sourceColumn: code
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: c7a1d12b-51c2-4103-8fbf-50a935c0f9a1
+		summarizeBy: none
+		sourceColumn: deleted
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c30a5135-9860-4ffc-a04d-9238d869dc6c
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 50f498af-374e-4547-96c3-97f25eafe18b
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 0293fffa-0f2b-42a3-b042-74a73e9774e7
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_production_type = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_preprd_Database = Source{[Name="mal_maite_bi_preprd",Kind="Database"]}[Data],
+				    common_Schema = mal_maite_bi_preprd_Database{[Name="common",Kind="Schema"]}[Data],
+				    dim_production_type_Table = common_Schema{[Name="dim_production_type",Kind="Table"]}[Data]
+				in
+				    dim_production_type_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,506 @@
+table dim_batches_specifications
+	lineageTag: 9bb3e052-f3c3-4c8a-a8c0-f8f931dfe104
+
+	measure Avg_Last_24h = ```
+			
+			CALCULATE(
+			    AVERAGE(fact_process_time_analyses[mesure_value]),
+			    dim_batches_specifications[Last24h] = 1
+			)
+			
+			```
+		lineageTag: 81abcea5-c046-4e45-84dc-8a7a8266d3c9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Avg_Last_48h = ```
+			
+			CALCULATE(
+			    AVERAGE(fact_process_time_analyses[mesure_value]),
+			    dim_batches_specifications[Last48h] = 1
+			)
+			
+			```
+		lineageTag: 96d3514e-dc98-4c84-9d80-a5677b555e85
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Min_Last_24h = ```
+			
+			CALCULATE(
+			    MIN(fact_process_time_analyses[mesure_value]),
+			    dim_batches_specifications[Last24h] = 1
+			)
+			
+			```
+		lineageTag: 9657411d-083c-43d7-8fef-63a94879092f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Max_Last_24h = ```
+			
+			CALCULATE(
+			    MAX(fact_process_time_analyses[mesure_value]),
+			    dim_batches_specifications[Last24h] = 1
+			)
+			
+			```
+		lineageTag: 7286f652-9536-47c8-bc45-115c0dc7f55a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Min_Last_48h = ```
+			
+			CALCULATE(
+			    MIN(fact_process_time_analyses[mesure_value]),
+			    dim_batches_specifications[Last48h] = 1
+			)
+			
+			```
+		lineageTag: aedc0764-679f-4db3-bca8-eaaad955b4e0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Max_Last_48h = ```
+			
+			CALCULATE(
+			    MAX(fact_process_time_analyses[mesure_value]),
+			    dim_batches_specifications[Last48h] = 1
+			)
+			
+			```
+		lineageTag: 1bee3027-5613-4b76-b428-135d1bd992b4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure mesure_value_is_latest_batch =
+			
+			CALCULATE(
+				SUM('fact_process_time_analyses'[mesure_value_h]),
+				'dim_batches_specifications'[Last24h] IN { 1 }
+			)
+		lineageTag: 28d4aa3c-8e6d-4add-8c9d-4328db8bb0af
+
+		extendedProperty MeasureTemplate =
+				{
+				  "version": 0,
+				  "daxTemplateName": "FilteredMeasure"
+				}
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column batch_id
+		dataType: string
+		lineageTag: 6036bcdd-7c13-4927-8fd2-02e5a3e1452d
+		summarizeBy: none
+		sourceColumn: batch_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column batch_number
+		dataType: string
+		lineageTag: 0fa49f6a-3d6d-4e00-ad00-5bb33a7f5e45
+		summarizeBy: none
+		sourceColumn: batch_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column mes_number
+		dataType: string
+		lineageTag: 9f55dabd-c104-4546-b732-9f2462b04bce
+		summarizeBy: none
+		sourceColumn: mes_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column requirement_specifications
+		dataType: string
+		lineageTag: be18ce67-ad7f-406a-abfc-4d01a790f0b5
+		summarizeBy: none
+		sourceColumn: requirement_specifications
+
+		annotation SummarizationSetBy = Automatic
+
+	column specy_name
+		dataType: string
+		lineageTag: 86de143e-15f5-45de-a498-c90017daa581
+		summarizeBy: none
+		sourceColumn: specy_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column variety_name
+		dataType: string
+		lineageTag: da796e5e-8b8a-4607-aeca-30af430d69e3
+		summarizeBy: none
+		sourceColumn: variety_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column goods_weight
+		dataType: int64
+		formatString: 0
+		lineageTag: 0d88d4cb-e16a-496b-a30b-8d1386c29f7f
+		summarizeBy: sum
+		sourceColumn: goods_weight
+
+		annotation SummarizationSetBy = Automatic
+
+	column planned_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: dd101b9f-6b75-43a6-943b-8a368d0a31fa
+		summarizeBy: none
+		sourceColumn: planned_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column week
+		dataType: int64
+		formatString: 0
+		lineageTag: 1dcd1729-62fd-4ed2-8a88-f4d5759b0bbb
+		summarizeBy: sum
+		sourceColumn: week
+
+		annotation SummarizationSetBy = Automatic
+
+	column year
+		dataType: int64
+		formatString: 0
+		lineageTag: 4882aac5-8d3b-4385-a9cf-3cc8e33c6919
+		summarizeBy: sum
+		sourceColumn: year
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_fin_prod
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 9d684dd7-65b3-40ac-8fca-170b482c123d
+		summarizeBy: none
+		sourceColumn: date_fin_prod
+
+		annotation SummarizationSetBy = Automatic
+
+	column planned_datetime
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: bb162db0-92ae-4b07-9b4e-8bc9afb0efad
+		summarizeBy: none
+		sourceColumn: planned_datetime
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: ddd9db1a-de03-44b1-ae0d-b87cb6c7a4de
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a032e445-bf95-4191-868f-3cc8a75241c1
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d959667f-8398-4b52-b778-396a4d40447d
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column Last10days = ```
+			
+			IF (
+			    TRUNC([date_fin_prod]) >= TODAY() - 11
+			    && TRUNC([date_fin_prod]) <= TODAY() - 1,
+			    "Last 10 days",
+			    "autre"
+			)
+			
+			
+			
+			```
+		lineageTag: 1e1371a6-ed00-445b-8dd8-77126d9f0129
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Last12s = ```
+			
+			IF (
+			    TRUNC([date_fin_prod]) >= TODAY() - 84
+			    && TRUNC([date_fin_prod]) <= TODAY() - 0,
+			    1,
+			    0
+			)
+			
+			```
+		formatString: 0
+		lineageTag: f585ba59-fc9c-404f-aa42-ae25a5aad59b
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Last24h = ```
+			
+			IF (
+			    TRUNC([date_fin_prod]) >= TODAY() - 1
+			    && TRUNC([date_fin_prod]) <= TODAY() - 0,
+			    1,
+			    0
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 3849bc7a-5e1b-4195-b606-e9e060b8b2c0
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column goods_weight_group = ```
+			FLOOR('dim_batches_specifications'[goods_weight], 5)
+			
+			```
+		formatString: 0
+		lineageTag: 2c71f6c7-8ccf-4cc5-9a33-3eef179754b3
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Last48h = ```
+			
+			IF (
+			    TRUNC([date_fin_prod]) >= TODAY() - 2
+			    && TRUNC([date_fin_prod]) <= TODAY() - 1,
+			    1,
+			    0
+			)
+			
+			```
+		formatString: 0
+		lineageTag: ad5154fb-e8ce-44ad-9598-8ded6f153568
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column flg_terminé = ```
+			
+			IF(
+			    'dim_batches_specifications'[date_fin_prod] <= NOW(), 
+			    1,
+			    0
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 692efbb3-fc3c-410d-9cab-ac6d747fe425
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_label
+		dataType: string
+		lineageTag: ba7faab9-75f5-48c2-b7fd-eb4f2e1599f7
+		summarizeBy: none
+		sourceColumn: month_label
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_name
+		dataType: string
+		lineageTag: 900b0008-5dc6-41c1-be28-a801d377d5c4
+		summarizeBy: none
+		sourceColumn: month_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Last7days = ```
+			
+			IF (
+			    TRUNC([date_fin_prod]) >= TODAY() - 7
+			    && TRUNC([date_fin_prod]) <= TODAY() - 0,
+			    1,
+			    0
+			)
+			
+			```
+		formatString: 0
+		lineageTag: e7f4ec75-4c76-4252-890b-8b614f1763bf
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Last72h = ```
+			
+			IF (
+			    TRUNC([date_fin_prod]) >= TODAY() - 3
+			    && TRUNC([date_fin_prod]) <= TODAY() - 0,
+			    1,
+			    0
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 98353db4-54c1-4437-b75e-d7434d42872d
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column production_type
+		dataType: string
+		lineageTag: 17d15fac-4725-48a0-988d-fdf0686ad1c1
+		summarizeBy: none
+		sourceColumn: production_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column batch_status_localization
+		dataType: string
+		lineageTag: 0d35de5c-eb4c-40bd-b541-19eed940d83f
+		summarizeBy: none
+		sourceColumn: batch_status_localization
+
+		annotation SummarizationSetBy = Automatic
+
+	column error_messages
+		dataType: string
+		lineageTag: 2209d059-9e5e-47ab-9f89-4db4e0c0c19f
+		summarizeBy: none
+		sourceColumn: error_messages
+
+		annotation SummarizationSetBy = Automatic
+
+	column cycle_duration
+		dataType: int64
+		formatString: 0
+		lineageTag: 0826ed15-7f17-40eb-b062-f1535e4106ed
+		summarizeBy: sum
+		sourceColumn: cycle_duration
+
+		annotation SummarizationSetBy = Automatic
+
+	column cycle_label
+		dataType: string
+		lineageTag: ef794b14-a724-4d78-b2e8-c2ec7b2994b8
+		summarizeBy: none
+		sourceColumn: cycle_label
+
+		annotation SummarizationSetBy = Automatic
+
+	column HEUREUTC = UTCNOW()
+		formatString: General Date
+		lineageTag: a45b4cfb-ff46-4d80-b3a7-d33540cb9bc6
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column HEURE = NOW()
+		formatString: General Date
+		lineageTag: 4c6fbb61-1f4c-4848-ae52-9f1172b79e24
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column DIFFHEURE = dim_batches_specifications[HEUREUTC]-dim_batches_specifications[HEURE]
+		formatString: General Date
+		lineageTag: d4628f79-08a4-4e85-8503-08b8094edca3
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column HeureFranceDynamique =
+			
+			VAR UtcNowValue = UTCNOW()
+			VAR Annee = YEAR(UtcNowValue)
+			
+			VAR DernierDimancheMars =
+			    DATE(Annee, 3, 31)
+			    - MOD(WEEKDAY(DATE(Annee, 3, 31), 2), 7)
+			
+			VAR DernierDimancheOctobre =
+			    DATE(Annee, 10, 31)
+			    - MOD(WEEKDAY(DATE(Annee, 10, 31), 2), 7)
+			
+			VAR DebutHeureEte =
+			    DernierDimancheMars + TIME(1, 0, 0)
+			
+			VAR FinHeureEte =
+			    DernierDimancheOctobre + TIME(1, 0, 0)
+			
+			VAR EstHeureEte =
+			    UtcNowValue >= DebutHeureEte
+			        && UtcNowValue < FinHeureEte
+			
+			RETURN
+			    UtcNowValue + IF(EstHeureEte, TIME(2, 0, 0), TIME(1, 0, 0))
+		formatString: General Date
+		lineageTag: 6b84d7f3-d1ff-443c-8a8c-18309d4a3782
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_good_specy
+		dataType: int64
+		formatString: 0
+		lineageTag: 9874d5d6-fa68-4a9e-9986-d700009507ee
+		summarizeBy: sum
+		sourceColumn: id_good_specy
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_good_variety
+		dataType: int64
+		formatString: 0
+		lineageTag: 2d313695-cd8c-4385-8ac7-c37972e82c6c
+		summarizeBy: sum
+		sourceColumn: id_good_variety
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_parameter_production_type
+		dataType: int64
+		formatString: 0
+		lineageTag: e279a418-4627-4065-9f72-e66616b46f61
+		summarizeBy: sum
+		sourceColumn: id_parameter_production_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_requirement_specification
+		dataType: int64
+		formatString: 0
+		lineageTag: d7c2228a-5cd4-426e-885f-98a00c6bbb8b
+		summarizeBy: sum
+		sourceColumn: id_requirement_specification
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_batches_specifications = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_preprd_Database = Source{[Name="mal_maite_bi_preprd",Kind="Database"]}[Data],
+				    process_time_analyses_Schema = mal_maite_bi_preprd_Database{[Name="process_time_analyses",Kind="Schema"]}[Data],
+				    dim_batches_specifications_Table = process_time_analyses_Schema{[Name="dim_batches_specifications",Kind="Table"]}[Data]
+				in
+				    dim_batches_specifications_Table
+
+	annotation PBI_ResultType = Exception
+
+	annotation PBI_NavigationStepName = Navigation
+

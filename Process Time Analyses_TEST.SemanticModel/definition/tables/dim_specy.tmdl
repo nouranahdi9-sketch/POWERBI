@@ -1,0 +1,71 @@
+table dim_specy
+	lineageTag: 0d0a0be8-7712-4a4b-9b97-1c7baa9592b4
+
+	column id_good_specy
+		dataType: int64
+		formatString: 0
+		lineageTag: c8a26c75-7525-4595-a3c1-9cd37bc26446
+		summarizeBy: sum
+		sourceColumn: id_good_specy
+
+		annotation SummarizationSetBy = Automatic
+
+	column code
+		dataType: string
+		lineageTag: ef061a3a-38a2-42fa-918e-c5c3ef4d9162
+		summarizeBy: none
+		sourceColumn: code
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 69037fa6-1365-45ff-b604-174f70a9c48c
+		summarizeBy: none
+		sourceColumn: deleted
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 63e1e882-d2c4-4ed6-84c2-d5b4da556c7e
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 15ccef3f-d190-440a-8a10-e54fb90598c7
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d5dcc918-02f9-4f78-bd46-2233f3a62baa
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_specy = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_preprd_Database = Source{[Name="mal_maite_bi_preprd",Kind="Database"]}[Data],
+				    common_Schema = mal_maite_bi_preprd_Database{[Name="common",Kind="Schema"]}[Data],
+				    dim_specy_Table = common_Schema{[Name="dim_specy",Kind="Table"]}[Data]
+				in
+				    dim_specy_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,88 @@
+table dim_requirement_specification
+	lineageTag: 0d54e206-337b-45c6-ac73-990fa86c1ae6
+
+	column id_requirement_specification
+		dataType: int64
+		formatString: 0
+		lineageTag: 069d4337-540d-4284-84a8-634244dabeeb
+		summarizeBy: sum
+		sourceColumn: id_requirement_specification
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: 8c1a9911-3718-41f8-be26-c6e5ea3f3ece
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column plant
+		dataType: int64
+		formatString: 0
+		lineageTag: 757d76c5-2b6a-4ba5-893f-1aecb9a6ac71
+		summarizeBy: sum
+		sourceColumn: plant
+
+		annotation SummarizationSetBy = Automatic
+
+	column model_code
+		dataType: string
+		lineageTag: 4722bb3a-1781-447c-84d7-160feb627e86
+		summarizeBy: none
+		sourceColumn: model_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 3d9d8458-a198-4fe1-b80b-9e2c72e1b022
+		summarizeBy: none
+		sourceColumn: deleted
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8f586d9a-aff7-4b20-9d9f-4099399975f4
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 508e634b-84ff-4b4f-9d91-41086a75aa37
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 5b45a1fa-e106-407d-807c-d640d3449540
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_requirement_specification = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_preprd_Database = Source{[Name="mal_maite_bi_preprd",Kind="Database"]}[Data],
+				    common_Schema = mal_maite_bi_preprd_Database{[Name="common",Kind="Schema"]}[Data],
+				    dim_requirement_specification_Table = common_Schema{[Name="dim_requirement_specification",Kind="Table"]}[Data]
+				in
+				    dim_requirement_specification_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

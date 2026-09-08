@@ -1,0 +1,97 @@
+relationship AutoDetected_af8be50c-8aba-43ff-9d21-aaa98e45da90
+	fromColumn: fact_process_time_analyses.id_plant_production_line
+	toColumn: dim_site.id_plant_production_line
+
+relationship AutoDetected_e6efcbaf-3c7d-4f1b-a18f-702a66540f38
+	fromColumn: fact_batch_note.id_plant_production_line
+	toColumn: dim_site.id_plant_production_line
+
+relationship AutoDetected_20110a20-f698-4157-a9d5-fcce515048d1
+	fromColumn: fact_batch_note.batch
+	toColumn: dim_batches_specifications.batch_id
+
+relationship 7be648fe-832a-4ebc-53da-ec5d92da462e
+	crossFilteringBehavior: bothDirections
+	fromColumn: fact_process_time_analyses.batch_id
+	toColumn: dim_batches_specifications.batch_id
+
+relationship 5b8f0a4a-0da8-306d-b534-9aa61aaa00d8
+	fromColumn: fact_process_time_analyses.start_date
+	toColumn: dim_calendar.day_date
+
+relationship fcd5f100-6f5c-ab07-a327-f769ebac4d1e
+	fromColumn: fact_batch_note.entry_date
+	toColumn: dim_calendar.day_date
+
+relationship 8ad5272a-a45c-2ac0-96ac-2b4ab30eb590
+	toCardinality: many
+	fromColumn: fact_process_time_analyses.batch_id
+	toColumn: fact_batch_note.batch
+
+relationship trad_specy_nom
+	crossFilteringBehavior: bothDirections
+	fromColumn: dim_trad_specy.id_good_specy
+	toColumn: dim_specy.id_good_specy
+
+relationship trad_variety_nom
+	crossFilteringBehavior: bothDirections
+	fromColumn: dim_trad_variety.id_good_variety
+	toColumn: dim_variety.id_good_variety
+
+relationship trad_production_type_nom
+	crossFilteringBehavior: bothDirections
+	fromColumn: dim_trad_production_type.id_parameter_production_type
+	toColumn: dim_production_type.id_parameter_production_type
+
+relationship trad_bn_location_nom
+	crossFilteringBehavior: bothDirections
+	fromColumn: dim_trad_batch_note_location.batch_note_category
+	toColumn: dim_batch_note_location.id_batch_note_category
+
+relationship trad_bn_event_nom
+	crossFilteringBehavior: bothDirections
+	fromColumn: dim_trad_batch_note_event.batch_note_category
+	toColumn: dim_batch_note_event.id_batch_note_category
+
+relationship trad_bn_detail_nom
+	crossFilteringBehavior: bothDirections
+	fromColumn: dim_trad_batch_note_detail.batch_note_category
+	toColumn: dim_batch_note_detail.id_batch_note_category
+
+relationship trad_bn_impact_nom
+	crossFilteringBehavior: bothDirections
+	fromColumn: dim_trad_batch_note_impact.batch_note_category
+	toColumn: dim_batch_note_impact.id_batch_note_category
+
+relationship batches_specy
+	fromColumn: dim_batches_specifications.id_good_specy
+	toColumn: dim_specy.id_good_specy
+
+relationship batches_variety
+	fromColumn: dim_batches_specifications.id_good_variety
+	toColumn: dim_variety.id_good_variety
+
+relationship batches_production_type
+	fromColumn: dim_batches_specifications.id_parameter_production_type
+	toColumn: dim_production_type.id_parameter_production_type
+
+relationship batches_requirement_specification
+	fromColumn: dim_batches_specifications.id_requirement_specification
+	toColumn: dim_requirement_specification.id_requirement_specification
+
+relationship batch_note_location
+	fromColumn: fact_batch_note.key_location
+	toColumn: dim_batch_note_location.id_batch_note_category
+
+relationship batch_note_event
+	fromColumn: fact_batch_note.key_event
+	toColumn: dim_batch_note_event.id_batch_note_category
+
+relationship batch_note_detail
+	fromColumn: fact_batch_note.key_detail
+	toColumn: dim_batch_note_detail.id_batch_note_category
+
+relationship batch_note_impact
+	fromColumn: fact_batch_note.key_impact
+	toColumn: dim_batch_note_impact.id_batch_note_category
+
