@@ -2,13 +2,17 @@
 --
 -- Une ligne par libellé et par langue manquante. Rien d'autre.
 --
+-- table_nomenclature : la table PostgreSQL où vit la donnée
+-- table_traduction   : la table PostgreSQL où la traduction doit être écrite
+--
 -- Chaque entrée de nomenclature est croisée avec les 4 langues du projet ;
 -- on ne garde que les couples pour lesquels aucune traduction non vide
 -- n'existe.
 --
 -- Environnement : remplacer _prd par _test pour la préprod.
 
-SELECT 'Espèce' AS donnee,
+SELECT 'goods_species' AS table_nomenclature,
+       'goods_species_translations' AS table_traduction,
        CAST(n.code AS STRING) AS libelle,
        CAST(n.id_good_specy AS STRING) AS identifiant,
        l.nom AS langue_manquante
@@ -33,7 +37,8 @@ WHERE n.deleted = false
 
 UNION ALL
 
-SELECT 'Variété' AS donnee,
+SELECT 'goods_varieties' AS table_nomenclature,
+       'goods_varieties_translations' AS table_traduction,
        CAST(n.code AS STRING) AS libelle,
        CAST(n.id_good_variety AS STRING) AS identifiant,
        l.nom AS langue_manquante
@@ -58,7 +63,8 @@ WHERE n.deleted = false
 
 UNION ALL
 
-SELECT 'Type de production' AS donnee,
+SELECT 'parameters_production_types' AS table_nomenclature,
+       'parameters_production_type_translations' AS table_traduction,
        CAST(n.code AS STRING) AS libelle,
        CAST(n.id_parameter_production_type AS STRING) AS identifiant,
        l.nom AS langue_manquante
@@ -83,7 +89,8 @@ WHERE n.deleted = false
 
 UNION ALL
 
-SELECT 'Variable' AS donnee,
+SELECT 'parameters_variables' AS table_nomenclature,
+       'parameters_variables_translations' AS table_traduction,
        CAST(n.code AS STRING) AS libelle,
        CAST(n.id_parameter_variable AS STRING) AS identifiant,
        l.nom AS langue_manquante
@@ -108,7 +115,8 @@ WHERE n.deleted = false
 
 UNION ALL
 
-SELECT 'Variable de ligne de production' AS donnee,
+SELECT 'parameters_production_line_variables' AS table_nomenclature,
+       'parameters_production_line_variables_translations' AS table_traduction,
        CONCAT(COALESCE(v.code, 'variable inconnue'), ' / ', COALESCE(p.name, 'ligne inconnue')) AS libelle,
        CAST(n.id_parameter_production_line_variable AS STRING) AS identifiant,
        l.nom AS langue_manquante
@@ -135,7 +143,8 @@ WHERE n.deleted = false
 
 UNION ALL
 
-SELECT 'Emplacement' AS donnee,
+SELECT 'parameters_localizations' AS table_nomenclature,
+       'parameters_localizations_translations' AS table_traduction,
        CAST(n.code AS STRING) AS libelle,
        CAST(n.id_parameter_localization AS STRING) AS identifiant,
        l.nom AS langue_manquante
@@ -160,7 +169,8 @@ WHERE n.deleted = false
 
 UNION ALL
 
-SELECT 'Groupe d’emplacements' AS donnee,
+SELECT 'parameters_localization_groups' AS table_nomenclature,
+       'parameters_localization_groups_translations' AS table_traduction,
        CAST(n.code AS STRING) AS libelle,
        CAST(n.id_parameter_localization_group AS STRING) AS identifiant,
        l.nom AS langue_manquante
@@ -185,7 +195,8 @@ WHERE n.deleted = false
 
 UNION ALL
 
-SELECT 'Note de production' AS donnee,
+SELECT 'parameters_batch_note_categories' AS table_nomenclature,
+       'parameters_batch_note_categories_translations' AS table_traduction,
        COALESCE(CAST(n.category_label AS STRING), CAST(n.id_batch_note_category AS STRING)) AS libelle,
        CAST(n.id_batch_note_category AS STRING) AS identifiant,
        l.nom AS langue_manquante
@@ -208,4 +219,4 @@ WHERE n.deleted = false
         AND TRIM(COALESCE(t.label, '')) <> ''
   )
 
-ORDER BY donnee, libelle, langue_manquante;
+ORDER BY table_nomenclature, libelle, langue_manquante;
