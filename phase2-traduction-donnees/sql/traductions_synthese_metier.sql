@@ -1,19 +1,9 @@
--- Traductions à compléter — toutes les nomenclatures
+-- Synthèse : combien de données à compléter par catégorie
 --
--- Version destinée au métier : noms de données et de langues en clair.
--- Couvre les 8 nomenclatures de l'application disposant d'une table de
--- traductions, sans restriction au périmètre du rapport.
---
--- Une donnée ressort dès qu'il lui manque une des 4 langues du projet
--- (français, anglais, roumain, tchèque). Une ligne de traduction existante
--- mais au libellé vide ne compte pas comme traduite.
---
--- La colonne « Affiché dans Process Time Analyses » permet de prioriser :
--- les données marquées Non sont utilisées ailleurs dans l'application.
+-- Donne l'ampleur du chantier avant d'envoyer la liste détaillée
+-- (traductions_a_completer_metier.sql).
 --
 -- Environnement : remplacer _prd par _test pour la préprod.
---
--- Une requête de synthèse par catégorie figure en fin de fichier.
 
 SELECT
     CASE resultat.categorie
@@ -30,16 +20,10 @@ SELECT
         WHEN 'batch_note_impact'        THEN 'Note de production — Impact'
         WHEN 'batch_note_sans_classe'   THEN 'Note de production — famille non renseignée'
         ELSE resultat.categorie
-    END                                              AS `Donnee`,
-    resultat.libelle_actuel                         AS `Libelle actuel`,
-    resultat.identifiant                            AS `Identifiant technique`,
-    resultat.deja_traduit                           AS `Deja traduit en`,
-    resultat.a_completer                            AS `A completer en`,
-    CASE
-        WHEN resultat.nb_langues = 0
-            THEN 'Critique — aucun libellé, le code technique s’affiche'
-        ELSE 'À corriger — le libellé anglais s’affiche à la place'
-    END                                             AS `Consequence utilisateur`,
+    END                                             AS `Donnee`,
+    COUNT(*)                                        AS `Nb a completer`,
+    SUM(CASE WHEN resultat.nb_langues = 0 THEN 1 ELSE 0 END)
+                                                    AS `Dont aucune traduction`,
     CASE
         WHEN resultat.categorie IN (
             'specy', 'variety', 'production_type',
@@ -353,4 +337,5 @@ SELECT * FROM (
     HAVING COUNT(DISTINCT l.code) < 4
 )
 ) resultat
-ORDER BY resultat.nb_langues, 1, 2;
+GROUP BY 1, 4
+ORDER BY 2 DESC;
