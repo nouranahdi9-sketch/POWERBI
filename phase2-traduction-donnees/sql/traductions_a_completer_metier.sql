@@ -23,23 +23,23 @@ SELECT
         WHEN 'variable'                 THEN 'Variable'
         WHEN 'production_line_variable' THEN 'Variable de ligne de production'
         WHEN 'localization'             THEN 'Emplacement'
-        WHEN 'localization_group'       THEN 'Groupe d''emplacements'
+        WHEN 'localization_group'       THEN 'Groupe d’emplacements'
         WHEN 'batch_note_location'      THEN 'Note de production — Emplacement'
         WHEN 'batch_note_event'         THEN 'Note de production — Événement'
         WHEN 'batch_note_detail'        THEN 'Note de production — Détail'
         WHEN 'batch_note_impact'        THEN 'Note de production — Impact'
         WHEN 'batch_note_sans_classe'   THEN 'Note de production — famille non renseignée'
         ELSE resultat.categorie
-    END                                              AS `Donnée`,
-    resultat.libelle_actuel                         AS `Libellé actuel`,
+    END                                              AS `Donnee`,
+    resultat.libelle_actuel                         AS `Libelle actuel`,
     resultat.identifiant                            AS `Identifiant technique`,
-    resultat.deja_traduit                           AS `Déjà traduit en`,
-    resultat.a_completer                            AS `À compléter en`,
+    resultat.deja_traduit                           AS `Deja traduit en`,
+    resultat.a_completer                            AS `A completer en`,
     CASE
         WHEN resultat.nb_langues = 0
-            THEN 'Critique — aucun libellé, le code technique s''affiche'
-        ELSE 'À corriger — le libellé anglais s''affiche à la place'
-    END                                             AS `Conséquence pour l''utilisateur`,
+            THEN 'Critique — aucun libellé, le code technique s’affiche'
+        ELSE 'À corriger — le libellé anglais s’affiche à la place'
+    END                                             AS `Consequence utilisateur`,
     CASE
         WHEN resultat.categorie IN (
             'specy', 'variety', 'production_type',
@@ -47,7 +47,7 @@ SELECT
             'batch_note_detail', 'batch_note_impact'
         ) THEN 'Oui'
         ELSE 'Non'
-    END                                             AS `Affiché dans Process Time Analyses`
+    END                                             AS `Affiche dans le rapport`
 FROM (
 SELECT * FROM (
     SELECT 'specy' AS categorie,
@@ -369,15 +369,15 @@ ORDER BY resultat.nb_langues, 1, 2;
         WHEN 'variable'                 THEN 'Variable'
         WHEN 'production_line_variable' THEN 'Variable de ligne de production'
         WHEN 'localization'             THEN 'Emplacement'
-        WHEN 'localization_group'       THEN 'Groupe d''emplacements'
+        WHEN 'localization_group'       THEN 'Groupe d’emplacements'
         WHEN 'batch_note_location'      THEN 'Note de production — Emplacement'
         WHEN 'batch_note_event'         THEN 'Note de production — Événement'
         WHEN 'batch_note_detail'        THEN 'Note de production — Détail'
         WHEN 'batch_note_impact'        THEN 'Note de production — Impact'
         WHEN 'batch_note_sans_classe'   THEN 'Note de production — famille non renseignée'
         ELSE resultat.categorie
-    END                                           AS `Donnée`,
---     COUNT(*)                                     AS `Nb à compléter`,
+    END                                           AS `Donnee`,
+--     COUNT(*)                                     AS `Nb a completer`,
 --     SUM(CASE WHEN resultat.nb_langues = 0 THEN 1 ELSE 0 END)
 --                                                  AS `Dont aucune traduction`
 -- FROM (
