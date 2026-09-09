@@ -84,8 +84,17 @@ trs_metadata_translations
 Plus propre en base, extensible sans modification de schéma. Trois fois plus de
 lignes à saisir.
 
-**Notre préférence : l'option A**, parce que la saisie est manuelle et que la
-relecture prime. Mais c'est votre table, votre choix.
+**Le choix dépend de la façon dont `trs_metadata` est alimentée**, que nous ne
+connaissons pas :
+
+- **remplie à la main** (tableur, éditeur SQL) → l'option A. Une mesure tient
+  sur une ligne, les manques se repèrent d'un coup d'œil, et il est impossible
+  de saisir deux libellés pour la même langue.
+- **alimentée par un pipeline** → l'option B. La lisibilité n'a plus d'objet, et
+  l'ajout d'une langue ne demande aucune modification de schéma.
+
+Dites-nous laquelle correspond à votre fonctionnement, notre traitement s'adapte
+aux deux sans effort.
 
 Dans les deux cas, prévoir la même chose pour `measure_type` et `categorie` —
 soit deux petites tables, soit un onglet dédié.
