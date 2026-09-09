@@ -106,8 +106,10 @@ soit deux petites tables, soit un onglet dédié.
 **Le code d'identification de la langue** : `fr`, `en`, `ro`, `cs` (ISO 639-1).
 Attention, le tchèque est `cs`, pas `cz`.
 
-**Un libellé par mesure et par langue.** Deux libellés pour le même couple
-feraient apparaître la mesure en double dans le rapport.
+**Un libellé par mesure et par langue.** En cas de doublon, notre traitement
+retient la ligne la plus récemment modifiée — la mesure n'apparaîtra donc pas en
+double, mais le libellé affiché devient imprévisible si les horodatages sont
+identiques. Mieux vaut garantir l'unicité à la source.
 
 **Ne pas laisser de chaîne vide.** Une case vide est traitée comme une
 traduction absente — ce qui est le comportement voulu. Un espace ou un tiret
@@ -171,3 +173,5 @@ apparaissent dans le rapport au rafraîchissement suivant, sans intervention.
    production, ou le libellé est-il propre à la mesure quel que soit le site ?
    Cette réponse détermine la clé de traduction.
 4. Quel délai envisagez-vous pour un premier jeu, même limité à l'anglais ?
+5. Les horodatages `created_at` / `modified_at` sont-ils bien alimentés à chaque
+   modification ? Ils nous servent à départager d'éventuels doublons.
