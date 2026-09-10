@@ -1,5 +1,5 @@
 -- =====================================================================
--- Purge des paramètres retirés de fact_batch_report (Self Service)
+-- Purge des neuf paramètres devenus colonnes de dim_batch (Self Service)
 -- =====================================================================
 --
 -- POURQUOI CE SCRIPT
@@ -14,13 +14,15 @@
 -- exécutions précédentes y restent indéfiniment, et la matrice de l'onglet
 -- BATCH continue de les afficher en colonnes.
 --
--- Ce script supprime ces lignes orphelines. À exécuter UNE FOIS, après avoir
--- exécuté le notebook. Les exécutions suivantes n'en auront plus besoin :
--- le filtre de la cellule 28 empêche toute réinsertion.
+-- Ce script supprime ces lignes orphelines pour LES NEUF PARAMÈTRES devenus
+-- colonnes de dim_batch. À exécuter UNE FOIS, après avoir exécuté le
+-- notebook. Les exécutions suivantes n'en auront plus besoin : le filtre de
+-- la cellule 28 empêche toute réinsertion.
 --
 -- Alternative : relancer le notebook avec le widget execution_mode = "full"
 -- (delete + insert intégral). Plus radical, plus long, et cela réinitialise
--- created_at sur toutes les lignes.
+-- created_at sur toutes les lignes. À noter : ce mode purgerait AUSSI les six
+-- paramètres de la section 5 ci-dessous, sans qu'on ait à en décider.
 --
 -- Environnement : preprd. Adapter le catalogue pour prd.
 -- =====================================================================
@@ -36,7 +38,6 @@ SELECT
     count(DISTINCT id_batch)     AS nb_lots
 FROM mal_maite_bi_preprd.self_service.fact_batch_report
 WHERE trim(parameter) IN (
-        -- Les neuf paramètres devenus colonnes de dim_batch
         'Fabrication order',
         'Production line',
         'Production type',
@@ -45,14 +46,7 @@ WHERE trim(parameter) IN (
         'End of production',
         'Specifications',
         'Species',
-        'Variety',
-        -- Les six paramètres déjà retirés antérieurement (demande William)
-        'Mes number',
-        'Moisture Malt',
-        'Indice qualite',
-        '#_volume',
-        'Goods Calibration Date',
-        'Goods Storage Duration'
+        'Variety'
       )
 GROUP BY trim(parameter)
 ORDER BY parametre;
@@ -72,13 +66,7 @@ WHERE trim(parameter) IN (
         'End of production',
         'Specifications',
         'Species',
-        'Variety',
-        'Mes number',
-        'Moisture Malt',
-        'Indice qualite',
-        '#_volume',
-        'Goods Calibration Date',
-        'Goods Storage Duration'
+        'Variety'
       );
 
 
@@ -91,8 +79,7 @@ FROM mal_maite_bi_preprd.self_service.fact_batch_report
 WHERE trim(parameter) IN (
         'Fabrication order', 'Production line', 'Production type', 'Harvest',
         'Start of production', 'End of production', 'Specifications',
-        'Species', 'Variety', 'Mes number', 'Moisture Malt', 'Indice qualite',
-        '#_volume', 'Goods Calibration Date', 'Goods Storage Duration'
+        'Species', 'Variety'
       )
 GROUP BY trim(parameter);
 
@@ -113,3 +100,40 @@ SELECT
 FROM mal_maite_bi_preprd.self_service.fact_batch_report
 GROUP BY trim(parameter)
 ORDER BY min(custom_order), parametre;
+
+
+-- ---------------------------------------------------------------------
+-- 5. CONTRÔLE SEUL (aucune suppression) — les six paramètres retirés
+--    antérieurement, hors périmètre traduction
+-- ---------------------------------------------------------------------
+--
+-- Ces six paramètres figuraient déjà dans `to_drop` avant les travaux de
+-- traduction (commentaire du notebook : "modif suite demande William
+-- réorganisation des colonnes"). Ils ne sont donc plus alimentés.
+--
+-- Comme le mode "update" ne supprime rien, ils SONT PEUT-ÊTRE encore
+-- présents dans la table — cela dépend de si leur retrait de `to_drop` est
+-- antérieur ou postérieur à la première alimentation, ce que le dépôt ne
+-- permet pas de trancher.
+--
+-- Cette requête ne fait que compter. La décision de les purger n'appartient
+-- pas au chantier traduction : à vérifier d'abord qu'aucun autre onglet ne
+-- les affiche encore.
+
+SELECT
+    trim(parameter)          AS parametre,
+    count(*)                 AS nb_lignes,
+    count(DISTINCT id_batch) AS nb_lots,
+    max(created_at)          AS derniere_insertion,
+    max(updated_at)          AS derniere_maj
+FROM mal_maite_bi_preprd.self_service.fact_batch_report
+WHERE trim(parameter) IN (
+        'Mes number',
+        'Moisture Malt',
+        'Indice qualite',
+        '#_volume',
+        'Goods Calibration Date',
+        'Goods Storage Duration'
+      )
+GROUP BY trim(parameter)
+ORDER BY parametre;
