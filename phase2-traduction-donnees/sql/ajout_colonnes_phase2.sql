@@ -73,3 +73,23 @@ ADD COLUMNS (month_num INT);
 -- ---------------------------------------------------------------------
 
 DESCRIBE TABLE mal_maite_bi_preprd.process_time_analyses.dim_batches_specifications;
+
+
+-- ---------------------------------------------------------------------
+-- 4. Rapport Self Service — identifiant d'espèce sur dim_batch
+--
+-- L'espèce n'est pas portée par le lot mais par la variété. On la remonte
+-- dans dim_batch pour la relier directement à la nomenclature des espèces,
+-- plutôt que par la chaîne lot -> variété -> espèce, qui imposerait du
+-- filtrage bidirectionnel à chaque étage et rouvrirait le risque de chemins
+-- ambigus.
+--
+-- Adapter le catalogue : self_service vit dans mal_maite_bi_<env>.
+-- ---------------------------------------------------------------------
+
+ALTER TABLE mal_maite_bi_preprd.self_service.dim_batch
+ADD COLUMNS (id_espece STRING);
+
+-- Contrôle après le prochain run du notebook :
+-- SELECT count(*) AS total, count(id_espece) AS avec_espece
+-- FROM mal_maite_bi_preprd.self_service.dim_batch;
