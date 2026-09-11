@@ -62,11 +62,11 @@ table dim_production_type
 		source =
 				let
 				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
-				    ext_mal_psql_maite_vision_board_prd_Database = Source{[Name="ext_mal_psql_maite_vision_board_prd",Kind="Database"]}[Data],
-				    public_Schema = ext_mal_psql_maite_vision_board_prd_Database{[Name="public",Kind="Schema"]}[Data],
-				    parameters_production_types_Table = public_Schema{[Name="parameters_production_types",Kind="Table"]}[Data]
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    common_Schema = mal_maite_bi_prd_Database{[Name="common",Kind="Schema"]}[Data],
+				    dim_production_type_Table = common_Schema{[Name="dim_production_type",Kind="Table"]}[Data]
 				in
-				    parameters_production_types_Table
+				    dim_production_type_Table
 
 	annotation PBI_NavigationStepName = Navigation
 
