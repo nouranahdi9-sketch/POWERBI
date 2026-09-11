@@ -54,10 +54,15 @@ table dim_site
 				let
 				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
 				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
-				    recommendations_Schema = mal_maite_bi_prd_Database{[Name="recommendations",Kind="Schema"]}[Data],
-				    dim_site_Table = recommendations_Schema{[Name="dim_site",Kind="Table"]}[Data]
+				    common_Schema = mal_maite_bi_prd_Database{[Name="common",Kind="Schema"]}[Data],
+				    dim_site_Table = common_Schema{[Name="dim_site",Kind="Table"]}[Data],
+				    // common.dim_site aliase deja name en plant ; seul l'identifiant change de nom.
+				    #"Colonnes conservees" = Table.SelectColumns(dim_site_Table,
+				        {"id_plant_production_line", "plant", "created_at", "updated_at", "deleted_at"}),
+				    #"Colonnes renommees" = Table.RenameColumns(#"Colonnes conservees",
+				        {{"id_plant_production_line", "id_plant"}})
 				in
-				    dim_site_Table
+				    #"Colonnes renommees"
 
 	annotation PBI_NavigationStepName = Navigation
 

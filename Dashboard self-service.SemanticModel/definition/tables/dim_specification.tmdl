@@ -51,10 +51,14 @@ table dim_specification
 				let
 				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
 				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
-				    recommendations_Schema = mal_maite_bi_prd_Database{[Name="recommendations",Kind="Schema"]}[Data],
-				    dim_specification_Table = recommendations_Schema{[Name="dim_specification",Kind="Table"]}[Data]
+				    common_Schema = mal_maite_bi_prd_Database{[Name="common",Kind="Schema"]}[Data],
+				    dim_requirement_specification_Table = common_Schema{[Name="dim_requirement_specification",Kind="Table"]}[Data],
+				    #"Colonnes conservees" = Table.SelectColumns(dim_requirement_specification_Table,
+				        {"id_requirement_specification", "name", "created_at", "updated_at", "deleted_at"}),
+				    #"Colonnes renommees" = Table.RenameColumns(#"Colonnes conservees",
+				        {{"id_requirement_specification", "id_cdc"}, {"name", "cdc"}})
 				in
-				    dim_specification_Table
+				    #"Colonnes renommees"
 
 	annotation PBI_NavigationStepName = Navigation
 
