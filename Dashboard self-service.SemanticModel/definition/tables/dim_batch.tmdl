@@ -41,7 +41,7 @@ table dim_batch
 		dataType: int64
 		formatString: 0
 		lineageTag: b8d4ba35-758a-478f-9508-52acdf83942f
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: id_site
 
 		annotation SummarizationSetBy = Automatic
@@ -50,7 +50,7 @@ table dim_batch
 		dataType: int64
 		formatString: 0
 		lineageTag: 11af42f0-2b73-4749-8205-b4e9ea9ec27e
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: id_cdc
 
 		annotation SummarizationSetBy = Automatic
@@ -86,7 +86,7 @@ table dim_batch
 		dataType: int64
 		formatString: 0
 		lineageTag: 95e089c7-f4ee-4993-9def-2a095cfe7cc4
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: id_type
 
 		annotation SummarizationSetBy = Automatic

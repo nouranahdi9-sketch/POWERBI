@@ -42,7 +42,7 @@ table dim_site
 		dataType: int64
 		formatString: 0
 		lineageTag: 13147c45-99dc-456c-a399-321c9b5d9b30
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: id_plant
 
 		annotation SummarizationSetBy = Automatic

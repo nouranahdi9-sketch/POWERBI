@@ -49,3 +49,22 @@ relationship AutoDetected_b6c56671-22d6-4182-9ca2-fbbddc3f9e23
 	fromColumn: fact_measurement.batch_id
 	toColumn: dim_batch.id_batch
 
+relationship 65d8d4c3-c74e-b5b6-81b8-2f7423c50581
+	crossFilteringBehavior: bothDirections
+	fromColumn: dim_batch.id_site
+	toColumn: dim_site.id_plant
+
+relationship 4728f366-4260-d6d0-852f-c7c2a46e7eec
+	crossFilteringBehavior: bothDirections
+	fromColumn: dim_batch.id_cdc
+	toColumn: dim_specification.id_cdc
+
+relationship af008be1-5e14-baf7-2c11-5d41b2bd1133
+	crossFilteringBehavior: bothDirections
+	fromColumn: dim_batch.id_type
+	toColumn: dim_production_type.id_parameter_production_type
+
+relationship 1e19c54a-2417-8a8a-5e25-096fe9d8ba98
+	fromColumn: manual_entries.id_batch
+	toColumn: dim_batch.id_batch
+

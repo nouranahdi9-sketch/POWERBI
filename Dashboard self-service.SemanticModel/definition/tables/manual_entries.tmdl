@@ -1,9 +1,17 @@
 table manual_entries
-	lineageTag: b06fea17-97fa-419c-ba6e-7130439730ff
+	lineageTag: 74342094-fcd1-490e-8895-4897169a4ae2
+
+	column id_batch
+		dataType: string
+		lineageTag: a9ab5b7f-2902-4a78-9765-b504cacb7385
+		summarizeBy: none
+		sourceColumn: id_batch
+
+		annotation SummarizationSetBy = Automatic
 
 	column parameter_variable
 		dataType: string
-		lineageTag: d5c4a11c-9cb2-4a81-828c-321bba1df4b4
+		lineageTag: 0ca1d680-1672-4513-8e98-7f279eb70016
 		summarizeBy: none
 		sourceColumn: parameter_variable
 
@@ -11,7 +19,7 @@ table manual_entries
 
 	column value
 		dataType: double
-		lineageTag: 3fe2b776-5b72-429b-bc87-52d58e9e35a5
+		lineageTag: ff66f8ec-742f-477e-afef-770252612e63
 		summarizeBy: sum
 		sourceColumn: value
 
@@ -21,24 +29,16 @@ table manual_entries
 
 	column unit
 		dataType: string
-		lineageTag: 39f62579-a5aa-4f62-93fe-77ed5ee51e29
+		lineageTag: 512220f6-bc7a-439c-8ea3-f7d8d31a3cf0
 		summarizeBy: none
 		sourceColumn: unit
-
-		annotation SummarizationSetBy = Automatic
-
-	column id_batch
-		dataType: string
-		lineageTag: a17023df-5152-473f-9f1e-6d60502417be
-		summarizeBy: none
-		sourceColumn: id_batch
 
 		annotation SummarizationSetBy = Automatic
 
 	column created_at
 		dataType: dateTime
 		formatString: General Date
-		lineageTag: a6e5e57e-852a-4341-8292-8ea822bf6198
+		lineageTag: 8edbe6f4-cd01-4408-ba0b-1d0cfd370950
 		summarizeBy: none
 		sourceColumn: created_at
 
@@ -47,7 +47,7 @@ table manual_entries
 	column updated_at
 		dataType: dateTime
 		formatString: General Date
-		lineageTag: 4e60e6b7-0e72-40d7-9287-68f0e57c4f52
+		lineageTag: f532c923-e6ad-4e42-be4e-14623010b985
 		summarizeBy: none
 		sourceColumn: updated_at
 
@@ -56,7 +56,7 @@ table manual_entries
 	column deleted_at
 		dataType: dateTime
 		formatString: General Date
-		lineageTag: c9b2dc02-d936-46a7-82ab-6270f6cec6b3
+		lineageTag: 1bb9c006-8526-48bb-860a-266bd62f5e0f
 		summarizeBy: none
 		sourceColumn: deleted_at
 
@@ -66,14 +66,14 @@ table manual_entries
 		mode: import
 		source =
 				let
-				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
-				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
-				    self_service_Schema = mal_maite_bi_prd_Database{[Name="self_service",Kind="Schema"]}[Data],
+				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_preprd_Database = Source{[Name="mal_maite_bi_preprd",Kind="Database"]}[Data],
+				    self_service_Schema = mal_maite_bi_preprd_Database{[Name="self_service",Kind="Schema"]}[Data],
 				    fact_manual_entries_Table = self_service_Schema{[Name="fact_manual_entries",Kind="Table"]}[Data]
 				in
 				    fact_manual_entries_Table
 
 	annotation PBI_NavigationStepName = Navigation
 
-	annotation PBI_ResultType = Exception
+	annotation PBI_ResultType = Table
 

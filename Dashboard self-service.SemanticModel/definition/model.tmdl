@@ -31,6 +31,7 @@ ref table fact_measurement
 ref table Translation
 ref table dim_variable
 ref table dim_production_type
+ref table manual_entries
 
 ref cultureInfo fr-FR
 ref cultureInfo en-US
