@@ -1,30 +1,11 @@
-relationship AutoDetected_1f2866ec-2e7b-4a83-806d-7f617c1f9cce
-	fromColumn: manual_entries.id_batch
-	toColumn: dim_batch.id_batch
-
-relationship AutoDetected_75bfc0e4-7aa3-4394-9793-96688ddbc8ee
-	crossFilteringBehavior: bothDirections
-	fromColumn: dim_batch.id_cdc
-	toColumn: dim_specification.id_cdc
-
 relationship AutoDetected_49457617-7c36-4d6d-bd5e-95925d5084a1
 	fromColumn: localisation.batch_id
 	toColumn: dim_batch.id_batch
-
-relationship 7e0cb81d-dcd0-3c2c-8958-ac186cd15364
-	crossFilteringBehavior: bothDirections
-	fromColumn: dim_batch.id_site
-	toColumn: dim_site.id_plant
 
 relationship 9140585b-7f98-63a4-5684-efd450c314b3
 	crossFilteringBehavior: bothDirections
 	fromColumn: dim_batch.id_variete
 	toColumn: dim_variety_specy.id_variety
-
-relationship a9c7bec0-2f2f-f57b-0af7-bcd38055c6ba
-	crossFilteringBehavior: bothDirections
-	fromColumn: dim_batch.id_type
-	toColumn: dim_production_type.id_parameter_production_type
 
 relationship 6b5788ce-b0a0-1872-d835-b48d71ac80d1
 	fromColumn: batch_report.id_batch

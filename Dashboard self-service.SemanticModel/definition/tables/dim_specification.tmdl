@@ -1,23 +1,6 @@
 table dim_specification
 	lineageTag: 338931ba-f81a-4ff6-ba7f-5c9c1dca6da7
 
-	column id_cdc
-		dataType: int64
-		formatString: 0
-		lineageTag: 9c681640-633d-4941-a33b-4f0dc289afa8
-		summarizeBy: none
-		sourceColumn: id_cdc
-
-		annotation SummarizationSetBy = Automatic
-
-	column cdc
-		dataType: string
-		lineageTag: e68f42d3-1519-4c90-a85b-c75b986981da
-		summarizeBy: none
-		sourceColumn: cdc
-
-		annotation SummarizationSetBy = Automatic
-
 	column created_at
 		dataType: dateTime
 		formatString: General Date
@@ -45,13 +28,30 @@ table dim_specification
 
 		annotation SummarizationSetBy = Automatic
 
+	column id_cdc
+		dataType: int64
+		formatString: 0
+		lineageTag: 9bb458b3-55c0-4077-b92e-3ed2768dd10b
+		summarizeBy: sum
+		sourceColumn: id_cdc
+
+		annotation SummarizationSetBy = Automatic
+
+	column cdc
+		dataType: string
+		lineageTag: e6864440-b3ad-450a-b69b-6c97a9b96df3
+		summarizeBy: none
+		sourceColumn: cdc
+
+		annotation SummarizationSetBy = Automatic
+
 	partition dim_specification = m
 		mode: import
 		source =
 				let
-				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
-				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
-				    common_Schema = mal_maite_bi_prd_Database{[Name="common",Kind="Schema"]}[Data],
+				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_preprd_Database = Source{[Name="mal_maite_bi_preprd",Kind="Database"]}[Data],
+				    common_Schema = mal_maite_bi_preprd_Database{[Name="common",Kind="Schema"]}[Data],
 				    dim_requirement_specification_Table = common_Schema{[Name="dim_requirement_specification",Kind="Table"]}[Data],
 				    #"Colonnes conservees" = Table.SelectColumns(dim_requirement_specification_Table,
 				        {"id_requirement_specification", "name", "created_at", "updated_at", "deleted_at"}),
@@ -62,5 +62,5 @@ table dim_specification
 
 	annotation PBI_NavigationStepName = Navigation
 
-	annotation PBI_ResultType = Table
+	annotation PBI_ResultType = Exception
 

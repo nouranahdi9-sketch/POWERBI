@@ -25,17 +25,11 @@ cultureInfo en-US
 			table dim_site
 				column plant
 					caption: Production line
-			table dim_specification
-				column cdc
-					caption: Specifications
 			table dim_variety_specy
 				column variety
 					caption: Variety
 				column specy
 					caption: Species
-			table dim_production_type
-				column code
-					caption: Production type
 			table parameters_variables
 				column code
 					caption: Parameter

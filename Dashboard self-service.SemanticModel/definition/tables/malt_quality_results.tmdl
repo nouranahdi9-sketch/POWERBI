@@ -184,9 +184,9 @@ table malt_quality_results
 		mode: import
 		source =
 				let
-				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
-				    mal_maite_common_prd_Database = Source{[Name="mal_maite_common_prd",Kind="Database"]}[Data],
-				    gold_Schema = mal_maite_common_prd_Database{[Name="gold",Kind="Schema"]}[Data],
+				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_common_preprd_Database = Source{[Name="mal_maite_common_preprd",Kind="Database"]}[Data],
+				    gold_Schema = mal_maite_common_preprd_Database{[Name="gold",Kind="Schema"]}[Data],
 				    malt_quality_results_View = gold_Schema{[Name="malt_quality_results",Kind="View"]}[Data],
 				    #"Autres colonnes supprimées" = Table.SelectColumns(malt_quality_results_View,{"fabrication_order", "malt_color_ebc", "malt_free_amino_nitrogen", "malt_friability", "malt_moisture", "malt_soluble_beta_glucan", "malt_viscosity", "malt_soluble_protein", "malt_broken_kernels", "malt_turbidity_ebc","malt_partly_unmodified_grains", "malt_fine_extract", "malt_ph", "malt_kolbach_index", "malt_boiled_wort_colour_ebc","malt_hartong_45", "malt_protein_content", "malt_whole_grains"}),
 				    #"Doublons supprimés" = Table.Distinct(#"Autres colonnes supprimées", {"fabrication_order"})
@@ -195,5 +195,5 @@ table malt_quality_results
 
 	annotation PBI_NavigationStepName = Navigation
 
-	annotation PBI_ResultType = Table
+	annotation PBI_ResultType = Exception
 

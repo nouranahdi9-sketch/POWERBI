@@ -34,9 +34,9 @@ table goods_quality_results
 		mode: import
 		source =
 				let
-				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
-				    mal_maite_common_prd_Database = Source{[Name="mal_maite_common_prd",Kind="Database"]}[Data],
-				    gold_Schema = mal_maite_common_prd_Database{[Name="gold",Kind="Schema"]}[Data],
+				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_common_preprd_Database = Source{[Name="mal_maite_common_preprd",Kind="Database"]}[Data],
+				    gold_Schema = mal_maite_common_preprd_Database{[Name="gold",Kind="Schema"]}[Data],
 				    goods_quality_results_View = gold_Schema{[Name="goods_quality_results",Kind="View"]}[Data],
 				    #"Autres colonnes supprimées" = Table.SelectColumns(goods_quality_results_View,{"fabrication_order", "goods_bad_grains_percent", "goods_broken_grains_percent"}),
 				    #"Doublons supprimés" = Table.Distinct(#"Autres colonnes supprimées", {"fabrication_order"})
@@ -45,5 +45,5 @@ table goods_quality_results
 
 	annotation PBI_NavigationStepName = Navigation
 
-	annotation PBI_ResultType = Table
+	annotation PBI_ResultType = Exception
 

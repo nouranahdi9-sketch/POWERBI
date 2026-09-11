@@ -41,7 +41,7 @@ table dim_batch
 		dataType: int64
 		formatString: 0
 		lineageTag: b8d4ba35-758a-478f-9508-52acdf83942f
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: id_site
 
 		annotation SummarizationSetBy = Automatic
@@ -50,7 +50,7 @@ table dim_batch
 		dataType: int64
 		formatString: 0
 		lineageTag: 11af42f0-2b73-4749-8205-b4e9ea9ec27e
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: id_cdc
 
 		annotation SummarizationSetBy = Automatic
@@ -86,7 +86,7 @@ table dim_batch
 		dataType: int64
 		formatString: 0
 		lineageTag: 95e089c7-f4ee-4993-9def-2a095cfe7cc4
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: id_type
 
 		annotation SummarizationSetBy = Automatic
@@ -126,13 +126,21 @@ table dim_batch
 
 		annotation SummarizationSetBy = Automatic
 
+	column id_espece
+		dataType: string
+		lineageTag: 8b04f058-90eb-42cb-ad34-9f8967957c64
+		summarizeBy: none
+		sourceColumn: id_espece
+
+		annotation SummarizationSetBy = Automatic
+
 	partition dim_batch = m
 		mode: import
 		source =
 				let
-				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
-				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
-				    self_service_Schema = mal_maite_bi_prd_Database{[Name="self_service",Kind="Schema"]}[Data],
+				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_preprd_Database = Source{[Name="mal_maite_bi_preprd",Kind="Database"]}[Data],
+				    self_service_Schema = mal_maite_bi_preprd_Database{[Name="self_service",Kind="Schema"]}[Data],
 				    dim_batch_Table = self_service_Schema{[Name="dim_batch",Kind="Table"]}[Data],
 				    #"Type modifié" = Table.TransformColumnTypes(dim_batch_Table,{{"ordre_fabrication", type text}})
 				in
@@ -140,5 +148,5 @@ table dim_batch
 
 	annotation PBI_NavigationStepName = Navigation
 
-	annotation PBI_ResultType = Table
+	annotation PBI_ResultType = Exception
 

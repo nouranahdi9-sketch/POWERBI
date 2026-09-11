@@ -75,9 +75,9 @@ table parameters_variables_translations
 		mode: import
 		source =
 				let
-				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
-				    ext_mal_psql_maite_vision_board_prd_Database = Source{[Name="ext_mal_psql_maite_vision_board_prd",Kind="Database"]}[Data],
-				    public_Schema = ext_mal_psql_maite_vision_board_prd_Database{[Name="public",Kind="Schema"]}[Data],
+				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    ext_mal_psql_maite_vision_board_test_Database = Source{[Name="ext_mal_psql_maite_vision_board_test",Kind="Database"]}[Data],
+				    public_Schema = ext_mal_psql_maite_vision_board_test_Database{[Name="public",Kind="Schema"]}[Data],
 				    parameters_variables_translations_Table = public_Schema{[Name="parameters_variables_translations",Kind="Table"]}[Data],
 				    #"Lignes filtrées" = Table.SelectRows(parameters_variables_translations_Table, each ([language] = 1)),
 				    #"Requêtes fusionnées" = Table.NestedJoin(#"Lignes filtrées", {"parameter_variable"}, parameters_variables, {"id_parameter_variable"}, "parameters_variables", JoinKind.LeftOuter),
@@ -87,5 +87,5 @@ table parameters_variables_translations
 
 	annotation PBI_NavigationStepName = Navigation
 
-	annotation PBI_ResultType = Table
+	annotation PBI_ResultType = Exception
 

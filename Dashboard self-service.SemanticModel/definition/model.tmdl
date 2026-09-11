@@ -6,7 +6,7 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
-annotation PBI_QueryOrder = ["batch_report","manual_entries","localisation","dim_batch","dim_site","dim_specification","dim_variety_specy","dim_production_type","malt_quality_results","goods_quality_results","parameters_variables_translations","parameters_variables","phase","fact_weather","fact_energy","fact_measurement","Translation"]
+annotation PBI_QueryOrder = ["batch_report","manual_entries","localisation","dim_batch","dim_site","dim_specification","dim_variety_specy","malt_quality_results","goods_quality_results","parameters_variables_translations","parameters_variables","phase","fact_weather","fact_energy","fact_measurement","Translation","dim_variable","dim_production_type"]
 
 annotation __PBI_TimeIntelligenceEnabled = 0
 
@@ -15,13 +15,11 @@ annotation __TEdtr = 1
 annotation PBI_ProTooling = ["DevMode"]
 
 ref table batch_report
-ref table manual_entries
 ref table localisation
 ref table dim_batch
 ref table dim_site
 ref table dim_specification
 ref table dim_variety_specy
-ref table dim_production_type
 ref table malt_quality_results
 ref table goods_quality_results
 ref table parameters_variables_translations
@@ -31,6 +29,8 @@ ref table fact_weather
 ref table fact_energy
 ref table fact_measurement
 ref table Translation
+ref table dim_variable
+ref table dim_production_type
 
 ref cultureInfo fr-FR
 ref cultureInfo en-US

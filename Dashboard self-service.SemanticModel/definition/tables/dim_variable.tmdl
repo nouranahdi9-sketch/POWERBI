@@ -1,18 +1,18 @@
-table parameters_variables
-	lineageTag: a0be1046-6b84-4045-bd6a-4926fc033a47
+table dim_variable
+	lineageTag: 9c8a39e9-684b-4e05-b94b-09211d9b89d2
 
 	column id_parameter_variable
 		dataType: int64
 		formatString: 0
-		lineageTag: 04b9e8e6-363b-40c1-84bb-edf35901b975
-		summarizeBy: none
+		lineageTag: 07d865cf-54bc-4509-a0d2-1bebf7cee2ef
+		summarizeBy: sum
 		sourceColumn: id_parameter_variable
 
 		annotation SummarizationSetBy = Automatic
 
 	column code
 		dataType: string
-		lineageTag: cc5d781b-2b29-4611-b28f-eae753861507
+		lineageTag: 981bbfec-459d-40c5-a2df-bd7d2ee0a228
 		summarizeBy: none
 		sourceColumn: code
 
@@ -21,7 +21,7 @@ table parameters_variables
 	column unit
 		dataType: int64
 		formatString: 0
-		lineageTag: 2b388fd8-1d79-4cef-a3ef-e18c8a83ba27
+		lineageTag: 2b15695c-15cf-46a5-99a9-34c1cd7a9329
 		summarizeBy: sum
 		sourceColumn: unit
 
@@ -30,7 +30,7 @@ table parameters_variables
 	column phase
 		dataType: int64
 		formatString: 0
-		lineageTag: 3766f843-592c-452e-bbc7-916d7613ac17
+		lineageTag: 982e42e0-4e6f-4b7e-bc1e-a4dad9ad1639
 		summarizeBy: sum
 		sourceColumn: phase
 
@@ -39,7 +39,7 @@ table parameters_variables
 	column activity
 		dataType: int64
 		formatString: 0
-		lineageTag: 4b388c3e-d372-49f8-8485-7b0286867267
+		lineageTag: ee8f25e5-4ad7-47d5-8caa-44d4743392ae
 		summarizeBy: sum
 		sourceColumn: activity
 
@@ -48,7 +48,7 @@ table parameters_variables
 	column task
 		dataType: int64
 		formatString: 0
-		lineageTag: a420dd63-dd8b-46fa-b05a-a3a7e74b0bf2
+		lineageTag: 3e0a27e2-47a6-4a4f-8307-b40cb40e818b
 		summarizeBy: sum
 		sourceColumn: task
 
@@ -57,7 +57,7 @@ table parameters_variables
 	column sequence
 		dataType: int64
 		formatString: 0
-		lineageTag: d8adda03-b865-418a-a37b-332dd0bbdc75
+		lineageTag: a6bab316-8430-483d-9833-d2cfd346c263
 		summarizeBy: sum
 		sourceColumn: sequence
 
@@ -66,7 +66,7 @@ table parameters_variables
 	column category
 		dataType: int64
 		formatString: 0
-		lineageTag: a8168d5a-2b37-4ca4-970a-b1dde4a50596
+		lineageTag: 19af5224-d520-4bc5-9789-44754408aba2
 		summarizeBy: sum
 		sourceColumn: category
 
@@ -75,7 +75,7 @@ table parameters_variables
 	column manual_entry
 		dataType: boolean
 		formatString: """TRUE"";""TRUE"";""FALSE"""
-		lineageTag: 8dd0a582-8e80-43f5-9dfa-dfe9cec69783
+		lineageTag: eecbd1e7-8a76-4f11-9689-1fb9197d151e
 		summarizeBy: none
 		sourceColumn: manual_entry
 
@@ -84,7 +84,7 @@ table parameters_variables
 	column deleted
 		dataType: boolean
 		formatString: """TRUE"";""TRUE"";""FALSE"""
-		lineageTag: 2a53e29d-e653-435b-86fd-3d0d4cfd483a
+		lineageTag: fe83943f-ae79-43c0-9dd0-407e9aaee18e
 		summarizeBy: none
 		sourceColumn: deleted
 
@@ -93,7 +93,7 @@ table parameters_variables
 	column created_at
 		dataType: dateTime
 		formatString: General Date
-		lineageTag: 245d2f7e-4392-41a2-9ee3-8e6bef2c3d2f
+		lineageTag: ac95a01c-6169-4131-9dd9-727441794685
 		summarizeBy: none
 		sourceColumn: created_at
 
@@ -102,7 +102,7 @@ table parameters_variables
 	column updated_at
 		dataType: dateTime
 		formatString: General Date
-		lineageTag: 7a67a6b0-c7af-4957-b742-19006907c4c3
+		lineageTag: 6e8e66de-93fe-4a78-8ee4-2d355cf3ae36
 		summarizeBy: none
 		sourceColumn: updated_at
 
@@ -111,7 +111,7 @@ table parameters_variables
 	column deleted_at
 		dataType: dateTime
 		formatString: General Date
-		lineageTag: 73e72308-bf41-4df3-b0d6-b05c0b2457dc
+		lineageTag: 213a5318-9bfb-4ff8-98a2-ddf30f97ca43
 		summarizeBy: none
 		sourceColumn: deleted_at
 
@@ -119,7 +119,7 @@ table parameters_variables
 
 	column description
 		dataType: string
-		lineageTag: 60a5646d-18c7-410c-810f-c7fcd72994ac
+		lineageTag: 7e7c24dd-d4eb-4341-8f1e-8a23f1431dfe
 		summarizeBy: none
 		sourceColumn: description
 
@@ -128,24 +128,24 @@ table parameters_variables
 	column is_total
 		dataType: boolean
 		formatString: """TRUE"";""TRUE"";""FALSE"""
-		lineageTag: be8a3944-7b31-498b-83a3-f539ac8f9382
+		lineageTag: 34a36a31-bda9-4c46-a9f2-d0373e8ec41b
 		summarizeBy: none
 		sourceColumn: is_total
 
 		annotation SummarizationSetBy = Automatic
 
-	partition parameters_variables = m
+	partition dim_variable = m
 		mode: import
 		source =
 				let
 				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
-				    ext_mal_psql_maite_vision_board_test_Database = Source{[Name="ext_mal_psql_maite_vision_board_test",Kind="Database"]}[Data],
-				    public_Schema = ext_mal_psql_maite_vision_board_test_Database{[Name="public",Kind="Schema"]}[Data],
-				    parameters_variables_Table = public_Schema{[Name="parameters_variables",Kind="Table"]}[Data]
+				    mal_maite_bi_preprd_Database = Source{[Name="mal_maite_bi_preprd",Kind="Database"]}[Data],
+				    common_Schema = mal_maite_bi_preprd_Database{[Name="common",Kind="Schema"]}[Data],
+				    dim_variable_Table = common_Schema{[Name="dim_variable",Kind="Table"]}[Data]
 				in
-				    parameters_variables_Table
+				    dim_variable_Table
 
 	annotation PBI_NavigationStepName = Navigation
 
-	annotation PBI_ResultType = Exception
+	annotation PBI_ResultType = Table
 

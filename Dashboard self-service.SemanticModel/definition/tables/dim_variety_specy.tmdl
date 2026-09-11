@@ -18,16 +18,6 @@ table dim_variety_specy
 
 		annotation SummarizationSetBy = Automatic
 
-	column id_specy
-		dataType: int64
-		formatString: 0
-		lineageTag: 0265c467-e0b3-4b5e-967e-5c52637ea861
-		summarizeBy: none
-		sourceColumn: id_specy
-		isHidden
-
-		annotation SummarizationSetBy = Automatic
-
 	column specy
 		dataType: string
 		lineageTag: 300c222a-f4d5-400a-a5c7-24cc2fdd9d3d
@@ -63,19 +53,24 @@ table dim_variety_specy
 
 		annotation SummarizationSetBy = Automatic
 
+	column id_specy
+		dataType: int64
+		formatString: 0
+		lineageTag: 9b9bc571-1b57-434f-9477-8b15569636bc
+		summarizeBy: none
+		sourceColumn: id_specy
+
+		annotation SummarizationSetBy = Automatic
+
 	partition dim_variety_specy = m
 		mode: import
 		source =
 				let
-				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
-				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
-				    common_Schema = mal_maite_bi_prd_Database{[Name="common",Kind="Schema"]}[Data],
-				    // common separe les deux nomenclatures ; on les rassemble ici pour garder
-				    // la table dim_variety_specy telle que le rapport l'interroge.
+				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_preprd_Database = Source{[Name="mal_maite_bi_preprd",Kind="Database"]}[Data],
+				    common_Schema = mal_maite_bi_preprd_Database{[Name="common",Kind="Schema"]}[Data],
 				    dim_variety_Table = common_Schema{[Name="dim_variety",Kind="Table"]}[Data],
 				    dim_specy_Table = common_Schema{[Name="dim_specy",Kind="Table"]}[Data],
-				    // Dans dim_variety, la colonne "specy" est la cle etrangere vers l'espece,
-				    // pas son libelle : on la renomme id_specy pour liberer le nom.
 				    #"Varietes" = Table.RenameColumns(
 				        Table.SelectColumns(dim_variety_Table,
 				            {"id_good_variety", "code", "specy", "created_at", "updated_at", "deleted_at"}),
@@ -93,5 +88,5 @@ table dim_variety_specy
 
 	annotation PBI_NavigationStepName = Navigation
 
-	annotation PBI_ResultType = Table
+	annotation PBI_ResultType = Exception
 

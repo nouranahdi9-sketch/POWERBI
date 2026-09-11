@@ -1,0 +1,14 @@
+expression manual_entries =
+		let
+		    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+		    mal_maite_bi_preprd_Database = Source{[Name="mal_maite_bi_preprd",Kind="Database"]}[Data],
+		    self_service_Schema = mal_maite_bi_preprd_Database{[Name="self_service",Kind="Schema"]}[Data],
+		    fact_manual_entries_Table = self_service_Schema{[Name="fact_manual_entries",Kind="Table"]}[Data]
+		in
+		    fact_manual_entries_Table
+	lineageTag: 7dfd6c59-08c2-4c06-addb-c0d639bade9f
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+

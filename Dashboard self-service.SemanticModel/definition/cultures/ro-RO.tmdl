@@ -25,17 +25,11 @@ cultureInfo ro-RO
 			table dim_site
 				column plant
 					caption: Linie de producție
-			table dim_specification
-				column cdc
-					caption: Specificații
 			table dim_variety_specy
 				column variety
 					caption: Varietate
 				column specy
 					caption: Soi
-			table dim_production_type
-				column code
-					caption: Tip de producție
 			table parameters_variables
 				column code
 					caption: Parametru

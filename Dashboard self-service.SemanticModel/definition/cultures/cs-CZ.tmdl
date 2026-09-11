@@ -25,17 +25,11 @@ cultureInfo cs-CZ
 			table dim_site
 				column plant
 					caption: Výrobní linka
-			table dim_specification
-				column cdc
-					caption: Specifikace
 			table dim_variety_specy
 				column variety
 					caption: Odrůda
 				column specy
 					caption: Druh
-			table dim_production_type
-				column code
-					caption: Typ výroby
 			table parameters_variables
 				column code
 					caption: Parametr

@@ -1,21 +1,11 @@
 table dim_site
 	lineageTag: 90ae5abb-16f0-4b25-848c-2023652868cd
 
-	column id_plant
-		dataType: int64
-		formatString: 0
-		lineageTag: cbc33692-3606-4ea8-9d4a-d28c0bd429cc
-		summarizeBy: none
-		sourceColumn: id_plant
-
-		annotation SummarizationSetBy = Automatic
-
 	column plant
 		dataType: string
 		lineageTag: 964146ef-6c8a-4b25-930f-72ac5f84ece6
 		summarizeBy: none
 		sourceColumn: plant
-		sortByColumn: id_plant
 
 		changedProperty = SortByColumn
 
@@ -48,15 +38,23 @@ table dim_site
 
 		annotation SummarizationSetBy = Automatic
 
+	column id_plant
+		dataType: int64
+		formatString: 0
+		lineageTag: 13147c45-99dc-456c-a399-321c9b5d9b30
+		summarizeBy: sum
+		sourceColumn: id_plant
+
+		annotation SummarizationSetBy = Automatic
+
 	partition dim_site = m
 		mode: import
 		source =
 				let
-				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
-				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
-				    common_Schema = mal_maite_bi_prd_Database{[Name="common",Kind="Schema"]}[Data],
+				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_preprd_Database = Source{[Name="mal_maite_bi_preprd",Kind="Database"]}[Data],
+				    common_Schema = mal_maite_bi_preprd_Database{[Name="common",Kind="Schema"]}[Data],
 				    dim_site_Table = common_Schema{[Name="dim_site",Kind="Table"]}[Data],
-				    // common.dim_site aliase deja name en plant ; seul l'identifiant change de nom.
 				    #"Colonnes conservees" = Table.SelectColumns(dim_site_Table,
 				        {"id_plant_production_line", "plant", "created_at", "updated_at", "deleted_at"}),
 				    #"Colonnes renommees" = Table.RenameColumns(#"Colonnes conservees",
@@ -66,5 +64,5 @@ table dim_site
 
 	annotation PBI_NavigationStepName = Navigation
 
-	annotation PBI_ResultType = Table
+	annotation PBI_ResultType = Exception
 
