@@ -68,3 +68,8 @@ relationship 1e19c54a-2417-8a8a-5e25-096fe9d8ba98
 	fromColumn: manual_entries.id_batch
 	toColumn: dim_batch.id_batch
 
+relationship b82641e6-214e-c460-536a-26f86f14cda0
+	crossFilteringBehavior: bothDirections
+	fromColumn: dim_variety_specy.id_specy
+	toColumn: dim_specy.id_good_specy
+

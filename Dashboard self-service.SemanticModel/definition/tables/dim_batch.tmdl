@@ -32,10 +32,10 @@ table dim_batch
 		dataType: int64
 		formatString: 0
 		lineageTag: de68590a-8361-4cff-bbd2-726d164e8d5e
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: annee_recolte
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column id_site
 		dataType: int64

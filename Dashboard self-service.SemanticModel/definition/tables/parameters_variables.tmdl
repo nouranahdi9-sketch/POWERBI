@@ -139,13 +139,13 @@ table parameters_variables
 		source =
 				let
 				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
-				    ext_mal_psql_maite_vision_board_test_Database = Source{[Name="ext_mal_psql_maite_vision_board_test",Kind="Database"]}[Data],
-				    public_Schema = ext_mal_psql_maite_vision_board_test_Database{[Name="public",Kind="Schema"]}[Data],
-				    parameters_variables_Table = public_Schema{[Name="parameters_variables",Kind="Table"]}[Data]
+				    mal_maite_bi_preprd_Database = Source{[Name="mal_maite_bi_preprd",Kind="Database"]}[Data],
+				    common_Schema = mal_maite_bi_preprd_Database{[Name="common",Kind="Schema"]}[Data],
+				    dim_variable_Table = common_Schema{[Name="dim_variable",Kind="Table"]}[Data]
 				in
-				    parameters_variables_Table
+				    dim_variable_Table
 
 	annotation PBI_NavigationStepName = Navigation
 
-	annotation PBI_ResultType = Exception
+	annotation PBI_ResultType = Table
 
