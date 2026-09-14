@@ -1,0 +1,53 @@
+role Translation
+	modelPermission: read
+
+	tablePermission dim_trad_specy =
+			VAR __culture =
+			    LOWER ( LEFT ( USERCULTURE (), 2 ) )
+			VAR __lang =
+			    COALESCE (
+			        LOOKUPVALUE (
+			            dim_trad_language[language],
+			            dim_trad_language[culture_code], __culture
+			        ),
+			        LOOKUPVALUE (
+			            dim_trad_language[language],
+			            dim_trad_language[culture_code], "en"
+			        )
+			    )
+			RETURN
+			    dim_trad_specy[language] = __lang
+
+	tablePermission dim_trad_variety =
+			VAR __culture =
+			    LOWER ( LEFT ( USERCULTURE (), 2 ) )
+			VAR __lang =
+			    COALESCE (
+			        LOOKUPVALUE (
+			            dim_trad_language[language],
+			            dim_trad_language[culture_code], __culture
+			        ),
+			        LOOKUPVALUE (
+			            dim_trad_language[language],
+			            dim_trad_language[culture_code], "en"
+			        )
+			    )
+			RETURN
+			    dim_trad_variety[language] = __lang
+
+	tablePermission dim_trad_production_type =
+			VAR __culture =
+			    LOWER ( LEFT ( USERCULTURE (), 2 ) )
+			VAR __lang =
+			    COALESCE (
+			        LOOKUPVALUE (
+			            dim_trad_language[language],
+			            dim_trad_language[culture_code], __culture
+			        ),
+			        LOOKUPVALUE (
+			            dim_trad_language[language],
+			            dim_trad_language[culture_code], "en"
+			        )
+			    )
+			RETURN
+			    dim_trad_production_type[language] = __lang
