@@ -14,7 +14,7 @@ table dim_trad_variety
 		dataType: int64
 		formatString: 0
 		lineageTag: 1b5f4fe3-ae03-4151-856e-41017f22a4f8
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: language
 
 		annotation SummarizationSetBy = Automatic

@@ -37,9 +37,10 @@ ref table dim_trad_language
 ref table dim_trad_variety
 ref table dim_trad_production_type
 
+ref role Translation
+
 ref cultureInfo fr-FR
 ref cultureInfo en-US
 ref cultureInfo ro-RO
 ref cultureInfo cs-CZ
 
-ref role Translation

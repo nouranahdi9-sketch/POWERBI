@@ -1,6 +1,17 @@
 table dim_batch
 	lineageTag: 919d4d6a-bf1e-4290-b0e0-c798b731c8f2
 
+	measure Variété =
+			
+			CALCULATE (
+			    MIN ( dim_trad_variety[label] ),
+			    TREATAS (
+			        VALUES ( dim_variety_specy[id_variety] ),
+			        dim_trad_variety[id_good_variety]
+			    )
+			)
+		lineageTag: 6d7c2f6f-9b92-4671-aab5-3829675545e9
+
 	column id_batch
 		dataType: string
 		lineageTag: 371d07c9-9a81-43fa-bebc-84aaa898c922

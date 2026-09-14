@@ -1,6 +1,9 @@
 table dim_variety_specy
 	lineageTag: b2424328-b52d-49a5-ac4e-9353553b1b24
 
+	measure Test = MIN ( dim_variety_specy[variety] )
+		lineageTag: 17aa735d-0e89-4e50-b972-1a0b331613ae
+
 	column id_variety
 		dataType: int64
 		formatString: 0

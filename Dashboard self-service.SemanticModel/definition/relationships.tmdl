@@ -87,3 +87,4 @@ relationship trad_production_type_nom
 	crossFilteringBehavior: bothDirections
 	fromColumn: dim_trad_production_type.id_parameter_production_type
 	toColumn: dim_production_type.id_parameter_production_type
+
