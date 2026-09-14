@@ -73,17 +73,17 @@ relationship b82641e6-214e-c460-536a-26f86f14cda0
 	fromColumn: dim_variety_specy.id_specy
 	toColumn: dim_specy.id_good_specy
 
-relationship 1b341b13-7bb9-4399-9b89-6ec02d7a41fc
-	fromCardinality: one
-	fromColumn: dim_specy.id_good_specy
-	toColumn: dim_trad_specy.id_good_specy
+relationship trad_specy_nom
+	crossFilteringBehavior: bothDirections
+	fromColumn: dim_trad_specy.id_good_specy
+	toColumn: dim_specy.id_good_specy
 
-relationship 98866f44-0ca4-46e0-a77c-5a36ceca4fc4
-	fromCardinality: one
-	fromColumn: dim_variety_specy.id_variety
-	toColumn: dim_trad_variety.id_good_variety
+relationship trad_variety_nom
+	crossFilteringBehavior: bothDirections
+	fromColumn: dim_trad_variety.id_good_variety
+	toColumn: dim_variety_specy.id_variety
 
-relationship 731dc5e7-32dd-45ac-a0ee-46ab5cef45b6
-	fromCardinality: one
-	fromColumn: dim_production_type.id_parameter_production_type
-	toColumn: dim_trad_production_type.id_parameter_production_type
+relationship trad_production_type_nom
+	crossFilteringBehavior: bothDirections
+	fromColumn: dim_trad_production_type.id_parameter_production_type
+	toColumn: dim_production_type.id_parameter_production_type
