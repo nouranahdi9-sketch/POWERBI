@@ -62,7 +62,7 @@ cultureInfo ro-RO
 
 			table dim_specification
 				column cdc
-					caption: Caiet de sarcini
+					caption: Specificații
 
 			table dim_production_type
 				column code

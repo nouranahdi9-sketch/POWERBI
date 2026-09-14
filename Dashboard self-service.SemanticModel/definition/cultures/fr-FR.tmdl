@@ -64,7 +64,7 @@ cultureInfo fr-FR
 
 			table dim_specification
 				column cdc
-					caption: Cahier des charges
+					caption: Spécifications
 
 			table dim_production_type
 				column code
