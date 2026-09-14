@@ -62,6 +62,26 @@ cultureInfo fr-FR
 				column label
 					caption: Libellé
 
+			table dim_specification
+				column cdc
+					caption: Cahier des charges
+
+			table dim_production_type
+				column code
+					caption: Type de production
+
+			table dim_trad_specy
+				column label
+					caption: Espèce
+
+			table dim_trad_variety
+				column label
+					caption: Variété
+
+			table dim_trad_production_type
+				column label
+					caption: Type de production
+
 	linguisticMetadata =
 			{
 			  "Version": "4.1.0",

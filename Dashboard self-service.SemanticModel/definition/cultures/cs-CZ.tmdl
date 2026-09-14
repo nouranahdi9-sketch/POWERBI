@@ -60,3 +60,22 @@ cultureInfo cs-CZ
 				column label
 					caption: Etiketa
 
+			table dim_specification
+				column cdc
+					caption: Specifikace
+
+			table dim_production_type
+				column code
+					caption: Typ výroby
+
+			table dim_trad_specy
+				column label
+					caption: Druh
+
+			table dim_trad_variety
+				column label
+					caption: Odrůda
+
+			table dim_trad_production_type
+				column label
+					caption: Typ výroby
