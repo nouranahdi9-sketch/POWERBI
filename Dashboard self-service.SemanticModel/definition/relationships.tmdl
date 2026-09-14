@@ -46,6 +46,7 @@ relationship 474f0da4-c4a8-0e74-b77f-92384b2e24b9
 	toColumn: parameters_variables.id_parameter_variable
 
 relationship AutoDetected_b6c56671-22d6-4182-9ca2-fbbddc3f9e23
+	crossFilteringBehavior: bothDirections
 	fromColumn: fact_measurement.batch_id
 	toColumn: dim_batch.id_batch
 

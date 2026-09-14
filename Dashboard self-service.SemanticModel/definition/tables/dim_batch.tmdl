@@ -137,21 +137,13 @@ table dim_batch
 
 		annotation SummarizationSetBy = Automatic
 
-	column id_espece
-		dataType: string
-		lineageTag: 8b04f058-90eb-42cb-ad34-9f8967957c64
-		summarizeBy: none
-		sourceColumn: id_espece
-
-		annotation SummarizationSetBy = Automatic
-
 	partition dim_batch = m
 		mode: import
 		source =
 				let
-				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
-				    mal_maite_bi_preprd_Database = Source{[Name="mal_maite_bi_preprd",Kind="Database"]}[Data],
-				    self_service_Schema = mal_maite_bi_preprd_Database{[Name="self_service",Kind="Schema"]}[Data],
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    self_service_Schema = mal_maite_bi_prd_Database{[Name="self_service",Kind="Schema"]}[Data],
 				    dim_batch_Table = self_service_Schema{[Name="dim_batch",Kind="Table"]}[Data],
 				    #"Type modifié" = Table.TransformColumnTypes(dim_batch_Table,{{"ordre_fabrication", type text}})
 				in

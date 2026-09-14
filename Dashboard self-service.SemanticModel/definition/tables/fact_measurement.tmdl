@@ -4,6 +4,10 @@ table fact_measurement
 	measure 'Current Culture' = USERCULTURE()
 		lineageTag: f750dfb3-7cc5-4a68-acae-3c374ab130c1
 
+	measure 'Nb lignes fact' = COUNTROWS ( fact_measurement )
+		formatString: 0.00
+		lineageTag: f92ee98d-bec9-4059-b11e-911b5d97f918
+
 	column batch_id
 		dataType: string
 		lineageTag: 1f4b4cc2-31b8-4f92-bb41-a9db6212feb2
@@ -77,9 +81,9 @@ table fact_measurement
 		mode: import
 		source =
 				let
-				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
-				    mal_maite_bi_preprd_Database = Source{[Name="mal_maite_bi_preprd",Kind="Database"]}[Data],
-				    self_service_Schema = mal_maite_bi_preprd_Database{[Name="self_service",Kind="Schema"]}[Data],
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    self_service_Schema = mal_maite_bi_prd_Database{[Name="self_service",Kind="Schema"]}[Data],
 				    fact_measurement_Table = self_service_Schema{[Name="fact_measurement",Kind="Table"]}[Data]
 				in
 				    fact_measurement_Table
