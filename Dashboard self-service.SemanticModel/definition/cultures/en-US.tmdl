@@ -60,22 +60,3 @@ cultureInfo en-US
 				column label
 					caption: Label
 
-			table dim_specification
-				column cdc
-					caption: Specifications
-
-			table dim_production_type
-				column code
-					caption: Production type
-
-			table dim_trad_specy
-				column label
-					caption: Species
-
-			table dim_trad_variety
-				column label
-					caption: Variety
-
-			table dim_trad_production_type
-				column label
-					caption: Production type
