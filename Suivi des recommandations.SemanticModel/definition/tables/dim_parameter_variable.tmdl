@@ -1,0 +1,131 @@
+table dim_parameter_variable
+	lineageTag: e1c3b15c-9553-4828-8a5a-5e93690c12c0
+
+	column id_parameter_production_line
+		dataType: string
+		lineageTag: d36cdd90-925b-4262-9ed2-697b1b0c59bb
+		summarizeBy: none
+		sourceColumn: id_parameter_production_line
+
+		annotation SummarizationSetBy = Automatic
+
+	column parameter_variable
+		dataType: string
+		lineageTag: 1b46563a-25e4-49ec-b665-7bb4b9a01efe
+		summarizeBy: none
+		sourceColumn: parameter_variable
+		sortByColumn: custom_order
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column parameter_variable_label
+		dataType: string
+		lineageTag: c1cc7566-98db-4b2f-a875-48d011de1481
+		summarizeBy: none
+		sourceColumn: parameter_variable_label
+
+		annotation SummarizationSetBy = Automatic
+
+	column unit
+		dataType: string
+		lineageTag: 54bd7cfd-f806-4bef-95bc-253f1e9f91bf
+		summarizeBy: none
+		sourceColumn: unit
+
+		annotation SummarizationSetBy = Automatic
+
+	column type
+		dataType: string
+		lineageTag: 68224e9f-3e9a-45f3-98e8-0c22807f8126
+		summarizeBy: none
+		sourceColumn: type
+
+		annotation SummarizationSetBy = Automatic
+
+	column tolerance
+		dataType: double
+		lineageTag: 3ae4be31-baf9-49cf-a18e-c45223f84335
+		summarizeBy: sum
+		sourceColumn: tolerance
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column localization
+		dataType: string
+		lineageTag: efe3415f-16d6-47f4-abb9-504708246432
+		summarizeBy: none
+		sourceColumn: localization
+
+		annotation SummarizationSetBy = Automatic
+
+	column custom_order
+		dataType: int64
+		formatString: 0
+		lineageTag: 3e906593-da02-4037-a597-7f9e7a95ed70
+		summarizeBy: sum
+		sourceColumn: custom_order
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d5da3510-a9eb-4ccc-965f-00a3df669ff0
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 1b018f23-9122-4ad8-99fd-ea4b24fd4dab
+			defaultHierarchy: LocalDateTable_02a07be0-ad37-4397-87c9-bedea6cf7b2a.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 3a8ee5d7-afb9-4f4c-b6d1-c47aba644141
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: bd1431b7-2c39-460b-935a-60cf004d526f
+			defaultHierarchy: LocalDateTable_8bf73116-7d7b-4cfc-839c-102ef7459456.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 5f95564a-d4c9-44b3-9e9a-6aad9629d846
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 74e7f50f-5631-4c4d-8e6e-3bdda2f5d845
+			defaultHierarchy: LocalDateTable_e80756b7-2a72-4b9e-89a0-319d3b4b55e3.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_parameter_variable = m
+		mode: import
+		queryGroup: dimension
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    parameters_Schema = mal_maite_bi_prd_Database{[Name="parameters",Kind="Schema"]}[Data],
+				    dim_parameter_variable_Table = parameters_Schema{[Name="dim_parameter_variable",Kind="Table"]}[Data]
+				in
+				    dim_parameter_variable_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

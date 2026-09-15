@@ -1,0 +1,210 @@
+table batches_reco
+	lineageTag: 9327bf63-cc6e-4300-8ac8-4f2bc66938d4
+
+	measure %reco_évaluées = SUM(batches_reco[evaluee]) / SUM(batches_reco[total_all])
+		formatString: 0\ %;-0\ %;0\ %
+		lineageTag: 11b2d0af-a4f1-4ef0-a6a4-1e1f271a0ec7
+
+	measure %reco_acceptées = ```
+			SUM(batches_reco[acceptee]) / SUM(batches_reco[Total_all]) 
+			```
+		formatString: 0\ %;-0\ %;0\ %
+		lineageTag: 52dc008c-c2a6-45a3-9bcb-86150c274784
+
+	measure %reco_acceptées_appliquées = ```
+			SUM(batches_reco[acceptee_et_appliquee]) / SUM(batches_reco[total_all]) 
+			```
+		formatString: 0\ %;-0\ %;0\ %
+		lineageTag: 363c4282-96a2-484e-a9b2-fa1eec2b0143
+
+	measure %reco_évaluées_appliquées = ```
+			SUM(batches_reco[acceptee_et_appliquee]) / SUM(batches_reco[evaluee]) 
+			```
+		formatString: 0\ %;-0\ %;0\ %
+		lineageTag: 509e3c15-2d68-4304-b3b5-6e8ffea179c8
+
+	measure %reco_reçues = SUM(batches_reco[total]) / SUM(batches_reco[nb_reco_opti])
+		formatString: 0\ %;-0\ %;0\ %
+		lineageTag: b8666657-00ab-4e86-85fa-24d2ea3b16b7
+
+	measure batch_sans_reco = IF(COUNTROWS(FILTER(batches_reco, batches_reco[total] = 0)) = 0, 0, COUNTROWS(FILTER(batches_reco, batches_reco[total] = 0)))
+		formatString: 0
+		lineageTag: a58807bd-bd43-48d2-a01f-02000c6e801c
+
+	measure nb_reco_reçues = SUM(batches_reco[total]) & " recommandations"
+		lineageTag: e8b3fbbf-b665-4568-b9e0-6784e8065418
+
+	measure %reco_disponibles = SUM(batches_reco[total]) / SUM(batches_reco[nb_reco_opti])
+		formatString: 0\ %;-0\ %;0\ %
+		lineageTag: 6c9ae7d5-3ed5-4fe6-8e7b-d444932f9aea
+
+	measure %reco_refusée = ```
+			SUM(batches_reco[refusee]) / SUM(batches_reco[Total_all]) 
+			```
+		formatString: 0\ %;-0\ %;0\ %
+		lineageTag: ceee78f9-ce98-47b5-b390-066555b9d07a
+
+	column id_batch
+		dataType: string
+		lineageTag: 0d01dd5e-bf7f-432c-a504-c9ebf6f47a93
+		summarizeBy: none
+		sourceColumn: id_batch
+
+		annotation SummarizationSetBy = Automatic
+
+	column planned_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 0016c3a8-82b1-4af8-94c8-d63bb0bc5a0e
+		summarizeBy: none
+		sourceColumn: planned_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column nb_reco_opti
+		dataType: int64
+		formatString: 0
+		lineageTag: 3ed769a9-bc22-441c-bac8-a05ba1974aa9
+		summarizeBy: sum
+		sourceColumn: nb_reco_opti
+
+		annotation SummarizationSetBy = Automatic
+
+	column total
+		dataType: int64
+		formatString: 0
+		lineageTag: d2bcfa8a-08c9-46b8-8883-0769cdae682f
+		summarizeBy: sum
+		sourceColumn: total
+
+		annotation SummarizationSetBy = Automatic
+
+	column acceptee
+		dataType: int64
+		formatString: 0
+		lineageTag: bfab9f97-f201-4a8a-88ba-247217a8db94
+		summarizeBy: sum
+		sourceColumn: acceptee
+
+		annotation SummarizationSetBy = Automatic
+
+	column en_attente
+		dataType: int64
+		formatString: 0
+		lineageTag: 750440bd-ad91-4bf7-a2c5-429766c4032e
+		summarizeBy: sum
+		sourceColumn: en_attente
+
+		annotation SummarizationSetBy = Automatic
+
+	column acceptee_et_appliquee
+		dataType: int64
+		formatString: 0
+		lineageTag: 15745a63-e5bb-44af-a16e-8354e7088218
+		summarizeBy: sum
+		sourceColumn: acceptee_et_appliquee
+
+		annotation SummarizationSetBy = Automatic
+
+	column acceptee_mais_non_appliquee
+		dataType: int64
+		formatString: 0
+		lineageTag: d7324e6a-2071-4f76-bd49-45c591ba7c49
+		summarizeBy: sum
+		sourceColumn: acceptee_mais_non_appliquee
+
+		annotation SummarizationSetBy = Automatic
+
+	column evaluee
+		dataType: int64
+		formatString: 0
+		lineageTag: fe2adcd4-cad0-4595-aae8-824883e7120c
+		summarizeBy: sum
+		sourceColumn: evaluee
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_all
+		dataType: int64
+		formatString: 0
+		lineageTag: f348192a-38bf-4645-aa13-83299ecd2a25
+		summarizeBy: sum
+		sourceColumn: total_all
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: fe3107a2-d43f-483e-9908-624c9dca9938
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: b802977d-c4a3-49fe-acc8-a91abec2fd5d
+			defaultHierarchy: LocalDateTable_870a42ef-6078-4d7b-a583-6aa05e7ec52e.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 62ba7e74-94e9-4a6f-b7e1-3dc490271bd5
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: a13cd3c4-b42c-4394-995a-5e4146e6b79f
+			defaultHierarchy: LocalDateTable_0d9d9daf-be75-42db-aa5b-a65b3c236776.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 966d1a99-c8b4-45c6-9627-379b19045c25
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 3f8ef97f-1f54-4b8d-b69d-d022edffc2bb
+			defaultHierarchy: LocalDateTable_8eb6790a-87fc-43c3-8fec-d788d56e40c9.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column refusee_ia
+		dataType: int64
+		formatString: 0
+		lineageTag: 09ab9b2d-7d4c-41ea-bcc3-0795dd7a37aa
+		summarizeBy: sum
+		sourceColumn: refusee_ia
+
+		annotation SummarizationSetBy = Automatic
+
+	column refusee_usine
+		dataType: int64
+		formatString: 0
+		lineageTag: 4e702ddf-3265-49fe-bad4-13228a5a79e6
+		summarizeBy: sum
+		sourceColumn: refusee_usine
+
+		annotation SummarizationSetBy = Automatic
+
+	partition batches_reco = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    recommendations_Schema = mal_maite_bi_prd_Database{[Name="recommendations",Kind="Schema"]}[Data],
+				    fact_batches_reco_Table = recommendations_Schema{[Name="fact_batches_reco",Kind="Table"]}[Data]
+				in
+				    fact_batches_reco_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+

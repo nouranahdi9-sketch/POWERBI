@@ -1,0 +1,78 @@
+table DIM_SPECIFICATION
+	lineageTag: a41bab33-d86e-4bc5-a7c3-9ad38a036f44
+
+	column id_cdc
+		dataType: int64
+		formatString: 0
+		lineageTag: d05fe480-4fb4-46bc-821e-747e1e4495fb
+		summarizeBy: none
+		sourceColumn: id_cdc
+
+		annotation SummarizationSetBy = Automatic
+
+	column cdc
+		dataType: string
+		lineageTag: 009a04e2-da64-4a33-991a-528175fc7e1b
+		summarizeBy: none
+		sourceColumn: cdc
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: bd4bb19f-8d43-48bc-af18-162c7381a1d3
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: fa419454-b2d9-43c5-934c-2373a37a0d57
+			defaultHierarchy: LocalDateTable_5ad681d9-1456-41a1-a933-c9e6d50343c0.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e5295343-c410-49c8-9b38-e7a4d3a9c8c4
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: 627fcf70-1881-41cc-b5a9-04cf76ee380e
+			defaultHierarchy: LocalDateTable_72177538-9a64-4e56-bc79-dd86520fd7c0.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 2c6d1e64-f792-41f6-b53e-a50e078744b3
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 41672a7d-bc94-4196-87bc-0279cfad4388
+			defaultHierarchy: LocalDateTable_e2fd7629-52f8-4f12-85d9-01318d4afd72.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_SPECIFICATION = m
+		mode: import
+		queryGroup: dimension
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    recommendations_Schema = mal_maite_bi_prd_Database{[Name="recommendations",Kind="Schema"]}[Data],
+				    dim_specification_Table = recommendations_Schema{[Name="dim_specification",Kind="Table"]}[Data]
+				in
+				    dim_specification_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

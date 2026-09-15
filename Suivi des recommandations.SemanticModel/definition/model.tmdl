@@ -1,0 +1,113 @@
+model Model
+	culture: fr-FR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: fr-FR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+queryGroup dimension
+
+	annotation PBI_QueryGroupOrder = 0
+
+annotation PBI_QueryOrder = ["batches_reco","recommendations","batches_localization_reco","batches_calculation_date_reco","DIM_BATCH","DIM_LOCALIZATION","DIM_VARIETY_SPECY","dim_site","DIM_SPECIFICATION","DIM_profiles_users","DIM_acceptance_status","dim_parameter_localization","features_front_too_high_low","fact_recommendation_tolerance","fact_parameter_tolerance","dim_parameter_variable","fact_batches_parameter_realized_recommended","fact_monitoring_auto_manual_entries","fact_batch_weighted_application_rate"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table DateTableTemplate_29d9df85-0cfb-4f96-8bb6-c7cc7bb692dc
+ref table DIM_acceptance_status
+ref table DIM_PLANNED_DATE
+ref table batches_reco
+ref table recommendations
+ref table dim_site
+ref table DIM_LOCALIZATION
+ref table DIM_SPECIFICATION
+ref table DIM_profiles_users
+ref table LocalDateTable_f4213160-42c1-48ed-a182-dbcd4156c523
+ref table batches_localization_reco
+ref table batches_calculation_date_reco
+ref table DIM_BATCH
+ref table LocalDateTable_0c87c9a3-9962-447d-b684-d93a486fcb07
+ref table LocalDateTable_04429e87-f530-442a-937e-e401c06ea9ad
+ref table DIM_CALCULATION_DATE
+ref table LocalDateTable_de5fe7ce-03e5-4383-a803-4a4d07d99451
+ref table LocalDateTable_36130795-bc05-42af-b687-aa00b46a35ba
+ref table DIM_VARIETY_SPECY
+ref table LocalDateTable_870a42ef-6078-4d7b-a583-6aa05e7ec52e
+ref table LocalDateTable_0d9d9daf-be75-42db-aa5b-a65b3c236776
+ref table LocalDateTable_8eb6790a-87fc-43c3-8fec-d788d56e40c9
+ref table LocalDateTable_c819c868-11c0-4321-b166-127061f389ac
+ref table LocalDateTable_878de030-8a30-4a63-896a-b0c3c4e2a118
+ref table LocalDateTable_ebee8c90-c268-41c5-a05d-4531aea664fb
+ref table LocalDateTable_baf0b52c-2326-4884-bb29-0862a937da73
+ref table LocalDateTable_81832387-f5b2-4582-a796-5fc6e3516360
+ref table LocalDateTable_10d58c79-2a35-42b0-83af-1cec20f55f39
+ref table LocalDateTable_9232fd73-e381-46b4-9efc-a2d2b7976b29
+ref table LocalDateTable_300ece46-5d34-4878-ae59-7cb9b055c61f
+ref table LocalDateTable_702d0058-269f-4571-82cb-e36bfb5eff79
+ref table LocalDateTable_ee0ca19b-7161-46bf-bc58-ce3fabcfe626
+ref table LocalDateTable_41c11ac5-e3c4-40ab-95dd-14dc3cf90502
+ref table LocalDateTable_471e2020-2d66-4981-b183-60cc19d2a0d0
+ref table LocalDateTable_379d0e53-c808-4f78-a407-8e05a894ff30
+ref table LocalDateTable_bc9d47d1-fef2-4457-8c5d-ca3281fd99af
+ref table LocalDateTable_c3dff14b-9a72-4fa4-989f-3e045a54c079
+ref table LocalDateTable_7bf1475d-f975-4572-960b-7fb254efef6a
+ref table LocalDateTable_024f6e50-be46-4bcc-8e63-581f4b0007dd
+ref table LocalDateTable_27d9a68f-669e-43f8-aa59-5f004c3da2fe
+ref table LocalDateTable_1b687659-b850-436d-99bb-214e4f70b205
+ref table LocalDateTable_efffc891-93a7-422b-b919-b13def6f1ff9
+ref table LocalDateTable_e6949abe-f471-494b-bfba-184106fe4da4
+ref table LocalDateTable_5ad681d9-1456-41a1-a933-c9e6d50343c0
+ref table LocalDateTable_72177538-9a64-4e56-bc79-dd86520fd7c0
+ref table LocalDateTable_e2fd7629-52f8-4f12-85d9-01318d4afd72
+ref table LocalDateTable_84a353f2-fba4-44e8-8042-1e1417a14332
+ref table LocalDateTable_ca42aaa6-c212-4d66-acd3-29ee14d18a3b
+ref table LocalDateTable_5b2bc52c-0083-49c5-ade5-ba411819ed13
+ref table LocalDateTable_82e94be5-6827-4e9e-a3ba-25e4eb8cb316
+ref table dim_parameter_localization
+ref table features_front_too_high_low
+ref table LocalDateTable_74cd05aa-305c-4b24-aba7-29c54339a088
+ref table LocalDateTable_beaf549b-31a5-4b89-a54f-d4b83741ebc1
+ref table LocalDateTable_27f46677-918b-468f-8cf8-e86d58e63216
+ref table LocalDateTable_654b0aa4-eaee-43ae-b07a-aa27dfdd59c9
+ref table LocalDateTable_14343fcc-5ee3-42c3-86c1-04ac88a1dac6
+ref table fact_recommendation_tolerance
+ref table LocalDateTable_3d556edb-0b90-4db8-830f-5f74155fb536
+ref table LocalDateTable_3561cdd4-a231-439f-ab97-8364f7e8d0a6
+ref table LocalDateTable_b4c59096-7df5-4f09-a257-578a8114fb0b
+ref table fact_parameter_tolerance
+ref table LocalDateTable_49c80d9a-c28a-4cc5-927f-8d97d1a98845
+ref table LocalDateTable_14f23b17-d850-4ad5-9f33-cf4537997939
+ref table LocalDateTable_43c23602-5d32-4737-bbf0-de846a5203b0
+ref table dim_parameter_variable
+ref table LocalDateTable_02a07be0-ad37-4397-87c9-bedea6cf7b2a
+ref table LocalDateTable_8bf73116-7d7b-4cfc-839c-102ef7459456
+ref table LocalDateTable_e80756b7-2a72-4b9e-89a0-319d3b4b55e3
+ref table Count
+ref table Duration
+ref table Speed
+ref table Temperature
+ref table fact_batches_parameter_realized_recommended
+ref table LocalDateTable_0d5113eb-b413-44fa-b1f7-466bc99d21ea
+ref table LocalDateTable_20b6db62-ddcc-4a14-b8ea-98074a208419
+ref table LocalDateTable_c02e072c-0de9-4c5a-bfef-160fc73bd240
+ref table LocalDateTable_a87dfe8a-cd74-43ce-971f-056bde2ba74a
+ref table LocalDateTable_d2221592-7e4d-4192-9423-a5f64a1804cb
+ref table fact_monitoring_auto_manual_entries
+ref table LocalDateTable_b280477f-820a-493f-bbd1-dc962978afcf
+ref table LocalDateTable_dc0c6009-6126-48c8-b029-f1c57b202f67
+ref table LocalDateTable_2d8cfaa3-5f40-4292-9b55-2a9a1b01679a
+ref table LocalDateTable_3823560f-61e4-42b7-ac8c-677c5e6e9f49
+ref table LocalDateTable_28f1ff68-c1aa-47bf-b4cd-b8dbfa2d309e
+ref table LocalDateTable_6b6e7258-fa12-441f-a62a-42f71f2a17a4
+ref table LocalDateTable_a8f6004a-7b72-4138-b3f2-bcd38931edcc
+ref table fact_batch_weighted_application_rate
+ref table LocalDateTable_9a9498ab-cfbf-49b1-befb-8800b515e79f
+ref table LocalDateTable_5632bd84-814d-4f59-978a-046db9fa42b1
+ref table LocalDateTable_b8187a6f-8408-4837-89e7-9c75eb8de711
+ref table LocalDateTable_bbf0e677-a60f-486e-a8cd-5ec6d035f71f
+
+ref cultureInfo fr-FR
+

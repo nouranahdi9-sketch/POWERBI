@@ -1,0 +1,276 @@
+table fact_monitoring_auto_manual_entries
+	lineageTag: ede5b733-29a4-4cd5-8152-46b568c6c890
+
+	measure %_reco_reçues = SUM(fact_monitoring_auto_manual_entries[flg_succes]) / (SUM(fact_monitoring_auto_manual_entries[flg_succes]) + SUM(fact_monitoring_auto_manual_entries[flg_echec]))
+		formatString: 0\ %;-0\ %;0\ %
+		lineageTag: b5fe6516-36e2-4d0e-b480-72a70e814a0f
+
+	column id_production_line
+		dataType: int64
+		formatString: 0
+		lineageTag: 1c150609-878a-4675-975d-3433f1599a65
+		summarizeBy: sum
+		sourceColumn: id_production_line
+
+		annotation SummarizationSetBy = Automatic
+
+	column batch_id
+		dataType: string
+		lineageTag: b979cf92-9257-4c73-a155-6188e4af286a
+		summarizeBy: none
+		sourceColumn: batch_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_recommendation
+		dataType: string
+		lineageTag: bb5a4862-6a11-4d4f-aff1-c1f590434243
+		summarizeBy: none
+		sourceColumn: id_recommendation
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_parameter_localization
+		dataType: int64
+		formatString: 0
+		lineageTag: 32b174f8-3fe4-48e9-bed4-7c8e7c4c6493
+		summarizeBy: sum
+		sourceColumn: id_parameter_localization
+
+		annotation SummarizationSetBy = Automatic
+
+	column missing_value
+		dataType: string
+		lineageTag: 361ace03-db77-440b-9d19-04d9c386af6f
+		summarizeBy: none
+		sourceColumn: missing_value
+
+		annotation SummarizationSetBy = Automatic
+
+	column flg_manual
+		dataType: int64
+		formatString: 0
+		lineageTag: c1d1414d-dea5-4a0e-a7b3-8b40578e4df7
+		summarizeBy: sum
+		sourceColumn: flg_manual
+
+		annotation SummarizationSetBy = Automatic
+
+	column flg_auto
+		dataType: int64
+		formatString: 0
+		lineageTag: e076b8fd-a1ae-4a70-97ed-d1deb5de6f5e
+		summarizeBy: sum
+		sourceColumn: flg_auto
+
+		annotation SummarizationSetBy = Automatic
+
+	column type_de_missing_value
+		dataType: string
+		lineageTag: 52939241-52b0-463e-a38c-9b297e18e3d8
+		summarizeBy: none
+		sourceColumn: type_de_missing_value
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_saisie_manuelle
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 2ca38758-397b-490c-800c-e3ac1906cbb1
+		summarizeBy: none
+		sourceColumn: date_saisie_manuelle
+
+		variation Variation
+			isDefault
+			relationship: c8af4439-ed99-444b-8736-ddead4d49fe9
+			defaultHierarchy: LocalDateTable_b280477f-820a-493f-bbd1-dc962978afcf.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column flg_succes
+		dataType: int64
+		formatString: 0
+		lineageTag: cd3864ef-afb7-4601-833c-7ef86aa80bbc
+		summarizeBy: sum
+		sourceColumn: flg_succes
+
+		annotation SummarizationSetBy = Automatic
+
+	column flg_echec
+		dataType: int64
+		formatString: 0
+		lineageTag: 5fafcf25-9437-458e-82ae-bc0a6f271f6e
+		summarizeBy: sum
+		sourceColumn: flg_echec
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_alerting
+		dataType: int64
+		formatString: 0
+		lineageTag: 0bc47de0-6a75-4064-a2a1-7051782f29ff
+		summarizeBy: sum
+		sourceColumn: id_alerting
+
+		annotation SummarizationSetBy = Automatic
+
+	column succes_echec
+		dataType: string
+		lineageTag: 221918c2-2f6e-4b7c-93d9-a71cafd35e84
+		summarizeBy: none
+		sourceColumn: succes_echec
+
+		annotation SummarizationSetBy = Automatic
+
+	column calculation_interval_after_datetime
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 85aca048-1331-4724-ba0b-893af1af8644
+		summarizeBy: none
+		sourceColumn: calculation_interval_after_datetime
+
+		variation Variation
+			isDefault
+			relationship: 00c243c2-8a45-43f6-aed0-0bbd657686a1
+			defaultHierarchy: LocalDateTable_dc0c6009-6126-48c8-b029-f1c57b202f67.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_creation_reco
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d812c1d8-ddc8-4e45-9b6d-ca6c072c9966
+		summarizeBy: none
+		sourceColumn: date_creation_reco
+
+		variation Variation
+			isDefault
+			relationship: 31bab0fd-4a67-4d21-a16d-1026cc965fa9
+			defaultHierarchy: LocalDateTable_2d8cfaa3-5f40-4292-9b55-2a9a1b01679a.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column flg_lasted_reco
+		dataType: int64
+		formatString: 0
+		lineageTag: 83b9a129-0006-4cd4-8662-5b04821a5cf5
+		summarizeBy: sum
+		sourceColumn: flg_lasted_reco
+
+		annotation SummarizationSetBy = Automatic
+
+	column raison
+		dataType: string
+		lineageTag: 1fb692f8-d238-4827-b0cb-b156c6e53f4e
+		summarizeBy: none
+		sourceColumn: raison
+
+		annotation SummarizationSetBy = Automatic
+
+	column concat_id_reco
+		dataType: string
+		lineageTag: f71d81fe-dfd9-4c07-a662-0f11782c3bd6
+		summarizeBy: none
+		sourceColumn: concat_id_reco
+
+		annotation SummarizationSetBy = Automatic
+
+	column type_echec
+		dataType: string
+		lineageTag: 8ccfa20b-fe12-43ea-ba96-0370f4c9dc1d
+		summarizeBy: none
+		sourceColumn: type_echec
+
+		annotation SummarizationSetBy = Automatic
+
+	column has_auto_value
+		dataType: int64
+		formatString: 0
+		lineageTag: fdb92236-d6ea-4114-a590-36f007b1cc16
+		summarizeBy: sum
+		sourceColumn: has_auto_value
+
+		annotation SummarizationSetBy = Automatic
+
+	column has_manual_value
+		dataType: int64
+		formatString: 0
+		lineageTag: b6064c6b-a5b8-4944-87b6-9bcb7da537c8
+		summarizeBy: sum
+		sourceColumn: has_manual_value
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: faec4c2e-dca7-4208-b44e-751c2890e434
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 9dc2cd46-4c17-4a15-99b0-d01c52e7a5c9
+			defaultHierarchy: LocalDateTable_3823560f-61e4-42b7-ac8c-677c5e6e9f49.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: ab684546-9f12-4bb8-a4e4-6d7e065b41ee
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: 0eea32a0-942a-476a-b641-737820bc3764
+			defaultHierarchy: LocalDateTable_28f1ff68-c1aa-47bf-b4cd-b8dbfa2d309e.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 7317e95c-6cc5-457b-b02d-468803764635
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 5f6b7e97-db0d-451f-b40e-a1b64125a711
+			defaultHierarchy: LocalDateTable_6b6e7258-fa12-441f-a62a-42f71f2a17a4.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column calculation_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 22686e4e-12a7-4482-89d1-b5d19842f886
+		summarizeBy: none
+		sourceColumn: calculation_date
+
+		variation Variation
+			isDefault
+			relationship: 3d38bb7c-00db-4aa5-8c40-97ed70ee065f
+			defaultHierarchy: LocalDateTable_a8f6004a-7b72-4138-b3f2-bcd38931edcc.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition fact_monitoring_auto_manual_entries = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    recommendations_monitoring_Schema = mal_maite_bi_prd_Database{[Name="recommendations_monitoring",Kind="Schema"]}[Data],
+				    fact_monitoring_auto_manual_entries_Table = recommendations_monitoring_Schema{[Name="fact_monitoring_auto_manual_entries",Kind="Table"]}[Data]
+				in
+				    fact_monitoring_auto_manual_entries_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

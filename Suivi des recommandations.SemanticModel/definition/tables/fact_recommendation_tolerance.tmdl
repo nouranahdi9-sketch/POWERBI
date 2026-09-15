@@ -1,0 +1,100 @@
+table fact_recommendation_tolerance
+	lineageTag: 55a3ae23-9b17-4434-908d-99a67bb7c382
+
+	column id_recommendation
+		dataType: string
+		lineageTag: 0279876f-3370-4439-848d-a76aa68b4752
+		summarizeBy: none
+		sourceColumn: id_recommendation
+
+		annotation SummarizationSetBy = Automatic
+
+	column applied_status
+		dataType: string
+		lineageTag: 1188bbd5-09c0-4139-8ab8-24bc7f7ee35a
+		summarizeBy: none
+		sourceColumn: applied_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column applied_status_tolerance
+		dataType: string
+		lineageTag: 80696e31-7e3b-4e29-be3a-c4b84c337ebe
+		summarizeBy: none
+		sourceColumn: applied_status_tolerance
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d0f0f511-1ea7-430e-97bf-65e443497c8b
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: fa5e2e38-d406-43df-b3cf-1cc68f68e1a4
+			defaultHierarchy: LocalDateTable_3d556edb-0b90-4db8-830f-5f74155fb536.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 789fe86e-825f-4624-94c2-d4981c044cab
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: 5df1e66f-3353-40b5-9453-947f889fd40c
+			defaultHierarchy: LocalDateTable_3561cdd4-a231-439f-ab97-8364f7e8d0a6.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 7dbd0c4a-ceb6-4881-87d6-7e2b7944265e
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: e1270949-3dd2-4dc2-9f15-ec9e62978cc1
+			defaultHierarchy: LocalDateTable_b4c59096-7df5-4f09-a257-578a8114fb0b.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_batch
+		dataType: string
+		lineageTag: a991d324-2ad0-44e3-962f-fb2ead82a462
+		summarizeBy: none
+		sourceColumn: id_batch
+
+		annotation SummarizationSetBy = Automatic
+
+	column target_localization
+		dataType: string
+		lineageTag: 8279aa07-bf68-48b0-b460-d79b41d1068e
+		summarizeBy: none
+		sourceColumn: target_localization
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_recommendation_tolerance = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    parameters_Schema = mal_maite_bi_prd_Database{[Name="parameters",Kind="Schema"]}[Data],
+				    fact_recommendation_tolerance_Table = parameters_Schema{[Name="fact_recommendation_tolerance",Kind="Table"]}[Data]
+				in
+				    fact_recommendation_tolerance_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

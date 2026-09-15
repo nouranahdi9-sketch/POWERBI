@@ -1,0 +1,102 @@
+table DIM_LOCALIZATION
+	lineageTag: d762df1f-c44e-48e8-952d-653c678fa74a
+
+	column id_localization
+		dataType: int64
+		formatString: 0
+		lineageTag: 6c400437-7b73-4a4b-a63f-6f6655a5e040
+		summarizeBy: none
+		sourceColumn: id_localization
+
+		annotation SummarizationSetBy = Automatic
+
+	column localization
+		dataType: string
+		lineageTag: 65d3ead8-bf72-450b-a2a4-09a2b66cfbde
+		summarizeBy: none
+		sourceColumn: localization
+		sortByColumn: sequence
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column sequence
+		dataType: int64
+		formatString: 0
+		lineageTag: 6f371a77-c337-421e-baa2-9c379255f6a7
+		summarizeBy: sum
+		sourceColumn: sequence
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: eef7a3cb-ac39-427f-a20f-1b812635fe99
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 5bfc47b5-a26b-4cb6-9528-37a1f6679e4c
+			defaultHierarchy: LocalDateTable_379d0e53-c808-4f78-a407-8e05a894ff30.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 56932ac9-23cc-4c0a-8f2a-e388af715cf0
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: b4811eea-60fd-403b-9ff3-2a7e6002e12a
+			defaultHierarchy: LocalDateTable_bc9d47d1-fef2-4457-8c5d-ca3281fd99af.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d5819039-2fe1-4377-b035-2989894442a6
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 61193e6c-50df-4859-959c-e70ad95f1f68
+			defaultHierarchy: LocalDateTable_c3dff14b-9a72-4fa4-989f-3e045a54c079.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column localization_eng
+		dataType: string
+		lineageTag: 7444aad0-92c4-47bd-a776-3477779b38c7
+		summarizeBy: none
+		sourceColumn: localization_eng
+		sortByColumn: sequence
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_LOCALIZATION = m
+		mode: import
+		queryGroup: dimension
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    recommendations_Schema = mal_maite_bi_prd_Database{[Name="recommendations",Kind="Schema"]}[Data],
+				    dim_localization_Table = recommendations_Schema{[Name="dim_localization",Kind="Table"]}[Data],
+				    #"Type modifié" = Table.TransformColumnTypes(dim_localization_Table,{{"id_localization", Int64.Type}, {"localization", type text}, {"sequence", Int64.Type}})
+				in
+				    #"Type modifié"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,172 @@
+table batches_calculation_date_reco
+	lineageTag: ed799342-5aaa-469e-8b6e-c4adc43472ef
+
+	measure '% reco évaluées sur total reçu' = DIVIDE(SUM(batches_calculation_date_reco[evaluee]),sum(batches_calculation_date_reco[total]))
+		formatString: 0\ %;-0\ %;0\ %
+		lineageTag: e828962f-aa44-4d17-a0ea-68dec035bd7c
+
+	measure '% reco acceptées sur total reçu' = DIVIDE(SUM(batches_calculation_date_reco[acceptee]),sum(batches_calculation_date_reco[total]))
+		formatString: 0\ %;-0\ %;0\ %
+		lineageTag: d34470c6-fbeb-4211-8d10-c213c30237f9
+
+	measure '% reco acceptées sur évaluées' = DIVIDE(SUM(batches_calculation_date_reco[acceptee]),sum(batches_calculation_date_reco[evaluee]))
+		formatString: 0\ %;-0\ %;0\ %
+		lineageTag: e7e91510-2afe-4ab4-8f48-8bc6b63aaad1
+
+	measure '% reco appliquées sur total reçu' = DIVIDE(SUM(batches_calculation_date_reco[acceptee_et_appliquee]),sum(batches_calculation_date_reco[total]))
+		formatString: 0\ %;-0\ %;0\ %
+		lineageTag: 58145ad9-8150-4a14-9001-aee2ec60e391
+
+	measure '% reco appliquées sur Évaluée' = DIVIDE(SUM(batches_calculation_date_reco[acceptee_et_appliquee]),sum(batches_calculation_date_reco[evaluee]))
+		formatString: 0\ %;-0\ %;0\ %
+		lineageTag: e558acfb-bb51-48df-addb-9873b176c440
+
+	measure nb_reco_total = SUM(batches_calculation_date_reco[Total]) & " recommandations"
+		lineageTag: 5dfb1b0c-68b2-4142-8ed1-ce713aca7f8c
+
+	column batch
+		dataType: string
+		lineageTag: 5b8e4252-178b-4124-931a-85eeade2e77a
+		summarizeBy: none
+		sourceColumn: batch
+
+		annotation SummarizationSetBy = Automatic
+
+	column calculation_date
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 8fcf23b3-65e0-4906-a355-1520ca6841ff
+		summarizeBy: none
+		sourceColumn: calculation_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column acceptee
+		dataType: int64
+		formatString: 0
+		lineageTag: e078a88e-f6c9-49ef-8467-ae0c45ef05bc
+		summarizeBy: sum
+		sourceColumn: acceptee
+
+		annotation SummarizationSetBy = Automatic
+
+	column en_attente
+		dataType: int64
+		formatString: 0
+		lineageTag: c7834e2d-48e2-4ffd-9348-3cfb99d64df3
+		summarizeBy: sum
+		sourceColumn: en_attente
+
+		annotation SummarizationSetBy = Automatic
+
+	column evaluee
+		dataType: int64
+		formatString: 0
+		lineageTag: 2dce344e-d98b-4be1-8a15-44bedebaafa0
+		summarizeBy: sum
+		sourceColumn: evaluee
+
+		annotation SummarizationSetBy = Automatic
+
+	column total
+		dataType: int64
+		formatString: 0
+		lineageTag: d0e037d7-181d-4bad-819c-b70876495065
+		summarizeBy: sum
+		sourceColumn: total
+
+		annotation SummarizationSetBy = Automatic
+
+	column acceptee_et_appliquee
+		dataType: int64
+		formatString: 0
+		lineageTag: db6dbc79-9a95-42c0-bb41-acb64ebe73db
+		summarizeBy: sum
+		sourceColumn: acceptee_et_appliquee
+
+		annotation SummarizationSetBy = Automatic
+
+	column acceptee_mais_non_appliquee
+		dataType: int64
+		formatString: 0
+		lineageTag: 6aee0353-d270-457f-82b2-bd902e7a2051
+		summarizeBy: sum
+		sourceColumn: acceptee_mais_non_appliquee
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a8110c78-4175-46b3-8aff-c4b3330be42d
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 1a5d75e4-f21e-4cc9-b534-71c7c84479a9
+			defaultHierarchy: LocalDateTable_9232fd73-e381-46b4-9efc-a2d2b7976b29.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 62917c4c-e1aa-4a4e-b975-d0322b2b8709
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: d22731f3-28e0-41cb-9c2d-dbd531e207c1
+			defaultHierarchy: LocalDateTable_300ece46-5d34-4878-ae59-7cb9b055c61f.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 7000f3c9-90ad-4982-8a92-b60af7ee95cd
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: ab04cbc4-863a-461c-aaa0-d6055e06c229
+			defaultHierarchy: LocalDateTable_702d0058-269f-4571-82cb-e36bfb5eff79.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column refusee_ia
+		dataType: int64
+		formatString: 0
+		lineageTag: 434201aa-5b5a-48b9-a1ad-48b7cf4e511e
+		summarizeBy: sum
+		sourceColumn: refusee_ia
+
+		annotation SummarizationSetBy = Automatic
+
+	column refusee_usine
+		dataType: int64
+		formatString: 0
+		lineageTag: 2d009fcc-fcd1-4d8a-b059-1ff55dfc7f89
+		summarizeBy: sum
+		sourceColumn: refusee_usine
+
+		annotation SummarizationSetBy = Automatic
+
+	partition batches_calculation_date_reco = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    recommendations_Schema = mal_maite_bi_prd_Database{[Name="recommendations",Kind="Schema"]}[Data],
+				    fact_batches_calculation_date_reco_Table = recommendations_Schema{[Name="fact_batches_calculation_date_reco",Kind="Table"]}[Data]
+				in
+				    fact_batches_calculation_date_reco_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

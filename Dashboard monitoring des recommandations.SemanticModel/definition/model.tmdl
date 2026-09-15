@@ -1,0 +1,54 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: fr-FR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["dim_alerting","dim_batches","fact_monitoring_auto_manual_entries","dim_calendar","dim_target_localization","fact_ascendance_localization","dim_site"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table DateTableTemplate_bd890d6b-585b-4556-ada5-e4bffc042e84
+ref table dim_alerting
+ref table LocalDateTable_97fa3f20-d563-432e-b68a-0d1b6d6d6921
+ref table LocalDateTable_4dfc06da-a8a0-4e62-a667-29a6b562f2c2
+ref table LocalDateTable_42f746c5-08ef-4570-800a-c4e13ed3336f
+ref table dim_batches
+ref table LocalDateTable_e93e00bd-0c12-4b83-8fe9-d767cd43e805
+ref table LocalDateTable_00ea64a2-c7c1-469e-8559-14bb42c76cad
+ref table LocalDateTable_c3d0cfe4-b182-4cff-9459-bf847a8c15a4
+ref table LocalDateTable_5e20ecf3-9a6a-47a1-9823-f574841ac572
+ref table fact_monitoring_auto_manual_entries
+ref table LocalDateTable_e519d759-6e1d-46a1-ac7b-a495500c0ead
+ref table LocalDateTable_e9ec8287-8cdc-439a-a394-85474aa381f5
+ref table LocalDateTable_94dd3206-c9d0-4014-b24a-e6d8b830b6dc
+ref table LocalDateTable_6df64d35-ea32-4467-b9c2-8e88745c4c5f
+ref table dim_calendar
+ref table LocalDateTable_1d4e1e76-02cb-4232-82f8-1a8e928d58ab
+ref table LocalDateTable_504e8d9a-f6ef-4241-8047-eb46035607e1
+ref table LocalDateTable_2df17bee-5ea0-4a01-a8e6-6f56413fc3cf
+ref table LocalDateTable_0067b95d-89dc-4271-91f6-9bd69704b4d2
+ref table dim_target_localization
+ref table LocalDateTable_5c23be31-0b90-4857-8657-64a162d62398
+ref table LocalDateTable_b37a3194-c89e-4313-88c0-064683aebf31
+ref table LocalDateTable_7a7e9a9c-3419-4804-a0ae-9db4dd44ce84
+ref table fact_ascendance_localization
+ref table LocalDateTable_be03101a-7f1f-4130-b096-908d04f16b52
+ref table LocalDateTable_b49529b2-5ca2-43bd-ab42-6d6e4f2ff141
+ref table LocalDateTable_ca4e2b46-bfaf-4027-b87c-2a524b6b9cfd
+ref table LocalDateTable_8b9664f1-dbb3-4a03-b6c1-4dccb68962ef
+ref table LocalDateTable_dd74ca73-15cf-4934-a906-acab03412304
+ref table LocalDateTable_caee25e3-5251-41a2-9d95-0e349355e26e
+ref table LocalDateTable_9da11d81-348f-4d52-b16c-e0434fa6fee4
+ref table LocalDateTable_de335682-44bc-4849-bb2c-f0d5873bcd30
+ref table dim_site
+ref table LocalDateTable_397afca8-5ea0-488a-887e-d5c6c2b293a9
+ref table LocalDateTable_b0d495c8-4e04-459d-897e-b1325f611872
+ref table LocalDateTable_5074049c-241c-4983-b548-7cf4e7a640ea
+
+ref cultureInfo en-US
+

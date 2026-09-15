@@ -1,0 +1,138 @@
+table DIM_CALCULATION_DATE
+	lineageTag: 955d4665-2396-4910-b274-50d0c4c7c827
+
+	column Date
+		formatString: Short Date
+		lineageTag: a2cb30cd-7a25-4416-95a0-8e072cfc9993
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		variation Variation
+			isDefault
+			relationship: daa8fe4c-b323-4e6b-8132-b672f5ab6ab9
+			defaultHierarchy: LocalDateTable_de5fe7ce-03e5-4383-a803-4a4d07d99451.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		formatString: 0
+		lineageTag: 850d7504-72f7-4073-8ed3-39de97dcfa0a
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Year]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		formatString: 0
+		lineageTag: 54791899-d26a-48e5-ac5d-2cb0e9eb3ebc
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Month]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Day
+		formatString: 0
+		lineageTag: 61e6eb43-b489-402c-ae40-f549aa383a70
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Day]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Week Number'
+		formatString: 0
+		lineageTag: abb328f4-7311-452d-a58b-b5a9bd1b18fe
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Week Number]
+
+		annotation SummarizationSetBy = Automatic
+
+	column FirstDateByWeek =
+			
+			CALCULATE(
+			    MIN('DIM_CALCULATION_DATE'[Date]),
+			    ALLEXCEPT('DIM_CALCULATION_DATE', 'DIM_CALCULATION_DATE'[Week Number], 'DIM_CALCULATION_DATE'[Year])
+			)
+		formatString: Short Date
+		lineageTag: 0394d226-dbd6-4794-b002-d8253251d48c
+		summarizeBy: none
+
+		variation Variation
+			isDefault
+			relationship: 829fbee4-8f4b-46f6-9384-c003e41a48b6
+			defaultHierarchy: LocalDateTable_36130795-bc05-42af-b687-aa00b46a35ba.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Last 12 weeks' = ```
+			
+			VAR SemaineActuelle = WEEKNUM(TODAY(), 2)
+			VAR AnneeActuelle = YEAR(TODAY())
+			
+			VAR SemaineMin = SemaineActuelle - 10
+			VAR AnneeMin = AnneeActuelle
+			
+			VAR SemaineMinCorrigee = IF(SemaineMin <= 0, 52 + SemaineMin, SemaineMin)
+			VAR AnneeMinCorrigee = IF(SemaineMin <= 0, AnneeActuelle - 1, AnneeActuelle)
+			
+			RETURN 
+			    IF(
+			        ('DIM_CALCULATION_DATE'[Year] = AnneeActuelle && 'DIM_CALCULATION_DATE'[Week Number] <= SemaineActuelle)
+			        || ('DIM_CALCULATION_DATE'[Year] = AnneeMinCorrigee && 'DIM_CALCULATION_DATE'[Week Number] >= SemaineMinCorrigee),
+			        1, 
+			        0
+			    )
+			
+			```
+		formatString: 0
+		lineageTag: 5884abef-edd4-45ca-ae1e-1529ca2c3846
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Last 4 Months' = ```
+			
+			VAR MoisActuel = MONTH(TODAY())
+			VAR AnneeActuelle = YEAR(TODAY())
+			
+			VAR MoisMin = MoisActuel - 3
+			VAR AnneeMin = AnneeActuelle
+			
+			VAR MoisMinCorrige = IF(MoisMin <= 0, 12 + MoisMin, MoisMin)
+			VAR AnneeMinCorrige = IF(MoisMin <= 0, AnneeActuelle - 1, AnneeActuelle)
+			
+			RETURN 
+			    IF(
+			        ('DIM_CALCULATION_DATE'[Year] = AnneeActuelle && 'DIM_CALCULATION_DATE'[Month] <= MoisActuel && 'DIM_CALCULATION_DATE'[Month] >= MoisMin)
+			        || ('DIM_CALCULATION_DATE'[Year] = AnneeMinCorrige && 'DIM_CALCULATION_DATE'[Month] >= MoisMinCorrige),
+			        1, 
+			        0
+			    )
+			```
+		formatString: 0
+		lineageTag: 17adf379-1923-411b-9663-a46905943375
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_CALCULATION_DATE = calculated
+		mode: import
+		source =
+				
+				VAR MIN_DATE = "01/01/2024"
+				VAR MAX_DATE = TODAY()
+				RETURN
+				ADDCOLUMNS(
+				    CALENDAR(MIN_DATE, MAX_DATE),
+				    "Year", YEAR([Date]),
+				    "Month", MONTH([Date]),
+				    "Day", DAY([Date]),
+				    "Week Number", WEEKNUM([Date], 2)
+				)
+
+	annotation PBI_Id = 395ecbb4dd404f2798bdbc051c369559
+
