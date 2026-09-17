@@ -1,0 +1,222 @@
+table dim_batch
+	lineageTag: 99ea5dfd-d6e3-488b-bdac-39f56ea37aec
+
+	column batch_id
+		dataType: string
+		lineageTag: 9508ca69-892e-45be-a5ec-ad5184a3bdd9
+		summarizeBy: none
+		sourceColumn: batch_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column batch_number
+		dataType: string
+		lineageTag: 45a56110-ec3a-47ec-9bce-6f9f7ce3be01
+		summarizeBy: none
+		sourceColumn: batch_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column requirement_specifications
+		dataType: int64
+		formatString: 0
+		lineageTag: 8904831a-14cf-4b93-9b22-a4affd6268c4
+		summarizeBy: sum
+		sourceColumn: requirement_specifications
+
+		annotation SummarizationSetBy = Automatic
+
+	column variety
+		dataType: int64
+		formatString: 0
+		lineageTag: 80d8c879-dfa1-4083-b2f5-f48adde32ee3
+		summarizeBy: sum
+		sourceColumn: variety
+
+		annotation SummarizationSetBy = Automatic
+
+	column fabrication_order_number
+		dataType: int64
+		formatString: 0
+		lineageTag: bb678163-255b-451c-b3b8-c370a50205e9
+		summarizeBy: sum
+		sourceColumn: fabrication_order_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column mes_number
+		dataType: string
+		lineageTag: ced97c84-4ff6-4219-a17d-329197ec5d9d
+		summarizeBy: none
+		sourceColumn: mes_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column planned_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 94afe75e-92a9-49a3-8326-2c2acd380aa4
+		summarizeBy: none
+		sourceColumn: planned_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column harvest
+		dataType: int64
+		formatString: 0
+		lineageTag: 4136fb6b-4353-4c87-b745-712f0230fa79
+		summarizeBy: sum
+		sourceColumn: harvest
+
+		annotation SummarizationSetBy = Automatic
+
+	column production_line
+		dataType: int64
+		formatString: 0
+		lineageTag: 02b7a1d8-e49c-4e9f-8688-13bd0b35833c
+		summarizeBy: none
+		sourceColumn: production_line
+
+		annotation SummarizationSetBy = Automatic
+
+	column production_type
+		dataType: int64
+		formatString: 0
+		lineageTag: 537bc543-fb5a-4b10-a5fe-c47e264bf30c
+		summarizeBy: sum
+		sourceColumn: production_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column status
+		dataType: int64
+		formatString: 0
+		lineageTag: 38e3a43f-4c91-4997-984e-e7314de7d742
+		summarizeBy: sum
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column batch_cycle
+		dataType: int64
+		formatString: 0
+		lineageTag: 9b7361e9-511a-490d-af2b-a6097cfe645e
+		summarizeBy: sum
+		sourceColumn: batch_cycle
+
+		annotation SummarizationSetBy = Automatic
+
+	column planned_time
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d611bc68-5de5-4d6b-ab94-550578bcc589
+		summarizeBy: none
+		sourceColumn: planned_time
+
+		annotation SummarizationSetBy = Automatic
+
+	column planned_datetime
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 83feff3b-3fc0-4a19-8518-11e446459308
+		summarizeBy: none
+		sourceColumn: planned_datetime
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: b20f3dd7-f930-4c35-a42d-724aac9d3c1b
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 0da68749-90aa-416f-b7ad-c6581260292a
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: bf51c2a4-4def-47e8-9b10-890a4d1184f3
+		summarizeBy: none
+		sourceColumn: deleted
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 669b5fd7-6ce7-4d08-ad03-f7888e0d30ad
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date fin touraille' = ```
+			
+			VAR ValeurNumerique = 
+			    CALCULATE(
+			        MAX(fact_batch_measures[value])
+			    )
+			RETURN
+			    DATE(1899, 12, 30) + ValeurNumerique
+			```
+		formatString: Long Date
+		lineageTag: 564eb609-77e6-4c8a-ab33-289ebc8f7e40
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column max_end_date_kiln_unload
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ef0b8046-3f79-4498-b1ef-7547cc43e943
+		summarizeBy: none
+		sourceColumn: max_end_date_kiln_unload
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column specification_name
+		dataType: string
+		lineageTag: 6b01ac1f-5d08-4aad-9fc2-4ee330a235ca
+		summarizeBy: none
+		sourceColumn: specification_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column variety_code
+		dataType: string
+		lineageTag: 12a3e301-4cf8-494b-a352-c55c15bff20e
+		summarizeBy: none
+		sourceColumn: variety_code
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_batch = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, QueryTags=null, EnableAutomaticProxyDiscovery=null, Implementation="2.0", MetricViewBiCompatibilityMode=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    energy_Schema = mal_maite_bi_prd_Database{[Name="energy",Kind="Schema"]}[Data],
+				    dim_batch_Table = energy_Schema{[Name="dim_batch",Kind="Table"]}[Data],
+				    #"Lignes filtrées" = Table.SelectRows(dim_batch_Table, each ([status] = 3) and ([deleted] = false))
+				in
+				    #"Lignes filtrées"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+

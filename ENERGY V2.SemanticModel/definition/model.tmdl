@@ -1,0 +1,28 @@
+model Model
+	culture: fr-FR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: fr-FR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["dim_batch","dim_calendar","dim_parameter","dim_site","fact_batch_measures","dim_report_parameter_mapping"]
+
+annotation __TEdtr = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table dim_batch
+ref table dim_calendar
+ref table dim_parameter
+ref table dim_site
+ref table fact_batch_measures
+ref table dim_report_parameter_mapping
+
+ref cultureInfo fr-FR
+ref cultureInfo en-US
+ref cultureInfo ro-RO
+ref cultureInfo cs-CZ
+

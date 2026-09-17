@@ -1,0 +1,151 @@
+table dim_parameter
+	lineageTag: d89941a9-5dae-4252-be59-8e4d11327765
+
+	column parameter_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 6b0c973e-55f5-41d5-b39f-cf703a4c06c6
+		summarizeBy: none
+		sourceColumn: parameter_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column code
+		dataType: string
+		lineageTag: deb76fee-027e-4ae1-ad11-206762f19570
+		summarizeBy: none
+		sourceColumn: code
+
+		annotation SummarizationSetBy = Automatic
+
+	column description
+		dataType: string
+		lineageTag: b8f5bb49-9e23-4cf7-9b2a-de30864d4fe2
+		summarizeBy: none
+		sourceColumn: description
+
+		annotation SummarizationSetBy = Automatic
+
+	column unit
+		dataType: int64
+		formatString: 0
+		lineageTag: 6c34c1a5-2efd-4c0b-9e46-6d966eef4c4f
+		summarizeBy: sum
+		sourceColumn: unit
+
+		annotation SummarizationSetBy = Automatic
+
+	column phase
+		dataType: int64
+		formatString: 0
+		lineageTag: 40f9b4ee-dc8b-48e8-ba03-06c95f2830a0
+		summarizeBy: sum
+		sourceColumn: phase
+
+		annotation SummarizationSetBy = Automatic
+
+	column activity
+		dataType: int64
+		formatString: 0
+		lineageTag: 724961c9-3809-45fc-b016-21f688193b2d
+		summarizeBy: sum
+		sourceColumn: activity
+
+		annotation SummarizationSetBy = Automatic
+
+	column task
+		dataType: int64
+		formatString: 0
+		lineageTag: 5a953100-518e-4030-817b-ee02037502f8
+		summarizeBy: sum
+		sourceColumn: task
+
+		annotation SummarizationSetBy = Automatic
+
+	column category
+		dataType: int64
+		formatString: 0
+		lineageTag: cb68a70b-c9e9-44a5-bfd2-dbc3cfc94623
+		summarizeBy: sum
+		sourceColumn: category
+
+		annotation SummarizationSetBy = Automatic
+
+	column sequence
+		dataType: int64
+		formatString: 0
+		lineageTag: c432b707-9df1-446f-92fa-d1d227d63aaa
+		summarizeBy: sum
+		sourceColumn: sequence
+
+		annotation SummarizationSetBy = Automatic
+
+	column manual_entry
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 4ae3a53a-1519-456b-a513-be52d34ef8a7
+		summarizeBy: none
+		sourceColumn: manual_entry
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_total
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: f9dd3f92-9af3-4a62-8c80-0a8b1cc1d82f
+		summarizeBy: none
+		sourceColumn: is_total
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 885bf80a-4fef-4b28-92d2-c40edc7c0361
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e17338fd-10de-4aec-9d84-025953ebe1c6
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: b6bc886e-b065-47ec-811f-f18d1f666676
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: ded8f263-2d78-4917-80f2-1b4b76a13acf
+		summarizeBy: none
+		sourceColumn: deleted
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_parameter = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, QueryTags=null, EnableAutomaticProxyDiscovery=null, Implementation="2.0", MetricViewBiCompatibilityMode=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    energy_Schema = mal_maite_bi_prd_Database{[Name="energy",Kind="Schema"]}[Data],
+				    dim_parameter_Table = energy_Schema{[Name="dim_parameter",Kind="Table"]}[Data]
+				in
+				    dim_parameter_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+

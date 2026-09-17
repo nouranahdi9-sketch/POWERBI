@@ -1,0 +1,111 @@
+table fact_batch_measures
+	lineageTag: 173e7da2-38c2-4451-9b4e-36859daff8ed
+
+	measure 'Test Moyenne Filtree' =
+			
+			CALCULATE(AVERAGE(fact_batch_measures[value]), fact_batch_measures[value] <> 0)
+		lineageTag: 41f17cbf-5a69-45fa-a0d1-b04e11efb8c4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Test Moyenne Normale' =
+			
+			CALCULATE(AVERAGE(fact_batch_measures[value]))
+		lineageTag: c118c378-4828-4940-9757-4e416e7b79e3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column measure_id
+		dataType: string
+		lineageTag: 393206c7-79c7-4243-bd91-55b5dfa42d3e
+		summarizeBy: none
+		sourceColumn: measure_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column batch_id
+		dataType: string
+		lineageTag: 7d479334-ea51-4c87-8cfc-340d7defa0ff
+		summarizeBy: none
+		sourceColumn: batch_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column parameter_id
+		dataType: int64
+		formatString: 0
+		lineageTag: d0919422-c997-4a5c-8923-51f22b9a8973
+		summarizeBy: none
+		sourceColumn: parameter_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column event_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 1e95645a-cc31-48b9-a062-0666a8d412ed
+		summarizeBy: none
+		sourceColumn: event_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column value
+		dataType: double
+		lineageTag: a9b55cfb-4a9e-41af-9395-f89ba1cc4d8f
+		summarizeBy: sum
+		sourceColumn: value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column production_cell
+		dataType: int64
+		formatString: 0
+		lineageTag: ac8c81ec-b62e-4fef-a107-38fe08f9913a
+		summarizeBy: sum
+		sourceColumn: production_cell
+
+		annotation SummarizationSetBy = Automatic
+
+	column source
+		dataType: string
+		lineageTag: d920b85d-69d1-4507-ac7e-c349fe1b0ae8
+		summarizeBy: none
+		sourceColumn: source
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 9a63e132-f029-4125-b56c-5a208d0512fe
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: ee85a8b1-7fde-46a6-af1a-59da2b3e0fa8
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_batch_measures = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, QueryTags=null, EnableAutomaticProxyDiscovery=null, Implementation="2.0", MetricViewBiCompatibilityMode=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    energy_Schema = mal_maite_bi_prd_Database{[Name="energy",Kind="Schema"]}[Data],
+				    fact_batch_measures_Table = energy_Schema{[Name="fact_batch_measures",Kind="Table"]}[Data]
+				in
+				    fact_batch_measures_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+
