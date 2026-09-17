@@ -141,9 +141,10 @@ table dim_parameter
 				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, QueryTags=null, EnableAutomaticProxyDiscovery=null, Implementation="2.0", MetricViewBiCompatibilityMode=null]),
 				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
 				    energy_Schema = mal_maite_bi_prd_Database{[Name="energy",Kind="Schema"]}[Data],
-				    dim_parameter_Table = energy_Schema{[Name="dim_parameter",Kind="Table"]}[Data]
+				    dim_parameter_Table = energy_Schema{[Name="dim_parameter",Kind="Table"]}[Data],
+				    #"Lignes filtrées" = Table.SelectRows(dim_parameter_Table, each [deleted] = false)
 				in
-				    dim_parameter_Table
+				    #"Lignes filtrées"
 
 	annotation PBI_NavigationStepName = Navigation
 

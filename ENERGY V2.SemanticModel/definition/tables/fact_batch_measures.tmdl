@@ -101,9 +101,10 @@ table fact_batch_measures
 				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, QueryTags=null, EnableAutomaticProxyDiscovery=null, Implementation="2.0", MetricViewBiCompatibilityMode=null]),
 				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
 				    energy_Schema = mal_maite_bi_prd_Database{[Name="energy",Kind="Schema"]}[Data],
-				    fact_batch_measures_Table = energy_Schema{[Name="fact_batch_measures",Kind="Table"]}[Data]
+				    fact_batch_measures_Table = energy_Schema{[Name="fact_batch_measures",Kind="Table"]}[Data],
+				    #"Lignes filtrées" = Table.SelectRows(fact_batch_measures_Table, each [deleted] = false)
 				in
-				    fact_batch_measures_Table
+				    #"Lignes filtrées"
 
 	annotation PBI_NavigationStepName = Navigation
 
