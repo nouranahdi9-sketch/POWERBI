@@ -1,0 +1,87 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: fr-FR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["fact_features_min_max","dim_features_constraint","parameters_process_activities","parameters_process_activities_rouen1","parameters_process_activities_polisy1","parameters_process_activities_nogent2","parameters_process_activities_prouvy1","parameters_process_activities_strasbourg2","parameters_process_activities_nogent1","parameters_process_activities_bolelemi1","fact_ascendance_localization","dim_batches"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table fact_features_min_max
+ref table DateTableTemplate_a0a5822b-af02-45c1-b262-c091bfefe309
+ref table LocalDateTable_ea23c270-92b0-474d-bf33-ae87af70cc50
+ref table LocalDateTable_726d98f6-a3b2-462e-9828-b806d3414323
+ref table LocalDateTable_71e74a2e-1171-4650-ade3-421b5ad8bb68
+ref table dim_features_constraint
+ref table LocalDateTable_f5c5cb57-f1cc-4003-b939-9dba879a76b1
+ref table LocalDateTable_4e8a68a3-69b3-41a1-9317-98148e07163a
+ref table LocalDateTable_08d96a65-f271-435e-9304-f87488b31f84
+ref table parameters_process_activities
+ref table LocalDateTable_92991987-c467-45ed-9245-a10b5411899c
+ref table LocalDateTable_9cbf07e2-2ec7-424e-aac0-6d1bbbb9688f
+ref table LocalDateTable_eeaead1b-c1b4-414a-8f07-28710abca4d2
+ref table LocalDateTable_2505edec-7621-4123-b8f2-c620b34905cd
+ref table LocalDateTable_2ac09a3f-a567-43f1-8bae-7948076d8512
+ref table parameters_process_activities_rouen1
+ref table LocalDateTable_320ebc31-f59d-448c-bdd8-d873f0ba15ee
+ref table LocalDateTable_60d208c0-1169-45c7-b662-c1c563245264
+ref table LocalDateTable_2f309653-f31a-40a3-88d4-1314de7df2de
+ref table LocalDateTable_23345ba9-560f-4878-8681-1e4044abc455
+ref table LocalDateTable_136b5cdb-5d6b-45f5-897c-ec3a9ff405ba
+ref table parameters_process_activities_polisy1
+ref table LocalDateTable_f9b0e8c4-0eda-4719-afab-5861134b052a
+ref table LocalDateTable_11443e80-e5c3-40dc-b76b-cd3df77b2850
+ref table LocalDateTable_0493ff30-3b81-4cf3-8ddc-59889ae15167
+ref table LocalDateTable_dfb3695a-5dc7-492b-a9c5-bbdbc7986229
+ref table LocalDateTable_5aa3afc2-876c-4253-b969-a54f77ccfe46
+ref table parameters_process_activities_nogent2
+ref table LocalDateTable_4f29dbd9-378f-4e90-a589-1966421b1fc8
+ref table LocalDateTable_11fc05ba-8929-426a-b0e1-2e864da8d961
+ref table LocalDateTable_146e1c4b-1f57-4c67-b299-64cbe43d5c3e
+ref table LocalDateTable_256fae04-3df0-4945-b42d-81d1d02cfb6e
+ref table LocalDateTable_f30edde2-bd2b-43c8-a6cf-085697d7e7c3
+ref table parameters_process_activities_prouvy1
+ref table LocalDateTable_d5367b80-d9f8-4db2-9995-4b9ed33b11a7
+ref table LocalDateTable_e5eab041-c521-4b96-85d9-bf4411e2f2e3
+ref table LocalDateTable_299383ec-ca08-4da9-b894-b77e396e0610
+ref table LocalDateTable_8a968878-c721-4ece-b97b-e2f7238499e3
+ref table LocalDateTable_b818b1f2-c151-4e60-b594-4f81e1310472
+ref table parameters_process_activities_strasbourg2
+ref table LocalDateTable_d60364e6-7b7b-4da2-ab5b-623d84e4c07b
+ref table LocalDateTable_6ce71439-4ed9-47f8-bb23-7d50ade90d55
+ref table LocalDateTable_863228e1-d7df-4092-a63e-9238682568a8
+ref table LocalDateTable_f907458f-edf7-4ad0-bc62-84edca959c4d
+ref table LocalDateTable_25b894d2-0602-4b55-b776-3146e20edb71
+ref table parameters_process_activities_nogent1
+ref table LocalDateTable_fd5bf7b4-d66d-404a-a42e-aac328544be5
+ref table LocalDateTable_55508f2a-633e-40d0-ae51-a69ebf2c2079
+ref table LocalDateTable_2a53d1d4-117f-4de2-b54d-f5967fe0b012
+ref table LocalDateTable_2d3d68e2-d16f-489d-acb5-0a50f09084be
+ref table LocalDateTable_819bd803-9418-45b9-a0af-8c54b2eb3005
+ref table fact_ascendance_localization
+ref table LocalDateTable_00e3a838-88df-466d-b7aa-5c9fe432d0a3
+ref table LocalDateTable_02f4ba53-b1f8-4472-9fcf-fa966f9900a7
+ref table LocalDateTable_46b8c51c-2eab-4301-acee-d2206c49250c
+ref table LocalDateTable_a37f7c04-748d-4b18-8647-e62e14341539
+ref table LocalDateTable_5eca4b36-9360-4d7f-b9cd-95158656a112
+ref table LocalDateTable_fd324e93-4968-4297-aa87-35572c858c8d
+ref table dim_batches
+ref table LocalDateTable_79f11659-ab94-467a-9cc8-e31c1784272c
+ref table LocalDateTable_30856acc-e44a-479f-a379-3af45cebf7a4
+ref table LocalDateTable_82b25c6d-8153-4183-9b46-5f554ffb6c1d
+ref table LocalDateTable_43e36dd3-d8bd-481e-8599-911d5d6cebf1
+ref table LocalDateTable_dba35110-27f2-4e47-83c4-03ab50ba37fd
+ref table parameters_process_activities_bolelemi1
+ref table LocalDateTable_6e96b899-e54f-47dc-9bcb-8f3df21417e0
+ref table LocalDateTable_015b7c40-cbc1-437a-ba29-893d6180580f
+ref table LocalDateTable_8e266f02-163f-4cfe-b11b-40e68fd4959a
+ref table LocalDateTable_f0536409-9e63-4b09-b7e4-ba354d8981b0
+ref table LocalDateTable_b333918a-3bad-4b79-92a1-fb3db7d64b24
+
+ref cultureInfo en-US
+

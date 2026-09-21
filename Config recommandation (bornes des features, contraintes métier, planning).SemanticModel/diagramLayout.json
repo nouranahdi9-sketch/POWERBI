@@ -1,0 +1,165 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 729.33331298828125,
+        "y": 36
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 1090.3799032349684,
+            "y": 530.4431685169917
+          },
+          "nodeIndex": "dim_features_constraint",
+          "nodeLineageTag": "dcd2a76c-61a1-43ac-93d1-1cdfa6373205",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1374.3799032349684,
+            "y": 530.4431685169917
+          },
+          "nodeIndex": "fact_features_min_max",
+          "nodeLineageTag": "38739b29-410a-4e95-bcf0-b2073f9e5d85",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 612.473956327415,
+            "y": 303.64707833842465
+          },
+          "nodeIndex": "parameters_process_activities",
+          "nodeLineageTag": "97b76f15-4928-4d6b-9707-c2d5783343b4",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 885.37990323496831,
+            "y": 0
+          },
+          "nodeIndex": "parameters_process_activities_nogent1",
+          "nodeLineageTag": "147ad7bb-1ad0-4142-9b29-e6b6e48f6229",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 452.40319155837693,
+            "y": 1010.8863370339836
+          },
+          "nodeIndex": "parameters_process_activities_nogent2",
+          "nodeLineageTag": "80690c98-edae-42c7-8dfc-ab85ceda516c",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 50,
+            "y": 657.24161913027945
+          },
+          "nodeIndex": "parameters_process_activities_polisy1",
+          "nodeLineageTag": "f4520301-7998-43ea-b1dc-f37c23cb0f0a",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 739.41154917239226,
+            "y": 741.163519335071
+          },
+          "nodeIndex": "parameters_process_activities_prouvy1",
+          "nodeLineageTag": "55aa16da-bb46-4f52-b06b-c2498ca446d3",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 142.16762118387942,
+            "y": 303.50019584139733
+          },
+          "nodeIndex": "parameters_process_activities_rouen1",
+          "nodeLineageTag": "3ca849c5-86fe-44e1-95fc-65fcbbac03af",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 336.76046547044081,
+            "y": 657.20316403500749
+          },
+          "nodeIndex": "parameters_process_activities_strasbourg2",
+          "nodeLineageTag": "d2538cf3-5b1b-4705-bdb3-45a724d28258",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1647.3799032349684,
+            "y": 525.44316851699182
+          },
+          "nodeIndex": "fact_ascendance_localization",
+          "nodeLineageTag": "3df5d83a-04c6-436c-b40c-b8b671222855",
+          "size": {
+            "height": 570,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1574.3799032349684,
+            "y": 21.443168516991818
+          },
+          "nodeIndex": "dim_batches",
+          "nodeLineageTag": "062b99dd-f51b-481c-913d-8c0500a0b10c",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Toutes les tables",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Toutes les tables",
+  "defaultDiagram": "Toutes les tables"
+}

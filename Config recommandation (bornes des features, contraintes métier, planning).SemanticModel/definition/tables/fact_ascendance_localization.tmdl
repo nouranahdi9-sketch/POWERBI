@@ -1,0 +1,215 @@
+table fact_ascendance_localization
+	lineageTag: 3df5d83a-04c6-436c-b40c-b8b671222855
+
+	column batch_id
+		dataType: string
+		lineageTag: dceb45b9-1920-410d-b22d-f1611fe433dd
+		summarizeBy: none
+		sourceColumn: batch_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column production_line
+		dataType: string
+		lineageTag: 38040399-853f-42ca-a231-fc8d4a4b5c9a
+		summarizeBy: none
+		sourceColumn: production_line
+
+		annotation SummarizationSetBy = Automatic
+
+	column prd_workshop
+		dataType: string
+		lineageTag: 7c73c3d0-27e4-4a6a-86ef-6048aab69a7a
+		summarizeBy: none
+		sourceColumn: prd_workshop
+
+		annotation SummarizationSetBy = Automatic
+
+	column prd_cell
+		dataType: int64
+		formatString: 0
+		lineageTag: 87ba12fb-3edb-43f7-bac7-2b4559250989
+		summarizeBy: sum
+		sourceColumn: prd_cell
+
+		annotation SummarizationSetBy = Automatic
+
+	column measure_calculation_datetime
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 6b2c5b35-a37f-425c-a016-554feac7043c
+		summarizeBy: none
+		sourceColumn: measure_calculation_datetime
+
+		variation Variation
+			isDefault
+			relationship: 611986ef-86d1-48ef-b83c-a6a27a4e54d5
+			defaultHierarchy: LocalDateTable_00e3a838-88df-466d-b7aa-5c9fe432d0a3.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column measure_name
+		dataType: string
+		lineageTag: f1ebc3ca-13f5-4bcc-b82d-ce8dc3fef679
+		summarizeBy: none
+		sourceColumn: measure_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column measure_value
+		dataType: double
+		lineageTag: cad8f86a-2a0b-4d1b-8ec6-389e944c8a3c
+		summarizeBy: sum
+		sourceColumn: measure_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column tagname
+		dataType: string
+		lineageTag: 00e9615e-a8ee-408e-b88e-073165213ce8
+		summarizeBy: none
+		sourceColumn: tagname
+
+		annotation SummarizationSetBy = Automatic
+
+	column calculation_interval_after
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 97cd5eb5-eaaa-43de-b66a-1d63d07edaf7
+		summarizeBy: none
+		sourceColumn: calculation_interval_after
+
+		variation Variation
+			isDefault
+			relationship: 6a43da68-c66d-4868-b221-29ff0c76ddec
+			defaultHierarchy: LocalDateTable_02f4ba53-b1f8-4472-9fcf-fa966f9900a7.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column localizations_used
+		dataType: string
+		lineageTag: 02a46ff5-fee1-490a-8c7a-cbb5e646a79d
+		summarizeBy: none
+		sourceColumn: localizations_used
+
+		annotation SummarizationSetBy = Automatic
+
+	column mean_occurrences
+		dataType: double
+		lineageTag: 604f9b9f-53a2-402e-be4b-f75fe5805449
+		summarizeBy: sum
+		sourceColumn: mean_occurrences
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column map_hour_occurrences
+		dataType: string
+		lineageTag: c98d49c4-64f6-4651-89bd-40a9320d757b
+		summarizeBy: none
+		sourceColumn: map_hour_occurrences
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_missing_occurrences
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 57a018e9-20db-42b6-becc-d3a182efa487
+		summarizeBy: none
+		sourceColumn: is_missing_occurrences
+
+		annotation SummarizationSetBy = Automatic
+
+	column target_localization
+		dataType: string
+		lineageTag: bfd1cf9a-24be-4bd1-a3e4-a58cc4150af0
+		summarizeBy: none
+		sourceColumn: target_localization
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_late
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: fac59da6-f985-4c52-849c-82784a3d02cd
+		summarizeBy: none
+		sourceColumn: is_late
+
+		annotation SummarizationSetBy = Automatic
+
+	column calculation_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 32a3cc68-7d3b-4af6-8cf8-c8fb494f6b4a
+		summarizeBy: none
+		sourceColumn: calculation_date
+
+		variation Variation
+			isDefault
+			relationship: 73814f86-70db-451f-971f-407331f446bb
+			defaultHierarchy: LocalDateTable_46b8c51c-2eab-4301-acee-d2206c49250c.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 4e4ddc5d-b268-439f-b890-009ffa8802de
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: efaa5586-d2a5-4dca-9e81-f67850c08d07
+			defaultHierarchy: LocalDateTable_a37f7c04-748d-4b18-8647-e62e14341539.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a585ee06-5a14-4ce9-92eb-2033d0fcf591
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: ceadfdfa-5970-470a-a572-4eb837bc79e4
+			defaultHierarchy: LocalDateTable_5eca4b36-9360-4d7f-b9cd-95158656a112.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 12d11cc3-d24d-4200-a900-7f0b39f9fde4
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: ff20f861-9fe7-4f55-9945-a897fe393aa5
+			defaultHierarchy: LocalDateTable_fd324e93-4968-4297-aa87-35572c858c8d.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_ascendance_localization = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    recommendations_monitoring_Schema = mal_maite_bi_prd_Database{[Name="recommendations_monitoring",Kind="Schema"]}[Data],
+				    fact_ascendance_localization_Table = recommendations_monitoring_Schema{[Name="fact_ascendance_localization",Kind="Table"]}[Data]
+				in
+				    fact_ascendance_localization_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

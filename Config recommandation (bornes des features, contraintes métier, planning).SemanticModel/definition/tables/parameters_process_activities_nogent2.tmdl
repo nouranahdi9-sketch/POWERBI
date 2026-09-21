@@ -1,0 +1,221 @@
+table parameters_process_activities_nogent2
+	lineageTag: 80690c98-edae-42c7-8dfc-ab85ceda516c
+
+	column production_line
+		dataType: string
+		lineageTag: 60ca3acf-233f-42ac-a9b6-b26281ad815c
+		summarizeBy: none
+		sourceColumn: production_line
+
+		annotation SummarizationSetBy = Automatic
+
+	column sequence
+		dataType: int64
+		formatString: 0
+		lineageTag: 1f72d132-4c3d-4b97-9e8a-ef2df82e762a
+		summarizeBy: sum
+		sourceColumn: sequence
+
+		annotation SummarizationSetBy = Automatic
+
+	column activity
+		dataType: string
+		lineageTag: 0f6cb733-588f-4da2-a31c-43c09b544fe4
+		summarizeBy: none
+		sourceColumn: activity
+
+		annotation SummarizationSetBy = Automatic
+
+	column activity_code
+		dataType: string
+		lineageTag: 7ee27f94-de71-4887-be46-69d98130b75f
+		summarizeBy: none
+		sourceColumn: activity_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column phase_code
+		dataType: string
+		lineageTag: 670748b0-65cd-401a-a89b-5fbead786e1c
+		summarizeBy: none
+		sourceColumn: phase_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_target_localization
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: ee262de2-1f9f-444e-98bb-800a02118ec9
+		summarizeBy: none
+		sourceColumn: is_target_localization
+
+		annotation SummarizationSetBy = Automatic
+
+	column technical_duration
+		dataType: int64
+		formatString: 0
+		lineageTag: 18330819-fc28-4aca-9e3b-dd8765531c87
+		summarizeBy: sum
+		sourceColumn: technical_duration
+
+		annotation SummarizationSetBy = Automatic
+
+	column gap_duration
+		dataType: int64
+		formatString: 0
+		lineageTag: 518eb515-0d87-4ee6-86d9-31e43fedbce1
+		summarizeBy: sum
+		sourceColumn: gap_duration
+
+		annotation SummarizationSetBy = Automatic
+
+	column interval_before
+		dataType: int64
+		formatString: 0
+		lineageTag: ce09e667-1e55-48c7-b59f-7a740f4e8c93
+		summarizeBy: sum
+		sourceColumn: interval_before
+
+		annotation SummarizationSetBy = Automatic
+
+	column interval_after
+		dataType: int64
+		formatString: 0
+		lineageTag: 4755da52-0a8e-49ab-ba75-c8032b83e1d8
+		summarizeBy: sum
+		sourceColumn: interval_after
+
+		annotation SummarizationSetBy = Automatic
+
+	column valid_from
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: db4d8e97-d164-494b-b47e-61ac01666247
+		summarizeBy: none
+		sourceColumn: valid_from
+
+		variation Variation
+			isDefault
+			relationship: 50530bad-def3-4fec-829a-1d5bef430e73
+			defaultHierarchy: LocalDateTable_4f29dbd9-378f-4e90-a589-1966421b1fc8.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column valid_to
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 2d7a1c25-88f9-4965-8826-449de6df0ab2
+		summarizeBy: none
+		sourceColumn: valid_to
+
+		variation Variation
+			isDefault
+			relationship: 6810c630-5181-4215-9056-9de795eaffbc
+			defaultHierarchy: LocalDateTable_11fc05ba-8929-426a-b0e1-2e864da8d961.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 5781c6ec-9182-41ae-969f-b2d05f11e476
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: bcbd2724-a891-499b-ad9c-2fe16af65aa2
+			defaultHierarchy: LocalDateTable_146e1c4b-1f57-4c67-b299-64cbe43d5c3e.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 0174d58e-b5cf-4628-8177-0561407009a9
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: dcd5c348-8cfa-4f31-a3ff-18c9a29d2965
+			defaultHierarchy: LocalDateTable_256fae04-3df0-4945-b42d-81d1d02cfb6e.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 060fe929-eb90-4089-8238-222d274fa4a5
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 35edf5ec-5c07-48da-9dc1-8a77bd287446
+			defaultHierarchy: LocalDateTable_f30edde2-bd2b-43c8-a6cf-085697d7e7c3.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 41ff9527-3084-4acb-9e17-764c5f09a6ed
+		summarizeBy: none
+		sourceColumn: deleted
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_principal_activity
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 4562010c-a7b9-4665-9a9b-2534d31358cb
+		summarizeBy: none
+		sourceColumn: is_principal_activity
+
+		annotation SummarizationSetBy = Automatic
+
+	column activity_data_prerequisite
+		dataType: string
+		lineageTag: 55e0f86c-b369-4981-850d-8cdba8e1a6c5
+		summarizeBy: none
+		sourceColumn: activity_data_prerequisite
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_prediction_by_phase
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 6072cc11-15cb-458f-8881-8ba64c5f5842
+		summarizeBy: none
+		sourceColumn: is_prediction_by_phase
+
+		annotation SummarizationSetBy = Automatic
+
+	column activity_manual_data_prerequisite
+		dataType: string
+		lineageTag: c38b0f65-3845-4cc0-b78a-9ae8efe768f9
+		summarizeBy: none
+		sourceColumn: activity_manual_data_prerequisite
+
+		annotation SummarizationSetBy = Automatic
+
+	partition parameters_process_activities_nogent2 = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_prd_Database = Source{[Name="mal_maite_prd",Kind="Database"]}[Data],
+				    nogent2_Schema = mal_maite_prd_Database{[Name="nogent2",Kind="Schema"]}[Data],
+				    parameters_process_activities_Table = nogent2_Schema{[Name="parameters_process_activities",Kind="Table"]}[Data]
+				in
+				    parameters_process_activities_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
