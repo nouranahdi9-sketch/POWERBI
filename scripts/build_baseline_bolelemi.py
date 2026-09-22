@@ -18,7 +18,7 @@ import pandas as pd
 
 RACINE = Path(__file__).resolve().parent.parent
 SOURCE = RACINE / "BOL_Baseline_04082026.xlsx"
-SORTIE = RACINE / "Baseline BOLELEMI.xlsx"
+SORTIE = RACINE / "Baseline BOLELEMI1.xlsx"
 
 NS = "{http://schemas.openxmlformats.org/spreadsheetml/2006/main}"
 
