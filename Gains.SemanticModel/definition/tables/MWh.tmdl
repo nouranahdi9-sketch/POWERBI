@@ -1,0 +1,210 @@
+table MWh
+	lineageTag: b03b5602-e01f-4cca-be7d-6e27e7e99ed4
+
+	column date_fin_production
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 1cfdac05-d0a0-4761-8892-698c72a53dcd
+		summarizeBy: none
+		sourceColumn: date_fin_production
+
+		variation Variation
+			isDefault
+			relationship: c1576584-b98a-492a-8f2f-c99cf2adb54e
+			defaultHierarchy: LocalDateTable_260be005-b7ff-457f-8b7a-a9fbc12a7e50.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column cahier_des_charges
+		dataType: string
+		lineageTag: cf2dbc8c-a01c-45ba-b17f-3ff01a5287c3
+		summarizeBy: none
+		sourceColumn: cahier_des_charges
+
+		annotation SummarizationSetBy = Automatic
+
+	column type_de_production
+		dataType: string
+		lineageTag: aaa49813-9c33-4295-99b7-128a5e22f57a
+		summarizeBy: none
+		sourceColumn: type_de_production
+
+		annotation SummarizationSetBy = Automatic
+
+	column reel_thermique_MWh
+		dataType: double
+		lineageTag: faaa6ee4-1f24-4b45-8075-305fcd997dbb
+		summarizeBy: sum
+		sourceColumn: reel_thermique_MWh
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column baseline_thermique_MWh
+		dataType: double
+		lineageTag: c0a8fb92-e8f9-4335-9ab1-ae9ab775961d
+		summarizeBy: sum
+		sourceColumn: baseline_thermique_MWh
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ecart_thermique_MWh
+		dataType: double
+		lineageTag: 042714ba-2266-4c22-96c8-913282c20143
+		summarizeBy: sum
+		sourceColumn: ecart_thermique_MWh
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column reel_elec_MWh
+		dataType: double
+		lineageTag: 4eb183f0-a841-426f-87d1-f9810ed9beb0
+		summarizeBy: sum
+		sourceColumn: reel_elec_MWh
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column baseline_elec_MWh
+		dataType: double
+		lineageTag: 363557f3-ef6f-4671-85d7-572812367609
+		summarizeBy: sum
+		sourceColumn: baseline_elec_MWh
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ecart_elec_MWh
+		dataType: double
+		lineageTag: b124a3f9-7457-48be-a503-7a04a96fbbcf
+		summarizeBy: sum
+		sourceColumn: ecart_elec_MWh
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column batch
+		dataType: string
+		lineageTag: 7819fb1e-2fcb-4452-be8a-97a573291fdc
+		summarizeBy: none
+		sourceColumn: batch
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_site_production
+		dataType: int64
+		formatString: 0
+		lineageTag: 1345a100-6415-435b-a930-bf7c935c50ce
+		summarizeBy: sum
+		sourceColumn: id_site_production
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_production
+		dataType: string
+		lineageTag: 7c9eb84d-28fd-4a67-8c6c-f48781ce071b
+		summarizeBy: none
+		sourceColumn: site_production
+
+		annotation SummarizationSetBy = Automatic
+
+	column goods_specy
+		dataType: string
+		lineageTag: 5cff391c-5ee3-40b4-a3e7-e191fcfb1cda
+		summarizeBy: none
+		sourceColumn: goods_specy
+
+		annotation SummarizationSetBy = Automatic
+
+	column goods_variety
+		dataType: string
+		lineageTag: f56ecfd0-e244-4edf-9f7c-ed5474e2422a
+		summarizeBy: none
+		sourceColumn: goods_variety
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_cahier_des_charges
+		dataType: int64
+		formatString: 0
+		lineageTag: 9364e0ae-9106-4425-ac16-0c03424f1bad
+		summarizeBy: sum
+		sourceColumn: id_cahier_des_charges
+
+		annotation SummarizationSetBy = Automatic
+
+	column reel_malt_humide
+		dataType: double
+		lineageTag: daefe8eb-0a6d-4cc7-9a1d-8bdfbeb6d8d2
+		summarizeBy: sum
+		sourceColumn: reel_malt_humide
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 36c7b3e3-8c13-48b8-bb67-f3398c7f0293
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: ae4806b7-7733-40ee-bb1b-9ba49031ef8f
+			defaultHierarchy: LocalDateTable_807a7792-9ac9-479c-9994-81198183cd62.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 17802966-cbc0-45c4-be16-c87765215b49
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: 142996ca-187b-4b24-91fb-c2e54f25237d
+			defaultHierarchy: LocalDateTable_45c5e8b8-c5be-4f1d-82b1-f6201a3203e3.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: bce915e8-2129-46a3-9c6e-5943571fe936
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 83022273-d69f-417c-a483-c3e175fc510b
+			defaultHierarchy: LocalDateTable_c67a630a-65c7-44cc-97f7-18b5231fc312.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition MWh = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    gains_Schema = mal_maite_bi_prd_Database{[Name="gains",Kind="Schema"]}[Data],
+				    fact_mwh_Table = gains_Schema{[Name="fact_mwh",Kind="Table"]}[Data]
+				in
+				    fact_mwh_Table
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

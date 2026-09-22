@@ -1,0 +1,28 @@
+table 'DIM DATE'
+	lineageTag: c8b3cbad-e102-40dc-8c03-e1bd927c48cb
+
+	column Date
+		formatString: Short Date
+		lineageTag: bf5687f0-dfb0-404c-8ce0-77ade2eea8de
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		variation Variation
+			isDefault
+			relationship: 5d3fc1b6-b01a-425f-98c8-e168c687d4a4
+			defaultHierarchy: LocalDateTable_d6f4d38f-07a6-4b03-b95c-6161b0306b8f.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM DATE' = calculated
+		mode: import
+		source =
+				
+				VAR MinDate = MIN(fact[date_fin_production])
+				VAR MaxDate = MAX(fact[date_fin_production])
+				RETURN
+				CALENDAR(MinDate, MaxDate)
+
+	annotation PBI_Id = bcdbeea9572244019393b3971f609425
+

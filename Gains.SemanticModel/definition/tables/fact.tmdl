@@ -1,0 +1,1247 @@
+table fact
+	lineageTag: eacac078-17ec-4d34-b0a0-04cf178b8677
+
+	measure Ecart_R2sec =
+			
+			AVERAGE('fact'[reel_r2_sec]) - AVERAGE('fact'[baseline_r2_sec])
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 28c22402-3e51-428e-87b2-0c3147d02ffe
+
+	measure 'Sous_total Malt_Sec' =
+			
+			SUM('fact'[baseline_malt_sec]) + SUM('fact'[malt_sec_supplementaire_via_perf_r2_sec])
+		lineageTag: 9578463f-b846-46ea-b1f7-bc8d05a78f6c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Ecart_orge_sec =
+			
+			SUM('fact'[reel_orge_sec]) - SUM('fact'[baseline_orge_sec])
+		lineageTag: fddf1683-0ba5-495f-9043-7f0f87954a24
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Sous_total Malt_sec_taille_batch' =
+			
+			SUM('fact'[malt_sec_supplementaire_via_taille_batch_equivalent_baseline]) + SUM('fact'[malt_sec_supplementaire_via_taille_batch_et_perf_r2_sec])
+		lineageTag: cc2699d4-bca2-465b-9b83-f0c7c16b7973
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Malt sec' =
+			
+			[Sous_total Malt_Sec] + [Sous_total Malt_sec_taille_batch]
+		lineageTag: bd8cf133-d49f-47af-a002-29fd7f61032f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Surplus Malt Sec / Baseline' =
+			
+			SUM('fact'[malt_sec_supplementaire_via_perf_r2_sec]) + SUM('fact'[malt_sec_supplementaire_via_taille_batch_et_perf_r2_sec])
+		lineageTag: 22555de7-44cc-4734-8b52-e73d8a266cbe
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '0 reco' =
+			
+			VAR DateActuelle = MAX('fact'[date_fin_production])
+			
+			RETURN
+			CALCULATE(
+			    SUM('fact'[total_malt_humide_supplementaire]),
+			    FILTER(
+			        ALLSELECTED('fact'),
+			        'fact'[date_fin_production] <= DateActuelle
+			            && 'fact'[reco_acceptee] = 0
+			    )
+			)
+		displayFolder: gain reco.
+		lineageTag: 174cc9f7-6bf9-4137-a76e-063f1071e9b9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '1 reco' =
+			
+			VAR DateActuelle = MAX('fact'[date_fin_production])
+			
+			RETURN
+			CALCULATE(
+			    SUM('fact'[total_malt_humide_supplementaire]),
+			    FILTER(
+			        ALLSELECTED('fact'),
+			        'fact'[date_fin_production] <= DateActuelle
+			            && 'fact'[reco_acceptee] = 1
+			    )
+			)
+		displayFolder: gain reco.
+		lineageTag: 89c208ae-c80b-44ae-92cb-e06b2c317f9d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '2 reco' =
+			
+			VAR DateActuelle = MAX('fact'[date_fin_production])
+			
+			RETURN
+			CALCULATE(
+			    SUM('fact'[total_malt_humide_supplementaire]),
+			    FILTER(
+			        ALLSELECTED('fact'),
+			        'fact'[date_fin_production] <= DateActuelle
+			            && 'fact'[reco_acceptee] = 2
+			    )
+			)
+		displayFolder: gain reco.
+		lineageTag: 71884258-b39e-4fb6-ae99-82dda9fda9af
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '3 reco' =
+			
+			VAR DateActuelle = MAX('fact'[date_fin_production])
+			
+			RETURN
+			CALCULATE(
+			    SUM('fact'[total_malt_humide_supplementaire]),
+			    FILTER(
+			        ALLSELECTED('fact'),
+			        'fact'[date_fin_production] <= DateActuelle
+			            && 'fact'[reco_acceptee] = 3
+			    )
+			)
+		displayFolder: gain reco.
+		lineageTag: 44237cfc-73ad-4069-bcd8-3a9c8bbcc2c0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '4 reco' =
+			
+			VAR DateActuelle = MAX('fact'[date_fin_production])
+			
+			RETURN
+			CALCULATE(
+			    SUM('fact'[total_malt_humide_supplementaire]),
+			    FILTER(
+			        ALLSELECTED('fact'),
+			        'fact'[date_fin_production] <= DateActuelle
+			            && 'fact'[reco_acceptee] = 4
+			    )
+			)
+		displayFolder: gain reco.
+		lineageTag: 6a175535-806d-4380-bb56-bc22156eb533
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '5 reco' =
+			
+			VAR DateActuelle = MAX('fact'[date_fin_production])
+			
+			RETURN
+			CALCULATE(
+			    SUM('fact'[total_malt_humide_supplementaire]),
+			    FILTER(
+			        ALLSELECTED('fact'),
+			        'fact'[date_fin_production] <= DateActuelle
+			            && 'fact'[reco_acceptee] = 5
+			    )
+			)
+		displayFolder: gain reco.
+		lineageTag: abc62185-fd5c-4876-a40f-2921c9a007c3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '6 reco' =
+			
+			VAR DateActuelle = MAX('fact'[date_fin_production])
+			
+			RETURN
+			CALCULATE(
+			    SUM('fact'[total_malt_humide_supplementaire]),
+			    FILTER(
+			        ALLSELECTED('fact'),
+			        'fact'[date_fin_production] <= DateActuelle
+			            && 'fact'[reco_acceptee] = 6
+			    )
+			)
+		displayFolder: gain reco.
+		lineageTag: 8340034a-6f93-475e-8f29-be1e801c0367
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '7 reco et +' =
+			
+			VAR DateActuelle = MAX('fact'[date_fin_production])
+			
+			RETURN
+			CALCULATE(
+			    SUM('fact'[total_malt_humide_supplementaire]),
+			    FILTER(
+			        ALLSELECTED('fact'),
+			        'fact'[date_fin_production] <= DateActuelle
+			            && 'fact'[reco_acceptee] > 6
+			    )
+			)
+		displayFolder: gain reco.
+		lineageTag: 76d1b27d-e8c0-4611-9684-1bc230a3fe4a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '0 reco avec IA' =
+			
+			VAR DateActuelle = MAX('fact'[date_fin_production])
+			
+			RETURN
+			CALCULATE(
+			    SUM('fact'[gain_avec_IA]),
+			    FILTER(
+			        ALLSELECTED('fact'),
+			        'fact'[date_fin_production] <= DateActuelle
+			            && 'fact'[reco_acceptee] = 0
+			    )
+			)
+		displayFolder: gain reco. avec IA
+		lineageTag: a1a161b5-6940-4625-98a3-864dbe2fc121
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '1 reco avec IA' =
+			
+			VAR DateActuelle = MAX('fact'[date_fin_production])
+			
+			RETURN
+			CALCULATE(
+			    SUM('fact'[gain_avec_IA]),
+			    FILTER(
+			        ALLSELECTED('fact'),
+			        'fact'[date_fin_production] <= DateActuelle
+			            && 'fact'[reco_acceptee] = 1
+			    )
+			)
+		displayFolder: gain reco. avec IA
+		lineageTag: 7c6b348e-51da-48ff-b650-5cac163507ef
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '2 reco avec IA' =
+			
+			VAR DateActuelle = MAX('fact'[date_fin_production])
+			
+			RETURN
+			CALCULATE(
+			    SUM('fact'[gain_avec_IA]),
+			    FILTER(
+			        ALLSELECTED('fact'),
+			        'fact'[date_fin_production] <= DateActuelle
+			            && 'fact'[reco_acceptee] = 2
+			    )
+			)
+		displayFolder: gain reco. avec IA
+		lineageTag: fa14d0cc-de63-4193-a3f0-f7cb5e4e866b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '3 reco avec IA' =
+			
+			VAR DateActuelle = MAX('fact'[date_fin_production])
+			
+			RETURN
+			CALCULATE(
+			    SUM('fact'[gain_avec_IA]),
+			    FILTER(
+			        ALLSELECTED('fact'),
+			        'fact'[date_fin_production] <= DateActuelle
+			            && 'fact'[reco_acceptee] = 3
+			    )
+			)
+		displayFolder: gain reco. avec IA
+		lineageTag: b07f967f-bb13-4db4-8f87-30f5c9320f67
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '4 reco avec IA' =
+			
+			VAR DateActuelle = MAX('fact'[date_fin_production])
+			
+			RETURN
+			CALCULATE(
+			    SUM('fact'[gain_avec_IA]),
+			    FILTER(
+			        ALLSELECTED('fact'),
+			        'fact'[date_fin_production] <= DateActuelle
+			            && 'fact'[reco_acceptee] = 4
+			    )
+			)
+		displayFolder: gain reco. avec IA
+		lineageTag: 696fe313-de4a-441f-aef5-69178db7e2a6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '5 reco avec IA' =
+			
+			VAR DateActuelle = MAX('fact'[date_fin_production])
+			
+			RETURN
+			CALCULATE(
+			    SUM('fact'[gain_avec_IA]),
+			    FILTER(
+			        ALLSELECTED('fact'),
+			        'fact'[date_fin_production] <= DateActuelle
+			            && 'fact'[reco_acceptee] = 5
+			    )
+			)
+		displayFolder: gain reco. avec IA
+		lineageTag: 28320505-c246-4a3b-b4f2-31dd10459650
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '6 reco avec IA' =
+			
+			VAR DateActuelle = MAX('fact'[date_fin_production])
+			
+			RETURN
+			CALCULATE(
+			    SUM('fact'[gain_avec_IA]),
+			    FILTER(
+			        ALLSELECTED('fact'),
+			        'fact'[date_fin_production] <= DateActuelle
+			            && 'fact'[reco_acceptee] = 6
+			    )
+			)
+		displayFolder: gain reco. avec IA
+		lineageTag: c21495f5-45d7-468a-9794-3b5dd38a8295
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '7 reco et + avec IA' =
+			
+			VAR DateActuelle = MAX('fact'[date_fin_production])
+			
+			RETURN
+			CALCULATE(
+			    SUM('fact'[gain_avec_IA]),
+			    FILTER(
+			        ALLSELECTED('fact'),
+			        'fact'[date_fin_production] <= DateActuelle
+			            && 'fact'[reco_acceptee] > 6
+			    )
+			)
+		displayFolder: gain reco. avec IA
+		lineageTag: 2028510e-caa3-4ccf-a685-c4a99e12492b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'gain cumulé R2/H - Malt sec' =
+			
+			VAR DateActuelle = MAX('fact'[date_fin_production])
+			
+			RETURN
+			CALCULATE(
+			    SUM('fact'[R2_H_malt_sec]),
+			    FILTER(
+			        ALLSELECTED('fact'),
+			        'fact'[date_fin_production] <= DateActuelle
+			    )
+			)
+		lineageTag: e3d05e6a-1045-40aa-99fc-2477845b0408
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'gain cumulé R2/H - Eau' =
+			
+			VAR DateActuelle = MAX('fact'[date_fin_production])
+			
+			RETURN
+			CALCULATE(
+			    SUM('fact'[R2_H_eau]),
+			    FILTER(
+			        ALLSELECTED('fact'),
+			        'fact'[date_fin_production] <= DateActuelle
+			    )
+			)
+		lineageTag: 9b32a55c-6292-430e-9df6-2e06415d5580
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'gain cumulé Taille batch - Malt sec' =
+			
+			VAR DateActuelle = MAX('fact'[date_fin_production])
+			
+			RETURN
+			CALCULATE(
+			    SUM('fact'[malt_sec_supplementaire_via_taille_batch_equivalent_baseline]),
+			    FILTER(
+			        ALLSELECTED('fact'),
+			        'fact'[date_fin_production] <= DateActuelle
+			    )
+			)
+		lineageTag: 33c674fc-5b1c-460d-9cf3-f598811c600d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'gain cumulé Taille batch - Eau' =
+			
+			VAR DateActuelle = MAX('fact'[date_fin_production])
+			
+			RETURN
+			CALCULATE(
+			    SUM('fact'[eau_supplementaire_via_taille_batch_equivalent_baseline]),
+			    FILTER(
+			        ALLSELECTED('fact'),
+			        'fact'[date_fin_production] <= DateActuelle
+			    )
+			)
+		lineageTag: 92412ee0-437c-4309-a084-c80522cf7722
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column batch
+		dataType: string
+		lineageTag: a607e42d-98ac-4d7c-8951-e896d824a815
+		summarizeBy: none
+		sourceColumn: batch
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_fin_production
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 38706d2b-b041-4d49-b3c3-41f31c86447e
+		summarizeBy: none
+		sourceColumn: date_fin_production
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column type_de_production
+		dataType: string
+		lineageTag: a78054e9-a0b5-46c5-ba51-fd96aa377cb3
+		summarizeBy: none
+		sourceColumn: type_de_production
+
+		annotation SummarizationSetBy = Automatic
+
+	column cahier_des_charges
+		dataType: string
+		lineageTag: fce1854c-f726-4eed-9500-1d99f9f8adbd
+		summarizeBy: none
+		sourceColumn: cahier_des_charges
+
+		annotation SummarizationSetBy = Automatic
+
+	column baseline_r2_humide
+		dataType: double
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: d43e7823-6a95-4c96-9636-7d0d23094f03
+		summarizeBy: sum
+		sourceColumn: baseline_r2_humide
+
+		annotation SummarizationSetBy = Automatic
+
+	column baseline_orge_humide
+		dataType: double
+		lineageTag: 31dd94ad-684e-4a35-9b47-46a780783369
+		summarizeBy: sum
+		sourceColumn: baseline_orge_humide
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column baseline_humidite_orge
+		dataType: double
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 6a7c5766-3640-4a28-821f-a9156c16ba68
+		summarizeBy: sum
+		sourceColumn: baseline_humidite_orge
+
+		annotation SummarizationSetBy = Automatic
+
+	column baseline_orge_sec
+		dataType: double
+		lineageTag: 47fde1b5-1bd9-4aa7-87a0-fa9126e38f27
+		summarizeBy: sum
+		sourceColumn: baseline_orge_sec
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column baseline_eau_dans_orge
+		dataType: double
+		lineageTag: 329ba4c5-9f1c-4172-b254-e7136e31f0c5
+		summarizeBy: sum
+		sourceColumn: baseline_eau_dans_orge
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column baseline_malt_humide
+		dataType: double
+		lineageTag: 92b2543f-2b1f-4695-8958-6226e882673c
+		summarizeBy: sum
+		sourceColumn: baseline_malt_humide
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column baseline_humidite_malt
+		dataType: double
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 26f8524e-55ba-44f4-923c-80875819422e
+		summarizeBy: sum
+		sourceColumn: baseline_humidite_malt
+
+		annotation SummarizationSetBy = Automatic
+
+	column baseline_malt_sec
+		dataType: double
+		lineageTag: 94134288-16c4-4bfb-a8d2-95aa696bcd9d
+		summarizeBy: sum
+		sourceColumn: baseline_malt_sec
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column baseline_eau_dans_malt
+		dataType: double
+		lineageTag: 57fa8e03-6f25-48ef-8dec-e3a28c2e95b4
+		summarizeBy: sum
+		sourceColumn: baseline_eau_dans_malt
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column reel_r2_humide
+		dataType: double
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 6860934d-4bd2-412a-8ee1-bfae07c760c5
+		summarizeBy: sum
+		sourceColumn: reel_r2_humide
+
+		annotation SummarizationSetBy = Automatic
+
+	column reel_orge_humide
+		dataType: double
+		lineageTag: 204f2e92-ae03-448a-ac1c-39b0d180b998
+		summarizeBy: sum
+		sourceColumn: reel_orge_humide
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column reel_humidite_orge
+		dataType: double
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 17d782d0-39c1-45d4-9c47-1b1efec717fc
+		summarizeBy: sum
+		sourceColumn: reel_humidite_orge
+
+		annotation SummarizationSetBy = Automatic
+
+	column reel_orge_sec
+		dataType: double
+		lineageTag: 41f53b50-aab5-407c-9852-543c73270e5a
+		summarizeBy: sum
+		sourceColumn: reel_orge_sec
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column reel_eau_dans_orge
+		dataType: double
+		lineageTag: 13b60c22-e5a4-4956-ac41-ca1d4c014c7c
+		summarizeBy: sum
+		sourceColumn: reel_eau_dans_orge
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column reel_malt_humide
+		dataType: double
+		lineageTag: 0d0c2b21-52b7-410c-87dd-f4c55425e9e7
+		summarizeBy: sum
+		sourceColumn: reel_malt_humide
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column reel_humidite_malt
+		dataType: double
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 43f2b826-315c-4d13-9cf3-e02b96474b54
+		summarizeBy: sum
+		sourceColumn: reel_humidite_malt
+
+		annotation SummarizationSetBy = Automatic
+
+	column reel_malt_sec
+		dataType: double
+		lineageTag: 9bc7fd78-99b9-4794-bfd6-a13d6c30b4cc
+		summarizeBy: sum
+		sourceColumn: reel_malt_sec
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column reel_eau_dans_malt
+		dataType: double
+		lineageTag: 4758185f-8bf9-4e3e-b963-f672480a7a96
+		summarizeBy: sum
+		sourceColumn: reel_eau_dans_malt
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column reel_ecart_orge_sec_comparaison_baseline
+		dataType: double
+		lineageTag: 5445a16f-753a-4c0b-94b9-cf6641c10cf5
+		summarizeBy: sum
+		sourceColumn: reel_ecart_orge_sec_comparaison_baseline
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column eau_equivalent_baseline
+		dataType: double
+		lineageTag: 2bcf0e06-8629-43d6-8307-46f454f9ef97
+		summarizeBy: sum
+		sourceColumn: eau_equivalent_baseline
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column eau_supplementaire_via_perf_humidite_malt
+		dataType: double
+		lineageTag: 1209ea7d-a688-49ea-9633-86ade1860a27
+		summarizeBy: sum
+		sourceColumn: eau_supplementaire_via_perf_humidite_malt
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column eau_supplementaire_via_taille_batch_et_perf_humidite_malt
+		dataType: double
+		lineageTag: 93a1cb06-8220-402c-881d-d7df0a046bed
+		summarizeBy: sum
+		sourceColumn: eau_supplementaire_via_taille_batch_et_perf_humidite_malt
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column eau_supplementaire_via_taille_batch_equivalent_baseline
+		dataType: double
+		lineageTag: 030fd425-1cb9-4190-95eb-1f0adaefc22a
+		summarizeBy: sum
+		sourceColumn: eau_supplementaire_via_taille_batch_equivalent_baseline
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column malt_sec_supplementaire_via_taille_batch_equivalent_baseline
+		dataType: double
+		lineageTag: 878e34d9-d834-432c-b35a-9b67f89bfa89
+		summarizeBy: sum
+		sourceColumn: malt_sec_supplementaire_via_taille_batch_equivalent_baseline
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column total_malt_sec_supplementaire
+		dataType: double
+		lineageTag: f9c2b342-3926-4810-8025-e0fcacd52f12
+		summarizeBy: sum
+		sourceColumn: total_malt_sec_supplementaire
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column total_eau_supplementaire
+		dataType: double
+		lineageTag: 487d9339-4f74-4ba1-af0e-496ea3029f37
+		summarizeBy: sum
+		sourceColumn: total_eau_supplementaire
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column total_malt_humide_supplementaire
+		dataType: double
+		lineageTag: e9145d41-dcb3-43a7-b694-d2e06a52b7ed
+		summarizeBy: sum
+		sourceColumn: total_malt_humide_supplementaire
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column gain_avec_IA
+		dataType: double
+		lineageTag: 87d77a0f-3604-4ff7-9f96-444332acc71a
+		summarizeBy: sum
+		sourceColumn: gain_avec_IA
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column baseline_r2_sec
+		dataType: double
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 86b6d955-010b-44f0-9a9b-2346027f3884
+		summarizeBy: sum
+		sourceColumn: baseline_r2_sec
+
+		annotation SummarizationSetBy = Automatic
+
+	column reel_r2_sec
+		dataType: double
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 4e1aef6d-295f-4d72-8a49-4b5681774185
+		summarizeBy: sum
+		sourceColumn: reel_r2_sec
+
+		annotation SummarizationSetBy = Automatic
+
+	column reel_ecart_r2_sec_comparaison_baseline
+		dataType: double
+		lineageTag: 372fa495-27a7-44ec-9658-61f27df0ed25
+		summarizeBy: sum
+		sourceColumn: reel_ecart_r2_sec_comparaison_baseline
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column eau_supplementaire_via_perf_r2_sec_equivalent_baseline
+		dataType: double
+		lineageTag: 06a3e1a7-2795-4095-8182-931dbd49562c
+		summarizeBy: sum
+		sourceColumn: eau_supplementaire_via_perf_r2_sec_equivalent_baseline
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column eau_supplementaire_via_perf_r2_sec_et_perf_humidite_malt
+		dataType: double
+		lineageTag: 3964a078-d1eb-4308-bbf1-3359cdeeb330
+		summarizeBy: sum
+		sourceColumn: eau_supplementaire_via_perf_r2_sec_et_perf_humidite_malt
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column eau_supplementaire_via_taille_batch_et_perf_r2_sec_equivalent_baseline
+		dataType: double
+		lineageTag: c205f14e-4d86-4622-ae49-0f0eebd4423d
+		summarizeBy: sum
+		sourceColumn: eau_supplementaire_via_taille_batch_et_perf_r2_sec_equivalent_baseline
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column eau_supplementaire_via_taille_batch_et_perf_r2_sec_et_perf_humidite_malt
+		dataType: double
+		lineageTag: e6b0a089-3bd3-465a-9360-178510c7ce32
+		summarizeBy: sum
+		sourceColumn: eau_supplementaire_via_taille_batch_et_perf_r2_sec_et_perf_humidite_malt
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column malt_sec_supplementaire_via_perf_r2_sec
+		dataType: double
+		lineageTag: cdd14270-4b23-476e-bdff-276fe1b2a201
+		summarizeBy: sum
+		sourceColumn: malt_sec_supplementaire_via_perf_r2_sec
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column malt_sec_supplementaire_via_taille_batch_et_perf_r2_sec
+		dataType: double
+		lineageTag: 1ecad5f1-214d-4b9b-b830-2b82d338e114
+		summarizeBy: sum
+		sourceColumn: malt_sec_supplementaire_via_taille_batch_et_perf_r2_sec
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column goods_specy
+		dataType: string
+		lineageTag: 3188c008-64a1-4795-a2a5-15881d47a630
+		summarizeBy: none
+		sourceColumn: goods_specy
+
+		annotation SummarizationSetBy = Automatic
+
+	column goods_variety
+		dataType: string
+		lineageTag: 294a59fc-0728-469e-9269-514fd058e092
+		summarizeBy: none
+		sourceColumn: goods_variety
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_site_production
+		dataType: int64
+		formatString: 0
+		lineageTag: 7e4d621a-990c-48bf-9f88-dc7ec77d72a9
+		summarizeBy: none
+		sourceColumn: id_site_production
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_production
+		dataType: string
+		lineageTag: 3573278d-4dd4-494d-9483-39e127470fdf
+		summarizeBy: none
+		sourceColumn: site_production
+
+		annotation SummarizationSetBy = Automatic
+
+	column nb_individus_baseline
+		dataType: int64
+		formatString: 0
+		lineageTag: d2ad77ea-0500-46fd-a077-07baf72c840b
+		summarizeBy: sum
+		sourceColumn: nb_individus_baseline
+
+		annotation SummarizationSetBy = Automatic
+
+	column type_de_baseline
+		dataType: string
+		lineageTag: 0a46af70-10e8-42f1-88fc-617b2354cffa
+		summarizeBy: none
+		sourceColumn: type_de_baseline
+
+		annotation SummarizationSetBy = Automatic
+
+	column FAN
+		dataType: double
+		formatString: 0.00
+		lineageTag: be5ae7ee-be42-4bf5-8414-d634fd9055b5
+		summarizeBy: sum
+		sourceColumn: FAN
+
+		annotation SummarizationSetBy = Automatic
+
+	column FAN_max
+		dataType: int64
+		formatString: 0
+		lineageTag: 46ec9abd-3739-4b64-91a7-6866f6277f9f
+		summarizeBy: sum
+		sourceColumn: FAN_max
+
+		annotation SummarizationSetBy = Automatic
+
+	column FAN_min
+		dataType: int64
+		formatString: 0
+		lineageTag: 678041e2-03fc-4362-aadf-ae9de5c1c259
+		summarizeBy: sum
+		sourceColumn: FAN_min
+
+		annotation SummarizationSetBy = Automatic
+
+	column FAN_result
+		dataType: double
+		lineageTag: 35cf3f32-378a-48dc-b444-a503c19a0243
+		summarizeBy: sum
+		sourceColumn: FAN_result
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column hum_malt
+		dataType: double
+		lineageTag: 73469a48-6fdd-4f3e-b001-f95798cd28a2
+		summarizeBy: sum
+		sourceColumn: hum_malt
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column hum_malt_max
+		dataType: double
+		lineageTag: fef49741-f925-4d1a-b975-d521a8bfe781
+		summarizeBy: sum
+		sourceColumn: hum_malt_max
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column hum_malt_min
+		dataType: double
+		lineageTag: 91d79c46-4154-4194-8fcf-7ce0be391d8a
+		summarizeBy: sum
+		sourceColumn: hum_malt_min
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column hum_malt_result
+		dataType: double
+		lineageTag: 5f611506-1d05-482b-a4de-ccc2e6086115
+		summarizeBy: sum
+		sourceColumn: hum_malt_result
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column betaG
+		dataType: double
+		formatString: 0.00
+		lineageTag: c7926a82-1a2a-44d7-9f90-6809e15cbb2a
+		summarizeBy: sum
+		sourceColumn: betaG
+
+		annotation SummarizationSetBy = Automatic
+
+	column betaG_max
+		dataType: int64
+		formatString: 0
+		lineageTag: d941e918-0823-450c-9237-d9a2a4b34485
+		summarizeBy: sum
+		sourceColumn: betaG_max
+
+		annotation SummarizationSetBy = Automatic
+
+	column betaG_min
+		dataType: int64
+		formatString: 0
+		lineageTag: 7d663e9d-8208-4628-9c7e-2baea5d8e9f7
+		summarizeBy: sum
+		sourceColumn: betaG_min
+
+		annotation SummarizationSetBy = Automatic
+
+	column betaG_result
+		dataType: double
+		lineageTag: c81aaac1-d184-46a5-b944-f469035c7459
+		summarizeBy: sum
+		sourceColumn: betaG_result
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column friabilite
+		dataType: double
+		formatString: 0.00
+		lineageTag: b8ce8fcc-cd76-41b5-939f-9183a371e38b
+		summarizeBy: sum
+		sourceColumn: friabilite
+
+		annotation SummarizationSetBy = Automatic
+
+	column friabilite_max
+		dataType: int64
+		formatString: 0
+		lineageTag: 7aa71223-f314-4ac4-bb03-842dd8d883e3
+		summarizeBy: sum
+		sourceColumn: friabilite_max
+
+		annotation SummarizationSetBy = Automatic
+
+	column friabilite_min
+		dataType: int64
+		formatString: 0
+		lineageTag: 47f34e40-6b5c-41ba-bf48-cca5526c2b64
+		summarizeBy: sum
+		sourceColumn: friabilite_min
+
+		annotation SummarizationSetBy = Automatic
+
+	column friabilite_result
+		dataType: double
+		lineageTag: 669038bb-36ad-47ff-82d8-94d8beaa94ec
+		summarizeBy: sum
+		sourceColumn: friabilite_result
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column coloration_EBC
+		dataType: double
+		formatString: 0.00
+		lineageTag: 944016d8-970a-44e9-9e55-4300df5354b6
+		summarizeBy: sum
+		sourceColumn: coloration_EBC
+
+		annotation SummarizationSetBy = Automatic
+
+	column coloration_EBC_max
+		dataType: int64
+		lineageTag: 2d677b85-28f4-49b3-b018-56dc2fe84363
+		summarizeBy: sum
+		sourceColumn: coloration_EBC_max
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column coloration_EBC_min
+		dataType: int64
+		lineageTag: 8c9e61de-83f7-4090-813a-1c26c3f531fc
+		summarizeBy: sum
+		sourceColumn: coloration_EBC_min
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column coloration_EBC_result
+		dataType: double
+		lineageTag: af9f7dac-c945-4572-ac26-1b5ec420d38a
+		summarizeBy: sum
+		sourceColumn: coloration_EBC_result
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column baseline_indice_qualite
+		dataType: double
+		formatString: 0\ %;-0\ %;0\ %
+		lineageTag: 8af49beb-4f86-49ef-bd87-b01aaa6c381f
+		summarizeBy: sum
+		sourceColumn: baseline_indice_qualite
+
+		annotation SummarizationSetBy = Automatic
+
+	column indice_qualite
+		dataType: double
+		formatString: 0\ %;-0\ %;0\ %
+		lineageTag: c1a4b047-90c9-4f85-a1f0-6641bf07e535
+		summarizeBy: sum
+		sourceColumn: indice_qualite
+
+		annotation SummarizationSetBy = Automatic
+
+	column baseline_betaG
+		dataType: double
+		lineageTag: 7eab0f44-a25e-4b7c-93df-6349f323e2f2
+		summarizeBy: sum
+		sourceColumn: baseline_betaG
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column baseline_coloration_EBC
+		dataType: double
+		lineageTag: 8ff3ba83-d3ea-47c6-95d0-3fd4cc64ff89
+		summarizeBy: sum
+		sourceColumn: baseline_coloration_EBC
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column baseline_FAN
+		dataType: double
+		lineageTag: cb14c3db-3abc-450d-8e49-4ce5fe979180
+		summarizeBy: sum
+		sourceColumn: baseline_FAN
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column baseline_friabilite
+		dataType: double
+		lineageTag: a4656f34-03d8-4fba-84d1-6cb4b897f3f1
+		summarizeBy: sum
+		sourceColumn: baseline_friabilite
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column id_cahier_des_charges
+		dataType: int64
+		formatString: 0
+		lineageTag: 1cf87790-594f-468e-9f27-98401d66220e
+		summarizeBy: none
+		sourceColumn: id_cahier_des_charges
+
+		annotation SummarizationSetBy = Automatic
+
+	column R2_H_malt_sec
+		dataType: double
+		lineageTag: 1463c8d0-a9b3-4c6b-9eb4-b6ed3160addf
+		summarizeBy: sum
+		sourceColumn: R2_H_malt_sec
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column R2_H_eau
+		dataType: double
+		lineageTag: 7fbe4267-6feb-43b6-8562-de9395194b0b
+		summarizeBy: sum
+		sourceColumn: R2_H_eau
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column reco_acceptee
+		dataType: int64
+		formatString: 0
+		lineageTag: a519159e-6954-4633-8f88-9eae080a46cb
+		summarizeBy: sum
+		sourceColumn: reco_acceptee
+
+		annotation SummarizationSetBy = Automatic
+
+	column reco_trempe
+		dataType: int64
+		formatString: 0
+		lineageTag: 164778f7-94d8-4a73-b48c-babd591303ca
+		summarizeBy: sum
+		sourceColumn: reco_trempe
+
+		annotation SummarizationSetBy = Automatic
+
+	column reco_germination
+		dataType: int64
+		formatString: 0
+		lineageTag: 58459843-1518-4e74-b5cd-b9ae523df8fb
+		summarizeBy: sum
+		sourceColumn: reco_germination
+
+		annotation SummarizationSetBy = Automatic
+
+	column reco_touraille
+		dataType: int64
+		formatString: 0
+		lineageTag: 4912b532-197b-4394-89ff-185edb4d2d9e
+		summarizeBy: sum
+		sourceColumn: reco_touraille
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d82e9019-8692-4547-a483-b28d2a1e6e8e
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 0e94ec92-a87e-437e-a84e-817b899a7be8
+			defaultHierarchy: LocalDateTable_dbb8d7d3-0ada-422f-bf2b-066bfd00e1ed.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e06fee13-5411-4481-87ff-23954937699b
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: 281671d3-ff01-41f4-bd6c-df82bada9443
+			defaultHierarchy: LocalDateTable_a5de2f97-0d34-4b81-9e52-1b5e6ff0b1b7.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 55dbf544-96bf-482a-a6b6-8ca5abe8af02
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 9ebec333-d9d9-40c1-a351-05d279d044f1
+			defaultHierarchy: LocalDateTable_77ef13d9-45f8-4b97-a0e2-e11d86b74028.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column annee_de_recolte
+		dataType: int64
+		formatString: 0
+		lineageTag: 91237abf-a7ed-48b2-9b5c-4f1f230e5350
+		summarizeBy: sum
+		sourceColumn: annee_de_recolte
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_batch
+		dataType: string
+		lineageTag: c8ea89bc-06b2-4a00-9bc6-c2b6614ae9d6
+		summarizeBy: none
+		sourceColumn: id_batch
+
+		annotation SummarizationSetBy = Automatic
+
+	column ordre_de_fabrication
+		dataType: int64
+		formatString: 0
+		lineageTag: c9f4f22a-aac4-4d65-809f-6f97f1dc50fa
+		summarizeBy: sum
+		sourceColumn: ordre_de_fabrication
+
+		annotation SummarizationSetBy = Automatic
+
+	column lot_mes
+		dataType: string
+		lineageTag: b5fc6e46-d5c5-4282-aa12-39596065173d
+		summarizeBy: none
+		sourceColumn: lot_mes
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    gains_Schema = mal_maite_bi_prd_Database{[Name="gains",Kind="Schema"]}[Data],
+				    fact_Table = gains_Schema{[Name="fact",Kind="Table"]}[Data]
+				in
+				    fact_Table
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+
