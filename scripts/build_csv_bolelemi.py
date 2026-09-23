@@ -22,9 +22,8 @@ SORTIE = RACINE / "Baseline_BOLELEMI1.csv"
 # ---------------------------------------------------------------------------
 # VALEURS PROVISOIRES - a remplacer par les identifiants reels avant chargement
 # ---------------------------------------------------------------------------
-# id_plant_production_line de BOLELEMI1 dans plants_production_lines.
-# Le referentiel connu s'arrete a 7 (PITHIVIERS6), 8 est le suivant disponible.
-ID_SITE = 8
+# id_plant_production_line de BOLELEMI1 dans plants_production_lines (releve en base).
+ID_SITE = 15
 SITE = "BOLELEMI1"
 
 # id_requirement_specification de 2RS et IBON, a creer dans
