@@ -1,0 +1,20 @@
+relationship AutoDetected_5bc35d7c-5392-4408-93d3-e9f826a15dc8
+	fromColumn: fact_batch_measures.batch_id
+	toColumn: dim_batch.batch_id
+
+relationship 86c02953-4f65-2169-2155-4c971b7662f5
+	fromColumn: dim_batch.production_line
+	toColumn: dim_site.id_plant_production_line
+
+relationship 05e73940-bf5d-44e0-64b2-d2bc36bafe54
+	fromColumn: fact_batch_measures.parameter_id
+	toColumn: dim_parameter.parameter_id
+
+relationship e716129a-cc0a-c2b7-1fe8-ae8b69292e46
+	fromColumn: dim_batch.max_end_date_kiln_unload
+	toColumn: dim_calendar.day_date
+
+relationship bf189b75-7388-18fd-873d-9298d3ec73fb
+	fromColumn: fact_batch_measures.parameter_id
+	toColumn: dim_report_parameter_mapping.parameter_id
+

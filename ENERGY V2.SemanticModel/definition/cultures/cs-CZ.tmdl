@@ -1,0 +1,26 @@
+cultureInfo cs-CZ
+	translations
+		model Model
+			table dim_batch
+				column batch_number
+					caption: Batch
+				column max_end_date_kiln_unload
+					caption: Date de fin de déchargement touraille
+				column specification_name
+					caption: Spécifications
+				column variety_code
+					caption: Variété
+			table dim_calendar
+				column year
+					caption: Année
+				column month_name_fr
+					caption: Mois
+				column week_num
+					caption: Semaine
+			table dim_site
+				column name
+					caption: Ligne de production
+			table dim_report_parameter_mapping
+				column column_label
+					caption: Colonnes à afficher
+

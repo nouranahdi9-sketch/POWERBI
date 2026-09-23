@@ -1,0 +1,120 @@
+table dim_calendar
+	lineageTag: 61c35495-da08-43fa-83cd-b15703166ccd
+
+	column day_date
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: e8d588fa-e38b-47e3-9e55-71362ad5509e
+		summarizeBy: none
+		sourceColumn: day_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column year
+		dataType: int64
+		formatString: 0
+		lineageTag: 397afdf1-e83f-4d0b-92f5-6f9c5f9172fd
+		summarizeBy: sum
+		sourceColumn: year
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_num
+		dataType: int64
+		formatString: 0
+		lineageTag: 0de5beed-17e4-4747-82f4-39a05e156c18
+		summarizeBy: sum
+		sourceColumn: month_num
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_name_fr
+		dataType: string
+		lineageTag: 9083eb56-e029-4f7a-8cbc-cd65508cc911
+		summarizeBy: none
+		sourceColumn: month_name_fr
+		sortByColumn: month_num
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column quarter
+		dataType: int64
+		formatString: 0
+		lineageTag: f2e3683b-e7f7-4506-9e78-c82cb23ca836
+		summarizeBy: sum
+		sourceColumn: quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column week_num
+		dataType: int64
+		formatString: 0
+		lineageTag: b91d34c0-e39c-4a1f-b670-3f078f8913f2
+		summarizeBy: sum
+		sourceColumn: week_num
+
+		annotation SummarizationSetBy = Automatic
+
+	column day_of_week_num
+		dataType: int64
+		formatString: 0
+		lineageTag: 6ffaf797-cd8a-48fd-89d8-c6b8b833aa9e
+		summarizeBy: sum
+		sourceColumn: day_of_week_num
+
+		annotation SummarizationSetBy = Automatic
+
+	column day_name_fr
+		dataType: string
+		lineageTag: cac390f0-f18c-4e47-8193-6a8b64c28d82
+		summarizeBy: none
+		sourceColumn: day_name_fr
+
+		annotation SummarizationSetBy = Automatic
+
+	column year_week
+		dataType: string
+		lineageTag: abf5b686-ae0e-424f-9b2e-db7d023d259e
+		summarizeBy: none
+		sourceColumn: year_week
+
+		annotation SummarizationSetBy = Automatic
+
+	column year_month
+		dataType: string
+		lineageTag: 537d169e-a550-4f84-a063-a588c4e28720
+		summarizeBy: none
+		sourceColumn: year_month
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 28e5e37e-a12d-46be-890c-b6fb8395491d
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_calendar = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, QueryTags=null, EnableAutomaticProxyDiscovery=null, Implementation="2.0", MetricViewBiCompatibilityMode=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    common_Schema = mal_maite_bi_prd_Database{[Name="common",Kind="Schema"]}[Data],
+				    dim_calendar_Table = common_Schema{[Name="dim_calendar",Kind="Table"]}[Data]
+				in
+				    dim_calendar_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+
