@@ -26,12 +26,9 @@ SORTIE = RACINE / "Baseline_BOLELEMI1.csv"
 ID_SITE = 15
 SITE = "BOLELEMI1"
 
-# id_requirement_specification de 2RS et IBON, a creer dans
-# requirement_specifications. Le referentiel connu va de 0 a 59 sans trou.
-# Tant que les deux cahiers des charges n'existent pas, le script de prod leur
-# attribuerait 99 a tous les deux, ce qui produirait deux lignes de meme cle
-# metier par mois et ferait echouer le MERGE.
-ID_SPECIFICATION = {"2RS": 60, "IBON": 61}
+# id_requirement_specification de 2RS et IBON, releves en base : les deux
+# existaient deja, rattaches au plant 26 comme BOLELEMI1, et non supprimes.
+ID_SPECIFICATION = {"2RS": 183, "IBON": 184}
 
 # Espece et variete dominantes, relevees sur les 617 couches du fichier source :
 # 2RS -> TRAVELER (364 couches sur 494), IBON -> IBON (123 sur 123).
