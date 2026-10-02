@@ -17,7 +17,8 @@ table fact_monitoring_auto_manual_entries
 			    CALCULATE(
 			        SUM('fact_monitoring_auto_manual_entries'[flg_echec]),
 			        'fact_monitoring_auto_manual_entries'[has_manual_value] = 1 ,
-			        'fact_monitoring_auto_manual_entries'[has_auto_value] = 0
+			        'fact_monitoring_auto_manual_entries'[has_auto_value] = 0,
+			        'fact_monitoring_auto_manual_entries'[type_echec] <> "overlap" -- les échecs d'overlap sont comptés dans Evolution_echec_overlap
 			    )
 			VAR reco_total = 
 			    SUMX(
@@ -37,7 +38,8 @@ table fact_monitoring_auto_manual_entries
 			VAR reco_echec = 
 			    CALCULATE(
 			        SUM('fact_monitoring_auto_manual_entries'[flg_echec]),
-			        'fact_monitoring_auto_manual_entries'[has_auto_value] = 1, 'fact_monitoring_auto_manual_entries'[has_manual_value] = 0
+			        'fact_monitoring_auto_manual_entries'[has_auto_value] = 1, 'fact_monitoring_auto_manual_entries'[has_manual_value] = 0,
+			        'fact_monitoring_auto_manual_entries'[type_echec] <> "overlap" -- les échecs d'overlap sont comptés dans Evolution_echec_overlap
 			    )
 			VAR reco_total = 
 			    SUMX(
@@ -59,7 +61,8 @@ table fact_monitoring_auto_manual_entries
 			    CALCULATE(
 			        SUM('fact_monitoring_auto_manual_entries'[flg_echec]),
 			        'fact_monitoring_auto_manual_entries'[has_manual_value] = 1 &&
-			        'fact_monitoring_auto_manual_entries'[has_auto_value] = 1
+			        'fact_monitoring_auto_manual_entries'[has_auto_value] = 1,
+			        'fact_monitoring_auto_manual_entries'[type_echec] <> "overlap" -- les échecs d'overlap sont comptés dans Evolution_echec_overlap
 			    )
 			
 			-- Calcul pour le total des flg_non_null
@@ -87,7 +90,8 @@ table fact_monitoring_auto_manual_entries
 			VAR reco_echec = 
 			    CALCULATE(
 			        SUM('fact_monitoring_auto_manual_entries'[flg_echec]),
-			        'fact_monitoring_auto_manual_entries'[has_auto_value] = 0, 'fact_monitoring_auto_manual_entries'[has_manual_value] = 0
+			        'fact_monitoring_auto_manual_entries'[has_auto_value] = 0, 'fact_monitoring_auto_manual_entries'[has_manual_value] = 0,
+			        'fact_monitoring_auto_manual_entries'[type_echec] <> "overlap" -- les échecs d'overlap sont comptés dans Evolution_echec_overlap
 			    )
 			VAR reco_total = 
 			    SUMX(
@@ -101,6 +105,24 @@ table fact_monitoring_auto_manual_entries
 			
 			```
 		lineageTag: 586784f5-37e2-4eaf-83bf-d07b2cf01b7c
+
+	measure Evolution_echec_overlap = ```
+			-- recos en échec parce que leur fenêtre de calcul chevauche celle de la localisation suivante, calculée à la place (ex. pregerm / germ_c1)
+			VAR reco_echec = 
+			    CALCULATE(
+			        SUM('fact_monitoring_auto_manual_entries'[flg_echec]),
+			        'fact_monitoring_auto_manual_entries'[type_echec] = "overlap"
+			    )
+			VAR reco_total = 
+			    SUMX(
+			        'fact_monitoring_auto_manual_entries',
+			        'fact_monitoring_auto_manual_entries'[flg_echec] + 'fact_monitoring_auto_manual_entries'[flg_succes]
+			    )
+			VAR Taux_recos_echec = DIVIDE(reco_echec, reco_total, 0)
+			RETURN 
+			   FORMAT(reco_echec, "0") & "   (" & FORMAT(Taux_recos_echec, "0%") & ")"
+			```
+		lineageTag: 54c729a6-23a6-4a40-95d7-90f64fa64952
 
 	measure Evolution_echec_30j = ```
 			
