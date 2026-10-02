@@ -1,0 +1,107 @@
+table dim_calendar
+	lineageTag: ef755c1c-4a61-4dd6-a1ef-e1cdf8c563b8
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 000c2404-8506-4d37-8fc4-3a49572d6db7
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 31ce6851-b60e-42f1-9bf9-e4e0547cf1df
+			defaultHierarchy: LocalDateTable_1d4e1e76-02cb-4232-82f8-1a8e928d58ab.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: bca6b843-3529-4d8c-b2b5-d1cb2774b577
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: 059d19a3-4572-451f-b039-ad50fa6502ac
+			defaultHierarchy: LocalDateTable_504e8d9a-f6ef-4241-8047-eb46035607e1.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e99b676e-0882-452d-83da-fc2df2694696
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 839828c7-dd2a-42e6-ba71-474a9cb78898
+			defaultHierarchy: LocalDateTable_2df17bee-5ea0-4a01-a8e6-6f56413fc3cf.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Flag_Last3Days = ```
+			
+			IF (
+			    'dim_calendar'[date_simple] >= TODAY() - 3 
+			    && 'dim_calendar'[date_simple] <= TODAY(),
+			    1,
+			    0
+			)
+			
+			```
+		formatString: 0
+		lineageTag: baa412a5-736f-455a-84d2-4404cd3ed66e
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_simple
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 35c5eae2-cff5-4fe4-aef7-dab99deb3196
+		summarizeBy: none
+		sourceColumn: date_simple
+
+		variation Variation
+			isDefault
+			relationship: 8fee2990-c01c-4975-819d-0a0b0f359d10
+			defaultHierarchy: LocalDateTable_de335682-44bc-4849-bb2c-f0d5873bcd30.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column month_name
+		dataType: string
+		lineageTag: bc6143cc-d8d4-46b2-b1b6-5429d268ad34
+		summarizeBy: none
+		sourceColumn: month_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column year_name
+		dataType: int64
+		formatString: 0
+		lineageTag: 9ba6b3ea-c475-4a6c-b052-fcb3a259895b
+		summarizeBy: sum
+		sourceColumn: year_name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_calendar = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    recommendations_monitoring_Schema = mal_maite_bi_prd_Database{[Name="recommendations_monitoring",Kind="Schema"]}[Data],
+				    dim_calendar_Table = recommendations_monitoring_Schema{[Name="dim_calendar",Kind="Table"]}[Data]
+				in
+				    dim_calendar_Table
+
+	annotation PBI_ResultType = Table
+

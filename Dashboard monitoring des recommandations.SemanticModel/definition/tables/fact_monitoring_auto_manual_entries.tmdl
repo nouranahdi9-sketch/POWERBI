@@ -1,0 +1,687 @@
+table fact_monitoring_auto_manual_entries
+	lineageTag: 821a9180-1ad3-41f5-9ba8-17f004e50b54
+
+	measure Evolution_succes = ```
+			
+			VAR reco_succes = SUM('fact_monitoring_auto_manual_entries'[flg_succes])
+			VAR reco_total =  SUM('fact_monitoring_auto_manual_entries'[flg_echec]) +  SUM('fact_monitoring_auto_manual_entries'[flg_succes])
+			VAR Taux_recos_succes = DIVIDE(reco_succes, reco_total, 0)
+			RETURN 
+			    FORMAT(reco_succes, "0") & "   (" & FORMAT(Taux_recos_succes, "0%)")
+			```
+		lineageTag: 979c0055-c2e3-49ea-b38c-e666aee5baa9
+
+	measure Evolution_echec_manual = ```
+			
+			VAR reco_echec = 
+			    CALCULATE(
+			        SUM('fact_monitoring_auto_manual_entries'[flg_echec]),
+			        'fact_monitoring_auto_manual_entries'[has_manual_value] = 1 ,
+			        'fact_monitoring_auto_manual_entries'[has_auto_value] = 0
+			    )
+			VAR reco_total = 
+			    SUMX(
+			        'fact_monitoring_auto_manual_entries',
+			        'fact_monitoring_auto_manual_entries'[flg_echec] + 'fact_monitoring_auto_manual_entries'[flg_succes]
+			    )
+			
+			VAR Taux_recos_echec = DIVIDE(reco_echec, reco_total, 0)
+			RETURN 
+			    FORMAT(reco_echec, "0") & "   (" & FORMAT(Taux_recos_echec, "0%") & ")"
+			
+			```
+		lineageTag: a65e2fb8-2fb7-4cff-9571-8c49bc33bff2
+
+	measure Evolution_echec_auto = ```
+			
+			VAR reco_echec = 
+			    CALCULATE(
+			        SUM('fact_monitoring_auto_manual_entries'[flg_echec]),
+			        'fact_monitoring_auto_manual_entries'[has_auto_value] = 1, 'fact_monitoring_auto_manual_entries'[has_manual_value] = 0
+			    )
+			VAR reco_total = 
+			    SUMX(
+			        'fact_monitoring_auto_manual_entries',
+			        'fact_monitoring_auto_manual_entries'[flg_echec] + 'fact_monitoring_auto_manual_entries'[flg_succes]
+			    )
+			
+			VAR Taux_recos_echec = DIVIDE(reco_echec, reco_total, 0)
+			RETURN 
+			   FORMAT(reco_echec, "0") & "   (" & FORMAT(Taux_recos_echec, "0%") & ")"
+			
+			```
+		lineageTag: 2fbae546-4a0a-43d3-94ff-aa7abfb993b2
+
+	measure Evolution_echec_manual_auto = ```
+			
+			-- Calcul pour les recommandations manuelles et automatiques (flg_manual = 1 ET flg_auto = 1)
+			VAR reco_echec_manual_auto = 
+			    CALCULATE(
+			        SUM('fact_monitoring_auto_manual_entries'[flg_echec]),
+			        'fact_monitoring_auto_manual_entries'[has_manual_value] = 1 &&
+			        'fact_monitoring_auto_manual_entries'[has_auto_value] = 1
+			    )
+			
+			-- Calcul pour le total des flg_non_null
+			VAR reco_total = 
+			    SUMX(
+			        'fact_monitoring_auto_manual_entries',
+			        'fact_monitoring_auto_manual_entries'[flg_echec] + 'fact_monitoring_auto_manual_entries'[flg_succes]
+			    )
+			
+			
+			-- Taux d'échec pour les recommandations manuelles et automatiques
+			VAR Taux_recos_echec_manual_auto = 
+			    DIVIDE(reco_echec_manual_auto, reco_total, 0)
+			
+			-- Retour du résultat
+			RETURN 
+			    FORMAT(reco_echec_manual_auto, "0") & " (" & FORMAT(Taux_recos_echec_manual_auto, "0%") & ")"
+			
+			
+			```
+		lineageTag: ae766a35-8e8a-4025-9c42-cf31c60a3840
+
+	measure Evolution_echec_process = ```
+			
+			VAR reco_echec = 
+			    CALCULATE(
+			        SUM('fact_monitoring_auto_manual_entries'[flg_echec]),
+			        'fact_monitoring_auto_manual_entries'[has_auto_value] = 0, 'fact_monitoring_auto_manual_entries'[has_manual_value] = 0
+			    )
+			VAR reco_total = 
+			    SUMX(
+			        'fact_monitoring_auto_manual_entries',
+			        'fact_monitoring_auto_manual_entries'[flg_echec] + 'fact_monitoring_auto_manual_entries'[flg_succes]
+			    )
+			
+			VAR Taux_recos_echec = DIVIDE(reco_echec, reco_total, 0)
+			RETURN 
+			   FORMAT(reco_echec, "0") & "   (" & FORMAT(Taux_recos_echec, "0%") & ")"
+			
+			```
+		lineageTag: 586784f5-37e2-4eaf-83bf-d07b2cf01b7c
+
+	measure Evolution_echec_30j = ```
+			
+			VAR DerniereDate = today()
+			VAR MoisEnCours_Debut = DerniereDate - 29 -- Début des 30 derniers jours
+			VAR MoisPrecedente_Debut = DerniereDate - 60 -- Début du mois précédent
+			VAR MoisPrecedente_Fin = DerniereDate - 30 -- Fin du mois précédent
+			
+			-- Total des flg_non_null pour le mois en cours
+			VAR flg_nn_null_mois_en_cours = 
+			    CALCULATE(
+			        SUM('fact_monitoring_auto_manual_entries'[flg_echec]),
+			        FILTER(
+			            'fact_monitoring_auto_manual_entries', 
+			            'fact_monitoring_auto_manual_entries'[calculation_interval_after_datetime] >= MoisEnCours_Debut && 
+			            'fact_monitoring_auto_manual_entries'[calculation_interval_after_datetime] <= DerniereDate 
+			        )
+			    )
+			
+			-- Total des flg_non_null pour le mois précédent
+			VAR flg_nn_null_mois_precedente = 
+			    CALCULATE(
+			        SUM('fact_monitoring_auto_manual_entries'[flg_echec]),
+			        FILTER(
+			            'fact_monitoring_auto_manual_entries', 
+			            'fact_monitoring_auto_manual_entries'[calculation_interval_after_datetime] >= MoisPrecedente_Debut && 
+			            'fact_monitoring_auto_manual_entries'[calculation_interval_after_datetime] < MoisPrecedente_Fin 
+			        )
+			    )
+			
+			-- Calcul de la différence et du taux d'évolution
+			VAR Diff_flg_non_null = flg_nn_null_mois_en_cours - flg_nn_null_mois_precedente
+			VAR Taux_evolution = DIVIDE(Diff_flg_non_null, flg_nn_null_mois_precedente, 0)
+			
+			-- Ajout d'un "+" si la différence est positive
+			VAR Diff_flg_non_null_formate = 
+			    IF(Diff_flg_non_null > 0, "+" & FORMAT(Diff_flg_non_null, "0"), FORMAT(Diff_flg_non_null, "0"))
+			
+			-- Déterminer la pastille (rouge pour négatif, vert pour positif ou zéro)
+			VAR Pastille = 
+			    IF(Diff_flg_non_null <= 0, "🟢", "🔵")
+			
+			-- Vérification si les données sont disponibles
+			RETURN 
+			    IF(
+			        ISBLANK(flg_nn_null_mois_en_cours) || ISBLANK(flg_nn_null_mois_precedente),
+			        "No data",
+			        "vs previous period (" & Diff_flg_non_null_formate & ") " & Pastille
+			    )
+			
+			```
+		lineageTag: e65c95ed-4aea-40dd-b5d8-9d88af5ae543
+
+	measure Evolution_echec_7j = ```
+			
+			VAR DerniereDate = today()
+			VAR SemaineEnCours_Debut = DerniereDate - 6 -- Début des 7 derniers jours
+			VAR SemainePrecedente_Debut = DerniereDate - 13 -- Début de la semaine précédente
+			VAR SemainePrecedente_Fin = DerniereDate - 7 -- Fin de la semaine précédente
+			
+			-- Total des flg_null pour la semaine en cours
+			VAR flg_nn_null_semaine_en_cours = 
+			    CALCULATE(
+			        SUM('fact_monitoring_auto_manual_entries'[flg_echec]),
+			        FILTER(
+			            'fact_monitoring_auto_manual_entries', 
+			            'fact_monitoring_auto_manual_entries'[calculation_interval_after_datetime] >= SemaineEnCours_Debut && 
+			            'fact_monitoring_auto_manual_entries'[calculation_interval_after_datetime] < DerniereDate  
+			        )
+			    )
+			VAR flg_nn_null_semaine_precedente = 
+			    CALCULATE(
+			        SUM('fact_monitoring_auto_manual_entries'[flg_echec]),
+			        FILTER(
+			            'fact_monitoring_auto_manual_entries', 
+			            'fact_monitoring_auto_manual_entries'[calculation_interval_after_datetime] >= SemainePrecedente_Debut && 
+			            'fact_monitoring_auto_manual_entries'[calculation_interval_after_datetime] < SemainePrecedente_Fin 
+			        )
+			    )
+			
+			-- Calcul de la différence et du taux d'évolution
+			VAR Diff_flg_non_null = flg_nn_null_semaine_en_cours - flg_nn_null_semaine_precedente
+			VAR Taux_evolution = DIVIDE(Diff_flg_non_null, flg_nn_null_semaine_precedente, 0)
+			
+			-- Ajout d'un "+" si la différence est positive
+			VAR Diff_flg_non_null_formate = 
+			    IF(Diff_flg_non_null > 0, "+" & FORMAT(Diff_flg_non_null, "0"), FORMAT(Diff_flg_non_null, "0"))
+			
+			-- Déterminer la pastille (rouge pour négatif, vert pour positif ou zéro)
+			VAR Pastille = 
+			    IF(Diff_flg_non_null <= 0, "🟢" , "🔵")
+			
+			-- Retour du texte final avec la pastille
+			RETURN 
+			   "vs previous period (" & FORMAT(Diff_flg_non_null_formate, "0") & ") "  & Pastille
+			```
+		lineageTag: 1406a8a3-602d-475b-a808-7133bf7df6a1
+
+	measure Evolution_echec_24h = ```
+			
+			VAR Hier = today()  -1
+			VAR AvantHier = Hier - 2
+			
+			-- Calcul des totaux pour hier et avant-hier avec filtres supplémentaires
+			VAR flg_non_null_hier = 
+			    CALCULATE(
+			        SUM('fact_monitoring_auto_manual_entries'[flg_echec]),
+			        FILTER(
+			            'fact_monitoring_auto_manual_entries', 
+			            'fact_monitoring_auto_manual_entries'[calculation_interval_after_datetime] >= Hier && 
+			            'fact_monitoring_auto_manual_entries'[calculation_interval_after_datetime] < TODAY() 
+			        )
+			    )
+			VAR flg_non_null_avant_hier = 
+			    CALCULATE(
+			        SUM('fact_monitoring_auto_manual_entries'[flg_echec]),
+			        FILTER(
+			            'fact_monitoring_auto_manual_entries', 
+			            'fact_monitoring_auto_manual_entries'[calculation_interval_after_datetime] >= AvantHier && 
+			            'fact_monitoring_auto_manual_entries'[calculation_interval_after_datetime] < Hier 
+			        )
+			    )
+			
+			-- Calcul de la différence et du taux d'évolution
+			VAR Diff_flg_non_null = flg_non_null_hier
+			VAR Taux_evolution = DIVIDE(Diff_flg_non_null, flg_non_null_avant_hier, 0)
+			
+			-- Ajout d'un "+" si la différence est positive
+			VAR Diff_flg_non_null_formate = 
+			    IF(Diff_flg_non_null > 0, "+" & FORMAT(Diff_flg_non_null, "0"), FORMAT(Diff_flg_non_null, "0"))
+			
+			-- Déterminer la pastille (rouge pour négatif, vert pour positif ou zéro)
+			VAR Pastille = 
+			    IF(Diff_flg_non_null <= 0, "🟢" , "🔵")
+			
+			-- Retour du texte final avec la pastille
+			RETURN 
+			   "vs previous period (" & FORMAT(Diff_flg_non_null_formate, "0") & ") "  & Pastille
+			
+			
+			```
+		lineageTag: 0d4dd573-f977-4ab5-adc9-65d402bf1167
+
+	measure recos_attendues =
+			
+			SUM ( fact_monitoring_auto_manual_entries[flg_echec] )
+			+ SUM ( fact_monitoring_auto_manual_entries[flg_succes] )
+		formatString: 0
+		lineageTag: 12a49f00-fe8b-4799-8371-a3648a23122b
+
+	measure Evolution_echec_tag_drop =
+			
+			VAR reco_echec =
+			    CALCULATE(
+			        SUM('fact_monitoring_auto_manual_entries'[flg_echec]),
+			        (
+			            ISBLANK('fact_ascendance_localization'[map_hour_occurrences])
+			            || 'fact_ascendance_localization'[map_hour_occurrences] = "[]"
+			        )
+			    )
+			RETURN
+			    FORMAT(reco_echec, "0")
+		lineageTag: dbc66a47-16c7-4988-bd94-d0d0875f6d7c
+
+	column id_production_line
+		dataType: int64
+		formatString: 0
+		lineageTag: af3f8cb1-63d7-4085-aa66-9a423a0bef1f
+		summarizeBy: sum
+		sourceColumn: id_production_line
+
+		annotation SummarizationSetBy = Automatic
+
+	column batch_id
+		dataType: string
+		lineageTag: 65ab5387-e8c6-4231-94fb-f60da70ad651
+		summarizeBy: none
+		sourceColumn: batch_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_recommendation
+		dataType: string
+		lineageTag: dbc51e3a-d1f1-487a-bbb0-b7d226652bd9
+		summarizeBy: none
+		sourceColumn: id_recommendation
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_parameter_localization
+		dataType: int64
+		formatString: 0
+		lineageTag: d9f4735d-2f0e-479b-8f5e-9ac9eb66ccb3
+		summarizeBy: none
+		sourceColumn: id_parameter_localization
+
+		annotation SummarizationSetBy = Automatic
+
+	column missing_value
+		dataType: string
+		lineageTag: 6cc0022d-b127-46ed-8bf4-a76fac149591
+		summarizeBy: none
+		sourceColumn: missing_value
+
+		annotation SummarizationSetBy = Automatic
+
+	column flg_manual
+		dataType: int64
+		formatString: 0
+		lineageTag: e324842e-c7d6-460f-a9a8-b7abbc6a7da2
+		summarizeBy: sum
+		sourceColumn: flg_manual
+
+		annotation SummarizationSetBy = Automatic
+
+	column flg_auto
+		dataType: int64
+		formatString: 0
+		lineageTag: 056c9e70-9660-4ee3-b57c-e32a96faf97d
+		summarizeBy: sum
+		sourceColumn: flg_auto
+
+		annotation SummarizationSetBy = Automatic
+
+	column type_de_missing_value
+		dataType: string
+		lineageTag: 8674d5bb-9790-43b6-817f-22c5b3c9bbcd
+		summarizeBy: none
+		sourceColumn: type_de_missing_value
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_saisie_manuelle
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 4b4e56ac-ac2a-45bb-a18b-49776ffcf918
+		summarizeBy: none
+		sourceColumn: date_saisie_manuelle
+
+		variation Variation
+			isDefault
+			relationship: 0327f246-3586-4b9b-9312-ff0cc1ce4f16
+			defaultHierarchy: LocalDateTable_e519d759-6e1d-46a1-ac7b-a495500c0ead.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column flg_succes
+		dataType: int64
+		formatString: 0
+		lineageTag: ee7972eb-af4e-433b-8727-f05e7b3ad567
+		summarizeBy: sum
+		sourceColumn: flg_succes
+
+		annotation SummarizationSetBy = Automatic
+
+	column flg_echec
+		dataType: int64
+		formatString: 0
+		lineageTag: 74023f2e-315d-45f9-92d5-b694e2be5eb0
+		summarizeBy: sum
+		sourceColumn: flg_echec
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_alerting
+		dataType: int64
+		formatString: 0
+		lineageTag: 6e8d4e34-a95c-4236-98ae-1c031d38305e
+		summarizeBy: none
+		sourceColumn: id_alerting
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 7236abe1-8b23-4d70-bc65-7aeb6adbe640
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: adf57cbd-a7fe-43ce-8d87-908580d03496
+			defaultHierarchy: LocalDateTable_e9ec8287-8cdc-439a-a394-85474aa381f5.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 0258702e-6efe-4b03-b74e-3cd25b9f95d9
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: 8f6a9e64-ab43-4d37-bf9f-bddee03d8ee8
+			defaultHierarchy: LocalDateTable_94dd3206-c9d0-4014-b24a-e6d8b830b6dc.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 56f1c7a9-c104-4ed8-9350-e9f2afd280d5
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: d11a72c4-4997-44aa-8222-cb5af8c67c9f
+			defaultHierarchy: LocalDateTable_6df64d35-ea32-4467-b9c2-8e88745c4c5f.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Missing_Values_Concat_auto = ```
+			
+			CONCATENATEX(
+			    FILTER(
+			        'fact_monitoring_auto_manual_entries',  -- Remplacez 'export (61)' par le nom de votre table
+			        'fact_monitoring_auto_manual_entries'[id_production_line] = EARLIER('fact_monitoring_auto_manual_entries'[id_production_line]) && 
+			        'fact_monitoring_auto_manual_entries'[batch_id] = EARLIER('fact_monitoring_auto_manual_entries'[batch_id]) &&
+			        'fact_monitoring_auto_manual_entries'[id_parameter_localization] = EARLIER('fact_monitoring_auto_manual_entries'[id_parameter_localization]) &&
+			        'fact_monitoring_auto_manual_entries'[flg_auto] = 1
+			    ),
+			    'fact_monitoring_auto_manual_entries'[missing_value],  -- La colonne à concaténer
+			    ", ",  -- Séparateur entre les valeurs concaténées
+			    'fact_monitoring_auto_manual_entries'[missing_value],  -- Si vous avez besoin de trier les valeurs avant concaténation (facultatif)
+			    ASC  -- Trier par ordre croissant des valeurs
+			)
+			
+			```
+		lineageTag: 06ece6f2-42c6-454d-9190-552f2eda3cca
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Missing_Values_Concat_manuelles = ```
+			
+			CONCATENATEX(
+			    FILTER(
+			        'fact_monitoring_auto_manual_entries',  -- Remplacez 'export (61)' par le nom de votre table
+			        'fact_monitoring_auto_manual_entries'[id_production_line] = EARLIER('fact_monitoring_auto_manual_entries'[id_production_line]) && 
+			        'fact_monitoring_auto_manual_entries'[batch_id] = EARLIER('fact_monitoring_auto_manual_entries'[batch_id]) &&
+			        'fact_monitoring_auto_manual_entries'[id_parameter_localization] = EARLIER('fact_monitoring_auto_manual_entries'[id_parameter_localization]) &&
+			        'fact_monitoring_auto_manual_entries'[flg_manual] = 1
+			    ),
+			    'fact_monitoring_auto_manual_entries'[missing_value],  -- La colonne à concaténer
+			    ", ",  -- Séparateur entre les valeurs concaténées
+			    'fact_monitoring_auto_manual_entries'[missing_value],  -- Si vous avez besoin de trier les valeurs avant concaténation (facultatif)
+			    ASC  -- Trier par ordre croissant des valeurs
+			)
+			
+			```
+		lineageTag: 98031041-e7ce-41ef-b894-3b2a6aea43b4
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Target_Localisation_Colors = ```
+			
+			VAR EchecMax =
+			    CALCULATE(
+			        MAX('fact_monitoring_auto_manual_entries'[flg_echec]),
+			        ALLEXCEPT(
+			            'fact_monitoring_auto_manual_entries',
+			            'fact_monitoring_auto_manual_entries'[batch_id],
+			            'fact_monitoring_auto_manual_entries'[id_parameter_localization]
+			        )
+			    )
+			VAR TargetLoc = RELATED('dim_target_localization'[code])
+			RETURN
+			TargetLoc & IF(EchecMax = 1, " (🔵)", " (🟢)")
+			
+			```
+		lineageTag: ed2e9ba0-6f4f-449b-beaa-ae32b8a20b85
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column succes_echec
+		dataType: string
+		lineageTag: 1cfa193d-4f77-4577-92a4-df5071b7bfc8
+		summarizeBy: none
+		sourceColumn: succes_echec
+
+		annotation SummarizationSetBy = Automatic
+
+	column calculation_interval_after_datetime
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: df50b51c-3d22-40b2-8ad8-df418de35dd7
+		summarizeBy: none
+		sourceColumn: calculation_interval_after_datetime
+
+		variation Variation
+			isDefault
+			relationship: d757ae0a-1e78-4890-b212-4449da397175
+			defaultHierarchy: LocalDateTable_caee25e3-5251-41a2-9d95-0e349355e26e.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_creation_reco
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: b8aa77ae-3bb7-49bd-8cce-002514eb0a43
+		summarizeBy: none
+		sourceColumn: date_creation_reco
+
+		variation Variation
+			isDefault
+			relationship: 8c5ea93a-ce8e-4e3f-a9ba-97796a2e3f23
+			defaultHierarchy: LocalDateTable_0067b95d-89dc-4271-91f6-9bd69704b4d2.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column flg_lasted_reco
+		dataType: int64
+		formatString: 0
+		lineageTag: f2e92bbf-f25d-4850-8746-09d9dfe2421c
+		summarizeBy: sum
+		sourceColumn: flg_lasted_reco
+
+		annotation SummarizationSetBy = Automatic
+
+	column raison
+		dataType: string
+		lineageTag: a659510e-0192-4f4f-929e-f52ca01cbd68
+		summarizeBy: none
+		sourceColumn: raison
+
+		annotation SummarizationSetBy = Automatic
+
+	column concat_id_reco
+		dataType: string
+		lineageTag: 558d3c85-a817-4a14-9f8d-c82e00178c80
+		summarizeBy: none
+		sourceColumn: concat_id_reco
+
+		annotation SummarizationSetBy = Automatic
+
+	column type_echec
+		dataType: string
+		lineageTag: 11655609-8c55-45d5-bbe5-ad8f2a2d7800
+		summarizeBy: none
+		sourceColumn: type_echec
+
+		annotation SummarizationSetBy = Automatic
+
+	column has_auto_value
+		dataType: int64
+		formatString: 0
+		lineageTag: 4d1089f6-b836-4769-a7db-ff5e9325d788
+		summarizeBy: sum
+		sourceColumn: has_auto_value
+
+		annotation SummarizationSetBy = Automatic
+
+	column has_manual_value
+		dataType: int64
+		formatString: 0
+		lineageTag: bd560e8c-fdef-45dd-bc40-c77e1a1085e5
+		summarizeBy: sum
+		sourceColumn: has_manual_value
+
+		annotation SummarizationSetBy = Automatic
+
+	column Last24h = ```
+			
+			IF (
+			    [calculation_interval_after_datetime] >= TODAY() - 1 
+			    && [calculation_interval_after_datetime] <= TODAY(),
+			    1,
+			    0
+			)
+			
+			
+			
+			
+			```
+		formatString: 0
+		lineageTag: 5402b36f-033a-4ef5-9a75-af197288fdd7
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Last3months = ```
+			
+			IF (
+			    [calculation_interval_after_datetime] >= TODAY() - 90
+			    && [calculation_interval_after_datetime] <= TODAY(),
+			    1,
+			    0
+			)
+			
+			
+			
+			
+			```
+		formatString: 0
+		lineageTag: 070666d7-52f5-4689-8887-5c2aa9618ef5
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Flag_Lignes = ```
+			
+			IF(
+			    ('fact_monitoring_auto_manual_entries'[flg_succes]) = 1 || ('fact_monitoring_auto_manual_entries'[flg_echec]) = 1,
+			    1,
+			    0
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 3b149e4a-85d4-44c1-a79c-52ea784b3dec
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Last7j = ```
+			
+			IF (
+			    [calculation_interval_after_datetime] >= TODAY() - 7 
+			    && [calculation_interval_after_datetime] <= TODAY(),
+			    1,
+			    0
+			)
+			
+			
+			
+			
+			```
+		formatString: 0
+		lineageTag: 5e4d0199-313c-4a45-b550-317c3ee8d3f7
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Last30j = ```
+			
+			IF (
+			    [calculation_interval_after_datetime] >= TODAY() - 30 
+			    && [calculation_interval_after_datetime] <= TODAY(),
+			    1,
+			    0
+			)
+			
+			
+			
+			
+			```
+		formatString: 0
+		lineageTag: ff072bf4-0f89-40b8-9890-d3c8eb1b708e
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column calculation_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: e2189806-b45d-4e05-b0ea-a66073b35691
+		summarizeBy: none
+		sourceColumn: calculation_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition fact_monitoring_auto_manual_entries = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    recommendations_monitoring_Schema = mal_maite_bi_prd_Database{[Name="recommendations_monitoring",Kind="Schema"]}[Data],
+				    fact_monitoring_auto_manual_entries_Table = recommendations_monitoring_Schema{[Name="fact_monitoring_auto_manual_entries",Kind="Table"]}[Data]
+				in
+				    fact_monitoring_auto_manual_entries_Table
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

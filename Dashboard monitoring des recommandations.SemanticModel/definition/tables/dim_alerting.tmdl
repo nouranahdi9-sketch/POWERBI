@@ -1,0 +1,85 @@
+table dim_alerting
+	lineageTag: b92d06b3-140f-42e7-bb10-af97f2417837
+
+	column id_alerting
+		dataType: int64
+		formatString: 0
+		lineageTag: ffa6114d-000c-484f-96d2-e90ed1b1eae3
+		summarizeBy: none
+		sourceColumn: id_alerting
+
+		annotation SummarizationSetBy = Automatic
+
+	column alerte
+		dataType: string
+		lineageTag: a04c58cb-4134-41eb-897b-a294af86a6ec
+		summarizeBy: none
+		sourceColumn: alerte
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 3b1e4ed7-bf7b-4d3f-a0a2-59934bf9b824
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 99769dba-c9f6-4210-b7eb-6c5c0e07fe75
+			defaultHierarchy: LocalDateTable_97fa3f20-d563-432e-b68a-0d1b6d6d6921.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: edfb053c-d354-4fb7-aa69-3e76caeaafb9
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: 97ee6f4d-1f66-443a-960d-c141d2455499
+			defaultHierarchy: LocalDateTable_4dfc06da-a8a0-4e62-a667-29a6b562f2c2.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f93f4eb7-bc95-4728-bde8-304f69ca986d
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: c7c55cd9-afaf-4446-938d-28a0e47db7b9
+			defaultHierarchy: LocalDateTable_42f746c5-08ef-4570-800a-c4e13ed3336f.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column ms_idf_cat
+		dataType: string
+		lineageTag: e3d9df1e-01c1-456f-9d91-f83dbdc0c3a3
+		summarizeBy: none
+		sourceColumn: ms_idf_cat
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_alerting = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    recommendations_monitoring_Schema = mal_maite_bi_prd_Database{[Name="recommendations_monitoring",Kind="Schema"]}[Data],
+				    dim_alerting_Table = recommendations_monitoring_Schema{[Name="dim_alerting",Kind="Table"]}[Data]
+				in
+				    dim_alerting_Table
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+
