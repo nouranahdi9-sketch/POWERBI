@@ -266,15 +266,6 @@ table fact_monitoring_auto_manual_entries
 			```
 		lineageTag: 0d4dd573-f977-4ab5-adc9-65d402bf1167
 
-	measure nb_echecs_alerte_overlap =
-			-- nombre de recos en échec avec l'alerte 3 (overlap)
-			CALCULATE(
-			    SUM ( fact_monitoring_auto_manual_entries[flg_echec] ),
-			    fact_monitoring_auto_manual_entries[id_alerting] = 3
-			)
-		formatString: 0
-		lineageTag: 8bd99724-f231-4d68-acd9-9d63443098e1
-
 	measure recos_attendues =
 			
 			SUM ( fact_monitoring_auto_manual_entries[flg_echec] )
