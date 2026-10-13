@@ -1,0 +1,142 @@
+cultureInfo ro-RO
+	translations
+		model Model
+			table dim_batches_specifications
+				column batch_number
+					caption: Șarjă
+				column mes_number
+					caption: Număr MES
+				column specy_name
+					caption: Soi
+				column variety_name
+					caption: Varietate
+				column date_fin_prod
+					caption: Data de sfârșit a producției (cea mai veche)
+				column production_type
+					caption: Tip de producție
+				column batch_status_localization
+					caption: Stare șarjă
+				column error_messages
+					caption: Mesaj de eroare
+				column cycle_label
+					caption: Durată ciclu producție
+			table fact_process_time_analyses
+				column mesure_name
+					caption: Măsură
+				column categorie
+					caption: Categorie.
+				column measure_type
+					caption: Tip
+				column sequence
+					caption: Secvență
+				column label
+					caption: Etichetă
+				column measure_description
+					caption: Descriere
+				column columns_source
+					caption: Variabile sursă
+				column date_debut
+					caption: Dată de început
+				column date_fin
+					caption: Dată de sfârșit
+				column measure_value_hhmm
+					caption: Durată
+				column seuiltop20_value_hhmm
+					caption: Ținte statistice
+				column deltatop20_value_hhmm
+					caption: Delta statistică
+				column mesure_name_color
+					caption: Măsură
+				column mesure_value_h
+					caption: Durata ciclului
+				column top20_80th_percentile_h
+					caption: Target BI
+				column week_mesure
+					caption: Săptămână
+				column year_mesure
+					caption: An
+				column month_name_mesure
+					caption: Lună
+				column flg_outlier
+					caption: Valoare aberantă
+				column target_business
+					caption: Ținte de business
+				column delta_target_business
+					caption: Delta de business
+				column delta_target_business_h
+					caption: Delta de business
+				column target_business_h
+					caption: Ținte de business
+				column batch_prd_cell
+					caption: Celulă prod.
+				column Date_fin_type_date
+					caption: Data de sfârșit a producției
+				column label_graphe_cycle_time
+					caption: Timp de ciclu
+				column label_graphe_transfer_time
+					caption: Timp de transfer
+				column label_graphe_waiting_time
+					caption: Timp de așteptare
+				column mesure_value_transfer_graphe
+					caption: Durata transferului
+				column mesure_value_waiting_graphe
+					caption: Durata așteptării
+				column date_fin_tab_overwiew
+					caption: Data de încheiere a măsurii
+				column columns_source_metadate
+					caption: Localizări sursă
+				column measure_type_matadata
+					caption: Tip
+				column 'label - CyTiWai'
+					caption: Măsură
+				column targetbusiness_value_hhmm
+					caption: Ținte de business
+				column delta_targetbusiness_value_hhmm
+					caption: Delta de business
+			table dim_site
+				column plant
+					caption: Linie de producție
+			table fact_batch_note
+				column date_saisie
+					caption: Dată
+				column note
+					caption: Notă
+				column location
+					caption: Locație
+				column event
+					caption: Eveniment
+				column impact
+					caption: Impact.
+				column detail
+					caption: Detaliu
+				column gap_minutes
+					caption: Diferență (min)
+				column Gap_Heures
+					caption: Timp total pierdut (h)
+				column full_name
+					caption: Autor
+			table Periode
+				column Label
+					caption: Ultimele ore
+			table Calcul
+				measure BatchNumber_MaxMesureValue
+					caption: Șarjă cu durată maximă
+				measure BatchNumber_MinMesureValue
+					caption: Șarjă cu durată minimă
+				measure 'Moyenne hh:mm'
+					caption: Durată medie
+				measure Moyenne_delta_target_business_hh:mm
+					caption: Delta medie (de business)
+				measure Moyenne_delta_top_20_hh:mm
+					caption: Delta medie
+				measure Moyenne_target_business_hh:mm
+					caption: Țintă medie (de business)
+				measure Moyenne_top_20_hh:mm
+					caption: Target mediu (BI)
+				measure 'Max hh:mm'
+					caption: Max
+				measure 'Min hh:mm'
+					caption: Min
+				measure 'Batch-cycle Moyenne hh:mm'
+					caption: Medie
+

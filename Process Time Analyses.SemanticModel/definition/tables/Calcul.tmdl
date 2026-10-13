@@ -1,0 +1,533 @@
+table Calcul
+	lineageTag: 6ba5230c-f86d-4cfd-97d6-87998ee15631
+
+	measure BatchNumber_MaxMesureValue = ```
+			
+			VAR MinValue =
+			    MAXX(
+			        VALUES('fact_process_time_analyses'[batch_id]),
+			        CALCULATE(MAX('fact_process_time_analyses'[mesure_value]))
+			    )
+			VAR BatchID =
+			    MAXX(
+			        FILTER(
+			            VALUES('fact_process_time_analyses'),
+			            'fact_process_time_analyses'[mesure_value] = MinValue
+			        ),
+			        'fact_process_time_analyses'[batch_id]
+			    )
+			RETURN
+			    LOOKUPVALUE(
+			        'dim_batches_specifications'[batch_number],
+			        'dim_batches_specifications'[batch_id], BatchID
+			    )
+			
+			```
+		displayFolder: Mesures\AUTRES
+		lineageTag: 28466a0a-c6cb-4c91-a493-c18815016c2b
+
+	measure BatchNumber_MinMesureValue = ```
+			
+			VAR MinValue =
+			    MINX(
+			        VALUES('fact_process_time_analyses'[batch_id]),
+			        CALCULATE(MIN('fact_process_time_analyses'[mesure_value]))
+			    )
+			VAR BatchID =
+			    MINX(
+			        FILTER(
+			            VALUES('fact_process_time_analyses'),
+			            'fact_process_time_analyses'[mesure_value] = MinValue
+			        ),
+			        'fact_process_time_analyses'[batch_id]
+			    )
+			RETURN
+			    LOOKUPVALUE(
+			        'dim_batches_specifications'[batch_number],
+			        'dim_batches_specifications'[batch_id], BatchID
+			    )
+			
+			```
+		displayFolder: Mesures\AUTRES
+		lineageTag: 150360e2-6e56-4c42-adab-b2c093f16ceb
+
+	measure 'Moyenne hh:mm' =
+			
+			VAR TotalMinutes = AVERAGE('fact_process_time_analyses'[mesure_value])
+			VAR IsNegative = TotalMinutes < 0
+			VAR AbsMinutes = ABS(TotalMinutes)
+			VAR Hours = QUOTIENT(AbsMinutes, 60)
+			VAR Minutes = INT(AbsMinutes) - Hours * 60
+			VAR Result = FORMAT(Hours, "00") & ":" & FORMAT(Minutes, "00")
+			RETURN
+			IF(
+			    ISBLANK(TotalMinutes),
+			    BLANK(),
+			    IF(IsNegative, "-" & Result, Result)
+			)
+		displayFolder: Mesures\AUTRES
+		lineageTag: 66c5cf29-110a-41d7-b553-93d521c07ed7
+
+	measure Moyenne_delta_target_business_hh:mm =
+			
+			VAR TotalMinutes = AVERAGE('fact_process_time_analyses'[delta_target_business])
+			VAR IsNegative = TotalMinutes < 0
+			VAR AbsMinutes = ABS(TotalMinutes)
+			VAR Hours = QUOTIENT(INT(AbsMinutes),60)
+			VAR Minutes = MOD(INT(AbsMinutes),60)
+			VAR Result = FORMAT(Hours,"00") & ":" & FORMAT(Minutes,"00")
+			RETURN
+			IF(
+			    ISBLANK(TotalMinutes),
+			    BLANK(),
+			    IF(IsNegative,"-" & Result,Result)
+			)
+		displayFolder: Mesures\MesuresTARGET_BUSINESS
+		lineageTag: 69eaedfd-0fe0-46f1-9684-eb22f2c0a873
+
+	measure Moyenne_delta_top_20_hh:mm =
+			
+			VAR TotalMinutes = AVERAGE('fact_process_time_analyses'[delta_percentile_top_20_tonnage])
+			VAR IsNegative = TotalMinutes < 0
+			VAR AbsMinutes = ABS(TotalMinutes)
+			VAR Hours = QUOTIENT(AbsMinutes, 60)
+			VAR Minutes = INT(AbsMinutes) - Hours * 60
+			VAR Result = FORMAT(Hours, "00") & ":" & FORMAT(Minutes, "00")
+			RETURN
+			IF(
+			    ISBLANK(TotalMinutes),
+			    BLANK(),
+			    IF(IsNegative, "-" & Result, Result)
+			)
+		displayFolder: Mesures\AUTRES
+		lineageTag: 9ad8bda8-b346-489d-a4fa-0dbbed3eb929
+
+	measure Moyenne_target_business_hh:mm =
+			
+			VAR TotalMinutes = AVERAGE('fact_process_time_analyses'[target_business])
+			VAR IsNegative = TotalMinutes < 0
+			VAR AbsMinutes = ABS(TotalMinutes)
+			VAR Hours = QUOTIENT(AbsMinutes, 60)
+			VAR Minutes = INT(AbsMinutes) - Hours * 60
+			VAR Result = FORMAT(Hours, "00") & ":" & FORMAT(Minutes, "00")
+			RETURN
+			IF(
+			    ISBLANK(TotalMinutes),
+			    BLANK(),
+			    IF(IsNegative, "-" & Result, Result)
+			)
+		displayFolder: Mesures\MesuresTARGET_BUSINESS
+		lineageTag: f2ca2253-19a6-4d7d-bf66-42e779691e3d
+
+	measure Moyenne_top_20_hh:mm =
+			
+			VAR TotalMinutes = AVERAGE('fact_process_time_analyses'[top20_80th_percentile_tonnage])
+			VAR IsNegative = TotalMinutes < 0
+			VAR AbsMinutes = ABS(TotalMinutes)
+			VAR Hours = QUOTIENT(AbsMinutes, 60)
+			VAR Minutes = INT(AbsMinutes) - Hours * 60
+			VAR Result = FORMAT(Hours, "00") & ":" & FORMAT(Minutes, "00")
+			RETURN
+			IF(
+			    ISBLANK(TotalMinutes),
+			    BLANK(),
+			    IF(IsNegative, "-" & Result, Result)
+			)
+		displayFolder: Mesures\AUTRES
+		lineageTag: 0a2d48d2-7ae1-43a8-b551-ba46c695993b
+
+	measure Min_30Days_CycleDuration = ```
+			
+			VAR MaxDate =
+			    MAX ( 'fact_process_time_analyses'[date_debut] )
+			VAR MinDate =
+			    MaxDate - 30
+			RETURN
+			CALCULATE (
+			    MIN ( 'fact_process_time_analyses'[mesure_value_h] ),
+			    'fact_process_time_analyses'[measure_type] = "BATCH_CYCLE_DURATION",
+			    REMOVEFILTERS ( 'fact_process_time_analyses'[batch_id] ),
+			    FILTER (
+			        ALLSELECTED ( 'fact_process_time_analyses'[date_debut] ),
+			        'fact_process_time_analyses'[date_debut] >= MinDate
+			            && 'fact_process_time_analyses'[date_debut] <= MaxDate
+			    )
+			)
+			
+			```
+		displayFolder: Mesures\AUTRES
+		lineageTag: 64c03024-2967-429a-99c7-f11b974f1e35
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Min_7Days_CycleDuration = ```
+			
+			VAR MaxDate =
+			    MAX ( 'fact_process_time_analyses'[date_debut] )
+			VAR MinDate =
+			    MaxDate - 7
+			RETURN
+			CALCULATE (
+			    MIN ( 'fact_process_time_analyses'[mesure_value_h] ),
+			    'fact_process_time_analyses'[measure_type] = "BATCH_CYCLE_DURATION",
+			    REMOVEFILTERS ( 'fact_process_time_analyses'[batch_id] ),
+			    FILTER (
+			        ALLSELECTED ( 'fact_process_time_analyses'[date_debut] ),
+			        'fact_process_time_analyses'[date_debut] >= MinDate
+			            && 'fact_process_time_analyses'[date_debut] <= MaxDate
+			    )
+			)
+			
+			```
+		displayFolder: Mesures\AUTRES
+		lineageTag: 2afef7ff-30b7-4a83-a43b-a02a91f4e5ea
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Seuil_avg_week_Top20_30j = ```
+			
+			VAR _currentWeek =
+			    SELECTEDVALUE('dim_batches_specifications'[week])
+			
+			VAR _endDate =
+			    CALCULATE(
+			        MAX('dim_batches_specifications'[date_fin_prod]),
+			        'dim_batches_specifications'[week] = _currentWeek
+			    )
+			
+			VAR _prdLines =
+			    VALUES('dim_site'[plant])
+			
+			VAR _weightGroups =
+			    VALUES('dim_batches_specifications'[goods_weight_group])
+			
+			VAR _batchIds_30j =
+			    CALCULATETABLE(
+			        VALUES('dim_batches_specifications'[batch_id]),
+			        ALL('dim_batches_specifications'),
+			        'dim_site'[plant] IN _prdLines,
+			        'dim_batches_specifications'[goods_weight_group] IN _weightGroups,
+			        'dim_batches_specifications'[date_fin_prod] <= _endDate,
+			        'dim_batches_specifications'[date_fin_prod] >  _endDate - 30
+			    )
+			
+			RETURN
+			CALCULATE(
+			    AVERAGE('fact_process_time_analyses'[top20_80th_percentile_h]),
+			    KEEPFILTERS(TREATAS(_batchIds_30j, 'fact_process_time_analyses'[batch_id]))
+			)
+			
+			```
+		displayFolder: Mesures\AUTRES
+		lineageTag: 7ad7e28b-c455-4b5f-97c1-4ca19f0ee8d3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Max hh:mm' =
+			
+			VAR TotalMinutes = MAX('fact_process_time_analyses'[mesure_value])
+			VAR IsNegative = TotalMinutes < 0
+			VAR AbsMinutes = ABS(TotalMinutes)
+			VAR Hours = QUOTIENT(AbsMinutes, 60)
+			VAR Minutes = INT(AbsMinutes) - Hours * 60
+			VAR Result = FORMAT(Hours, "00") & ":" & FORMAT(Minutes, "00")
+			RETURN
+			IF(
+			    ISBLANK(TotalMinutes),
+			    BLANK(),
+			    IF(IsNegative, "-" & Result, Result)
+			)
+		displayFolder: Mesures\AUTRES
+		lineageTag: 46b89401-345a-414d-aa5b-b578ba27659c
+
+	measure Max_30Days_CycleDuration = ```
+			
+			VAR MaxDate =
+			    MAX ( 'fact_process_time_analyses'[date_debut] )
+			VAR MinDate =
+			    MaxDate - 30
+			RETURN
+			CALCULATE (
+			    MAX ( 'fact_process_time_analyses'[mesure_value_h] ),
+			    'fact_process_time_analyses'[measure_type] = "BATCH_CYCLE_DURATION",
+			    REMOVEFILTERS ( 'fact_process_time_analyses'[batch_id] ),
+			    FILTER (
+			        ALLSELECTED ( 'fact_process_time_analyses'[date_debut] ),
+			        'fact_process_time_analyses'[date_debut] >= MinDate
+			            && 'fact_process_time_analyses'[date_debut] <= MaxDate
+			    )
+			)
+			
+			```
+		displayFolder: Mesures\AUTRES
+		lineageTag: a061e5ee-c47d-43bc-9c36-c09034d90224
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Max_7Days_CycleDuration = ```
+			
+			VAR MaxDate =
+			    MAX ( 'fact_process_time_analyses'[date_debut] )
+			VAR MinDate =
+			    MaxDate - 7
+			RETURN
+			CALCULATE (
+			    MAX ( 'fact_process_time_analyses'[mesure_value_h] ),
+			    'fact_process_time_analyses'[measure_type] = "BATCH_CYCLE_DURATION",
+			    REMOVEFILTERS ( 'fact_process_time_analyses'[batch_id] ),
+			    FILTER (
+			        ALLSELECTED ( 'fact_process_time_analyses'[date_debut] ),
+			        'fact_process_time_analyses'[date_debut] >= MinDate
+			            && 'fact_process_time_analyses'[date_debut] <= MaxDate
+			    )
+			)
+			
+			```
+		displayFolder: Mesures\AUTRES
+		lineageTag: d3a3f44d-5109-4b54-96c4-ac5c900fcb28
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Min hh:mm' =
+			
+			VAR TotalMinutes = MIN('fact_process_time_analyses'[mesure_value])
+			VAR IsNegative = TotalMinutes < 0
+			VAR AbsMinutes = ABS(TotalMinutes)
+			VAR Hours = QUOTIENT(AbsMinutes, 60)
+			VAR Minutes = INT(AbsMinutes) - Hours * 60
+			VAR Result = FORMAT(Hours, "00") & ":" & FORMAT(Minutes, "00")
+			RETURN IF(
+			    ISBLANK(TotalMinutes),
+			    BLANK(),
+			    IF(IsNegative, "-" & Result, Result)
+			)
+		displayFolder: Mesures\AUTRES
+		lineageTag: d8aae889-af03-43f8-aa6b-ee5071266b84
+
+	measure 'Batch-cycle Moyenne hh:mm' =
+			
+			VAR TotalMinutes = AVERAGE('fact_process_time_analyses'[mesure_value])
+			VAR IsNegative = TotalMinutes < 0
+			VAR AbsMinutes = ABS(TotalMinutes)
+			VAR Hours = QUOTIENT(AbsMinutes, 60)
+			VAR Minutes = INT(AbsMinutes) - Hours * 60
+			VAR Result = FORMAT(Hours, "00") & ":" & FORMAT(Minutes, "00")
+			RETURN
+			IF(
+			    ISBLANK(TotalMinutes),
+			    BLANK(),
+			    IF(IsNegative, "-" & Result, Result)
+			)
+		displayFolder: Mesures\AUTRES
+		lineageTag: 7e27c426-c3bd-4cdf-b1ff-c6051566dd13
+
+	measure 'Evolution hh:mm' = ```
+			
+			VAR AvgMesure = AVERAGE('fact_process_time_analyses'[mesure_value])
+			VAR AvgTonnage = AVERAGE('fact_process_time_analyses'[top20_80th_percentile_tonnage])
+			VAR EvolutionPct = DIVIDE(AvgMesure - AvgTonnage, AvgTonnage, 0) * 100
+			VAR TotalMinutes = EvolutionPct
+			VAR AbsMinutes = ABS(TotalMinutes)
+			VAR Hours = QUOTIENT(AbsMinutes, 60)
+			VAR Minutes = INT(AbsMinutes) - Hours * 60
+			VAR TimeFormat = FORMAT(Hours, "00") & ":" & FORMAT(Minutes, "00")
+			VAR Arrow = 
+			    IF(TotalMinutes > 0, "🔺 ",
+			        IF(TotalMinutes < 0, "🔽 ", "")
+			    )
+			RETURN
+			    IF(
+			        ISBLANK(TotalMinutes),
+			        BLANK(),
+			        IF(TotalMinutes < 0,
+			            Arrow & "-" & TimeFormat,
+			            Arrow & TimeFormat
+			        )
+			    )
+			
+			```
+		displayFolder: Mesures\AUTRES
+		lineageTag: 9486e6f5-6028-4eb1-8a6b-7e53698d0e8b
+
+	measure Evolution_24h_vs_48h_val_pastille = ```
+			
+			VAR Avg24h = [Avg_Last_24h]
+			VAR Avg48h = [Avg_Last_48h]
+			VAR Diff = Avg24h - Avg48h
+			VAR IsNegative = Diff < 0
+			VAR AbsMinutes = ABS(Diff)
+			VAR Hours = QUOTIENT(AbsMinutes, 60)
+			VAR Minutes = INT(AbsMinutes) - Hours * 60
+			VAR FormattedTime = FORMAT(Hours, "00") & ":" & FORMAT(Minutes, "00")
+			VAR Pastille = 
+			    IF(
+			        Diff <= 0,
+			        "🟢",  -- amélioration ou stable
+			        "🔴"   -- détérioration
+			    )
+			RETURN
+			Pastille & " " & IF(IsNegative, "-" & FormattedTime, FormattedTime)
+			
+			```
+		displayFolder: Mesures\AUTRES
+		lineageTag: 4bb62733-4f45-468f-923e-53218d654453
+
+	measure Evolution_max_24h_vs_48h_pastille = ```
+			
+			VAR Max24h = [Max_Last_24h]
+			VAR Max48h = [Max_Last_48h]
+			VAR Diff = Max24h - Max48h
+			VAR IsNegative = Diff < 0
+			VAR AbsMinutes = ABS(Diff)
+			VAR Hours = QUOTIENT(AbsMinutes, 60)
+			VAR Minutes = INT(AbsMinutes) - Hours * 60
+			VAR FormattedTime = FORMAT(Hours, "00") & ":" & FORMAT(Minutes, "00")
+			VAR Pastille = 
+			    IF(
+			        Diff <= 0,
+			        "🟢",  -- amélioration ou stable
+			        "🔴"   -- détérioration
+			    )
+			RETURN
+			Pastille & " " & IF(IsNegative, "-" & FormattedTime, FormattedTime)
+			
+			```
+		displayFolder: Mesures\AUTRES
+		lineageTag: ceab04cd-edd7-4a4d-ba9d-83bef6af0f38
+
+	measure Evolution_min_24h_vs_48h_pastille = ```
+			
+			VAR Min24h = [Min_Last_24h]
+			VAR Min48h = [Min_Last_48h]
+			VAR Diff = Min24h - Min48h
+			VAR IsNegative = Diff < 0
+			VAR AbsMinutes = ABS(Diff)
+			VAR Hours = QUOTIENT(AbsMinutes, 60)
+			VAR Minutes = INT(AbsMinutes) - Hours * 60
+			VAR FormattedTime = FORMAT(Hours, "00") & ":" & FORMAT(Minutes, "00")
+			VAR Pastille = 
+			    IF(
+			        Diff <= 0,
+			        "🟢",  -- amélioration ou stable
+			        "🔴"   -- détérioration
+			    )
+			RETURN
+			Pastille & " " & IF(IsNegative, "-" & FormattedTime, FormattedTime)
+			
+			```
+		displayFolder: Mesures\AUTRES
+		lineageTag: b37e6a99-c625-4dee-a882-5ca66d852971
+
+	measure '% batchs avec target' =
+			
+			DIVIDE(
+			    CALCULATE(COUNTROWS('fact_process_time_analyses'), NOT ISBLANK('fact_process_time_analyses'[target_business])),
+			    COUNTROWS('fact_process_time_analyses')
+			)
+		displayFolder: Mesures\MesuresTARGET_BUSINESS_NOT_NULL
+		lineageTag: 65555772-117f-47d0-9621-151510f25d8c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Moyenne hh:mm (avec target)' = ```
+			
+			VAR TotalMinutes = 
+			    CALCULATE(
+			        AVERAGE('fact_process_time_analyses'[mesure_value]),
+			        NOT ISBLANK('fact_process_time_analyses'[target_business])
+			    )
+			VAR IsNegative = TotalMinutes < 0
+			VAR AbsMinutes = ABS(TotalMinutes)
+			VAR Heures = QUOTIENT(AbsMinutes, 60)
+			VAR Minutes = INT(AbsMinutes) - Heures * 60
+			VAR Result = FORMAT(Heures, "00") & ":" & FORMAT(Minutes, "00")
+			RETURN
+			IF(ISBLANK(TotalMinutes), BLANK(), IF(IsNegative, "-" & Result, Result))
+			```
+		displayFolder: Mesures\MesuresTARGET_BUSINESS_NOT_NULL
+		lineageTag: f28b7534-0238-45cd-8caf-1664ab17f9f9
+
+	measure 'Moyenne_target_business_hh:mm (Target not null)' = ```
+			
+			VAR TotalMinutes = 
+			    CALCULATE(
+			        AVERAGE('fact_process_time_analyses'[target_business]),
+			        NOT ISBLANK('fact_process_time_analyses'[target_business])
+			    )
+			VAR IsNegative = TotalMinutes < 0
+			VAR AbsMinutes = ABS(TotalMinutes)
+			VAR Heures = QUOTIENT(AbsMinutes, 60)
+			VAR Minutes = INT(AbsMinutes) - Heures * 60
+			VAR Result = FORMAT(Heures, "00") & ":" & FORMAT(Minutes, "00")
+			RETURN
+			IF(ISBLANK(TotalMinutes), BLANK(), IF(IsNegative, "-" & Result, Result))
+			```
+		displayFolder: Mesures\MesuresTARGET_BUSINESS_NOT_NULL
+		lineageTag: d1b1cb61-9de5-48a6-87d0-f4cbfe32b7d2
+
+	measure 'Moyenne_delta_target_business_hh:mm (Target not null)' = ```
+			
+			VAR TotalMinutes = 
+			    CALCULATE(
+			        AVERAGE('fact_process_time_analyses'[delta_target_business]),
+			        NOT ISBLANK('fact_process_time_analyses'[target_business])
+			    )
+			VAR IsNegative = TotalMinutes < 0
+			VAR AbsMinutes = ABS(TotalMinutes)
+			VAR Heures = QUOTIENT(INT(AbsMinutes), 60)
+			VAR Minutes = MOD(INT(AbsMinutes), 60)
+			VAR Result = FORMAT(Heures, "00") & ":" & FORMAT(Minutes, "00")
+			RETURN
+			IF(ISBLANK(TotalMinutes), BLANK(), IF(IsNegative, "-" & Result, Result))
+			```
+		displayFolder: Mesures\MesuresTARGET_BUSINESS_NOT_NULL
+		lineageTag: 78226acc-9837-4aa1-9616-2ab37bd130a4
+
+	measure 'Nb batchs avec target' =
+			
+			CALCULATE(
+			    COUNTROWS('fact_process_time_analyses'),
+			    NOT ISBLANK('fact_process_time_analyses'[target_business])
+			)
+		formatString: 0
+		displayFolder: Mesures\MesuresTARGET_BUSINESS_NOT_NULL
+		lineageTag: aab416ac-79ae-4199-b4da-286822ba1eea
+
+	measure 'Nb batchs total' = COUNTROWS('fact_process_time_analyses')
+		formatString: 0
+		displayFolder: Mesures\MesuresTARGET_BUSINESS_NOT_NULL
+		lineageTag: f54e589d-e5ff-41fa-9687-69dd29361ffd
+
+	measure '% couverture target' =
+			
+			DIVIDE(
+			    [Nb batchs avec target],
+			    [Nb batchs total]
+			)
+		displayFolder: Mesures\MesuresTARGET_BUSINESS_NOT_NULL
+		lineageTag: 194e9486-4060-4796-9eff-c25e5a10c912
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Valeur
+		isHidden
+		formatString: 0
+		lineageTag: d8bfb6f5-b584-4eb8-b264-d74f031a3447
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Valeur]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Calcul = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "Valeur", INTEGER,
+				    {
+				        {1}
+				    }
+				)
+
+	annotation PBI_Id = 455e70d387864cc78db065db5377c4f3
+
