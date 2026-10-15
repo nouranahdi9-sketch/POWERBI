@@ -112,6 +112,11 @@ table fact_process_time_analyses
 		summarizeBy: none
 		sourceColumn: date_debut
 
+		variation Variation
+			isDefault
+			relationship: 7967c6dc-040b-418c-bdec-758193af54f0
+			defaultHierarchy: LocalDateTable_d8567de5-13fe-4555-8ea1-480427e3b210.'Date Hierarchy'
+
 		annotation SummarizationSetBy = Automatic
 
 	column date_fin
@@ -120,6 +125,11 @@ table fact_process_time_analyses
 		lineageTag: cead48e6-aadd-403e-8e12-1eb7b6ab663e
 		summarizeBy: none
 		sourceColumn: date_fin
+
+		variation Variation
+			isDefault
+			relationship: 3645b89e-b0ed-4de8-b6d7-6dab2a10e1c4
+			defaultHierarchy: LocalDateTable_21527b15-36ae-4e69-998c-003a56f48a55.'Date Hierarchy'
 
 		annotation SummarizationSetBy = Automatic
 
@@ -130,6 +140,11 @@ table fact_process_time_analyses
 		summarizeBy: none
 		sourceColumn: created_at
 
+		variation Variation
+			isDefault
+			relationship: 801c6ad4-5019-4abd-974e-07eb7b0bde33
+			defaultHierarchy: LocalDateTable_e93a98bd-e5ac-403a-b5b3-abd7da0b90bd.'Date Hierarchy'
+
 		annotation SummarizationSetBy = Automatic
 
 	column updated_at
@@ -139,6 +154,11 @@ table fact_process_time_analyses
 		summarizeBy: none
 		sourceColumn: updated_at
 
+		variation Variation
+			isDefault
+			relationship: f52f0b78-802d-4e61-9841-ac37b020460b
+			defaultHierarchy: LocalDateTable_28ca4eff-09cf-44ac-aa21-c0cf5361260b.'Date Hierarchy'
+
 		annotation SummarizationSetBy = Automatic
 
 	column deleted_at
@@ -147,6 +167,11 @@ table fact_process_time_analyses
 		lineageTag: 24974cc1-8bbc-46d4-b45b-b81f7bc8df24
 		summarizeBy: none
 		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 3fedae3f-10ea-48ea-9d5f-d592baaba6d9
+			defaultHierarchy: LocalDateTable_2ab8e89a-c807-48ef-ae10-1084651ce483.'Date Hierarchy'
 
 		annotation SummarizationSetBy = Automatic
 
@@ -239,17 +264,15 @@ table fact_process_time_analyses
 
 		annotation SummarizationSetBy = Automatic
 
-	column Last72hTransfert = ```
+	column Last72hTransfert =
 			
 			IF(
-			    'fact_process_time_analyses'[measure_type] = "Transfert" &&
+			    'fact_process_time_analyses'[measure_type] = "transfer" &&
 			    TRUNC('fact_process_time_analyses'[date_fin]) >= TODAY() - 3 &&
 			    TRUNC('fact_process_time_analyses'[date_fin]) <= TODAY(),
 			    1,
 			    0
 			)
-			
-			```
 		formatString: 0
 		displayFolder: ColonnesCalculees
 		lineageTag: 47931aeb-eed2-4a79-a056-11f34ef80e92
@@ -260,12 +283,13 @@ table fact_process_time_analyses
 	column Last72hattente = ```
 			
 			IF(
-			    'fact_process_time_analyses'[measure_type] = "Attente" &&
+			    'fact_process_time_analyses'[measure_type] = "waiting" &&
 			    TRUNC('fact_process_time_analyses'[date_fin]) >= TODAY() - 3 &&
 			    TRUNC('fact_process_time_analyses'[date_fin]) <= TODAY(),
 			    1,
 			    0
 			)
+			
 			
 			```
 		formatString: 0
@@ -346,7 +370,7 @@ table fact_process_time_analyses
 	column Last72hcycles = ```
 			
 			IF(
-			    'fact_process_time_analyses'[measure_type] = "BATCH_CYCLE_DURATION" &&
+			    'fact_process_time_analyses'[measure_type] = "batch_cycle_duration" &&
 			    TRUNC('fact_process_time_analyses'[date_fin]) >= TODAY() - 3 &&
 			    TRUNC('fact_process_time_analyses'[date_fin]) <= TODAY(),
 			    1,
@@ -478,6 +502,11 @@ table fact_process_time_analyses
 		lineageTag: ef6e4934-8cee-42da-a1a0-af91168be70e
 		summarizeBy: none
 
+		variation Variation
+			isDefault
+			relationship: df39ac7f-0603-4c22-a0a2-7d20c8de39d4
+			defaultHierarchy: LocalDateTable_17801c6c-2962-43e6-b379-a2888ac8d370.'Date Hierarchy'
+
 		annotation SummarizationSetBy = Automatic
 
 	column 'Last10Days new' =
@@ -506,6 +535,11 @@ table fact_process_time_analyses
 		displayFolder: ColonnesCalculees
 		lineageTag: c1506dcc-5964-44f7-bc81-06f92f02d82a
 		summarizeBy: none
+
+		variation Variation
+			isDefault
+			relationship: 46bd9490-9fff-4e85-88ad-a4efb072c590
+			defaultHierarchy: LocalDateTable_a13303c4-cd70-4b91-9276-d3cd9000129b.'Date Hierarchy'
 
 		changedProperty = DataType
 
@@ -563,6 +597,11 @@ table fact_process_time_analyses
 		lineageTag: cc7a7ff7-2d4b-4bd7-b078-4457f94baf93
 		summarizeBy: none
 		sourceColumn: date_fin_tab_overwiew
+
+		variation Variation
+			isDefault
+			relationship: 475f3dfb-0f74-4c36-9b06-9d6734410850
+			defaultHierarchy: LocalDateTable_a1f42da1-117b-47c0-be19-04528387c687.'Date Hierarchy'
 
 		annotation SummarizationSetBy = Automatic
 
@@ -647,9 +686,9 @@ table fact_process_time_analyses
 		mode: import
 		source =
 				let
-				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
-				    mal_maite_bi_preprd_Database = Source{[Name="mal_maite_bi_preprd",Kind="Database"]}[Data],
-				    process_time_analyses_Schema = mal_maite_bi_preprd_Database{[Name="process_time_analyses",Kind="Schema"]}[Data],
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    process_time_analyses_Schema = mal_maite_bi_prd_Database{[Name="process_time_analyses",Kind="Schema"]}[Data],
 				    fact_process_time_analyses_Table = process_time_analyses_Schema{[Name="fact_process_time_analyses",Kind="Table"]}[Data],
 				    #"Duplication de la colonne" = Table.DuplicateColumn(fact_process_time_analyses_Table, "label", "label - Copier"),
 				    #"Colonnes renommées" = Table.RenameColumns(#"Duplication de la colonne",{{"label - Copier", "label_graphe_cycle_time"}}),
@@ -672,7 +711,7 @@ table fact_process_time_analyses
 				in
 				    #"Colonnes renommées8"
 
-	annotation PBI_ResultType = Exception
+	annotation PBI_ResultType = Table
 
 	annotation PBI_NavigationStepName = Navigation
 

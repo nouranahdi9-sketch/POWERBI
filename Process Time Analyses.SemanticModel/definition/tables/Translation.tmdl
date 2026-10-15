@@ -651,7 +651,7 @@ table Translation
 
 	column ReportCode
 		dataType: string
-		lineageTag: 6a68b488-99b5-4e3c-9110-96ba0c6fdc24
+		lineageTag: 206aae1c-a183-4e27-ad58-e4a8e6c20f91
 		summarizeBy: none
 		sourceColumn: ReportCode
 
@@ -659,7 +659,7 @@ table Translation
 
 	column TranslationKey
 		dataType: string
-		lineageTag: a16a46cb-6597-4260-8b76-589c7db416c0
+		lineageTag: 4ca663b8-b461-4764-8be1-7ae54f67128c
 		summarizeBy: none
 		sourceColumn: TranslationKey
 
@@ -667,7 +667,7 @@ table Translation
 
 	column LanguageCode
 		dataType: string
-		lineageTag: a736f22d-86ce-4f37-a4c8-0731479e2627
+		lineageTag: c14f99e0-aacb-445c-af23-a13129596feb
 		summarizeBy: none
 		sourceColumn: LanguageCode
 
@@ -675,7 +675,7 @@ table Translation
 
 	column TranslationText
 		dataType: string
-		lineageTag: 87f0eb10-0ff6-448a-8fff-67820aabd1a7
+		lineageTag: 69cf5590-f789-4b19-bcf4-a6fc88740686
 		summarizeBy: none
 		sourceColumn: TranslationText
 
@@ -685,14 +685,14 @@ table Translation
 		mode: import
 		source =
 				let
-				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
-				    mal_maite_bi_preprd_Database = Source{[Name="mal_maite_bi_preprd",Kind="Database"]}[Data],
-				    common_Schema = mal_maite_bi_preprd_Database{[Name="common",Kind="Schema"]}[Data],
-				    translation_Table = common_Schema{[Name="translation",Kind="Table"]}[Data]
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    common = mal_maite_bi_prd_Database{[Name="common",Kind="Schema"]}[Data],
+				    translation = common{[Name="translation",Kind="Table"]}[Data]
 				in
-				    translation_Table
+				    translation
 
 	annotation PBI_NavigationStepName = Navigation
 
-	annotation PBI_ResultType = Exception
+	annotation PBI_ResultType = Table
 

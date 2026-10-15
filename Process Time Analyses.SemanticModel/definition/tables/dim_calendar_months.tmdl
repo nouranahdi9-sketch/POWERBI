@@ -33,6 +33,11 @@ table dim_calendar_months
 		summarizeBy: none
 		sourceColumn: updated_at
 
+		variation Variation
+			isDefault
+			relationship: 4c29a6ec-4541-4757-b9ac-a689b4943849
+			defaultHierarchy: LocalDateTable_e674f7da-123b-486e-8f77-51f65d86a931.'Date Hierarchy'
+
 		annotation SummarizationSetBy = Automatic
 
 	column created_at
@@ -41,6 +46,11 @@ table dim_calendar_months
 		lineageTag: fcaf0b7c-e863-4e47-80b7-2633588a2e93
 		summarizeBy: none
 		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: cf64aecb-be13-41d0-9fb2-5e83cdd34666
+			defaultHierarchy: LocalDateTable_026d916b-7b3a-479e-8e6d-feb5d97afea1.'Date Hierarchy'
 
 		annotation SummarizationSetBy = Automatic
 
@@ -51,15 +61,20 @@ table dim_calendar_months
 		summarizeBy: none
 		sourceColumn: deleted_at
 
+		variation Variation
+			isDefault
+			relationship: 817350bc-7742-4c6e-b7d4-d510d0186d1e
+			defaultHierarchy: LocalDateTable_9b4a2fbe-3106-437e-ac39-24333caa4cde.'Date Hierarchy'
+
 		annotation SummarizationSetBy = Automatic
 
 	partition dim_calendar_months = m
 		mode: import
 		source =
 				let
-				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
-				    mal_maite_bi_preprd_Database = Source{[Name="mal_maite_bi_preprd",Kind="Database"]}[Data],
-				    process_time_analyses_Schema = mal_maite_bi_preprd_Database{[Name="process_time_analyses",Kind="Schema"]}[Data],
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    process_time_analyses_Schema = mal_maite_bi_prd_Database{[Name="process_time_analyses",Kind="Schema"]}[Data],
 				    dim_calendar_months_Table = process_time_analyses_Schema{[Name="dim_calendar_months",Kind="Table"]}[Data]
 				in
 				    dim_calendar_months_Table

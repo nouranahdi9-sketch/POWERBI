@@ -24,6 +24,11 @@ table fact_batch_note
 		summarizeBy: none
 		sourceColumn: date_saisie
 
+		variation Variation
+			isDefault
+			relationship: 99981316-6516-4bed-9876-76b73e24f07f
+			defaultHierarchy: LocalDateTable_8023d442-678d-4308-8567-f1f27cb7c40e.'Date Hierarchy'
+
 		annotation SummarizationSetBy = Automatic
 
 	column event_date
@@ -32,6 +37,11 @@ table fact_batch_note
 		lineageTag: d8c147db-9f3b-48c1-957e-9b97ab07d2cd
 		summarizeBy: none
 		sourceColumn: event_date
+
+		variation Variation
+			isDefault
+			relationship: 50bbf284-df6c-4c91-b781-ed3201593928
+			defaultHierarchy: LocalDateTable_b7930d00-333f-4e2c-a454-ce9de45049b3.'Date Hierarchy'
 
 		annotation SummarizationSetBy = Automatic
 
@@ -101,6 +111,11 @@ table fact_batch_note
 		summarizeBy: none
 		sourceColumn: updated_at
 
+		variation Variation
+			isDefault
+			relationship: a94bfdd8-e657-4e27-aefd-d41ec8af4e96
+			defaultHierarchy: LocalDateTable_20270c41-5aeb-4eda-9503-5dfeca83aa1f.'Date Hierarchy'
+
 		annotation SummarizationSetBy = Automatic
 
 	column created_at
@@ -110,6 +125,11 @@ table fact_batch_note
 		summarizeBy: none
 		sourceColumn: created_at
 
+		variation Variation
+			isDefault
+			relationship: d79bc623-191a-41bd-b694-fbf10f10cd2d
+			defaultHierarchy: LocalDateTable_9e6484ce-ea18-4c41-aa25-ab9e33182f2d.'Date Hierarchy'
+
 		annotation SummarizationSetBy = Automatic
 
 	column deleted_at
@@ -118,6 +138,11 @@ table fact_batch_note
 		lineageTag: bb9b5e57-8927-49c5-8b13-71654a436de1
 		summarizeBy: none
 		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 48bb6f10-cdff-47cc-80c3-3e5f049855ff
+			defaultHierarchy: LocalDateTable_0777e71c-fd52-483f-b88a-8cd25690b9de.'Date Hierarchy'
 
 		annotation SummarizationSetBy = Automatic
 
@@ -170,50 +195,18 @@ table fact_batch_note
 
 		annotation SummarizationSetBy = Automatic
 
-	column key_location
-		dataType: string
-		lineageTag: 7d0fa161-23f0-4fe3-bc8b-a15d52a51fa7
-		summarizeBy: none
-		sourceColumn: key_location
-
-		annotation SummarizationSetBy = Automatic
-
-	column key_impact
-		dataType: string
-		lineageTag: fd37588c-f6db-4e3e-baa4-1a059e677f32
-		summarizeBy: none
-		sourceColumn: key_impact
-
-		annotation SummarizationSetBy = Automatic
-
-	column key_event
-		dataType: string
-		lineageTag: 99f77836-9f7c-47a3-b5d1-40a873723054
-		summarizeBy: none
-		sourceColumn: key_event
-
-		annotation SummarizationSetBy = Automatic
-
-	column key_detail
-		dataType: string
-		lineageTag: ec2ca65c-3bb0-4db0-8830-f0b4dd525059
-		summarizeBy: none
-		sourceColumn: key_detail
-
-		annotation SummarizationSetBy = Automatic
-
 	partition fact_batch_note = m
 		mode: import
 		source =
 				let
-				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
-				    mal_maite_bi_preprd_Database = Source{[Name="mal_maite_bi_preprd",Kind="Database"]}[Data],
-				    process_time_analyses_Schema = mal_maite_bi_preprd_Database{[Name="process_time_analyses",Kind="Schema"]}[Data],
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    process_time_analyses_Schema = mal_maite_bi_prd_Database{[Name="process_time_analyses",Kind="Schema"]}[Data],
 				    fact_batch_note_Table = process_time_analyses_Schema{[Name="fact_batch_note",Kind="Table"]}[Data]
 				in
 				    fact_batch_note_Table
 
 	annotation PBI_NavigationStepName = Navigation
 
-	annotation PBI_ResultType = Exception
+	annotation PBI_ResultType = Table
 

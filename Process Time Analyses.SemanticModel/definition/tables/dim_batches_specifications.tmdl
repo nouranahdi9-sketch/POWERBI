@@ -155,6 +155,11 @@ table dim_batches_specifications
 		summarizeBy: none
 		sourceColumn: planned_date
 
+		variation Variation
+			isDefault
+			relationship: 7015e6fc-77bb-46aa-ac88-caff17b609c6
+			defaultHierarchy: LocalDateTable_09f6dd33-c8f3-4f0e-b4d1-a334ca8d7856.'Date Hierarchy'
+
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date
@@ -184,6 +189,11 @@ table dim_batches_specifications
 		summarizeBy: none
 		sourceColumn: date_fin_prod
 
+		variation Variation
+			isDefault
+			relationship: b66b0f57-ce8f-4a98-b906-42ebf7f8174c
+			defaultHierarchy: LocalDateTable_77d5f482-0a82-425e-80bf-043f35ee9dc7.'Date Hierarchy'
+
 		annotation SummarizationSetBy = Automatic
 
 	column planned_datetime
@@ -192,6 +202,11 @@ table dim_batches_specifications
 		lineageTag: bb162db0-92ae-4b07-9b4e-8bc9afb0efad
 		summarizeBy: none
 		sourceColumn: planned_datetime
+
+		variation Variation
+			isDefault
+			relationship: 75702469-cc38-4706-b153-14ea5541f339
+			defaultHierarchy: LocalDateTable_4d7e4538-6653-4512-8acb-ae547dd61702.'Date Hierarchy'
 
 		annotation SummarizationSetBy = Automatic
 
@@ -202,6 +217,11 @@ table dim_batches_specifications
 		summarizeBy: none
 		sourceColumn: created_at
 
+		variation Variation
+			isDefault
+			relationship: 9b3199cb-2202-4a61-99cd-297388177c72
+			defaultHierarchy: LocalDateTable_1ab51422-af46-4cd2-afe5-dfb7a91bfcd8.'Date Hierarchy'
+
 		annotation SummarizationSetBy = Automatic
 
 	column updated_at
@@ -211,6 +231,11 @@ table dim_batches_specifications
 		summarizeBy: none
 		sourceColumn: updated_at
 
+		variation Variation
+			isDefault
+			relationship: 35310ce7-42a3-4e78-8da3-5efe9b6cb85d
+			defaultHierarchy: LocalDateTable_e8386735-f525-4578-8feb-b2a77bfb453e.'Date Hierarchy'
+
 		annotation SummarizationSetBy = Automatic
 
 	column deleted_at
@@ -219,6 +244,11 @@ table dim_batches_specifications
 		lineageTag: d959667f-8398-4b52-b778-396a4d40447d
 		summarizeBy: none
 		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 4fb42b0c-700a-42b1-92f3-e8d21292fd09
+			defaultHierarchy: LocalDateTable_be226110-90e5-4eab-9316-fb7524fe6ab3.'Date Hierarchy'
 
 		annotation SummarizationSetBy = Automatic
 
@@ -406,6 +436,11 @@ table dim_batches_specifications
 		lineageTag: a45b4cfb-ff46-4d80-b3a7-d33540cb9bc6
 		summarizeBy: none
 
+		variation Variation
+			isDefault
+			relationship: 5f709d9b-beee-40c4-b51a-0068e502185f
+			defaultHierarchy: LocalDateTable_314942ec-0415-48b6-97b2-31230d80cf26.'Date Hierarchy'
+
 		annotation SummarizationSetBy = Automatic
 
 	column HEURE = NOW()
@@ -413,12 +448,22 @@ table dim_batches_specifications
 		lineageTag: 4c6fbb61-1f4c-4848-ae52-9f1172b79e24
 		summarizeBy: none
 
+		variation Variation
+			isDefault
+			relationship: f0af0e57-70a6-4011-92bb-174d0aba18b8
+			defaultHierarchy: LocalDateTable_d6124075-fff5-45e8-b731-ca09033d1a77.'Date Hierarchy'
+
 		annotation SummarizationSetBy = Automatic
 
 	column DIFFHEURE = dim_batches_specifications[HEUREUTC]-dim_batches_specifications[HEURE]
 		formatString: General Date
 		lineageTag: d4628f79-08a4-4e85-8503-08b8094edca3
 		summarizeBy: none
+
+		variation Variation
+			isDefault
+			relationship: 5d1a01a1-4b1a-4133-b295-883da030125a
+			defaultHierarchy: LocalDateTable_b82ff03c-9c05-42cb-8d39-f156d33a428a.'Date Hierarchy'
 
 		annotation SummarizationSetBy = Automatic
 
@@ -451,41 +496,10 @@ table dim_batches_specifications
 		lineageTag: 6b84d7f3-d1ff-443c-8a8c-18309d4a3782
 		summarizeBy: none
 
-		annotation SummarizationSetBy = Automatic
-
-	column id_good_specy
-		dataType: int64
-		formatString: 0
-		lineageTag: 9874d5d6-fa68-4a9e-9986-d700009507ee
-		summarizeBy: sum
-		sourceColumn: id_good_specy
-
-		annotation SummarizationSetBy = Automatic
-
-	column id_good_variety
-		dataType: int64
-		formatString: 0
-		lineageTag: 2d313695-cd8c-4385-8ac7-c37972e82c6c
-		summarizeBy: sum
-		sourceColumn: id_good_variety
-
-		annotation SummarizationSetBy = Automatic
-
-	column id_parameter_production_type
-		dataType: int64
-		formatString: 0
-		lineageTag: e279a418-4627-4065-9f72-e66616b46f61
-		summarizeBy: sum
-		sourceColumn: id_parameter_production_type
-
-		annotation SummarizationSetBy = Automatic
-
-	column id_requirement_specification
-		dataType: int64
-		formatString: 0
-		lineageTag: d7c2228a-5cd4-426e-885f-98a00c6bbb8b
-		summarizeBy: sum
-		sourceColumn: id_requirement_specification
+		variation Variation
+			isDefault
+			relationship: aeed211e-a2c3-427b-8a22-bc1f8892baf2
+			defaultHierarchy: LocalDateTable_27bcb866-6b05-4897-9a34-4baf3b0636a2.'Date Hierarchy'
 
 		annotation SummarizationSetBy = Automatic
 
@@ -493,9 +507,9 @@ table dim_batches_specifications
 		mode: import
 		source =
 				let
-				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
-				    mal_maite_bi_preprd_Database = Source{[Name="mal_maite_bi_preprd",Kind="Database"]}[Data],
-				    process_time_analyses_Schema = mal_maite_bi_preprd_Database{[Name="process_time_analyses",Kind="Schema"]}[Data],
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    process_time_analyses_Schema = mal_maite_bi_prd_Database{[Name="process_time_analyses",Kind="Schema"]}[Data],
 				    dim_batches_specifications_Table = process_time_analyses_Schema{[Name="dim_batches_specifications",Kind="Table"]}[Data]
 				in
 				    dim_batches_specifications_Table

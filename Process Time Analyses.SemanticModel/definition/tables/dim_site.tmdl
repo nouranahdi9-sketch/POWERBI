@@ -11,10 +11,9 @@ table dim_site
 		annotation SummarizationSetBy = Automatic
 
 	column plant
-		dataType: int64
-		formatString: 0
+		dataType: string
 		lineageTag: 0e7d9538-4df7-413d-acde-20411d81e67d
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: plant
 
 		annotation SummarizationSetBy = Automatic
@@ -26,6 +25,11 @@ table dim_site
 		summarizeBy: none
 		sourceColumn: updated_at
 
+		variation Variation
+			isDefault
+			relationship: 5566a337-030d-431b-be9e-a98801146e11
+			defaultHierarchy: LocalDateTable_56431f84-ab73-4bf5-b423-acfc94483b58.'Date Hierarchy'
+
 		annotation SummarizationSetBy = Automatic
 
 	column created_at
@@ -34,6 +38,11 @@ table dim_site
 		lineageTag: a46eef9a-efb0-4c75-8a1a-29d3a6565930
 		summarizeBy: none
 		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: df6beca6-671a-409c-acc6-447c3c23004a
+			defaultHierarchy: LocalDateTable_7370f4d0-a267-4ada-803b-a62b7f2bce5d.'Date Hierarchy'
 
 		annotation SummarizationSetBy = Automatic
 
@@ -44,65 +53,10 @@ table dim_site
 		summarizeBy: none
 		sourceColumn: deleted_at
 
-		annotation SummarizationSetBy = Automatic
-
-	column name
-		dataType: string
-		lineageTag: aa403cfc-da9d-4a47-be1e-c2cacc238560
-		summarizeBy: none
-		sourceColumn: name
-
-		annotation SummarizationSetBy = Automatic
-
-	column process
-		dataType: int64
-		formatString: 0
-		lineageTag: b6bc7bae-da36-4e9a-bddd-13f8b549b40b
-		summarizeBy: sum
-		sourceColumn: process
-
-		annotation SummarizationSetBy = Automatic
-
-	column default_production_type
-		dataType: int64
-		formatString: 0
-		lineageTag: 0f5a4569-1614-45e0-9f2c-d6aa28b118ce
-		summarizeBy: sum
-		sourceColumn: default_production_type
-
-		annotation SummarizationSetBy = Automatic
-
-	column deleted
-		dataType: boolean
-		formatString: """TRUE"";""TRUE"";""FALSE"""
-		lineageTag: d01b6f7c-f268-45b9-8ab7-9eb0760dd5b4
-		summarizeBy: none
-		sourceColumn: deleted
-
-		annotation SummarizationSetBy = Automatic
-
-	column default_batch_cycle
-		dataType: int64
-		formatString: 0
-		lineageTag: 729bbdab-1374-42d5-9bc9-5bd8d5694c31
-		summarizeBy: sum
-		sourceColumn: default_batch_cycle
-
-		annotation SummarizationSetBy = Automatic
-
-	column sap_code
-		dataType: string
-		lineageTag: d4547645-4cf2-4639-ae90-f4abe44cb7e6
-		summarizeBy: none
-		sourceColumn: sap_code
-
-		annotation SummarizationSetBy = Automatic
-
-	column common_code
-		dataType: string
-		lineageTag: 5d8147c8-5466-429c-88f1-8ca4d1520305
-		summarizeBy: none
-		sourceColumn: common_code
+		variation Variation
+			isDefault
+			relationship: 1eadbe98-a1fe-4c73-b5e7-031d12c7d055
+			defaultHierarchy: LocalDateTable_c23c486a-db43-452a-bc0e-18fe07633580.'Date Hierarchy'
 
 		annotation SummarizationSetBy = Automatic
 
@@ -110,14 +64,12 @@ table dim_site
 		mode: import
 		source =
 				let
-				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
-				    mal_maite_bi_preprd_Database = Source{[Name="mal_maite_bi_preprd",Kind="Database"]}[Data],
-				    common_Schema = mal_maite_bi_preprd_Database{[Name="common",Kind="Schema"]}[Data],
-				    dim_site_Table = common_Schema{[Name="dim_site",Kind="Table"]}[Data]
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    process_time_analyses_Schema = mal_maite_bi_prd_Database{[Name="process_time_analyses",Kind="Schema"]}[Data],
+				    dim_site_Table = process_time_analyses_Schema{[Name="dim_site",Kind="Table"]}[Data]
 				in
 				    dim_site_Table
 
 	annotation PBI_ResultType = Table
-
-	annotation PBI_NavigationStepName = Navigation
 

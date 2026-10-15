@@ -136,7 +136,7 @@ table Calcul
 		displayFolder: Mesures\AUTRES
 		lineageTag: 0a2d48d2-7ae1-43a8-b551-ba46c695993b
 
-	measure Min_30Days_CycleDuration = ```
+	measure Min_30Days_CycleDuration =
 			
 			VAR MaxDate =
 			    MAX ( 'fact_process_time_analyses'[date_debut] )
@@ -145,7 +145,7 @@ table Calcul
 			RETURN
 			CALCULATE (
 			    MIN ( 'fact_process_time_analyses'[mesure_value_h] ),
-			    'fact_process_time_analyses'[measure_type] = "BATCH_CYCLE_DURATION",
+			    'fact_process_time_analyses'[measure_type] = "batch_cycle_duration",
 			    REMOVEFILTERS ( 'fact_process_time_analyses'[batch_id] ),
 			    FILTER (
 			        ALLSELECTED ( 'fact_process_time_analyses'[date_debut] ),
@@ -153,8 +153,6 @@ table Calcul
 			            && 'fact_process_time_analyses'[date_debut] <= MaxDate
 			    )
 			)
-			
-			```
 		displayFolder: Mesures\AUTRES
 		lineageTag: 64c03024-2967-429a-99c7-f11b974f1e35
 
@@ -169,7 +167,7 @@ table Calcul
 			RETURN
 			CALCULATE (
 			    MIN ( 'fact_process_time_analyses'[mesure_value_h] ),
-			    'fact_process_time_analyses'[measure_type] = "BATCH_CYCLE_DURATION",
+			    'fact_process_time_analyses'[measure_type] = "batch_cycle_duration",
 			    REMOVEFILTERS ( 'fact_process_time_analyses'[batch_id] ),
 			    FILTER (
 			        ALLSELECTED ( 'fact_process_time_analyses'[date_debut] ),
@@ -177,6 +175,7 @@ table Calcul
 			            && 'fact_process_time_analyses'[date_debut] <= MaxDate
 			    )
 			)
+			
 			
 			```
 		displayFolder: Mesures\AUTRES
@@ -249,7 +248,7 @@ table Calcul
 			RETURN
 			CALCULATE (
 			    MAX ( 'fact_process_time_analyses'[mesure_value_h] ),
-			    'fact_process_time_analyses'[measure_type] = "BATCH_CYCLE_DURATION",
+			    'fact_process_time_analyses'[measure_type] = "batch_cycle_duration",
 			    REMOVEFILTERS ( 'fact_process_time_analyses'[batch_id] ),
 			    FILTER (
 			        ALLSELECTED ( 'fact_process_time_analyses'[date_debut] ),
@@ -257,6 +256,7 @@ table Calcul
 			            && 'fact_process_time_analyses'[date_debut] <= MaxDate
 			    )
 			)
+			
 			
 			```
 		displayFolder: Mesures\AUTRES
@@ -273,7 +273,7 @@ table Calcul
 			RETURN
 			CALCULATE (
 			    MAX ( 'fact_process_time_analyses'[mesure_value_h] ),
-			    'fact_process_time_analyses'[measure_type] = "BATCH_CYCLE_DURATION",
+			    'fact_process_time_analyses'[measure_type] = "batch_cycle_duration",
 			    REMOVEFILTERS ( 'fact_process_time_analyses'[batch_id] ),
 			    FILTER (
 			        ALLSELECTED ( 'fact_process_time_analyses'[date_debut] ),
