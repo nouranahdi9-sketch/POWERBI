@@ -1,0 +1,107 @@
+table fact_review
+	lineageTag: 4d56ac34-ba29-400c-9566-b47ab85030c7
+
+	column id_ventilation
+		dataType: int64
+		formatString: 0
+		lineageTag: 522600ca-e621-45e4-b7dd-3011fdb74489
+		summarizeBy: none
+		sourceColumn: id_ventilation
+
+		annotation SummarizationSetBy = Automatic
+
+	column valeur
+		dataType: double
+		lineageTag: 05f9ae41-6a9d-4e5f-84d5-3e9bd2692f27
+		summarizeBy: sum
+		sourceColumn: valeur
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c4983f28-4553-4967-a929-145ca20897b5
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 7181edf1-76b0-4d8e-974d-5325f30ce725
+			defaultHierarchy: LocalDateTable_4f634806-99a7-456e-b05a-6503eac67d07.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: ddf8152e-e6de-4938-90eb-68915485209c
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: a9451b21-8a6e-4fd8-9fa7-e2116a025d68
+			defaultHierarchy: LocalDateTable_f33ecd68-a8f7-441a-8b93-79e286bec364.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 56377d4c-6941-4e20-afa7-19ba22e9c6ca
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 830cde9f-fda0-4413-9108-1eb48d979283
+			defaultHierarchy: LocalDateTable_e6798646-737f-440b-ab48-ebe6d5bfb200.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column mois_annee
+		dataType: string
+		lineageTag: 074485d6-80dc-4d24-955b-571af42da96c
+		summarizeBy: none
+		sourceColumn: mois_annee
+		sortByColumn: custom_order
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column custom_order
+		dataType: int64
+		formatString: 0
+		lineageTag: 03ec6d68-2871-45fa-851c-072c83a56189
+		summarizeBy: sum
+		sourceColumn: custom_order
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_batch
+		dataType: string
+		lineageTag: a07fe5bf-a7f9-4eb9-bf4b-35c2fa1ec4df
+		summarizeBy: none
+		sourceColumn: id_batch
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_review = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    gains_Schema = mal_maite_bi_prd_Database{[Name="gains",Kind="Schema"]}[Data],
+				    fact_review_Table = gains_Schema{[Name="fact_review",Kind="Table"]}[Data]
+				in
+				    fact_review_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

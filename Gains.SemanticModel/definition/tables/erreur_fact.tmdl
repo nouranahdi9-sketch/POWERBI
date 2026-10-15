@@ -1,0 +1,240 @@
+table erreur_fact
+	lineageTag: c0c9916a-f5ea-4e83-982f-02b03e14b629
+
+	column causes
+		dataType: string
+		lineageTag: 4ad567e5-c825-4ebc-bbb3-277edd8801e2
+		summarizeBy: none
+		sourceColumn: causes
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_fin_production
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 241d606f-e306-442f-81bc-59b1a8b809a6
+		summarizeBy: none
+		sourceColumn: date_fin_production
+
+		variation Variation
+			isDefault
+			relationship: 80b21d63-44b7-484f-9ba2-382cfafe29de
+			defaultHierarchy: LocalDateTable_ef08459e-bc54-4ce8-bef3-583a62b9ce2a.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column batch
+		dataType: string
+		lineageTag: 8dd64872-00ff-4831-855a-c88eebaa1fef
+		summarizeBy: none
+		sourceColumn: batch
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_site_production
+		dataType: int64
+		formatString: 0
+		lineageTag: da990019-9b44-4bcb-921a-77a1dca1b787
+		summarizeBy: none
+		sourceColumn: id_site_production
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_production
+		dataType: string
+		lineageTag: 8839fb12-7a00-4a52-ba93-26636aeeae3b
+		summarizeBy: none
+		sourceColumn: site_production
+
+		annotation SummarizationSetBy = Automatic
+
+	column type_de_production
+		dataType: string
+		lineageTag: 39412737-3a3b-43d8-aacc-b20900278f5a
+		summarizeBy: none
+		sourceColumn: type_de_production
+
+		annotation SummarizationSetBy = Automatic
+
+	column cahier_des_charges
+		dataType: string
+		lineageTag: 2dbaed4e-1696-4527-a322-bd44abb723a6
+		summarizeBy: none
+		sourceColumn: cahier_des_charges
+
+		annotation SummarizationSetBy = Automatic
+
+	column baseline_orge_humide
+		dataType: double
+		lineageTag: 01f94676-46b8-4f4f-a573-08a65d5fb47e
+		summarizeBy: sum
+		sourceColumn: baseline_orge_humide
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column baseline_r2_humide
+		dataType: double
+		lineageTag: dd7d9569-ea10-4590-9b8a-fbbc271444e8
+		summarizeBy: sum
+		sourceColumn: baseline_r2_humide
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column baseline_humidite_orge
+		dataType: double
+		lineageTag: b4f5d499-8cc5-4150-88b5-625390579dee
+		summarizeBy: sum
+		sourceColumn: baseline_humidite_orge
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column baseline_r2_sec
+		dataType: double
+		lineageTag: 4ff90d9a-4eef-476c-a9ca-c51bd7ce5139
+		summarizeBy: sum
+		sourceColumn: baseline_r2_sec
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column baseline_humidite_malt
+		dataType: double
+		lineageTag: 6bfa2569-d821-4d8b-a480-8ba4badb8ed8
+		summarizeBy: sum
+		sourceColumn: baseline_humidite_malt
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column reel_orge_humide
+		dataType: double
+		lineageTag: ce2dff30-9778-400e-ac8f-405e9c098be2
+		summarizeBy: sum
+		sourceColumn: reel_orge_humide
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column reel_humidite_orge
+		dataType: double
+		lineageTag: 1640e06d-358e-4ca3-8d3e-0f23e020b389
+		summarizeBy: sum
+		sourceColumn: reel_humidite_orge
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column reel_humidite_malt
+		dataType: double
+		lineageTag: 4b85bffe-bea6-448f-98cf-4fcdaee97df1
+		summarizeBy: sum
+		sourceColumn: reel_humidite_malt
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column reel_malt_humide
+		dataType: double
+		lineageTag: 855ab922-acf5-4c46-9cc5-df8c541b7094
+		summarizeBy: sum
+		sourceColumn: reel_malt_humide
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column id_cahier_des_charges
+		dataType: int64
+		formatString: 0
+		lineageTag: d0da0c05-58b0-488a-aebb-b7ae4990e545
+		summarizeBy: sum
+		sourceColumn: id_cahier_des_charges
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: dd9ffbe3-9819-48c4-9643-8cc76ab96cac
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 6bab52ff-5c11-4c42-98aa-f21b3f350a3a
+			defaultHierarchy: LocalDateTable_b6cc22de-08b5-420e-ba7f-61a4397e356b.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d21ab4cb-f066-45de-b317-dd72229c4048
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: 15da443e-9502-4ad2-bdc2-e71d8ce6aaf5
+			defaultHierarchy: LocalDateTable_b6801b94-aed6-441d-9f79-7f3d0e0cc92d.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 19ca988f-a493-4a5d-8d3c-87a0f5709287
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 7d9c2101-0b75-4398-854f-fe56b20dedd4
+			defaultHierarchy: LocalDateTable_93925e95-bffe-4c94-a551-b3616eb7eeca.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'batch & site_production'
+		dataType: string
+		lineageTag: a43b405b-6d48-47ce-9fdf-7bc4d76c8e47
+		summarizeBy: none
+		sourceColumn: batch & site_production
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_batch
+		dataType: string
+		lineageTag: f1e20707-962d-46c8-a3c6-05ea880196df
+		summarizeBy: none
+		sourceColumn: id_batch
+
+		annotation SummarizationSetBy = Automatic
+
+	partition erreur_fact = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    gains_Schema = mal_maite_bi_prd_Database{[Name="gains",Kind="Schema"]}[Data],
+				    erreur_fact_Table = gains_Schema{[Name="erreur_fact",Kind="Table"]}[Data],
+				    #"Personnalisée ajoutée" = Table.AddColumn(erreur_fact_Table, "batch & site_production", each [batch] & " " & [site_production]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"Personnalisée ajoutée",{{"batch & site_production", type text}})
+				in
+				    #"Type modifié"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

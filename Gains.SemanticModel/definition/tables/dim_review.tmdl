@@ -1,0 +1,91 @@
+table dim_review
+	lineageTag: a78959f7-1f12-412c-9ede-c97b30cd768b
+
+	column id_ventilation
+		dataType: int64
+		formatString: 0
+		lineageTag: dba69c60-0c26-497e-973f-7717db546fff
+		summarizeBy: none
+		sourceColumn: id_ventilation
+
+		annotation SummarizationSetBy = Automatic
+
+	column ventilation
+		dataType: string
+		lineageTag: d6baf3cb-a515-402c-99a5-c84bc6db809b
+		summarizeBy: none
+		sourceColumn: ventilation
+		sortByColumn: id_ventilation
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column texte
+		dataType: string
+		lineageTag: 0bd548be-392c-4ccb-bae5-2e8a0a2183e9
+		summarizeBy: none
+		sourceColumn: texte
+		sortByColumn: id_ventilation
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f3596eb1-bf23-4526-a6bc-db5e9012ce20
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 908d202e-d290-4ab9-bd05-fc9e5465e204
+			defaultHierarchy: LocalDateTable_ed0fa8e3-f243-48e1-bc06-814dc1fb8ae4.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: b941b123-9f3f-46ef-b6a1-7581d1ed2a12
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: f13fafe1-067c-4d83-a9dc-d8e31e81ac0a
+			defaultHierarchy: LocalDateTable_81d243e1-186a-4bb4-8664-17ac01d75bf2.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 95c5cd73-b463-41e2-8eca-025b14db6efc
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 803ee2fd-e45b-4abb-ab83-6abec979b0b3
+			defaultHierarchy: LocalDateTable_1be1c5ca-63ae-4b0b-b759-4ebd141bf1fd.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_review = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    gains_Schema = mal_maite_bi_prd_Database{[Name="gains",Kind="Schema"]}[Data],
+				    dim_review_Table = gains_Schema{[Name="dim_review",Kind="Table"]}[Data]
+				in
+				    dim_review_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

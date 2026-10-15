@@ -1,0 +1,310 @@
+table kWh_t
+	lineageTag: 06523331-e91a-456f-986f-41309e6a6a1e
+
+	measure reel_coge_standard =
+			
+			CALCULATE(
+			    AVERAGE('kWh_t'[reel_coge_kwh_t]),
+			    'kWh_t'[type_de_production] = "standard"
+			)
+		lineageTag: 3b7bbe62-c637-4c05-a5eb-21a30e2a25c6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure reel_gaz_standard =
+			
+			CALCULATE(
+			    AVERAGE('kWh_t'[reel_gaz_kwh_t]),
+			    'kWh_t'[type_de_production] = "standard"
+			)
+		lineageTag: 1ba4203e-c9c9-4fd8-b676-8d2ab22d380c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure reel_pac_standard =
+			
+			CALCULATE(
+			    AVERAGE('kWh_t'[reel_pac_kwh_t]),
+			    'kWh_t'[type_de_production] = "standard"
+			)
+		lineageTag: 38de18e1-cdac-47cd-b809-5528b725623f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure reel_thermique_standard =
+			
+			CALCULATE(
+			    AVERAGE('kWh_t'[reel_thermique_kwh_t]),
+			    'kWh_t'[type_de_production] = "standard"
+			)
+		lineageTag: 256c1b08-5d47-4aa7-838c-10db94e1329e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure reel_elec_standard =
+			
+			CALCULATE(
+			    AVERAGE('kWh_t'[reel_elec_kwh_t]),
+			    'kWh_t'[type_de_production] = "standard"
+			)
+		lineageTag: 425a5b4a-b1be-4eaa-a83b-41ebfde04234
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure reel_coge_optisteep =
+			
+			CALCULATE(
+			    AVERAGE('kWh_t'[reel_coge_kwh_t]),
+			    'kWh_t'[type_de_production] = "optisteep"
+			)
+		lineageTag: 30787d01-29c7-4735-9c24-221be181bb48
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure reel_gaz_optisteep =
+			
+			CALCULATE(
+			    AVERAGE('kWh_t'[reel_gaz_kwh_t]),
+			    'kWh_t'[type_de_production] = "optisteep"
+			)
+		lineageTag: f36cbe74-edaf-4368-8dc2-60caa9ca7810
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure reel_pac_optisteep =
+			
+			CALCULATE(
+			    AVERAGE('kWh_t'[reel_pac_kwh_t]),
+			    'kWh_t'[type_de_production] = "optisteep"
+			)
+		lineageTag: 83552e7a-32f4-4176-9637-9bf19be0de6f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure reel_thermique_optisteep =
+			
+			CALCULATE(
+			    AVERAGE('kWh_t'[reel_thermique_kwh_t]),
+			    'kWh_t'[type_de_production] = "optisteep"
+			)
+		lineageTag: c306ac8c-8070-4e1b-8648-a14df6cb15b0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure reel_elec_optisteep =
+			
+			CALCULATE(
+			    AVERAGE('kWh_t'[reel_elec_kwh_t]),
+			    'kWh_t'[type_de_production] = "optisteep"
+			)
+		lineageTag: 45a37be3-88f7-49df-8223-a124c3cf3e61
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column date_fin_production
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 54a53b63-7581-4572-90f9-05d86f9da4a6
+		summarizeBy: none
+		sourceColumn: date_fin_production
+
+		variation Variation
+			isDefault
+			relationship: 3be734f3-a1da-4d77-bc97-7c18bcd4383a
+			defaultHierarchy: LocalDateTable_90293652-c376-40c4-addf-612aa5029cbb.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column cahier_des_charges
+		dataType: string
+		lineageTag: 4fba5136-31f9-46eb-8c02-ac1cc87d86e8
+		summarizeBy: none
+		sourceColumn: cahier_des_charges
+
+		annotation SummarizationSetBy = Automatic
+
+	column type_de_production
+		dataType: string
+		lineageTag: ab1f7e47-d369-4bc6-8b9a-163571cc4c02
+		summarizeBy: none
+		sourceColumn: type_de_production
+
+		annotation SummarizationSetBy = Automatic
+
+	column reel_thermique_kWh_t
+		dataType: double
+		lineageTag: 37c78b14-67bf-4df6-9bd1-8704f1451e8d
+		summarizeBy: sum
+		sourceColumn: reel_thermique_kWh_t
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column baseline_thermique_kWh_t
+		dataType: double
+		lineageTag: 2e4f4352-af40-4fd4-a119-f73d6c2800bb
+		summarizeBy: sum
+		sourceColumn: baseline_thermique_kWh_t
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ecart_thermique_kWh_t
+		dataType: double
+		lineageTag: a3ad3aa4-0456-4713-b085-e43d027ef5b0
+		summarizeBy: sum
+		sourceColumn: ecart_thermique_kWh_t
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column reel_elec_kWh_t
+		dataType: double
+		lineageTag: 46c20e04-4ac1-4326-8649-01e3acd432fe
+		summarizeBy: sum
+		sourceColumn: reel_elec_kWh_t
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column baseline_elec_kWh_t
+		dataType: double
+		lineageTag: c8ec0938-9388-4001-a72b-ab05e50f5575
+		summarizeBy: sum
+		sourceColumn: baseline_elec_kWh_t
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ecart_elec_kWh_t
+		dataType: double
+		lineageTag: 46f6a1b7-f89d-4f9f-b066-1059e50a1842
+		summarizeBy: sum
+		sourceColumn: ecart_elec_kWh_t
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column batch
+		dataType: string
+		lineageTag: 1ca753eb-a60e-482c-b2e9-63bf077034fa
+		summarizeBy: none
+		sourceColumn: batch
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_site_production
+		dataType: int64
+		formatString: 0
+		lineageTag: babea5ee-7174-4e4d-a1ee-82bc5eebbd79
+		summarizeBy: sum
+		sourceColumn: id_site_production
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_production
+		dataType: string
+		lineageTag: bdcb75e7-95eb-4999-9e01-fe3021e27053
+		summarizeBy: none
+		sourceColumn: site_production
+
+		annotation SummarizationSetBy = Automatic
+
+	column goods_specy
+		dataType: string
+		lineageTag: cfa2019e-2b05-457e-b3c8-9968828d8cc8
+		summarizeBy: none
+		sourceColumn: goods_specy
+
+		annotation SummarizationSetBy = Automatic
+
+	column goods_variety
+		dataType: string
+		lineageTag: 13870122-7fe6-493c-889d-42642362642b
+		summarizeBy: none
+		sourceColumn: goods_variety
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_cahier_des_charges
+		dataType: int64
+		formatString: 0
+		lineageTag: b48c1778-48de-417c-8b73-3db3ad1436d1
+		summarizeBy: sum
+		sourceColumn: id_cahier_des_charges
+
+		annotation SummarizationSetBy = Automatic
+
+	column reel_malt_humide
+		dataType: double
+		lineageTag: e29b1429-5bb7-4ab3-9c47-8c93384aa5bb
+		summarizeBy: sum
+		sourceColumn: reel_malt_humide
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a2712c39-827d-45ef-98a1-5ee20fc5ee9f
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 3db08da1-34b1-4e76-acb7-368ec6e29cc0
+			defaultHierarchy: LocalDateTable_1bac1ab0-8322-4058-9ca0-48f5f23e8f2c.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8cb89248-4b96-4998-9d92-9c1503bd33bd
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: 7aed3f19-de4f-4e54-ade0-de69643e2caf
+			defaultHierarchy: LocalDateTable_56214746-63e9-4470-b5ed-e4f33a649377.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 358d96fd-11e7-4acb-81c1-29d4b669f365
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 5969b9b1-b724-42a7-8fdb-9a5c62af885b
+			defaultHierarchy: LocalDateTable_08c90010-489c-48d6-bacc-759ecb4e1de1.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition kWh_t = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    gains_Schema = mal_maite_bi_prd_Database{[Name="gains",Kind="Schema"]}[Data],
+				    fact_kwh_t_Table = gains_Schema{[Name="fact_kwh_t",Kind="Table"]}[Data]
+				in
+				    fact_kwh_t_Table
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

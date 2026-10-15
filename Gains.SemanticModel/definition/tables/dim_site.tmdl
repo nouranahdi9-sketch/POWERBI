@@ -1,0 +1,80 @@
+table dim_site
+	lineageTag: e73b4239-9d65-4c17-9555-00fc255d015a
+
+	column id_plant
+		dataType: int64
+		formatString: 0
+		lineageTag: d44ac5cf-0c5d-486a-9ab9-b8a5a472ca9f
+		summarizeBy: none
+		sourceColumn: id_plant
+
+		annotation SummarizationSetBy = Automatic
+
+	column plant
+		dataType: string
+		lineageTag: 3ccab582-32aa-400c-b352-b9b7a20fd9f3
+		summarizeBy: none
+		sourceColumn: plant
+		sortByColumn: id_plant
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 550594e2-c65d-4d52-b08e-8fd6b18cc7f7
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: daa25b58-bc36-47f3-acf0-fd05af01ab1a
+			defaultHierarchy: LocalDateTable_0a354e86-60ec-4e00-a952-6e9fd4131252.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 5e732739-edd0-47ff-9dc0-97e8523d86f1
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: c63768b6-da94-485f-b737-d58e14472090
+			defaultHierarchy: LocalDateTable_5affd324-54d7-4962-8916-20501c0bbafe.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c7996aa3-df09-4ea4-9ccd-8e7031804b1b
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: e1c760d7-d2ba-4f0e-9b9a-32ee813dd05d
+			defaultHierarchy: LocalDateTable_4450267d-67bc-444e-bc12-0b94fcbebf1d.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_site = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    gains_Schema = mal_maite_bi_prd_Database{[Name="gains",Kind="Schema"]}[Data],
+				    dim_site_Table = gains_Schema{[Name="dim_site",Kind="Table"]}[Data]
+				in
+				    dim_site_Table
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

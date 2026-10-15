@@ -1,0 +1,182 @@
+table erreur_nrj
+	lineageTag: 1687921c-25ae-4bc2-a3fc-7667e3bc89e7
+
+	column batch
+		dataType: string
+		lineageTag: 6f0c2365-c1b0-47e3-803d-10928d913892
+		summarizeBy: none
+		sourceColumn: batch
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_site_production
+		dataType: int64
+		formatString: 0
+		lineageTag: 5a277ce0-eb77-4f4f-b988-69e6e039185c
+		summarizeBy: none
+		sourceColumn: id_site_production
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_production
+		dataType: string
+		lineageTag: a95916d3-10b3-4135-9178-4584cb58df04
+		summarizeBy: none
+		sourceColumn: site_production
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_fin_production
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 9f565e76-99fb-43ed-aa34-6787fb007991
+		summarizeBy: none
+		sourceColumn: date_fin_production
+
+		variation Variation
+			isDefault
+			relationship: a44e1d5e-decf-411d-8396-11734284947e
+			defaultHierarchy: LocalDateTable_a132eadd-65c1-44c3-b038-04fab66381fc.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column type_de_production
+		dataType: string
+		lineageTag: a2616155-7e10-4a62-8a1f-c5338a58bab9
+		summarizeBy: none
+		sourceColumn: type_de_production
+
+		annotation SummarizationSetBy = Automatic
+
+	column cahier_des_charges
+		dataType: string
+		lineageTag: f4737a19-4eba-4a41-b3e9-4ec243eeb74a
+		summarizeBy: none
+		sourceColumn: cahier_des_charges
+
+		annotation SummarizationSetBy = Automatic
+
+	column reel_thermique_kWh_t
+		dataType: double
+		lineageTag: 3f9d07a9-b0b2-4aa6-969b-f3a84ff05afb
+		summarizeBy: sum
+		sourceColumn: reel_thermique_kWh_t
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column baseline_thermique_kWh_t
+		dataType: double
+		lineageTag: 744ef0a0-2b95-46c9-b217-b77663cbe4e3
+		summarizeBy: sum
+		sourceColumn: baseline_thermique_kWh_t
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column reel_elec_kWh_t
+		dataType: double
+		lineageTag: 7758bf7d-4fd9-4ea6-8a2b-187c7f1bef89
+		summarizeBy: sum
+		sourceColumn: reel_elec_kWh_t
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column baseline_elec_kWh_t
+		dataType: double
+		lineageTag: eafcc0e2-2502-496f-9bd5-b51258b3ced2
+		summarizeBy: sum
+		sourceColumn: baseline_elec_kWh_t
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column causes
+		dataType: string
+		lineageTag: c89760f1-669b-48e9-8334-115b86c52328
+		summarizeBy: none
+		sourceColumn: causes
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_cahier_des_charges
+		dataType: int64
+		formatString: 0
+		lineageTag: 98a0b143-15fe-41b9-a9d7-939407f071cf
+		summarizeBy: sum
+		sourceColumn: id_cahier_des_charges
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: da14de01-5185-412a-8295-970a2f3316c4
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: b936bd37-1cc1-4f16-9180-4aea371f4b79
+			defaultHierarchy: LocalDateTable_f1a205a2-9631-4d64-b631-087408a27182.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 45a71a8b-c3b7-4b9c-81bd-8eae94272d46
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: 8ab1e7e0-e868-4d52-a39d-243b6355e637
+			defaultHierarchy: LocalDateTable_422b4a2e-44aa-448a-a1e2-c245d1dcd0d5.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 4e548c2e-7fd7-4aed-93d7-9b4cfd637029
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 1e4fa310-4ecf-48cc-9e6f-951129e0dcd8
+			defaultHierarchy: LocalDateTable_8810fb46-10d1-492e-b0ce-ba4aef23fb92.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'batch & site_production'
+		dataType: string
+		lineageTag: 3e6cfb13-dde4-49c1-8da4-31335cea70fa
+		summarizeBy: none
+		sourceColumn: batch & site_production
+
+		annotation SummarizationSetBy = Automatic
+
+	partition erreur_nrj = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    gains_Schema = mal_maite_bi_prd_Database{[Name="gains",Kind="Schema"]}[Data],
+				    erreur_nrj_Table = gains_Schema{[Name="erreur_nrj",Kind="Table"]}[Data],
+				    #"Personnalisée ajoutée" = Table.AddColumn(erreur_nrj_Table, "batch & site_production", each [batch] & " " & [site_production]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"Personnalisée ajoutée",{{"batch & site_production", type text}})
+				in
+				    #"Type modifié"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+
