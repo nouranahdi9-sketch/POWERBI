@@ -174,4 +174,7 @@ cultureInfo fr-FR
 			table dim_trad_batch_note_detail
 				column label
 					caption: Détail
+			table dim_trad_month
+				column label
+					caption: Mois
 

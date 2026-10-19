@@ -121,5 +121,21 @@ role Translation
 			RETURN
 			    dim_trad_batch_note_impact[language] = __lang
 
+	tablePermission dim_trad_month =
+			VAR __culture = LOWER ( LEFT ( USERCULTURE (), 2 ) )
+			VAR __lang =
+			    COALESCE (
+			        LOOKUPVALUE (
+			            dim_trad_language[language],
+			            dim_trad_language[culture_code], __culture
+			        ),
+			        LOOKUPVALUE (
+			            dim_trad_language[language],
+			            dim_trad_language[culture_code], "en"
+			        )
+			    )
+			RETURN
+			    dim_trad_month[language] = __lang
+
 	annotation PBI_Id = a00f9e61e79845f0b4eee53e79f30a39
 

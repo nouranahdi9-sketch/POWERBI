@@ -174,4 +174,7 @@ cultureInfo ro-RO
 			table dim_trad_batch_note_detail
 				column label
 					caption: Detaliu
+			table dim_trad_month
+				column label
+					caption: Lună
 

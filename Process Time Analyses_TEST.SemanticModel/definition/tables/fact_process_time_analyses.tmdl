@@ -246,12 +246,13 @@ table fact_process_time_analyses
 	column Last72hTransfert = ```
 			
 			IF(
-			    'fact_process_time_analyses'[measure_type] = "Transfert" &&
+			    'fact_process_time_analyses'[measure_type] = "transfer" &&
 			    TRUNC('fact_process_time_analyses'[date_fin]) >= TODAY() - 3 &&
 			    TRUNC('fact_process_time_analyses'[date_fin]) <= TODAY(),
 			    1,
 			    0
 			)
+			
 			
 			```
 		formatString: 0
@@ -264,7 +265,7 @@ table fact_process_time_analyses
 	column Last72hattente = ```
 			
 			IF(
-			    'fact_process_time_analyses'[measure_type] = "Attente" &&
+			    'fact_process_time_analyses'[measure_type] = "waiting" &&
 			    TRUNC('fact_process_time_analyses'[date_fin]) >= TODAY() - 3 &&
 			    TRUNC('fact_process_time_analyses'[date_fin]) <= TODAY(),
 			    1,
@@ -350,12 +351,13 @@ table fact_process_time_analyses
 	column Last72hcycles = ```
 			
 			IF(
-			    'fact_process_time_analyses'[measure_type] = "BATCH_CYCLE_DURATION" &&
+			    'fact_process_time_analyses'[measure_type] = "batch_cycle_duration" &&
 			    TRUNC('fact_process_time_analyses'[date_fin]) >= TODAY() - 3 &&
 			    TRUNC('fact_process_time_analyses'[date_fin]) <= TODAY(),
 			    1,
 			    0
 			)
+			
 			
 			```
 		formatString: 0
@@ -387,7 +389,7 @@ table fact_process_time_analyses
 		dataType: int64
 		formatString: 0
 		lineageTag: 10fd3510-6647-4661-b49a-82fc05d5ed07
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: month_num_mesure
 
 		annotation SummarizationSetBy = Automatic

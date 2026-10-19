@@ -6,7 +6,7 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
-annotation PBI_QueryOrder = ["dim_batches_specifications","fact_process_time_analyses","dim_calendar","dim_site","fact_batch_note","dim_calendar_months","Translation","dim_variety","dim_variable","dim_trad_variety","dim_trad_specy","dim_trad_production_type","dim_trad_production_line_variable","dim_trad_localization_group","dim_trad_localization","dim_trad_language","dim_trad_batch_note_location","dim_trad_batch_note_impact","dim_trad_batch_note_event","dim_trad_batch_note_detail","dim_specy","dim_requirement_specification","dim_production_type","dim_production_line_variable","dim_localization_group","dim_localization","dim_language","dim_batch_note_location","dim_batch_note_impact","dim_batch_note_event","dim_batch_note_detail"]
+annotation PBI_QueryOrder = ["dim_batches_specifications","fact_process_time_analyses","dim_calendar","dim_site","fact_batch_note","dim_calendar_months","Translation","dim_variety","dim_variable","dim_trad_variety","dim_trad_specy","dim_trad_production_type","dim_trad_production_line_variable","dim_trad_localization_group","dim_trad_localization","dim_trad_language","dim_trad_batch_note_location","dim_trad_batch_note_impact","dim_trad_batch_note_event","dim_trad_batch_note_detail","dim_specy","dim_requirement_specification","dim_production_type","dim_production_line_variable","dim_localization_group","dim_localization","dim_language","dim_batch_note_location","dim_batch_note_impact","dim_batch_note_event","dim_batch_note_detail","dim_trad_month","dim_month"]
 
 annotation __PBI_TimeIntelligenceEnabled = 0
 
@@ -47,6 +47,8 @@ ref table dim_batch_note_location
 ref table dim_batch_note_impact
 ref table dim_batch_note_event
 ref table dim_batch_note_detail
+ref table dim_trad_month
+ref table dim_month
 
 ref role Translation
 

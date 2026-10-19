@@ -174,4 +174,7 @@ cultureInfo cs-CZ
 			table dim_trad_batch_note_detail
 				column label
 					caption: Detail
+			table dim_trad_month
+				column label
+					caption: Měsíc
 

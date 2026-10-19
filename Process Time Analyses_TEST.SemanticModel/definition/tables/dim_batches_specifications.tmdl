@@ -489,6 +489,15 @@ table dim_batches_specifications
 
 		annotation SummarizationSetBy = Automatic
 
+	column month_num
+		dataType: int64
+		formatString: 0
+		lineageTag: f2f74669-c50c-4b6f-a58c-784fb8fb16a2
+		summarizeBy: sum
+		sourceColumn: month_num
+
+		annotation SummarizationSetBy = Automatic
+
 	partition dim_batches_specifications = m
 		mode: import
 		source =

@@ -95,3 +95,12 @@ relationship batch_note_impact
 	fromColumn: fact_batch_note.key_impact
 	toColumn: dim_batch_note_impact.id_batch_note_category
 
+relationship bc4a3ba5-21c0-4fa2-e52b-162e0cdf0b4f
+	crossFilteringBehavior: bothDirections
+	fromColumn: dim_trad_month.month_num
+	toColumn: dim_month.month_num
+
+relationship e401a5f8-a214-c25e-7b71-2d70b31c7d1e
+	fromColumn: fact_process_time_analyses.month_num_mesure
+	toColumn: dim_month.month_num
+

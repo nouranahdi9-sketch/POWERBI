@@ -145,7 +145,7 @@ table Calcul
 			RETURN
 			CALCULATE (
 			    MIN ( 'fact_process_time_analyses'[mesure_value_h] ),
-			    'fact_process_time_analyses'[measure_type] = "BATCH_CYCLE_DURATION",
+			    'fact_process_time_analyses'[measure_type] = "batch_cycle_duration",
 			    REMOVEFILTERS ( 'fact_process_time_analyses'[batch_id] ),
 			    FILTER (
 			        ALLSELECTED ( 'fact_process_time_analyses'[date_debut] ),
@@ -153,6 +153,8 @@ table Calcul
 			            && 'fact_process_time_analyses'[date_debut] <= MaxDate
 			    )
 			)
+			
+			
 			
 			```
 		displayFolder: Mesures\AUTRES
@@ -169,7 +171,7 @@ table Calcul
 			RETURN
 			CALCULATE (
 			    MIN ( 'fact_process_time_analyses'[mesure_value_h] ),
-			    'fact_process_time_analyses'[measure_type] = "BATCH_CYCLE_DURATION",
+			    'fact_process_time_analyses'[measure_type] = "batch_cycle_duration",
 			    REMOVEFILTERS ( 'fact_process_time_analyses'[batch_id] ),
 			    FILTER (
 			        ALLSELECTED ( 'fact_process_time_analyses'[date_debut] ),
@@ -240,7 +242,7 @@ table Calcul
 		displayFolder: Mesures\AUTRES
 		lineageTag: 46b89401-345a-414d-aa5b-b578ba27659c
 
-	measure Max_30Days_CycleDuration = ```
+	measure Max_30Days_CycleDuration =
 			
 			VAR MaxDate =
 			    MAX ( 'fact_process_time_analyses'[date_debut] )
@@ -249,7 +251,7 @@ table Calcul
 			RETURN
 			CALCULATE (
 			    MAX ( 'fact_process_time_analyses'[mesure_value_h] ),
-			    'fact_process_time_analyses'[measure_type] = "BATCH_CYCLE_DURATION",
+			    'fact_process_time_analyses'[measure_type] = "batch_cycle_duration",
 			    REMOVEFILTERS ( 'fact_process_time_analyses'[batch_id] ),
 			    FILTER (
 			        ALLSELECTED ( 'fact_process_time_analyses'[date_debut] ),
@@ -257,8 +259,6 @@ table Calcul
 			            && 'fact_process_time_analyses'[date_debut] <= MaxDate
 			    )
 			)
-			
-			```
 		displayFolder: Mesures\AUTRES
 		lineageTag: a061e5ee-c47d-43bc-9c36-c09034d90224
 
@@ -273,7 +273,7 @@ table Calcul
 			RETURN
 			CALCULATE (
 			    MAX ( 'fact_process_time_analyses'[mesure_value_h] ),
-			    'fact_process_time_analyses'[measure_type] = "BATCH_CYCLE_DURATION",
+			    'fact_process_time_analyses'[measure_type] = "batch_cycle_duration",
 			    REMOVEFILTERS ( 'fact_process_time_analyses'[batch_id] ),
 			    FILTER (
 			        ALLSELECTED ( 'fact_process_time_analyses'[date_debut] ),
