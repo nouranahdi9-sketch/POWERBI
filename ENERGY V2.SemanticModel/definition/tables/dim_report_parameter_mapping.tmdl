@@ -1,0 +1,146 @@
+table dim_report_parameter_mapping
+	lineageTag: c2ca9ffa-e511-42a4-bd7f-a8c519f0d4b2
+
+	measure Valeur =
+			
+			VAR ParamCourant =
+			    SELECTEDVALUE(fact_batch_measures[parameter_id])
+			
+			VAR TypeAgg =
+			    LOOKUPVALUE(
+			        'dim_report_parameter_mapping'[aggregation],
+			        'dim_report_parameter_mapping'[parameter_id], ParamCourant
+			    )
+			
+			VAR ExclureZero =
+			    LOOKUPVALUE(
+			        'dim_report_parameter_mapping'[exclure_zero_moyenne],
+			        'dim_report_parameter_mapping'[parameter_id], ParamCourant
+			    )
+			
+			VAR ValeurSomme =
+			    CALCULATE(
+			        SUM(fact_batch_measures[value])
+			    )
+			
+			VAR ValeurMoyenneFiltree =
+			    CALCULATE(
+			        AVERAGE(fact_batch_measures[value]),
+			        fact_batch_measures[value] <> 0
+			    )
+			
+			VAR ValeurMoyenne =
+			    IF(
+			        ExclureZero = TRUE,
+			        IF(ISBLANK(ValeurMoyenneFiltree), 0, ValeurMoyenneFiltree),
+			        CALCULATE(AVERAGE(fact_batch_measures[value]))
+			    )
+			
+			RETURN
+			    SWITCH(
+			        TRUE(),
+			        TypeAgg = "Somme", ValeurSomme,
+			        ValeurMoyenne
+			    )
+		lineageTag: 0c2cf105-f88c-4099-971c-4506bbd01c8b
+
+		formatStringDefinition =
+				IF(
+				    LOOKUPVALUE(
+				        'dim_report_parameter_mapping'[aggregation],
+				        'dim_report_parameter_mapping'[parameter_id], SELECTEDVALUE(fact_batch_measures[parameter_id])
+				    ) = "Somme",
+				    "0",
+				    "0.00"
+				)
+
+	column parameter_id
+		dataType: int64
+		formatString: 0
+		lineageTag: f37390be-64b3-461e-b267-e35216dce100
+		summarizeBy: none
+		sourceColumn: parameter_id
+		sortByColumn: display_order
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column code
+		dataType: string
+		lineageTag: b503092a-b70c-4c4f-908b-85a1ec0e9480
+		summarizeBy: none
+		sourceColumn: code
+
+		annotation SummarizationSetBy = Automatic
+
+	column column_label
+		dataType: string
+		lineageTag: 74adf7d5-50b8-4a6f-93d9-85f03c21b3f9
+		summarizeBy: none
+		sourceColumn: column_label
+		sortByColumn: display_order
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column aggregation
+		dataType: string
+		lineageTag: 86633ab1-4902-406c-8822-dcc774ebc16b
+		summarizeBy: none
+		sourceColumn: aggregation
+
+		annotation SummarizationSetBy = Automatic
+
+	column display_order
+		dataType: int64
+		formatString: 0
+		lineageTag: e29ba814-bc7b-4c24-b698-fba440a42f55
+		summarizeBy: sum
+		sourceColumn: display_order
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 18215144-ae3f-4be8-a35b-e65fb3ead07b
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column exclure_zero_moyenne
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: d9d9145d-2f1a-4e6e-aa0e-81c5f93cd198
+		summarizeBy: none
+		sourceColumn: exclure_zero_moyenne
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 767ab6bb-8c02-439b-bfec-80f812b9de75
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_report_parameter_mapping = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, QueryTags=null, EnableAutomaticProxyDiscovery=null, Implementation="2.0", MetricViewBiCompatibilityMode=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    energy_Schema = mal_maite_bi_prd_Database{[Name="energy",Kind="Schema"]}[Data],
+				    dim_report_parameter_mapping_Table = energy_Schema{[Name="dim_report_parameter_mapping",Kind="Table"]}[Data]
+				in
+				    dim_report_parameter_mapping_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
