@@ -5,6 +5,10 @@ table fact_process_time_analyses
 		formatString: 0.000
 		lineageTag: 9f28a474-88a5-4517-a241-a2dcca85e3f4
 
+	measure 'Lignes de mesure' = COUNTROWS ( fact_process_time_analyses )
+		formatString: 0
+		lineageTag: fe01c108-a33f-4352-83d2-0d6309fec461
+
 	column batch_id
 		dataType: string
 		lineageTag: da12fbba-9e8c-4575-a1b5-83530a3fd753
@@ -645,6 +649,41 @@ table fact_process_time_analyses
 			)
 		displayFolder: ColonnesCalculees
 		lineageTag: d90f4f4b-2ad5-4719-a72f-38819d762170
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column measure_key
+		dataType: string
+		lineageTag: 0fa3ba22-254b-419e-ba34-0f4556f08852
+		summarizeBy: none
+		sourceColumn: measure_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column pastille =
+			
+			VAR MesureValue =
+			    CALCULATE (
+			        MAX ( 'fact_process_time_analyses'[mesure_value] ),
+			        ALLEXCEPT ( 'fact_process_time_analyses',
+			            'fact_process_time_analyses'[label],
+			            'fact_process_time_analyses'[batch_id] )
+			    )
+			VAR TargetBusiness =
+			    CALCULATE (
+			        MAX ( 'fact_process_time_analyses'[target_business] ),
+			        ALLEXCEPT ( 'fact_process_time_analyses',
+			            'fact_process_time_analyses'[label],
+			            'fact_process_time_analyses'[batch_id] )
+			    )
+			RETURN
+			    IF (
+			        MesureValue > 0 && NOT ( ISBLANK ( TargetBusiness ) ),
+			        IF ( MesureValue > TargetBusiness, "(🔴)", "(🟢)" ),
+			        "---"
+			    )
+		lineageTag: bd800239-a324-4c68-9c63-fb1cd87f7188
 		summarizeBy: none
 
 		annotation SummarizationSetBy = Automatic

@@ -177,4 +177,25 @@ cultureInfo ro-RO
 			table dim_trad_month
 				column label
 					caption: Lună
+			table dim_trad_trs_measure
+				column label
+					caption: Măsură
+				column label_cycle_time
+					caption: Timp de ciclu
+				column label_transfer_time
+					caption: Timp de transfer
+				column label_waiting_time
+					caption: Timp de așteptare
+				measure Mesure
+					caption: Măsură
+			table dim_trad_trs_category
+				column label
+					caption: Categorie.
+				measure Catégorie
+					caption: Categorie.
+			table dim_trad_trs_measure_type
+				column label
+					caption: Tip
+				measure 'Type de mesure'
+					caption: Tip
 

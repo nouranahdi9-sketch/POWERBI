@@ -104,3 +104,30 @@ relationship e401a5f8-a214-c25e-7b71-2d70b31c7d1e
 	fromColumn: fact_process_time_analyses.month_num_mesure
 	toColumn: dim_month.month_num
 
+relationship d8eff703-e5fd-3327-fd30-a068b23a92e3
+	fromColumn: fact_process_time_analyses.measure_key
+	toColumn: dim_trs_measure.key
+
+relationship 0ba426dd-39cb-9547-2e18-a6d39484773c
+	fromColumn: fact_process_time_analyses.categorie
+	toColumn: dim_trs_category.key
+
+relationship 8dc79991-2d04-8a77-ea47-b887c4cc3111
+	fromColumn: fact_process_time_analyses.measure_type
+	toColumn: dim_trs_measure_type.key
+
+relationship a0028070-c74b-558c-e690-fbe3051ba3aa
+	crossFilteringBehavior: bothDirections
+	fromColumn: dim_trad_trs_measure.key
+	toColumn: dim_trs_measure.key
+
+relationship 34229b60-dc0b-74f2-d08d-39dc59d7bba0
+	crossFilteringBehavior: bothDirections
+	fromColumn: dim_trad_trs_category.key
+	toColumn: dim_trs_category.key
+
+relationship d71dcf9a-91e7-0463-6ae5-9927b043a9d9
+	crossFilteringBehavior: bothDirections
+	fromColumn: dim_trad_trs_measure_type.key
+	toColumn: dim_trs_measure_type.key
+

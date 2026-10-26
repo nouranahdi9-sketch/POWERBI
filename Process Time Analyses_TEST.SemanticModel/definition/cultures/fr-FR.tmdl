@@ -177,4 +177,25 @@ cultureInfo fr-FR
 			table dim_trad_month
 				column label
 					caption: Mois
+			table dim_trad_trs_measure
+				column label
+					caption: Mesure
+				column label_cycle_time
+					caption: Temps de cycle
+				column label_transfer_time
+					caption: Temps de transfert
+				column label_waiting_time
+					caption: Temps d'attente
+				measure Mesure
+					caption: Mesure
+			table dim_trad_trs_category
+				column label
+					caption: Catégorie
+				measure Catégorie
+					caption: Catégorie
+			table dim_trad_trs_measure_type
+				column label
+					caption: "Type "
+				measure 'Type de mesure'
+					caption: "Type "
 

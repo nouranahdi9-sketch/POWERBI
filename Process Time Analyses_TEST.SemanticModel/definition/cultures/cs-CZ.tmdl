@@ -177,4 +177,25 @@ cultureInfo cs-CZ
 			table dim_trad_month
 				column label
 					caption: Měsíc
+			table dim_trad_trs_measure
+				column label
+					caption: Opatření
+				column label_cycle_time
+					caption: Cyklus (čas)
+				column label_transfer_time
+					caption: Doba dopravy
+				column label_waiting_time
+					caption: Doba čekání
+				measure Mesure
+					caption: Opatření
+			table dim_trad_trs_category
+				column label
+					caption: Kategorie
+				measure Catégorie
+					caption: Kategorie
+			table dim_trad_trs_measure_type
+				column label
+					caption: Typ opatření
+				measure 'Type de mesure'
+					caption: Typ opatření
 
