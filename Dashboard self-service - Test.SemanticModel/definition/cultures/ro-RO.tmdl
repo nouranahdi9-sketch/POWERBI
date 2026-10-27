@@ -76,4 +76,7 @@ cultureInfo ro-RO
 			table dim_trad_processes_phases
 				column label
 					caption: Atelier
+			table dim_trad_variable
+				column label
+					caption: Parametru
 

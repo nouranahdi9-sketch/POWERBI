@@ -69,5 +69,16 @@ role Translation
 			RETURN
 			    dim_trad_processes_phases[language] = __lang
 
+	tablePermission dim_trad_variable =
+			VAR __culture =
+			    LOWER ( LEFT ( USERCULTURE (), 2 ) )
+			VAR __lang =
+			    COALESCE (
+			        LOOKUPVALUE ( dim_trad_language[language], dim_trad_language[culture_code], __culture ),
+			        LOOKUPVALUE ( dim_trad_language[language], dim_trad_language[culture_code], "en" )
+			    )
+			RETURN
+			    dim_trad_variable[language] = __lang
+
 	annotation PBI_Id = 322bd2d5f3e24366aa18d331c7c17871
 

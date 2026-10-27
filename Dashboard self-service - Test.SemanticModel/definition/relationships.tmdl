@@ -21,12 +21,6 @@ relationship fba2d8f1-565e-26ec-0755-6705ada9ab9d
 	fromColumn: dim_batch.ordre_fabrication
 	toColumn: goods_quality_results.fabrication_order
 
-relationship AutoDetected_a111d1ca-dabb-4e0f-aa2c-c0475fc25dae
-	crossFilteringBehavior: bothDirections
-	fromCardinality: one
-	fromColumn: parameters_variables_translations.parameter_variable
-	toColumn: parameters_variables.id_parameter_variable
-
 relationship AutoDetected_97cb0d8d-9e65-4ff5-b0a1-b15f5d0b2df1
 	fromColumn: phase.batch_id
 	toColumn: dim_batch.id_batch
@@ -98,4 +92,9 @@ relationship 823b225a-152e-8de1-a523-a5d43cd5a30f
 	crossFilteringBehavior: bothDirections
 	fromColumn: phase.prd_workshop
 	toColumn: dim_processes_phases.code
+
+relationship 025e814b-4341-2d68-e386-ecb8b22cd86e
+	crossFilteringBehavior: bothDirections
+	fromColumn: dim_trad_variable.id_parameter_variable
+	toColumn: parameters_variables.id_parameter_variable
 

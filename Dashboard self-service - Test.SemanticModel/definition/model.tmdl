@@ -6,7 +6,7 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
-annotation PBI_QueryOrder = ["batch_report","manual_entries","localisation","dim_batch","dim_site","dim_specification","dim_variety_specy","malt_quality_results","goods_quality_results","parameters_variables_translations","parameters_variables","phase","fact_weather","fact_energy","fact_measurement","Translation","dim_production_type","dim_specy","dim_trad_specy","dim_trad_language","dim_trad_variety","dim_trad_production_type","dim_processes_phases","dim_trad_processes_phases"]
+annotation PBI_QueryOrder = ["batch_report","manual_entries","localisation","dim_batch","dim_site","dim_specification","dim_variety_specy","malt_quality_results","goods_quality_results","parameters_variables","phase","fact_weather","fact_energy","fact_measurement","Translation","dim_production_type","dim_specy","dim_trad_specy","dim_trad_language","dim_trad_variety","dim_trad_production_type","dim_processes_phases","dim_trad_processes_phases","dim_trad_variable"]
 
 annotation __PBI_TimeIntelligenceEnabled = 0
 
@@ -22,7 +22,6 @@ ref table dim_specification
 ref table dim_variety_specy
 ref table malt_quality_results
 ref table goods_quality_results
-ref table parameters_variables_translations
 ref table parameters_variables
 ref table phase
 ref table fact_weather
@@ -38,6 +37,7 @@ ref table dim_trad_variety
 ref table dim_trad_production_type
 ref table dim_processes_phases
 ref table dim_trad_processes_phases
+ref table dim_trad_variable
 
 ref role Translation
 

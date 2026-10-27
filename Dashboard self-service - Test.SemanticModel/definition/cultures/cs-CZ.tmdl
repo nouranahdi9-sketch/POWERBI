@@ -76,4 +76,7 @@ cultureInfo cs-CZ
 			table dim_trad_processes_phases
 				column label
 					caption: Dílna
+			table dim_trad_variable
+				column label
+					caption: Parametr
 

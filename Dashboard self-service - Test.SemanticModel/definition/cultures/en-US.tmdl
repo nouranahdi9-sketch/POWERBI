@@ -76,4 +76,7 @@ cultureInfo en-US
 			table dim_trad_processes_phases
 				column label
 					caption: Workshop
+			table dim_trad_variable
+				column label
+					caption: Parameter
 
