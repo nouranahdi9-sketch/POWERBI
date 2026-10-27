@@ -1,0 +1,69 @@
+table dim_trad_processes_phases
+	lineageTag: 726cb9ad-c4e4-421f-91b8-7beb8f601035
+
+	column id_process_phase
+		dataType: int64
+		formatString: 0
+		lineageTag: 56f5f25c-209b-490d-8869-61db420823a0
+		summarizeBy: none
+		sourceColumn: id_process_phase
+
+		annotation SummarizationSetBy = Automatic
+
+	column language
+		dataType: int64
+		formatString: 0
+		lineageTag: 10a91e6d-0c69-4ccb-8d8a-74d8e32ab6f4
+		summarizeBy: sum
+		sourceColumn: language
+
+		annotation SummarizationSetBy = Automatic
+
+	column label
+		dataType: string
+		lineageTag: 2819438b-c7d9-457d-b6e1-069e1425ecd3
+		summarizeBy: none
+		sourceColumn: label
+
+		annotation SummarizationSetBy = Automatic
+
+	column label_source
+		dataType: string
+		lineageTag: 85e884ad-cbf8-469d-b397-487009af9ae9
+		summarizeBy: none
+		sourceColumn: label_source
+
+		annotation SummarizationSetBy = Automatic
+
+	column code
+		dataType: string
+		lineageTag: 3a4f5a66-6a31-40c8-bf9b-75169c8da1e8
+		summarizeBy: none
+		sourceColumn: code
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 38f2cb9e-01d3-43fb-83c8-75ba8c456d36
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_trad_processes_phases = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_preprd_Database = Source{[Name="mal_maite_bi_preprd",Kind="Database"]}[Data],
+				    common_Schema = mal_maite_bi_preprd_Database{[Name="common",Kind="Schema"]}[Data],
+				    dim_trad_processes_phases_Table = common_Schema{[Name="dim_trad_processes_phases",Kind="Table"]}[Data]
+				in
+				    dim_trad_processes_phases_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,79 @@
+table manual_entries
+	lineageTag: 74342094-fcd1-490e-8895-4897169a4ae2
+
+	column id_batch
+		dataType: string
+		lineageTag: a9ab5b7f-2902-4a78-9765-b504cacb7385
+		summarizeBy: none
+		sourceColumn: id_batch
+
+		annotation SummarizationSetBy = Automatic
+
+	column parameter_variable
+		dataType: string
+		lineageTag: 0ca1d680-1672-4513-8e98-7f279eb70016
+		summarizeBy: none
+		sourceColumn: parameter_variable
+
+		annotation SummarizationSetBy = Automatic
+
+	column value
+		dataType: double
+		lineageTag: ff66f8ec-742f-477e-afef-770252612e63
+		summarizeBy: sum
+		sourceColumn: value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column unit
+		dataType: string
+		lineageTag: 512220f6-bc7a-439c-8ea3-f7d8d31a3cf0
+		summarizeBy: none
+		sourceColumn: unit
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8edbe6f4-cd01-4408-ba0b-1d0cfd370950
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f532c923-e6ad-4e42-be4e-14623010b985
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 1bb9c006-8526-48bb-860a-266bd62f5e0f
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition manual_entries = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_preprd_Database = Source{[Name="mal_maite_bi_preprd",Kind="Database"]}[Data],
+				    self_service_Schema = mal_maite_bi_preprd_Database{[Name="self_service",Kind="Schema"]}[Data],
+				    fact_manual_entries_Table = self_service_Schema{[Name="fact_manual_entries",Kind="Table"]}[Data]
+				in
+				    fact_manual_entries_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

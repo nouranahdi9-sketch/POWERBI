@@ -1,0 +1,68 @@
+table dim_site
+	lineageTag: 90ae5abb-16f0-4b25-848c-2023652868cd
+
+	column plant
+		dataType: string
+		lineageTag: 964146ef-6c8a-4b25-930f-72ac5f84ece6
+		summarizeBy: none
+		sourceColumn: plant
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 58ae3ba9-2d64-4cd1-af7a-493160c7176b
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e368cbfd-c413-4f78-9b9c-55830ea57c01
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 2ca154f2-91aa-48d8-99d6-3d1d42a89914
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_plant
+		dataType: int64
+		formatString: 0
+		lineageTag: 13147c45-99dc-456c-a399-321c9b5d9b30
+		summarizeBy: none
+		sourceColumn: id_plant
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_site = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_preprd_Database = Source{[Name="mal_maite_bi_preprd",Kind="Database"]}[Data],
+				    common_Schema = mal_maite_bi_preprd_Database{[Name="common",Kind="Schema"]}[Data],
+				    dim_site_Table = common_Schema{[Name="dim_site",Kind="Table"]}[Data],
+				    #"Colonnes conservees" = Table.SelectColumns(dim_site_Table,
+				        {"id_plant_production_line", "plant", "created_at", "updated_at", "deleted_at"}),
+				    #"Colonnes renommees" = Table.RenameColumns(#"Colonnes conservees",
+				        {{"id_plant_production_line", "id_plant"}})
+				in
+				    #"Colonnes renommees"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+
