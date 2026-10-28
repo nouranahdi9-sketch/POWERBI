@@ -23,7 +23,7 @@ Légende statut :
 
 | ID | KPI | Règle de gestion | Source proposée | Date de référence | Statut | Questions |
 |---|---|---|---|---|---|---|
-| D1 | Data digitalization | Nb de lignes dont les données manuelles ont été intégrées en masse : > 180 batchs | PG `batches` (deleted = false) + `plants_production_lines` | Date à laquelle la ligne atteint son 181e batch | ✅ | Compter tous les batchs ou seulement les terminés ? |
+| D1 | Data digitalization | Nb de lignes dont les données manuelles ont été intégrées en masse : > 180 batchs | PG `batches` (deleted = false) + `plants_production_lines`. **Décision provisoire : tous les batchs**, quel que soit leur statut | Date à laquelle la ligne atteint son 181e batch | ✅ | Tous les batchs ou seulement les terminés : à valider avec le PO (PO1) |
 | D2 | Metamodels | Nb de metamodels en RUN | Actuellement : lignes ayant au moins 1 batch, hors PI6 (approximation) | Date du 1er batch | 🟡 | DE : existe-t-il un référentiel des metamodels en RUN ? |
 | D3 | AI Recommendations (T0 Target) | Lignes où au moins 1 reco IA a été générée en PROD | PG `recommendations` (deleted = false) jointe à `batches` : 1re `calculation_date` par ligne (remplace la liste en dur) | Date de la 1re reco | 🟡 | DS : valider ; traitement Pithiviers |
 | D4 | Time Tracking & Production Notes | Lignes avec config note de production ET config TRS déployées | Notes : PG `batches_notes` (au moins 1 note) ; TRS : `mal_maite_common_{env}.gold.trs_metadata` | max(1re note, 1re mesure TRS) | 🟡 | "Config note déployée" = au moins 1 note, ou une table de configuration ? Correspondance `prd_line` / `common_code` via `lower(name)` à vérifier |
@@ -71,3 +71,9 @@ Légende statut :
 | X1 | Cybersecurity (lignes avec règles cyber implémentées) | Saisie MS (fichier de référence) | 🔴 |
 | X2 | AVEVA (infra de collecte installée) | Saisie MS (fichier de référence) | 🔴 |
 | X3 | Dataplatform & Historization | A voir DE : automatisable ? | 🔴 |
+
+## Questions à discuter avec le PO
+
+| # | KPI | Question | Décision provisoire | Statut |
+|---|---|---|---|---|
+| PO1 | D1 Data digitalization | Compter tous les batchs (planifiés, en cours, terminés) ou seulement les batchs terminés ? | Tous les batchs | 🟡 à discuter |
