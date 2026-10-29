@@ -72,8 +72,6 @@ Légende statut :
 | X2 | AVEVA (infra de collecte installée) | Saisie MS (fichier de référence) | 🔴 |
 | X3 | Dataplatform & Historization | A voir DE : automatisable ? | 🔴 |
 
-## Questions à discuter avec le PO
+## Questions à clarifier
 
-| # | KPI | Question | Décision provisoire | Statut |
-|---|---|---|---|---|
-| PO1 | D1 Data digitalization | Compter tous les batchs (planifiés, en cours, terminés) ou seulement les batchs terminés ? | Tous les batchs | 🟡 à discuter |
+Les questions ouvertes (PO, DE, DS, BI) et les décisions prises sont suivies dans `notes_et_questions.md`.
