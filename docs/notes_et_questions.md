@@ -88,7 +88,9 @@ Légende : 🟡 à discuter · ⏳ en attente de réponse · ✅ tranchée (dép
 | 2026-10-28 | R6 – Average Real malt yield (R2) | Source : paramètre `malt_yield_r2` déjà utilisé dans le projet Energy |
 | 2026-10-28 | Référentiel des activations | Demande envoyée aux DS : une ligne par ligne de production et par module, mise à jour en place ; colonnes `is_active`, `valid_from`, `valid_to` ; clé unique `production_line_id + module` |
 | 2026-10-28 | Filtrage des lignes | Les données sont filtrées par jointure sur la colonne `site` avec le référentiel DS (`left_semi`) ; l'existence d'une table ne suffit pas à considérer une ligne déployée |
-| 2026-10-29 | D1 – Data digitalization | Provisoire : tous les batchs non supprimés sont comptés (cf. PO1) ; date de digitalisation = date du 181e batch |
+| 2026-10-29 | D1 – Data digitalization | Provisoire : tous les batchs non supprimés sont comptés (cf. PO1) ; date de digitalisation = date de création (`created_at`) du 181e batch |
+| 2026-10-29 | D2 – Metamodels | Provisoire : lignes ayant au moins 1 batch non supprimé, hors PI6, en attendant une source officielle des DE (cf. DE1) |
+| 2026-10-29 | Méthode | Une requête source par KPI dans `sql/<KPI>.sql` (détail au grain fin + contrôle de la valeur), testée dans Databricks puis regroupée dans les notebooks |
 
 ## Notes techniques
 
