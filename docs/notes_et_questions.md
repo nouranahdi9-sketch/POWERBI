@@ -35,7 +35,7 @@ Légende : 🟡 à discuter · ⏳ en attente de réponse · ✅ tranchée (dép
 | PO1 | D1 – Data digitalization | Compter tous les batchs (planifiés, en cours, terminés) ou seulement les batchs terminés ? | Tous les batchs | 🟡 |
 | PO2 | Tous les KPI | Pithiviers (PI6) : exclu de tous les KPI, ou seulement à partir d'une date ? | Exclu (géré via le référentiel DS : `is_active = false`) | 🟡 |
 | PO3 | Tous les KPI | Date de référence du filtre date pour les KPI "batch" : date de fin du batch ou date planifiée ? | Date de fin du batch | 🟡 |
-| PO4 | Q1 – Uncaptured Aveva data | Règle du dashboard monitoring (échecs avec données automatiques manquantes seules : capteurs défaillants + chutes de tags) ou règle du notebook (`id_alerting = 1` : chutes de tags uniquement) ? | Règle du dashboard monitoring, plus proche de la spec | 🟡 |
+| PO4 | Q1 – Uncaptured Aveva data | Règle du dashboard monitoring (échecs avec données automatiques manquantes seules : capteurs défaillants + chutes de tags) ou règle du notebook (`id_alerting = 1` : chutes de tags uniquement) ? | Règle du dashboard monitoring, plus proche de la spec. Sur 30 jours (requête du 2026-10-29) : 1 747 recos attendues ; règle dashboard 226 échecs = 12,9 % ; règle notebook (chutes de tags) 108 = 6,2 % | 🟡 |
 | PO7 | R4 – % Spec-compliant output batches | Batchs sans qualité ou avec qualité partielle : exclus du calcul ou comptés non conformes ? | - | 🟡 |
 | PO8 | P1 – Process time dashboard | Les colonnes Days et Views sont-elles utiles (question posée dans la spec) ? | - | 🟡 |
 | PO9 | P3 – Production notes<br>P4 – Production notes impacts | Date de référence des notes : date de l'événement (`event_date`) ou date de saisie ? | - | 🟡 |
