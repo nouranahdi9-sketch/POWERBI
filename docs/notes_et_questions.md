@@ -48,7 +48,6 @@ Légende : 🟡 à discuter · ⏳ en attente de réponse · ✅ tranchée (dép
 
 | # | KPI | Question | Statut |
 |---|---|---|---|
-| DE1 | D2 – Metamodels | Existe-t-il une source officielle des metamodels en RUN ? En attendant : lignes avec au moins 1 batch, hors PI6 | 🟡 |
 | DE2 | Q3 – % Batches with missing SAP mandatory data<br>Q4 – Mandatory SAP data missing | Clé de jointure entre `batches` et `malt_quality_results` : `fabrication_order` ? | 🟡 |
 | DE3 | Q3 – % Batches with missing SAP mandatory data<br>Q4 – Mandatory SAP data missing | Un batch terminé sans aucun résultat qualité doit-il être compté comme "données manquantes" ? | 🟡 |
 | DE4 | Q3 – % Batches with missing SAP mandatory data<br>Q4 – Mandatory SAP data missing | Le statut "undefined" des batchs historiques est-il bien recalculé ? | 🟡 |
@@ -64,7 +63,7 @@ Légende : 🟡 à discuter · ⏳ en attente de réponse · ✅ tranchée (dép
 | DS1 | Référentiel des activations | Ticket envoyé : suivre la livraison (nom et emplacement de la table, responsable, valeurs de `site` identiques aux tables de recos, dates initiales de mise en PROD, délai) | ⏳ |
 | DS2 | R3 – % Spec-compliant AI recommendations<br>R4 – % Spec-compliant output batches | Emplacement de la table `fact_delta_quality_realized_recommended` (dashboard Batch overview) | 🟡 |
 | DS3 | R5 – Average AI malt yield (R2) | Quelle table contient le R2 prédit par reco ? | 🟡 |
-| DS4 | D4 – Time Tracking & Production Notes | "Config note de production déployée" = au moins une note saisie, ou une table de configuration ? | 🟡 |
+| DS5 | D2 – Metamodels | Le ticket listait les modules recommendations, process_time, production_notes, energy : ajouter le module `metamodel` à la liste | 🟡 |
 
 ### Côté BI (à faire / à vérifier)
 
@@ -73,7 +72,6 @@ Légende : 🟡 à discuter · ⏳ en attente de réponse · ✅ tranchée (dép
 | BI1 | R1 – % Available recommendations<br>R2 – % Declared applied recommendations<br>R3 – % Spec-compliant AI recommendations<br>R4 – % Spec-compliant output batches<br>R5 – Average AI malt yield (R2) | Committer les rapports et notebooks "Suivi des recommandations" et "Batch overview" sur `One_Pager` | ⏳ |
 | BI2 | Q1 – Uncaptured Aveva data<br>Q2 – Missing manual entries | Vérifier si le dashboard monitoring filtre sur `flg_lasted_reco` (dernière reco seulement) | 🟡 |
 | BI3 | U2 – Dashboards PowerBI unique users<br>P1 – Process time dashboard | Si les rapports sont embarqués en mode "app owns data", les utilisateurs Maltimize ne sont pas identifiables côté Power BI : à vérifier | 🟡 |
-| BI4 | D4 – Time Tracking & Production Notes | Vérifier que `trs_metadata.prd_line` = `lower(plants_production_lines.name)` pour supprimer le CASE écrit en dur | 🟡 |
 | BI5 | P2 – Gap Target vs actual cycle time | Vérifier que la moyenne des écarts reste cohérente tous sites confondus | 🟡 |
 
 ## Décisions prises
@@ -89,7 +87,7 @@ Légende : 🟡 à discuter · ⏳ en attente de réponse · ✅ tranchée (dép
 | 2026-10-28 | Référentiel des activations | Demande envoyée aux DS : une ligne par ligne de production et par module, mise à jour en place ; colonnes `is_active`, `valid_from`, `valid_to` ; clé unique `production_line_id + module` |
 | 2026-10-28 | Filtrage des lignes | Les données sont filtrées par jointure sur la colonne `site` avec le référentiel DS (`left_semi`) ; l'existence d'une table ne suffit pas à considérer une ligne déployée |
 | 2026-10-29 | D1 – Data digitalization | Provisoire : tous les batchs non supprimés sont comptés (cf. PO1) ; date de digitalisation = date de création (`created_at`) du 181e batch. Requête `sql/D1_data_digitalization.sql` validée : 14 lignes |
-| 2026-10-29 | D2 – Metamodels | Provisoire : lignes ayant au moins 1 batch non supprimé, hors PI6, en attendant une source officielle des DE (cf. DE1) |
+| 2026-10-29 | D2 / D3 / D4 – KPI de déploiement | Source unique : le référentiel des activations de l'équipe DS. D2 = module `metamodel`, D3 = module `recommendations`, D4 = modules `process_time` ET `production_notes` actifs. Plus d'approximation par les batchs |
 | 2026-10-29 | Méthode | Une requête source par KPI dans `sql/<KPI>.sql` (détail au grain fin + contrôle de la valeur), testée dans Databricks puis regroupée dans les notebooks |
 
 ## Notes techniques

@@ -24,9 +24,9 @@ Légende statut :
 | ID | KPI | Règle de gestion | Source proposée | Date de référence | Statut | Questions |
 |---|---|---|---|---|---|---|
 | D1 | Data digitalization | Nb de lignes dont les données manuelles ont été intégrées en masse : > 180 batchs | PG `batches` (deleted = false) + `plants_production_lines`. **Décision provisoire : tous les batchs**, quel que soit leur statut | `created_at` du 181e batch | ✅ validé (14 lignes) | Tous les batchs ou seulement les terminés : à valider avec le PO (PO1) |
-| D2 | Metamodels | Nb de metamodels en RUN | Actuellement : lignes ayant au moins 1 batch, hors PI6 (approximation) | Date du 1er batch | 🟡 | DE : existe-t-il un référentiel des metamodels en RUN ? |
-| D3 | AI Recommendations (T0 Target) | Lignes où au moins 1 reco IA a été générée en PROD | PG `recommendations` (deleted = false) jointe à `batches` : 1re `calculation_date` par ligne (remplace la liste en dur) | Date de la 1re reco | 🟡 | DS : valider ; traitement Pithiviers |
-| D4 | Time Tracking & Production Notes | Lignes avec config note de production ET config TRS déployées | Notes : PG `batches_notes` (au moins 1 note) ; TRS : `mal_maite_common_{env}.gold.trs_metadata` | max(1re note, 1re mesure TRS) | 🟡 | "Config note déployée" = au moins 1 note, ou une table de configuration ? Correspondance `prd_line` / `common_code` via `lower(name)` à vérifier |
+| D2 | Metamodels | Nb de lignes dont le metamodel est en RUN | Référentiel des activations DS, module `metamodel` (`sql/D2_metamodels.sql`) | `valid_from` / `valid_to` | ⏳ | En attente de la table DS |
+| D3 | AI Recommendations (T0 Target) | Lignes où la feature de recommandations IA tourne en PROD | Référentiel des activations DS, module `recommendations` (`sql/D3_ai_recommendations.sql`) | `valid_from` / `valid_to` | ⏳ | En attente de la table DS |
+| D4 | Time Tracking & Production Notes | Lignes avec config note de production ET config TRS déployées | Référentiel des activations DS, modules `process_time` et `production_notes` (`sql/D4_time_tracking_production_notes.sql`) | Date où les deux modules sont actifs | ⏳ | En attente de la table DS |
 
 ## 2. User Activity (30 derniers jours + tendance)
 
