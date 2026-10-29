@@ -35,7 +35,7 @@ Légende : 🟡 à discuter · ⏳ en attente de réponse · ✅ tranchée (dép
 | PO1 | D1 – Data digitalization | Compter tous les batchs (planifiés, en cours, terminés) ou seulement les batchs terminés ? | Tous les batchs | 🟡 |
 | PO2 | Tous les KPI | Pithiviers (PI6) : exclu de tous les KPI, ou seulement à partir d'une date ? | Exclu (géré via le référentiel DS : `is_active = false`) | 🟡 |
 | PO3 | Tous les KPI | Date de référence du filtre date pour les KPI "batch" : date de fin du batch ou date planifiée ? | Date de fin du batch | 🟡 |
-| PO4 | Q1 – Uncaptured Aveva data | Garder la règle du notebook (`succes_echec = 'ECHEC'`, `flg_auto = 1`, `id_alerting = 1`) ou celle du dashboard monitoring (`Evolution_echec_auto`) ? Inclure les échecs dus au tag drop ? | Règle du dashboard monitoring | 🟡 |
+| PO4 | Q1 – Uncaptured Aveva data | Règle du dashboard monitoring (échecs avec données automatiques manquantes seules : capteurs défaillants + chutes de tags) ou règle du notebook (`id_alerting = 1` : chutes de tags uniquement) ? | Règle du dashboard monitoring, plus proche de la spec | 🟡 |
 | PO5 | R1 – % Available recommendations | Quelle définition correspond au dashboard Overview : recos reçues ÷ recos prévues au planning (`total ÷ nb_reco_opti`), ou recos en succès ÷ recos attendues ? | - | 🟡 |
 | PO6 | R2 – % Declared applied recommendations | Dénominateur : total des recos reçues ou recos évaluées ? | - | 🟡 |
 | PO7 | R4 – % Spec-compliant output batches | Batchs sans qualité ou avec qualité partielle : exclus du calcul ou comptés non conformes ? | - | 🟡 |
@@ -90,6 +90,7 @@ Légende : 🟡 à discuter · ⏳ en attente de réponse · ✅ tranchée (dép
 | 2026-10-29 | D2 / D3 – KPI de déploiement | Source unique : le référentiel des activations de l'équipe DS. D2 = module `metamodel`, D3 = module `recommendations` |
 | 2026-10-29 | D4 – Time Tracking & Production Notes | Pas besoin du référentiel DS : lignes ayant à la fois des notes de production (`batches_notes`) et une config TRS (`trs_metadata`), les deux conditions sont obligatoires. Basé sur le contenu des tables, aucun site exclu ; correspondance des lignes par nom en majuscules (plus de CASE en dur). Requête validée : 8 lignes |
 | 2026-10-29 | D1 – Data digitalization | Reste calculé à partir des batchs (plus de 180), pas à partir du référentiel DS |
+| 2026-10-29 | Q1 / Q2 – Date de référence | `calculation_interval_after_datetime` (date à laquelle la reco était attendue), comme le dashboard monitoring ; `date_creation_reco` est vide pour les recos en échec |
 | 2026-10-29 | Méthode | Une requête source par KPI dans `sql/<KPI>.sql` (détail au grain fin + contrôle de la valeur), testée dans Databricks puis regroupée dans les notebooks |
 
 ## Notes techniques
