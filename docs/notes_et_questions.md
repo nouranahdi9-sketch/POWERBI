@@ -69,7 +69,7 @@ Légende : 🟡 à discuter · ⏳ en attente de réponse · ✅ tranchée (dép
 
 | # | Sujet | Action | Statut |
 |---|---|---|---|
-| BI1 | R1 – % Available recommendations<br>R2 – % Declared applied recommendations<br>R3 – % Spec-compliant AI recommendations<br>R4 – % Spec-compliant output batches<br>R5 – Average AI malt yield (R2) | Committer les rapports et notebooks "Suivi des recommandations" et "Batch overview" sur `One_Pager` | ⏳ |
+| BI1 | R1 – % Available recommendations<br>R2 – % Declared applied recommendations<br>R3 – % Spec-compliant AI recommendations<br>R4 – % Spec-compliant output batches<br>R5 – Average AI malt yield (R2) | Reçus : monitoring (rapport, modèle, notebooks), suivi (modèle sémantique, notebook import_recommendations). Manquent : visuels du rapport suivi (.Report) et dashboard Batch overview | ⏳ |
 | BI2 | Q1 – Uncaptured Aveva data<br>Q2 – Missing manual entries | Vérifier si le dashboard monitoring filtre sur `flg_lasted_reco` (dernière reco seulement) | 🟡 |
 | BI3 | U2 – Dashboards PowerBI unique users<br>P1 – Process time dashboard | Si les rapports sont embarqués en mode "app owns data", les utilisateurs Maltimize ne sont pas identifiables côté Power BI : à vérifier | 🟡 |
 | BI5 | P2 – Gap Target vs actual cycle time | Vérifier que la moyenne des écarts reste cohérente tous sites confondus | 🟡 |
