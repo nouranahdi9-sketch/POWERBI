@@ -26,7 +26,7 @@ Légende statut :
 | D1 | Data digitalization | Nb de lignes dont les données manuelles ont été intégrées en masse : > 180 batchs | PG `batches` (deleted = false) + `plants_production_lines`. **Décision provisoire : tous les batchs**, quel que soit leur statut | `created_at` du 181e batch | ✅ validé (14 lignes) | Tous les batchs ou seulement les terminés : à valider avec le PO (PO1) |
 | D2 | Metamodels | Nb de lignes dont le metamodel est en RUN | Référentiel des activations DS, module `metamodel` (`sql/D2_metamodels.sql`) | `valid_from` / `valid_to` | ⏳ | En attente de la table DS |
 | D3 | AI Recommendations (T0 Target) | Lignes où la feature de recommandations IA tourne en PROD | Référentiel des activations DS, module `recommendations` (`sql/D3_ai_recommendations.sql`) | `valid_from` / `valid_to` | ⏳ | En attente de la table DS |
-| D4 | Time Tracking & Production Notes | Lignes avec config note de production ET config TRS déployées | PG `batches_notes` (au moins une note) + `mal_maite_common_prd.gold.trs_metadata` (`sql/D4_time_tracking_production_notes.sql`) | Date de la 1re note de production | 🟡 en test | |
+| D4 | Time Tracking & Production Notes | Lignes avec config note de production ET config TRS déployées | PG `batches_notes` (au moins une note) + `mal_maite_common_prd.gold.trs_metadata` (`sql/D4_time_tracking_production_notes.sql`) | Date de la 1re note de production | ✅ validé (8 lignes) | |
 
 ## 2. User Activity (30 derniers jours + tendance)
 

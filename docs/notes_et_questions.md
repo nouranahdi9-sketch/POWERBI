@@ -88,7 +88,7 @@ Légende : 🟡 à discuter · ⏳ en attente de réponse · ✅ tranchée (dép
 | 2026-10-28 | Filtrage des lignes | Les données sont filtrées par jointure sur la colonne `site` avec le référentiel DS (`left_semi`) ; l'existence d'une table ne suffit pas à considérer une ligne déployée |
 | 2026-10-29 | D1 – Data digitalization | Provisoire : tous les batchs non supprimés sont comptés (cf. PO1) ; date de digitalisation = date de création (`created_at`) du 181e batch. Requête `sql/D1_data_digitalization.sql` validée : 14 lignes |
 | 2026-10-29 | D2 / D3 – KPI de déploiement | Source unique : le référentiel des activations de l'équipe DS. D2 = module `metamodel`, D3 = module `recommendations` |
-| 2026-10-29 | D4 – Time Tracking & Production Notes | Pas besoin du référentiel DS : lignes ayant à la fois des notes de production (`batches_notes`) et une config TRS (`trs_metadata`), les deux conditions sont obligatoires. Basé sur le contenu des tables, aucun site exclu ; correspondance des lignes par nom en majuscules (plus de CASE en dur) |
+| 2026-10-29 | D4 – Time Tracking & Production Notes | Pas besoin du référentiel DS : lignes ayant à la fois des notes de production (`batches_notes`) et une config TRS (`trs_metadata`), les deux conditions sont obligatoires. Basé sur le contenu des tables, aucun site exclu ; correspondance des lignes par nom en majuscules (plus de CASE en dur). Requête validée : 8 lignes |
 | 2026-10-29 | D1 – Data digitalization | Reste calculé à partir des batchs (plus de 180), pas à partir du référentiel DS |
 | 2026-10-29 | Méthode | Une requête source par KPI dans `sql/<KPI>.sql` (détail au grain fin + contrôle de la valeur), testée dans Databricks puis regroupée dans les notebooks |
 

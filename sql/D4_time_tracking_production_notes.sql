@@ -12,6 +12,7 @@
 -- Correspondance des lignes : upper(trs_metadata.prd_line) = upper(plants_production_lines.name)
 -- (rouen1 = ROUEN1), à la place du CASE écrit en dur.
 -- Date de déploiement : date de la 1re note de production de la ligne.
+-- Statut : validé le 2026-10-29 (8 lignes).
 -- =============================================================================
 
 
