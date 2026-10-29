@@ -1,0 +1,26 @@
+table Duration
+	lineageTag: 0835ab04-5b57-41bd-a77f-08f4c35c44e4
+
+	measure 'Valeur Duration' = SELECTEDVALUE('Duration'[Duration], 0)
+		formatString: 0
+		lineageTag: 46915e1b-2313-4c59-9b11-9ce99b152168
+
+	column Duration
+		formatString: 0
+		lineageTag: 71ae3339-b43c-4981-85db-7f05d60dd9a7
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+	partition Duration = calculated
+		mode: import
+		source = GENERATESERIES(0, 500, 1)
+
+	annotation PBI_Id = 7b6666ca94b1425ab21e68b1cfb29a55
+

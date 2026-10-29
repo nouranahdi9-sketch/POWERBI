@@ -1,0 +1,394 @@
+table fact_batches_parameter_realized_recommended
+	lineageTag: 9449fd40-3e59-4401-b3d4-74bac6ce8bd7
+
+	column id_batch
+		dataType: string
+		lineageTag: f6b574ac-d2db-4756-9c36-2987159e0317
+		summarizeBy: none
+		sourceColumn: id_batch
+
+		annotation SummarizationSetBy = Automatic
+
+	column batch_number
+		dataType: string
+		lineageTag: ca0062a4-0d91-4237-a720-e91e4a5fa052
+		summarizeBy: none
+		sourceColumn: batch_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column production_line
+		dataType: int64
+		formatString: 0
+		lineageTag: e608649f-33c0-4885-8814-8922f3b2b211
+		summarizeBy: sum
+		sourceColumn: production_line
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_production
+		dataType: string
+		lineageTag: 5c3b0526-68df-435d-bf4b-c655fd027853
+		summarizeBy: none
+		sourceColumn: site_production
+
+		annotation SummarizationSetBy = Automatic
+
+	column cahier_des_charges
+		dataType: string
+		lineageTag: 486d05f4-d4c1-45e4-91ad-05d97c7bb02c
+		summarizeBy: none
+		sourceColumn: cahier_des_charges
+
+		annotation SummarizationSetBy = Automatic
+
+	column espece
+		dataType: string
+		lineageTag: 7ce1279b-a04f-4991-a40c-c047cf5a2ae1
+		summarizeBy: none
+		sourceColumn: espece
+
+		annotation SummarizationSetBy = Automatic
+
+	column campagne
+		dataType: int64
+		formatString: 0
+		lineageTag: 17e8307c-5273-410a-afd3-6185398bd592
+		summarizeBy: sum
+		sourceColumn: campagne
+
+		annotation SummarizationSetBy = Automatic
+
+	column production_type
+		dataType: string
+		lineageTag: 4f379fba-f4df-4f7b-9058-2ed525ab504b
+		summarizeBy: none
+		sourceColumn: production_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column duree_de_cycle
+		dataType: string
+		lineageTag: b579c9ae-1987-467f-baab-380e68103a45
+		summarizeBy: none
+		sourceColumn: duree_de_cycle
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_debut_production
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 39d4f7c1-8574-40fe-a12c-6a3960a811f5
+		summarizeBy: none
+		sourceColumn: date_debut_production
+
+		variation Variation
+			isDefault
+			relationship: 136362fa-a090-4639-b779-28dc9adc4c1c
+			defaultHierarchy: LocalDateTable_0d5113eb-b413-44fa-b1f7-466bc99d21ea.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column id_recommendation
+		dataType: string
+		lineageTag: f4cf892e-bb78-4538-bb7b-1d5cad04c01d
+		summarizeBy: none
+		sourceColumn: id_recommendation
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_target_localization
+		dataType: int64
+		formatString: 0
+		lineageTag: 37a617aa-af3d-49a3-9390-6ee8ec5df077
+		summarizeBy: none
+		sourceColumn: id_target_localization
+
+		annotation SummarizationSetBy = Automatic
+
+	column target_localization
+		dataType: string
+		lineageTag: 4319e8b1-3df1-4017-983d-2b37a36ab2b9
+		summarizeBy: none
+		sourceColumn: target_localization
+		sortByColumn: id_target_localization
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column calculation_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 948ba621-073c-4b89-a293-2178cd23064d
+		summarizeBy: none
+		sourceColumn: calculation_date
+
+		variation Variation
+			isDefault
+			relationship: 4e6cf92a-0f6d-4b9d-9753-f9ea125659dc
+			defaultHierarchy: LocalDateTable_20b6db62-ddcc-4a14-b8ea-98074a208419.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_recommendation_production
+		dataType: int64
+		formatString: 0
+		lineageTag: c75ea625-ca69-4f56-a587-3492892bfb27
+		summarizeBy: sum
+		sourceColumn: id_recommendation_production
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_parameter_variable
+		dataType: int64
+		formatString: 0
+		lineageTag: 95d7f5d3-1f86-421f-9bf3-4655e0990fee
+		summarizeBy: sum
+		sourceColumn: id_parameter_variable
+
+		annotation SummarizationSetBy = Automatic
+
+	column parameter_variable
+		dataType: string
+		lineageTag: b09dcb8f-b865-4298-a59b-95b38be794c6
+		summarizeBy: none
+		sourceColumn: parameter_variable
+
+		annotation SummarizationSetBy = Automatic
+
+	column process_activity
+		dataType: string
+		lineageTag: 35678e15-c42a-4f8f-9ab4-6998e1056c0a
+		summarizeBy: none
+		sourceColumn: process_activity
+
+		annotation SummarizationSetBy = Automatic
+
+	column recommended_value
+		dataType: double
+		lineageTag: 6e277e9f-6814-428a-bd0b-e15aba184d6c
+		summarizeBy: sum
+		sourceColumn: recommended_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column realized_value
+		dataType: double
+		lineageTag: 6c3986e2-a869-4887-9758-b78e7c7c43c8
+		summarizeBy: sum
+		sourceColumn: realized_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column unit
+		dataType: string
+		lineageTag: 3cfc92db-7e67-4369-97fe-71ec2a27a725
+		summarizeBy: none
+		sourceColumn: unit
+
+		annotation SummarizationSetBy = Automatic
+
+	column amplitude_de_reference
+		dataType: double
+		lineageTag: 96608f87-2272-4367-a081-f4b2b31a49ec
+		summarizeBy: sum
+		sourceColumn: amplitude_de_reference
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column erreur_relative
+		dataType: double
+		lineageTag: 84afe4e2-0549-4e9a-ad7a-dc6a96a3bfc1
+		summarizeBy: sum
+		sourceColumn: erreur_relative
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nb_realized
+		dataType: int64
+		formatString: 0
+		lineageTag: cb7c1e0b-d15c-4c92-b69c-4c90565f9747
+		summarizeBy: sum
+		sourceColumn: nb_realized
+
+		annotation SummarizationSetBy = Automatic
+
+	column classement_realized_value
+		dataType: int64
+		formatString: 0
+		lineageTag: 86709a3a-f2f3-4a76-b4ba-b4672ad0ab38
+		summarizeBy: sum
+		sourceColumn: classement_realized_value
+
+		annotation SummarizationSetBy = Automatic
+
+	column classement_recommended_value
+		dataType: int64
+		formatString: 0
+		lineageTag: 41b3ade8-33ea-4eb1-92b8-ddf416fcdbce
+		summarizeBy: sum
+		sourceColumn: classement_recommended_value
+
+		annotation SummarizationSetBy = Automatic
+
+	column ecart_normalise
+		dataType: double
+		lineageTag: 4d2aa33f-fda8-4045-b761-99aba9f4dab1
+		summarizeBy: sum
+		sourceColumn: ecart_normalise
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column delta_realized_recommended
+		dataType: double
+		lineageTag: a1a50766-f14b-478d-8e22-126c5d0e8edc
+		summarizeBy: sum
+		sourceColumn: delta_realized_recommended
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column delta_realized_recommended_percent
+		dataType: double
+		lineageTag: 21f8e535-277b-408f-b0ad-681218f8357e
+		summarizeBy: sum
+		sourceColumn: delta_realized_recommended_percent
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column score_parametre
+		dataType: double
+		formatString: 0\ %;-0\ %;0\ %
+		lineageTag: ae9ddbda-39c4-4412-b9aa-68878eb5947f
+		summarizeBy: sum
+		sourceColumn: score_parametre
+
+		annotation SummarizationSetBy = Automatic
+
+	column poids_parametre
+		dataType: int64
+		formatString: 0
+		lineageTag: 56a0c082-ea45-47d6-ae3b-3c86f8da56ef
+		summarizeBy: sum
+		sourceColumn: poids_parametre
+
+		annotation SummarizationSetBy = Automatic
+
+	column taux_application_localization
+		dataType: double
+		formatString: 0\ %;-0\ %;0\ %
+		lineageTag: 5e2e8171-0dd5-419b-85c5-4abd48f90642
+		summarizeBy: sum
+		sourceColumn: taux_application_localization
+
+		annotation SummarizationSetBy = Automatic
+
+	column nb_realized_distinct
+		dataType: int64
+		formatString: 0
+		lineageTag: 7867f1b4-5992-4598-971d-a42e5f571595
+		summarizeBy: sum
+		sourceColumn: nb_realized_distinct
+
+		annotation SummarizationSetBy = Automatic
+
+	column score_parametre_unique
+		dataType: int64
+		formatString: 0
+		lineageTag: adb977a9-ee3e-4a63-81da-c973e494cce4
+		summarizeBy: sum
+		sourceColumn: score_parametre_unique
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 51b5c939-9ee9-49ce-9c63-191589408518
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: f1cf9d0f-56cf-44f0-b6fa-8584c8b7125a
+			defaultHierarchy: LocalDateTable_c02e072c-0de9-4c5a-bfef-160fc73bd240.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e9af0aa6-c1e8-4f62-9d81-e2119d772818
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: 0aa0c86f-db46-4193-ac05-7b44f318cf60
+			defaultHierarchy: LocalDateTable_a87dfe8a-cd74-43ce-971f-056bde2ba74a.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: abb6d2b2-6081-4841-8841-81f786d823b2
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 12eb115a-a618-479f-ab71-9d354c190d96
+			defaultHierarchy: LocalDateTable_d2221592-7e4d-4192-9423-a5f64a1804cb.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column taux_non_application_localization
+		dataType: double
+		formatString: 0\ %;-0\ %;0\ %
+		lineageTag: d868da0d-8a8f-4e6f-8aa2-2f479cbe2432
+		summarizeBy: sum
+		sourceColumn: taux_non_application_localization
+
+		annotation SummarizationSetBy = Automatic
+
+	column score_parametre_non_applique = 1 - fact_batches_parameter_realized_recommended[score_parametre]
+		formatString: 0\ %;-0\ %;0\ %
+		lineageTag: f5149de8-eb1a-458c-8e52-2faefe482beb
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_batches_parameter_realized_recommended = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    parameters_Schema = mal_maite_bi_prd_Database{[Name="parameters",Kind="Schema"]}[Data],
+				    fact_batches_parameter_realized_recommended_Table = parameters_Schema{[Name="fact_batches_parameter_realized_recommended",Kind="Table"]}[Data],
+				    #"Personnalisée ajoutée" = Table.AddColumn(fact_batches_parameter_realized_recommended_Table, "taux_non_application_localization", each 1 - [taux_application_localization]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"Personnalisée ajoutée",{{"taux_non_application_localization", type number}})
+				in
+				    #"Type modifié"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

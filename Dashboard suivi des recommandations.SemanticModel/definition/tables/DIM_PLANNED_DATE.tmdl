@@ -1,0 +1,87 @@
+table DIM_PLANNED_DATE
+	lineageTag: 28d89452-8a58-4ae1-9e7a-30be416e1bc6
+
+	column Date
+		formatString: Short Date
+		lineageTag: 45a3defb-dc4a-4538-80d9-2734d57d5be3
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		variation Variation
+			isDefault
+			relationship: 5e9c7241-4bc8-4277-8e61-4fd18f3fb03d
+			defaultHierarchy: LocalDateTable_04429e87-f530-442a-937e-e401c06ea9ad.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		formatString: 0
+		lineageTag: dc80fe11-5d99-418c-9fd3-f8b7759271d6
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Year]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		formatString: 0
+		lineageTag: 09a40839-6ac5-4a88-837d-6134c719be1d
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Month]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Day
+		formatString: 0
+		lineageTag: 19f4b135-f7e4-4229-a2d6-9a4e34bed685
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Day]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Week Number'
+		formatString: 0
+		lineageTag: 7d05ac97-a0f7-4c89-b225-58f49c9b36d4
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Week Number]
+
+		annotation SummarizationSetBy = Automatic
+
+	column FirstDateByWeek =
+			
+			CALCULATE(
+			    MIN('DIM_PLANNED_DATE'[Date]),
+			    ALLEXCEPT('DIM_PLANNED_DATE', 'DIM_PLANNED_DATE'[Week Number], 'DIM_PLANNED_DATE'[Year])
+			)
+		formatString: Short Date
+		lineageTag: 4a67b4f8-f30d-4a7a-974b-e130ee028373
+		summarizeBy: none
+
+		variation Variation
+			isDefault
+			relationship: 8280022f-8790-432d-848c-bdd1bb273e97
+			defaultHierarchy: LocalDateTable_f4213160-42c1-48ed-a182-dbcd4156c523.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_PLANNED_DATE = calculated
+		mode: import
+		source =
+				
+				VAR MIN_DATE = "01/01/2024"
+				VAR MAX_DATE = TODAY()
+				RETURN
+				ADDCOLUMNS(
+				    CALENDAR(MIN_DATE, MAX_DATE),
+				    "Year", YEAR([Date]),
+				    "Month", MONTH([Date]),
+				    "Day", DAY([Date]),
+				    "Week Number", WEEKNUM([Date], 2)
+				)
+
+	annotation PBI_Id = 885f8113281541a39b2298223b9a0a7e
+
