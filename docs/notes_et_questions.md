@@ -72,6 +72,20 @@ Légende : 🟡 à discuter · ⏳ en attente de réponse · ✅ tranchée (dép
 | BI3 | U2 – Dashboards PowerBI unique users<br>P1 – Process time dashboard | Si les rapports sont embarqués en mode "app owns data", les utilisateurs Maltimize ne sont pas identifiables côté Power BI : à vérifier | 🟡 |
 | BI5 | P2 – Gap Target vs actual cycle time | Vérifier que la moyenne des écarts reste cohérente tous sites confondus | 🟡 |
 
+## Ajustements recommandés
+
+Points d'amélioration repérés en analysant les sources et les dashboards existants. A valider avant de les appliquer.
+
+| # | KPI | Constat | Ajustement recommandé | Statut |
+|---|---|---|---|---|
+| AJ1 | R1 – % Available recommendations | Le filtre sur les batchs terminés se fait sur le libellé français du statut (`batch_status = 'Fini'`) : il casse si le libellé ou la langue change | Filtrer sur le code du statut (`parameters_batch_status.code = 'finished'`), comme dans `03_transform_data` | 🟡 |
+| AJ2 | R1 – % Available recommendations | Le calcul somme(recos reçues) ÷ somme(recos attendues) peut dépasser 100 % si un batch reçoit des recos sans être au planning (`nb_reco_opti = 0`) | Vérifier s'il existe des batchs avec `total > nb_reco_opti` ; si oui, plafonner les recos reçues au nombre attendu par batch | 🟡 |
+| AJ3 | R1 / R2 / D3 | La liste des lignes déployées est écrite en dur dans le filtre du rapport Suivi (8 lignes) | Remplacer par le référentiel DS (module `recommendations`) | 🟡 |
+| AJ4 | R1 / R2 | Le notebook `import_recommendations` exclut en dur les recos « Germination J5 » de Rouen 1 : règle métier invisible dans les rapports | Documenter la règle et la passer dans une table de paramétrage plutôt qu'en dur | 🟡 |
+| AJ5 | R1 / R2 / Q3 / Q4 / R4 | Les KPI « batch » utilisent la date planifiée, alors que la spec raisonne sur les batchs terminés des 30 derniers jours | Utiliser la date de fin réelle du batch (cf. PO3) | 🟡 |
+| AJ6 | D4 – Time Tracking & Production Notes | La date de déploiement est celle de la 1re note : la date de mise en place du TRS n'est pas prise en compte | Vérifier si `trs_metadata` contient une date de configuration ; si oui, prendre la plus tardive des deux | 🟡 |
+| AJ7 | Toutes les requêtes | Les catalogues sont écrits en dur en `prd` | Les paramétrer avec `current_environment` lors du regroupement dans les notebooks (comme `01_env`) | 🟡 |
+
 ## Décisions prises
 
 | Date | Sujet | Décision |
