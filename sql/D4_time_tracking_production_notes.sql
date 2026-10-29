@@ -4,10 +4,13 @@
 --
 -- Règle (spec) : il faut à la fois qu'une configuration note de production
 -- ET une configuration TRS soient déployées sur la ligne.
--- Sources (logique de la requête initiale de Calcul.ipynb) :
---   - notes de production : PG batches_notes (au moins une note sur un batch
---     non supprimé de la ligne) ;
---   - config TRS : mal_maite_common_prd.gold.trs_metadata (la ligne y figure).
+-- Sources, basées sur leur contenu, sans exclusion de site :
+--   - notes de production : PG batches_notes (toutes les notes existantes,
+--     sur des batchs non supprimés) ;
+--   - config TRS : mal_maite_common_prd.gold.trs_metadata (ne contient que
+--     les sites concernés par le TRS).
+-- Correspondance des lignes : upper(trs_metadata.prd_line) = upper(plants_production_lines.name)
+-- (rouen1 = ROUEN1), à la place du CASE écrit en dur.
 -- Date de déploiement : date de la 1re note de production de la ligne.
 -- =============================================================================
 
@@ -16,32 +19,14 @@
 -- Requête 1 : détail par ligne de production (ce que produira le notebook)
 -- -----------------------------------------------------------------------------
 WITH lignes_trs AS (
-    SELECT DISTINCT
-        CASE
-            WHEN prd_line = 'burton1'     THEN 'BT1'
-            WHEN prd_line = 'rouen1'      THEN 'RO1'
-            WHEN prd_line = 'polisy1'     THEN 'PO1'
-            WHEN prd_line = 'bolelemi1'   THEN 'BO1'
-            WHEN prd_line = 'strasbourg1' THEN 'ST1'
-            WHEN prd_line = 'strasbourg2' THEN 'ST2'
-            WHEN prd_line = 'nogent1'     THEN 'NG1'
-            WHEN prd_line = 'nogent2'     THEN 'NG2'
-            WHEN prd_line = 'NYMBURK1'    THEN 'NY1'
-            WHEN prd_line = 'prouvy1'     THEN 'PR1'
-            WHEN prd_line = 'buzau1'      THEN 'BU1'
-            -- WHEN prd_line = 'pithiviers6' THEN 'PI6'
-            WHEN prd_line = 'burton2'     THEN 'BT2'
-            WHEN prd_line = 'HODONICE1'   THEN 'HO1'
-            WHEN prd_line = 'KROMERIZ1'   THEN 'KR1'
-            ELSE prd_line
-        END AS common_code
+    SELECT DISTINCT upper(trim(prd_line)) AS line_name
     FROM mal_maite_common_prd.gold.trs_metadata
 ),
 notes_par_ligne AS (
     SELECT
-        b.production_line          AS production_line_id,
-        MIN(bn.created_at)         AS first_note_at,
-        COUNT(*)                   AS nb_notes
+        b.production_line   AS production_line_id,
+        MIN(bn.created_at)  AS first_note_at,
+        COUNT(*)            AS nb_notes
     FROM ext_mal_psql_maite_vision_board_prd.public.batches b
     INNER JOIN ext_mal_psql_maite_vision_board_prd.public.batches_notes bn
         ON bn.batch = b.id_batch
@@ -58,38 +43,17 @@ FROM ext_mal_psql_maite_vision_board_prd.public.plants_production_lines pl
 INNER JOIN notes_par_ligne n
     ON n.production_line_id = pl.id_plant_production_line
 INNER JOIN lignes_trs t
-    ON t.common_code = pl.common_code
+    ON t.line_name = upper(trim(pl.name))
 ORDER BY deployment_date;
 
 
 -- -----------------------------------------------------------------------------
--- Requête 2 : contrôle (requête initiale de Calcul.ipynb)
+-- Requête 2 : contrôle de la correspondance des noms
+-- Liste les lignes de trs_metadata qui ne trouvent aucune ligne dans
+-- plants_production_lines. Doit renvoyer 0 ligne.
 -- -----------------------------------------------------------------------------
-SELECT COUNT(DISTINCT PL.id_plant_production_line) AS NbreSites
-FROM ext_mal_psql_maite_vision_board_prd.public.plants_production_lines PL
-INNER JOIN ext_mal_psql_maite_vision_board_prd.public.batches B
-    ON PL.id_plant_production_line = B.production_line
-INNER JOIN ext_mal_psql_maite_vision_board_prd.public.batches_notes BN
-    ON B.id_batch = BN.batch
-INNER JOIN mal_maite_common_prd.gold.trs_metadata MD
-    ON (
-        CASE
-            WHEN MD.prd_line = 'burton1'     THEN 'BT1'
-            WHEN MD.prd_line = 'rouen1'      THEN 'RO1'
-            WHEN MD.prd_line = 'polisy1'     THEN 'PO1'
-            WHEN MD.prd_line = 'bolelemi1'   THEN 'BO1'
-            WHEN MD.prd_line = 'strasbourg1' THEN 'ST1'
-            WHEN MD.prd_line = 'strasbourg2' THEN 'ST2'
-            WHEN MD.prd_line = 'nogent1'     THEN 'NG1'
-            WHEN MD.prd_line = 'nogent2'     THEN 'NG2'
-            WHEN MD.prd_line = 'NYMBURK1'    THEN 'NY1'
-            WHEN MD.prd_line = 'prouvy1'     THEN 'PR1'
-            WHEN MD.prd_line = 'buzau1'      THEN 'BU1'
-            -- WHEN MD.prd_line = 'pithiviers6' THEN 'PI6'
-            WHEN MD.prd_line = 'burton2'     THEN 'BT2'
-            WHEN MD.prd_line = 'HODONICE1'   THEN 'HO1'
-            WHEN MD.prd_line = 'KROMERIZ1'   THEN 'KR1'
-            ELSE MD.prd_line
-        END
-    ) = PL.common_code
-WHERE B.deleted = FALSE;
+SELECT DISTINCT md.prd_line
+FROM mal_maite_common_prd.gold.trs_metadata md
+LEFT JOIN ext_mal_psql_maite_vision_board_prd.public.plants_production_lines pl
+    ON upper(trim(pl.name)) = upper(trim(md.prd_line))
+WHERE pl.id_plant_production_line IS NULL;
