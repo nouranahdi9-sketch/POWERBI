@@ -59,6 +59,7 @@ Légende : 🟡 à discuter · ⏳ en attente de réponse · ✅ tranchée (dép
 | # | KPI | Question | Statut |
 |---|---|---|---|
 | DS1 | Référentiel des activations | Ticket envoyé : suivre la livraison (nom et emplacement de la table, responsable, valeurs de `site` identiques aux tables de recos, dates initiales de mise en PROD, délai) | ⏳ |
+| DS6 | D3 – AI Recommendations | Le notebook `import_recommendations` contient en commentaire des dates de mise en service par ligne (Polisy 13/02/2024, Nogent 2 13/05/2024, Prouvy 09/06/2024, Strasbourg 2 18/08/2024, Nogent 1 16/09/2024) : à transmettre aux DS pour initialiser `valid_from` | 🟡 |
 | DS2 | R3 – % Spec-compliant AI recommendations<br>R4 – % Spec-compliant output batches | Les valeurs IA et réelles des 5 critères qualité sont dans `parameters.fact_batch_weighted_application_rate`. Il manque les bornes IA par cahier des charges : quelle table ? | 🟡 |
 | DS5 | D2 – Metamodels | Le ticket listait les modules recommendations, process_time, production_notes, energy : ajouter le module `metamodel` à la liste | 🟡 |
 
@@ -88,9 +89,10 @@ Légende : 🟡 à discuter · ⏳ en attente de réponse · ✅ tranchée (dép
 | 2026-10-29 | D4 – Time Tracking & Production Notes | Pas besoin du référentiel DS : lignes ayant à la fois des notes de production (`batches_notes`) et une config TRS (`trs_metadata`), les deux conditions sont obligatoires. Basé sur le contenu des tables, aucun site exclu ; correspondance des lignes par nom en majuscules (plus de CASE en dur). Requête validée : 8 lignes |
 | 2026-10-29 | D1 – Data digitalization | Reste calculé à partir des batchs (plus de 180), pas à partir du référentiel DS |
 | 2026-10-29 | Q1 / Q2 – Date de référence | `calculation_interval_after_datetime` (date à laquelle la reco était attendue), comme le dashboard monitoring ; `date_creation_reco` est vide pour les recos en échec |
-| 2026-10-29 | R1 – % Available recommendations | Même règle que la page « overview » du Dashboard suivi : `%reco_disponibles` = recos reçues ÷ recos prévues au planning (`fact_batches_reco` : `total` ÷ `nb_reco_opti`) |
+| 2026-10-29 | R1 – % Available recommendations | Même règle que la page « overview » du Dashboard suivi : `%reco_disponibles` = recos reçues ÷ recos prévues au planning (`fact_batches_reco` : `total` ÷ `nb_reco_opti`) ; filtres du dashboard repris : batchs au statut « Fini » et lignes déployées ; date = date planifiée du batch |
 | 2026-10-29 | R2 – % Declared applied recommendations | Même règle que la page « calculation of applied recommendations » (déclaration malteur) : `%reco_appliqué` = recos au statut Appliquée (`acceptance_status = 2`) ÷ total des recos de `fact_recommendations` |
 | 2026-10-29 | R5 / R6 – Malt yield (R2) | Source : `parameters.fact_batch_weighted_application_rate`, colonnes `r2_ia` (IA) et `r2_reel` (réel) |
+| 2026-10-29 | Q1 / Q2 | Validés sur 30 jours (29/09 au 28/10/2026) : Q1 = 226 recos, identique au dashboard monitoring ; Q2 = 218 contre 217 dans le dashboard (écart de 1 attribué au décalage d'actualisation, à revérifier) |
 | 2026-10-29 | Méthode | Une requête source par KPI dans `sql/<KPI>.sql` (détail au grain fin + contrôle de la valeur), testée dans Databricks puis regroupée dans les notebooks |
 
 ## Notes techniques

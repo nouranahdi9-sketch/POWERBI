@@ -20,7 +20,9 @@
 --     2 = mesures auto en retard, 11 = synchronisation, 9 / 10 = saisie manuelle...
 -- Les deux KPI partagent la même requête retenue : les pourcentages sont
 -- calculés dans Power BI, ce qui permet les filtres sites et date.
--- Question ouverte : règle à retenir pour Q1 (cf. PO4).
+-- Règle Q1 retenue par défaut : celle du dashboard (cf. PO4 pour confirmation).
+-- Statut : validé le 2026-10-29 sur 30 jours : Q1 = 226 (identique au dashboard),
+-- Q2 = 218 (dashboard : 217, écart de 1 attribué au décalage d'actualisation).
 -- =============================================================================
 
 
