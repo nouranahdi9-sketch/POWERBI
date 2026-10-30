@@ -1,0 +1,99 @@
+table dim_trad_trs_measure
+	lineageTag: 0a6f3614-cf43-4016-b59e-9d173cc7b6c7
+
+	measure Mesure =
+			
+			CALCULATE (
+			    MIN ( dim_trad_trs_measure[label] ),
+			    TREATAS (
+			        VALUES ( fact_process_time_analyses[measure_key] ),
+			        dim_trad_trs_measure[key]
+			    )
+			)
+		lineageTag: 15b14bcf-3781-41d6-a110-c83bb65f2251
+
+	column key
+		dataType: string
+		lineageTag: 17e2cfb8-20c7-4c0a-a1bf-31b67eb263f8
+		summarizeBy: none
+		sourceColumn: key
+
+		annotation SummarizationSetBy = Automatic
+
+	column language
+		dataType: int64
+		formatString: 0
+		lineageTag: ff029b3d-3d88-44c5-b1c6-98e2b84fb10b
+		summarizeBy: sum
+		sourceColumn: language
+
+		annotation SummarizationSetBy = Automatic
+
+	column label
+		dataType: string
+		lineageTag: bd8fb400-30db-4dd4-b5c0-2486a7a30dac
+		summarizeBy: none
+		sourceColumn: label
+
+		annotation SummarizationSetBy = Automatic
+
+	column label_source
+		dataType: string
+		lineageTag: 6295f1f8-4b99-4711-bddd-fe6b551848b0
+		summarizeBy: none
+		sourceColumn: label_source
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 92eaad05-b350-4be8-9757-85ba9c2c6c85
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column label_cycle_time
+		dataType: string
+		lineageTag: b6849081-05f8-4253-81ad-d523d73a89a3
+		summarizeBy: none
+		sourceColumn: label_cycle_time
+
+		annotation SummarizationSetBy = Automatic
+
+	column label_transfer_time
+		dataType: string
+		lineageTag: 6cde1dde-91b9-47e1-b8e5-1d5eca63e96b
+		summarizeBy: none
+		sourceColumn: label_transfer_time
+
+		annotation SummarizationSetBy = Automatic
+
+	column label_waiting_time
+		dataType: string
+		lineageTag: e924c20b-d0a9-4715-99d4-adf03f5cce0b
+		summarizeBy: none
+		sourceColumn: label_waiting_time
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_trad_trs_measure = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_preprd_Database = Source{[Name="mal_maite_bi_preprd",Kind="Database"]}[Data],
+				    common_Schema = mal_maite_bi_preprd_Database{[Name="common",Kind="Schema"]}[Data],
+				    dim_trad_trs_measure_Table = common_Schema{[Name="dim_trad_trs_measure",Kind="Table"]}[Data],
+				    #"Duplication de la colonne" = Table.DuplicateColumn(dim_trad_trs_measure_Table, "label", "label - Copier"),
+				    #"Duplication de la colonne1" = Table.DuplicateColumn(#"Duplication de la colonne", "label", "label - Copier.1"),
+				    #"Duplication de la colonne2" = Table.DuplicateColumn(#"Duplication de la colonne1", "label", "label - Copier.2"),
+				    #"Colonnes renommées" = Table.RenameColumns(#"Duplication de la colonne2",{{"label - Copier", "label_cycle_time"}, {"label - Copier.1", "label_transfer_time"}, {"label - Copier.2", "label_waiting_time"}})
+				in
+				    #"Colonnes renommées"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

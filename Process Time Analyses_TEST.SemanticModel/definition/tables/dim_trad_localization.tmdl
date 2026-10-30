@@ -1,0 +1,61 @@
+table dim_trad_localization
+	lineageTag: 359f6f17-148e-4577-a57e-09cbb4b5c2f3
+
+	column id_parameter_localization
+		dataType: int64
+		formatString: 0
+		lineageTag: 5bc67060-06c8-4d2e-92d2-486ad9973596
+		summarizeBy: sum
+		sourceColumn: id_parameter_localization
+
+		annotation SummarizationSetBy = Automatic
+
+	column language
+		dataType: int64
+		formatString: 0
+		lineageTag: c045bf72-f88f-4062-8f50-0521a1fc63aa
+		summarizeBy: sum
+		sourceColumn: language
+
+		annotation SummarizationSetBy = Automatic
+
+	column label
+		dataType: string
+		lineageTag: c85ea2d4-1bd4-42e6-968a-9bae53127490
+		summarizeBy: none
+		sourceColumn: label
+
+		annotation SummarizationSetBy = Automatic
+
+	column label_source
+		dataType: string
+		lineageTag: e3241b78-ded2-45b4-955e-e45d54f58b59
+		summarizeBy: none
+		sourceColumn: label_source
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 61b45683-8426-4f23-b822-2ceccf8feb41
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_trad_localization = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_preprd_Database = Source{[Name="mal_maite_bi_preprd",Kind="Database"]}[Data],
+				    common_Schema = mal_maite_bi_preprd_Database{[Name="common",Kind="Schema"]}[Data],
+				    dim_trad_localization_Table = common_Schema{[Name="dim_trad_localization",Kind="Table"]}[Data]
+				in
+				    dim_trad_localization_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

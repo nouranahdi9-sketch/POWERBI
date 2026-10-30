@@ -1,0 +1,98 @@
+table dim_localization
+	lineageTag: c4aca37b-acdd-4467-b68c-4db53e763b3d
+
+	column id_parameter_localization
+		dataType: int64
+		formatString: 0
+		lineageTag: 97da69ff-012a-4e56-b929-f52f7fdccb05
+		summarizeBy: sum
+		sourceColumn: id_parameter_localization
+
+		annotation SummarizationSetBy = Automatic
+
+	column code
+		dataType: string
+		lineageTag: 24ab6910-9052-4c27-8c04-650a97ad9c3e
+		summarizeBy: none
+		sourceColumn: code
+
+		annotation SummarizationSetBy = Automatic
+
+	column sequence
+		dataType: int64
+		formatString: 0
+		lineageTag: d7f2408d-a53b-4465-b061-700c3c2644db
+		summarizeBy: sum
+		sourceColumn: sequence
+
+		annotation SummarizationSetBy = Automatic
+
+	column group
+		dataType: int64
+		formatString: 0
+		lineageTag: 741b64bd-3096-4021-9e1b-d6debf749567
+		summarizeBy: sum
+		sourceColumn: group
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 54977d5d-0e12-4f87-8945-2c3139335063
+		summarizeBy: none
+		sourceColumn: deleted
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 19e2dcb3-2a65-4f69-aeb3-21ae67bf8637
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 32f8a158-642d-4158-9d43-2408cf37e3e7
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 28e66d72-a31f-4644-b4c8-1ff2e4881e15
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column linked_activity
+		dataType: int64
+		formatString: 0
+		lineageTag: 40759f31-315b-4e5b-8506-4e6e0511a7af
+		summarizeBy: sum
+		sourceColumn: linked_activity
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_localization = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_preprd_Database = Source{[Name="mal_maite_bi_preprd",Kind="Database"]}[Data],
+				    common_Schema = mal_maite_bi_preprd_Database{[Name="common",Kind="Schema"]}[Data],
+				    dim_localization_Table = common_Schema{[Name="dim_localization",Kind="Table"]}[Data]
+				in
+				    dim_localization_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

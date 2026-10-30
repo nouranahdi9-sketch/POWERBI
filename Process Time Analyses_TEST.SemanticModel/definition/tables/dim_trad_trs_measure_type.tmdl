@@ -1,0 +1,71 @@
+table dim_trad_trs_measure_type
+	lineageTag: 8a67733f-da9b-41cc-be66-9b25ec75d3ce
+
+	measure 'Type de mesure' =
+			
+			CALCULATE (
+			    MIN ( dim_trad_trs_measure_type[label] ),
+			    TREATAS (
+			        VALUES ( fact_process_time_analyses[measure_type] ),
+			        dim_trad_trs_measure_type[key]
+			    )
+			)
+		lineageTag: f273cd08-458a-4c90-a5b2-9cdb3735206b
+
+	column key
+		dataType: string
+		lineageTag: 6fb710f7-a4e5-4c39-b3f2-e4f98389478f
+		summarizeBy: none
+		sourceColumn: key
+
+		annotation SummarizationSetBy = Automatic
+
+	column language
+		dataType: int64
+		formatString: 0
+		lineageTag: c8e4c315-cc6d-4379-ba83-c1d6d2120633
+		summarizeBy: sum
+		sourceColumn: language
+
+		annotation SummarizationSetBy = Automatic
+
+	column label
+		dataType: string
+		lineageTag: 60a72cbb-74c5-48b6-ab03-5d15286717cf
+		summarizeBy: none
+		sourceColumn: label
+
+		annotation SummarizationSetBy = Automatic
+
+	column label_source
+		dataType: string
+		lineageTag: dc059014-cdb1-4e3c-98c2-dafd100b4abe
+		summarizeBy: none
+		sourceColumn: label_source
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8515ce0a-2e31-4525-862c-9ee58428f9ff
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_trad_trs_measure_type = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_preprd_Database = Source{[Name="mal_maite_bi_preprd",Kind="Database"]}[Data],
+				    common_Schema = mal_maite_bi_preprd_Database{[Name="common",Kind="Schema"]}[Data],
+				    dim_trad_trs_measure_type_Table = common_Schema{[Name="dim_trad_trs_measure_type",Kind="Table"]}[Data]
+				in
+				    dim_trad_trs_measure_type_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+
