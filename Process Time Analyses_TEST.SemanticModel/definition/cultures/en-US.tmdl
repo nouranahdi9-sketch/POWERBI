@@ -131,6 +131,10 @@ cultureInfo en-US
 					caption: avg. Delta (BI)
 				measure Moyenne_target_business_hh:mm
 					caption: Average Business Target
+				measure Synthese_Duree_h
+					caption: Duration (h)
+				measure Synthese_Objectif_metier_h
+					caption: Business target (h)
 				measure Moyenne_top_20_hh:mm
 					caption: avg. Target (BI)
 				measure 'Max hh:mm'

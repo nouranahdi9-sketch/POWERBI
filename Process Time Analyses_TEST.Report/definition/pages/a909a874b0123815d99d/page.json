@@ -99,5 +99,6 @@
       "target": "f9b29869ea1f75ad510f",
       "type": "NoFilter"
     }
-  ]
+  ],
+  "visibility": "HiddenInViewMode"
 }

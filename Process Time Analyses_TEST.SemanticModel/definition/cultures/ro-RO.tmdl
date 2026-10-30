@@ -131,6 +131,10 @@ cultureInfo ro-RO
 					caption: Delta medie
 				measure Moyenne_target_business_hh:mm
 					caption: Țintă medie (de business)
+				measure Synthese_Duree_h
+					caption: Durată (h)
+				measure Synthese_Objectif_metier_h
+					caption: Țintă de business (h)
 				measure Moyenne_top_20_hh:mm
 					caption: Target mediu (BI)
 				measure 'Max hh:mm'

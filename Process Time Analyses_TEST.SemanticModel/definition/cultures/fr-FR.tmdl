@@ -131,6 +131,10 @@ cultureInfo fr-FR
 					caption: Delta moy. (BI)
 				measure Moyenne_target_business_hh:mm
 					caption: Objectif moyen (métier)
+				measure Synthese_Duree_h
+					caption: Durée (h)
+				measure Synthese_Objectif_metier_h
+					caption: Objectif métier (h)
 				measure Moyenne_top_20_hh:mm
 					caption: Objectif moy. (BI)
 				measure 'Max hh:mm'

@@ -313,6 +313,30 @@ table Translation
 			COALESCE ( TitleTranslated, TitleDefault )
 		lineageTag: de9019f5-9926-4e49-b1df-dfbaedadf7f7
 
+	measure TITLE_SYNTHESE =
+			
+			VAR CurrentCulture = USERCULTURE()
+			
+			VAR TitleTranslated =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE_SYNTHESE",
+			        Translation[LanguageCode] = CurrentCulture
+			    )
+			
+			VAR TitleDefault =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE_SYNTHESE",
+			        Translation[LanguageCode] = "en-US"
+			    )
+			
+			RETURN
+			COALESCE ( TitleTranslated, TitleDefault, "Process times per batch" )
+		lineageTag: f77e0258-f867-4202-a58f-69c7a37b920b
+
 	measure TITLE1_MEASURES_ALL =
 			
 			VAR CurrentCulture = USERCULTURE()

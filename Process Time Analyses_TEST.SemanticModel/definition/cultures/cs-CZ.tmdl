@@ -131,6 +131,10 @@ cultureInfo cs-CZ
 					caption: Průměrná delta (BI)
 				measure Moyenne_target_business_hh:mm
 					caption: Průměrný cíl (obchodní)
+				measure Synthese_Duree_h
+					caption: Doba trvání (h)
+				measure Synthese_Objectif_metier_h
+					caption: Obchodní cíl (h)
 				measure Moyenne_top_20_hh:mm
 					caption: Průměrný cíl (BI)
 				measure 'Max hh:mm'

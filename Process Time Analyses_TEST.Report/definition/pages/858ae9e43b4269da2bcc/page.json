@@ -94,5 +94,6 @@
       "target": "6256b20e86203d9e97c8",
       "type": "NoFilter"
     }
-  ]
+  ],
+  "visibility": "HiddenInViewMode"
 }

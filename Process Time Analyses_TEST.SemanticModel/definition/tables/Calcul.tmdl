@@ -586,6 +586,26 @@ table Calcul
 			)
 		lineageTag: 69272839-9766-402b-835a-2e1689d50bef
 
+	measure Synthese_Duree_h =
+			
+			IF (
+			    HASONEVALUE ( dim_trs_measure[key] ),
+			    AVERAGE ( fact_process_time_analyses[mesure_value_h] )
+			)
+		formatString: 0.00
+		displayFolder: Mesures\Synthese
+		lineageTag: 7da5254a-a1dd-4a72-a561-62f1b32aecce
+
+	measure Synthese_Objectif_metier_h =
+			
+			IF (
+			    HASONEVALUE ( dim_trs_measure[key] ),
+			    AVERAGE ( fact_process_time_analyses[target_business_h] )
+			)
+		formatString: 0.00
+		displayFolder: Mesures\Synthese
+		lineageTag: da83a5f2-67dd-41aa-820f-de0fb0546b2a
+
 	measure DBG_NbLignesTrad = COUNTROWS ( dim_trad_specy )
 		formatString: 0
 		lineageTag: da61084f-9609-4a54-8636-329328ca6b6e
