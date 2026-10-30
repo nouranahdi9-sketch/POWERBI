@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "name": "83ac210e1dbed202c66a",
+  "position": {
+    "x": 0,
+    "y": 229.362381608592,
+    "z": 3000,
+    "height": 430.05446551611,
+    "width": 211.44344554542076,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_trad_specy"
+                    }
+                  },
+                  "Property": "label"
+                }
+              },
+              "queryRef": "dim_trad_specy.label",
+              "nativeQueryRef": "label"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

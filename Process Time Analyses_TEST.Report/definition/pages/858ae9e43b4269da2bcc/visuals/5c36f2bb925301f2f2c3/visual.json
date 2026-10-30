@@ -1,0 +1,358 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "name": "5c36f2bb925301f2f2c3",
+  "position": {
+    "x": 0,
+    "y": 148.45360824742266,
+    "z": 6000,
+    "height": 193.97938144329896,
+    "width": 1279.6701030927834,
+    "tabOrder": 6000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_trad_trs_measure"
+                    }
+                  },
+                  "Property": "label"
+                }
+              },
+              "queryRef": "dim_trad_trs_measure.label",
+              "nativeQueryRef": "label"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calcul"
+                    }
+                  },
+                  "Property": "Moyenne hh:mm"
+                }
+              },
+              "queryRef": "fact_process_time_analyses.Moyenne hh:mm",
+              "nativeQueryRef": "Moyenne hh:mm"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calcul"
+                    }
+                  },
+                  "Property": "Moyenne_target_business_hh:mm"
+                }
+              },
+              "queryRef": "Calcul.Moyenne_target_business_hh:mm",
+              "nativeQueryRef": "Moyenne_target_business_hh:mm"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calcul"
+                    }
+                  },
+                  "Property": "Moyenne_delta_target_business_hh:mm"
+                }
+              },
+              "queryRef": "Calcul.Moyenne_delta_target_business_hh:mm",
+              "nativeQueryRef": "Moyenne_delta_target_business_hh:mm"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calcul"
+                    }
+                  },
+                  "Property": "Min hh:mm"
+                }
+              },
+              "queryRef": "fact_process_time_analyses.Min hh:mm",
+              "nativeQueryRef": "Min hh:mm"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calcul"
+                    }
+                  },
+                  "Property": "Max hh:mm"
+                }
+              },
+              "queryRef": "fact_process_time_analyses.Max hh:mm",
+              "nativeQueryRef": "Max hh:mm"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calcul"
+                    }
+                  },
+                  "Property": "BatchNumber_MinMesureValue"
+                }
+              },
+              "queryRef": "fact_process_time_analyses.BatchNumber_MinMesureValue",
+              "nativeQueryRef": "BatchNumber_MinMesureValue"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calcul"
+                    }
+                  },
+                  "Property": "BatchNumber_MaxMesureValue"
+                }
+              },
+              "queryRef": "fact_process_time_analyses.BatchNumber_MaxMesureValue",
+              "nativeQueryRef": "BatchNumber_MaxMesureValue"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calcul"
+                    }
+                  },
+                  "Property": "Moyenne_top_20_hh:mm"
+                }
+              },
+              "queryRef": "fact_process_time_analyses.Moyenne_top_20_hh:mm",
+              "nativeQueryRef": "Moyenne_top_20_hh:mm"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calcul"
+                    }
+                  },
+                  "Property": "Moyenne_delta_top_20_hh:mm"
+                }
+              },
+              "queryRef": "fact_process_time_analyses.Moyenne_delta_top_20_hh:mm",
+              "nativeQueryRef": "Moyenne_delta_top_20_hh:mm"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "91.64771073587D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "fact_process_time_analyses.Moyenne hh:mm"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "82.35842114751905D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "fact_process_time_analyses.Moyenne_top_20_hh:mm"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "97.88892474656245D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Calcul.Moyenne_delta_target_business_hh:mm"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "95.07408631072974D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Calcul.Moyenne_target_business_hh:mm"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "113.33118424651543D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "fact_process_time_analyses.Moyenne_delta_top_20_hh:mm"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "152.67963900697407D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "fact_process_time_analyses.BatchNumber_MinMesureValue"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "149.7102044532291D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "fact_process_time_analyses.BatchNumber_MaxMesureValue"
+          }
+        }
+      ],
+      "grid": [
+        {
+          "properties": {
+            "rowPadding": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "total": [
+        {
+          "properties": {
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "stylePreset": [
+        {
+          "properties": {
+            "name": {
+              "expr": {
+                "Literal": {
+                  "Value": "'None'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualHeader": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,609 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "name": "d5bb64bc6639d0a9939b",
+  "position": {
+    "x": 0,
+    "y": 203.74721403407864,
+    "z": 0,
+    "height": 516.822201452297,
+    "width": 1280.4601337263641,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_batches_specifications"
+                    }
+                  },
+                  "Property": "batch_number"
+                }
+              },
+              "queryRef": "dim_batches_specifications.batch_number",
+              "nativeQueryRef": "batch_number"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_batch_note"
+                    }
+                  },
+                  "Property": "note"
+                }
+              },
+              "queryRef": "fact_batch_note.note",
+              "nativeQueryRef": "note"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calcul"
+                    }
+                  },
+                  "Property": "Emplacement"
+                }
+              },
+              "queryRef": "Calcul.Emplacement",
+              "nativeQueryRef": "Emplacement"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calcul"
+                    }
+                  },
+                  "Property": "Événement"
+                }
+              },
+              "queryRef": "Calcul.Événement",
+              "nativeQueryRef": "Événement"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calcul"
+                    }
+                  },
+                  "Property": "Détail"
+                }
+              },
+              "queryRef": "Calcul.Détail",
+              "nativeQueryRef": "Détail"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_batch_note"
+                    }
+                  },
+                  "Property": "gap_minutes"
+                }
+              },
+              "queryRef": "Sum(fact_batch_note.gap_minutes)",
+              "nativeQueryRef": "gap_minutes"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_batch_note"
+                    }
+                  },
+                  "Property": "date_saisie"
+                }
+              },
+              "queryRef": "fact_batch_note.date_saisie",
+              "nativeQueryRef": "date_saisie"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_batch_note"
+                    }
+                  },
+                  "Property": "full_name"
+                }
+              },
+              "queryRef": "fact_batch_note.full_name",
+              "nativeQueryRef": "full_name"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calcul"
+                    }
+                  },
+                  "Property": "Impact"
+                }
+              },
+              "queryRef": "Calcul.Impact",
+              "nativeQueryRef": "Impact"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_site"
+                    }
+                  },
+                  "Property": "plant"
+                }
+              },
+              "queryRef": "dim_site.plant",
+              "nativeQueryRef": "plant"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "fact_batch_note"
+                  }
+                },
+                "Property": "date_saisie"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnHeaders": [
+        {
+          "properties": {
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "grid": [
+        {
+          "properties": {
+            "rowPadding": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "total": [
+        {
+          "properties": {
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "226.58252660823285D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "fact_batch_note.note"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "77.71153843751537D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(fact_batch_note.gap_minutes)"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "132.1222364999553D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "fact_batch_note.full_name"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "86.09166855088895D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "dim_batches_specifications.batch_number"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "132.66666718435263D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "fact_batch_note.date_saisie"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "99.00000354855518D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Calcul.Emplacement"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "171.61851847042303D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Calcul.Détail"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "stylePreset": [
+        {
+          "properties": {
+            "name": {
+              "expr": {
+                "Literal": {
+                  "Value": "'None'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "dcf948a6cd8a5a370f21",
+        "ordinal": 0,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_batches_specifications"
+              }
+            },
+            "Property": "batch_number"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "a9f5fe3f0a22ae7fbedc",
+        "ordinal": 1,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_process_time_analyses"
+              }
+            },
+            "Property": "measure_type"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "82f987a6f510a6dbcfeb",
+        "ordinal": 2,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_process_time_analyses"
+              }
+            },
+            "Property": "measure_value_hhmm"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "5ffc5405bacaa8382951",
+        "ordinal": 3,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_process_time_analyses"
+              }
+            },
+            "Property": "mesure_name"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "693a58f55f9182279169",
+        "ordinal": 4,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_process_time_analyses"
+              }
+            },
+            "Property": "deltatop20_value_hhmm"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "5c16689906bac79c9386",
+        "ordinal": 5,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_process_time_analyses"
+              }
+            },
+            "Property": "seuiltop20_value_hhmm"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "8c70093861abbc5e2962",
+        "ordinal": 6,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_process_time_analyses"
+              }
+            },
+            "Property": "mesure_name_color"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "5f5202948e79d92e7658",
+        "ordinal": 7,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_process_time_analyses"
+              }
+            },
+            "Property": "date_fin"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "f0bd0ffc603670677e16",
+        "ordinal": 8,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_batch_note"
+              }
+            },
+            "Property": "note"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "574082d6422385ae02c7",
+        "ordinal": 9,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_batch_note"
+              }
+            },
+            "Property": "location"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "fd34ba6d76b029403d8b",
+        "ordinal": 10,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_batch_note"
+              }
+            },
+            "Property": "impact"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "7c408bd87c5abb97738d",
+        "ordinal": 11,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_batch_note"
+              }
+            },
+            "Property": "event"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "9e674036b63bc37b8ce1",
+        "ordinal": 12,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_batch_note"
+              }
+            },
+            "Property": "detail"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "6e2b8b09b304a0e45d29",
+        "ordinal": 13,
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "fact_batch_note"
+                  }
+                },
+                "Property": "gap_minutes"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced",
+        "howCreated": "User"
+      },
+      {
+        "name": "1b0c775baedb8cac2dac",
+        "ordinal": 14,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_batch_note"
+              }
+            },
+            "Property": "date_saisie"
+          }
+        },
+        "type": "Categorical"
+      }
+    ],
+    "filterSortOrder": "Custom"
+  }
+}

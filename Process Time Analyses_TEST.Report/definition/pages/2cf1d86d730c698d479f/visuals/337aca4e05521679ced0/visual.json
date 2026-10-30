@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "name": "337aca4e05521679ced0",
+  "position": {
+    "x": 867.2765054574885,
+    "y": 476.64369928035524,
+    "z": 4000,
+    "height": 243.697530459129,
+    "width": 363.75440208237637,
+    "tabOrder": 4000
+  },
+  "visual": {
+    "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Tooltips": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calcul"
+                    }
+                  },
+                  "Property": "Espèce"
+                }
+              },
+              "queryRef": "Calcul.Espèce",
+              "nativeQueryRef": "Espèce"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

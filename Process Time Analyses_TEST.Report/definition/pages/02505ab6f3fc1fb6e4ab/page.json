@@ -1,0 +1,45 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "name": "02505ab6f3fc1fb6e4ab",
+  "displayName": "Overview - last hours",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "objects": {
+    "outspacePane": [
+      {
+        "properties": {
+          "width": {
+            "expr": {
+              "Literal": {
+                "Value": "347L"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visualInteractions": [
+    {
+      "source": "c2f578262dbe41fb84d9",
+      "target": "f759d34e07648838c008",
+      "type": "NoFilter"
+    },
+    {
+      "source": "c2f578262dbe41fb84d9",
+      "target": "7ab293bfd486b061c941",
+      "type": "NoFilter"
+    },
+    {
+      "source": "089c55500eab06bd4a2e",
+      "target": "f759d34e07648838c008",
+      "type": "NoFilter"
+    },
+    {
+      "source": "089c55500eab06bd4a2e",
+      "target": "7ab293bfd486b061c941",
+      "type": "NoFilter"
+    }
+  ]
+}

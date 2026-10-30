@@ -1,0 +1,510 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "name": "c51513a5669c210fc9b1",
+  "position": {
+    "x": 0,
+    "y": 236.87684233230283,
+    "z": 3000,
+    "height": 419.08979797253573,
+    "width": 1280.4601337263641,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_batches_specifications"
+                    }
+                  },
+                  "Property": "batch_number"
+                }
+              },
+              "queryRef": "dim_batches_specifications.batch_number",
+              "nativeQueryRef": "batch_number"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_trad_trs_measure_type"
+                    }
+                  },
+                  "Property": "Type de mesure"
+                }
+              },
+              "queryRef": "dim_trad_trs_measure_type.Type de mesure",
+              "nativeQueryRef": "Type de mesure"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_trad_trs_measure"
+                    }
+                  },
+                  "Property": "label"
+                }
+              },
+              "queryRef": "dim_trad_trs_measure.label",
+              "nativeQueryRef": "label"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_process_time_analyses"
+                    }
+                  },
+                  "Property": "pastille"
+                }
+              },
+              "queryRef": "fact_process_time_analyses.pastille",
+              "nativeQueryRef": " ",
+              "displayName": " "
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_process_time_analyses"
+                    }
+                  },
+                  "Property": "measure_value_hhmm"
+                }
+              },
+              "queryRef": "fact_process_time_analyses.measure_value_hhmm",
+              "nativeQueryRef": "measure_value_hhmm"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_process_time_analyses"
+                    }
+                  },
+                  "Property": "targetbusiness_value_hhmm"
+                }
+              },
+              "queryRef": "fact_process_time_analyses.targetbusiness_value_hhmm",
+              "nativeQueryRef": "targetbusiness_value_hhmm"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_process_time_analyses"
+                    }
+                  },
+                  "Property": "delta_targetbusiness_value_hhmm"
+                }
+              },
+              "queryRef": "fact_process_time_analyses.delta_targetbusiness_value_hhmm",
+              "nativeQueryRef": "delta_targetbusiness_value_hhmm"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_process_time_analyses"
+                    }
+                  },
+                  "Property": "date_debut"
+                }
+              },
+              "queryRef": "fact_process_time_analyses.date_debut",
+              "nativeQueryRef": "date_debut"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_process_time_analyses"
+                    }
+                  },
+                  "Property": "date_fin"
+                }
+              },
+              "queryRef": "fact_process_time_analyses.date_fin",
+              "nativeQueryRef": "date_fin"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_process_time_analyses"
+                    }
+                  },
+                  "Property": "sequence"
+                }
+              },
+              "queryRef": "Sum(fact_process_time_analyses.sequence)",
+              "nativeQueryRef": "sequence"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_trad_trs_category"
+                    }
+                  },
+                  "Property": "Catégorie"
+                }
+              },
+              "queryRef": "dim_trad_trs_category.Catégorie",
+              "nativeQueryRef": "Catégorie"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_process_time_analyses"
+                    }
+                  },
+                  "Property": "columns_source"
+                }
+              },
+              "queryRef": "fact_process_time_analyses.columns_source",
+              "nativeQueryRef": "columns_source"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_batches_specifications"
+                    }
+                  },
+                  "Property": "mes_number"
+                }
+              },
+              "queryRef": "dim_batches_specifications.mes_number",
+              "nativeQueryRef": "mes_number"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_process_time_analyses"
+                    }
+                  },
+                  "Property": "flg_outlier"
+                }
+              },
+              "queryRef": "Sum(fact_process_time_analyses.flg_outlier)",
+              "nativeQueryRef": "flg_outlier"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_batches_specifications"
+                    }
+                  },
+                  "Property": "batch_status_localization"
+                }
+              },
+              "queryRef": "dim_batches_specifications.batch_status_localization",
+              "nativeQueryRef": "batch_status_localization"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_batches_specifications"
+                    }
+                  },
+                  "Property": "error_messages"
+                }
+              },
+              "queryRef": "dim_batches_specifications.error_messages",
+              "nativeQueryRef": "error_messages"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calcul"
+                    }
+                  },
+                  "Property": "Type de production"
+                }
+              },
+              "queryRef": "Calcul.Type de production",
+              "nativeQueryRef": "Type de production"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calcul"
+                    }
+                  },
+                  "Property": "Espèce"
+                }
+              },
+              "queryRef": "Calcul.Espèce",
+              "nativeQueryRef": "Espèce"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calcul"
+                    }
+                  },
+                  "Property": "Variété"
+                }
+              },
+              "queryRef": "Calcul.Variété",
+              "nativeQueryRef": "Variété"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_batches_specifications"
+                    }
+                  },
+                  "Property": "cycle_label"
+                }
+              },
+              "queryRef": "dim_batches_specifications.cycle_label",
+              "nativeQueryRef": "cycle_label"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_site"
+                    }
+                  },
+                  "Property": "plant"
+                }
+              },
+              "queryRef": "dim_site.plant",
+              "nativeQueryRef": "plant"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_process_time_analyses"
+                    }
+                  },
+                  "Property": "seuiltop20_value_hhmm"
+                }
+              },
+              "queryRef": "fact_process_time_analyses.seuiltop20_value_hhmm",
+              "nativeQueryRef": "seuiltop20_value_hhmm"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_process_time_analyses"
+                    }
+                  },
+                  "Property": "deltatop20_value_hhmm"
+                }
+              },
+              "queryRef": "fact_process_time_analyses.deltatop20_value_hhmm",
+              "nativeQueryRef": "deltatop20_value_hhmm"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "fact_process_time_analyses"
+                  }
+                },
+                "Property": "date_fin"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "total": [
+        {
+          "properties": {
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "grid": [
+        {
+          "properties": {
+            "rowPadding": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "311.80142347067715D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "dim_batches_specifications.error_messages"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "167.12222397636663D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "fact_process_time_analyses.targetbusiness_value_hhmm"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "212.40463189831686D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "fact_process_time_analyses.delta_targetbusiness_value_hhmm"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "stylePreset": [
+        {
+          "properties": {
+            "name": {
+              "expr": {
+                "Literal": {
+                  "Value": "'None'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "7ab090a086e51056532a",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_process_time_analyses"
+              }
+            },
+            "Property": "measure_type"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User",
+        "objects": {
+          "general": [
+            {
+              "properties": {
+                "isInvertedSelectionMode": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "true"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

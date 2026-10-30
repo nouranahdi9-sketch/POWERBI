@@ -1,0 +1,468 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "name": "5924dc88a2f28310ab37",
+  "position": {
+    "x": 0,
+    "y": 148.45360824742266,
+    "z": 6000,
+    "height": 193.97938144329896,
+    "width": 1279.6701030927834,
+    "tabOrder": 6000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_trad_trs_measure"
+                    }
+                  },
+                  "Property": "label"
+                }
+              },
+              "queryRef": "dim_trad_trs_measure.label",
+              "nativeQueryRef": "label"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calcul"
+                    }
+                  },
+                  "Property": "Moyenne hh:mm"
+                }
+              },
+              "queryRef": "fact_process_time_analyses.Moyenne hh:mm",
+              "nativeQueryRef": "Moyenne hh:mm"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calcul"
+                    }
+                  },
+                  "Property": "Moyenne_target_business_hh:mm"
+                }
+              },
+              "queryRef": "Calcul.Moyenne_target_business_hh:mm",
+              "nativeQueryRef": "Moyenne_target_business_hh:mm"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calcul"
+                    }
+                  },
+                  "Property": "Moyenne_delta_target_business_hh:mm"
+                }
+              },
+              "queryRef": "Calcul.Moyenne_delta_target_business_hh:mm",
+              "nativeQueryRef": "Moyenne_delta_target_business_hh:mm"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calcul"
+                    }
+                  },
+                  "Property": "Min hh:mm"
+                }
+              },
+              "queryRef": "fact_process_time_analyses.Min hh:mm",
+              "nativeQueryRef": "Min hh:mm"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calcul"
+                    }
+                  },
+                  "Property": "Max hh:mm"
+                }
+              },
+              "queryRef": "fact_process_time_analyses.Max hh:mm",
+              "nativeQueryRef": "Max hh:mm"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calcul"
+                    }
+                  },
+                  "Property": "BatchNumber_MinMesureValue"
+                }
+              },
+              "queryRef": "fact_process_time_analyses.BatchNumber_MinMesureValue",
+              "nativeQueryRef": "BatchNumber_MinMesureValue"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calcul"
+                    }
+                  },
+                  "Property": "BatchNumber_MaxMesureValue"
+                }
+              },
+              "queryRef": "fact_process_time_analyses.BatchNumber_MaxMesureValue",
+              "nativeQueryRef": "BatchNumber_MaxMesureValue"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calcul"
+                    }
+                  },
+                  "Property": "Moyenne_top_20_hh:mm"
+                }
+              },
+              "queryRef": "fact_process_time_analyses.Moyenne_top_20_hh:mm",
+              "nativeQueryRef": "Moyenne_top_20_hh:mm"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calcul"
+                    }
+                  },
+                  "Property": "Moyenne_delta_top_20_hh:mm"
+                }
+              },
+              "queryRef": "fact_process_time_analyses.Moyenne_delta_top_20_hh:mm",
+              "nativeQueryRef": "Moyenne_delta_top_20_hh:mm"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Calcul"
+                  }
+                },
+                "Property": "BatchNumber_MaxMesureValue"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "grid": [
+        {
+          "properties": {
+            "rowPadding": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "total": [
+        {
+          "properties": {
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "90.42671710186431D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "fact_process_time_analyses.Moyenne_delta_top_20_hh:mm"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "61.46573927449022D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "fact_process_time_analyses.Min hh:mm"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "62.80926197094844D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "fact_process_time_analyses.Max hh:mm"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "178.0591122342266D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "fact_process_time_analyses.BatchNumber_MinMesureValue"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "186.86206992859115D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "fact_process_time_analyses.BatchNumber_MaxMesureValue"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "85.02054617285594D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "fact_process_time_analyses.Moyenne_top_20_hh:mm"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "105.48277952279925D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Calcul.Moyenne_target_business_hh:mm"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "102.10344955081953D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Calcul.Moyenne_delta_target_business_hh:mm"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "stylePreset": [
+        {
+          "properties": {
+            "name": {
+              "expr": {
+                "Literal": {
+                  "Value": "'None'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualHeader": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "749e94f0f3e5ca196fdf",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_process_time_analyses"
+              }
+            },
+            "Property": "categorie"
+          }
+        },
+        "type": "Categorical",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "f",
+              "Entity": "fact_process_time_analyses",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "In": {
+                  "Expressions": [
+                    {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "f"
+                          }
+                        },
+                        "Property": "categorie"
+                      }
+                    }
+                  ],
+                  "Values": [
+                    [
+                      {
+                        "Literal": {
+                          "Value": "'germination'"
+                        }
+                      }
+                    ],
+                    [
+                      {
+                        "Literal": {
+                          "Value": "'kilning'"
+                        }
+                      }
+                    ],
+                    [
+                      {
+                        "Literal": {
+                          "Value": "'steeping'"
+                        }
+                      }
+                    ],
+                    [
+                      {
+                        "Literal": {
+                          "Value": "'kilning_total'"
+                        }
+                      }
+                    ]
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User"
+      }
+    ]
+  }
+}

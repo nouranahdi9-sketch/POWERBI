@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "name": "3bbad74c2aee6dc6494a",
+  "position": {
+    "x": 0,
+    "y": 0,
+    "z": 2000,
+    "height": 229,
+    "width": 364,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_batch_note"
+                    }
+                  },
+                  "Property": "gap_minutes"
+                }
+              },
+              "queryRef": "Sum(fact_batch_note.gap_minutes)",
+              "nativeQueryRef": "gap_minutes"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
