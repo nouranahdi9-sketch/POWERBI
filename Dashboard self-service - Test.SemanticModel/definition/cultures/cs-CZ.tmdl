@@ -55,6 +55,8 @@ cultureInfo cs-CZ
 			table fact_energy
 				column value
 					caption: Hodnota
+				measure Valeur
+					caption: Hodnota
 			table fact_measurement
 				column measure_name
 					caption: Parametr

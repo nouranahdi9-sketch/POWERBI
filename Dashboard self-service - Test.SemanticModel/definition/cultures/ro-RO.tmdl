@@ -55,6 +55,8 @@ cultureInfo ro-RO
 			table fact_energy
 				column value
 					caption: Valoare
+				measure Valeur
+					caption: Valoare
 			table fact_measurement
 				column measure_name
 					caption: Parametru

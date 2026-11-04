@@ -57,6 +57,8 @@ cultureInfo fr-FR
 			table fact_energy
 				column value
 					caption: Valeur
+				measure Valeur
+					caption: Valeur
 			table fact_measurement
 				column measure_name
 					caption: Paramètre

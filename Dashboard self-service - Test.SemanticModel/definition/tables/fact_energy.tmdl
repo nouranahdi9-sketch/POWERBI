@@ -1,6 +1,11 @@
 table fact_energy
 	lineageTag: 2c0d2814-5b90-48f6-91cf-ea1ecc361bae
 
+	measure Valeur = MIN ( fact_energy[value] )
+		lineageTag: f7346aa1-4ef6-4aea-8483-54cfa5a59f80
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
 	column id_batch
 		dataType: string
 		lineageTag: 90aa0589-1203-4bd6-b3f4-d7ec9f2e7753
