@@ -1,0 +1,52 @@
+table 'Niveau notes'
+	lineageTag: a5933852-c909-4b75-8640-62a6bcedd806
+
+	column 'Niveau notes'
+		dataType: string
+		lineageTag: fdd01fe9-03d6-431f-a749-8d0714368bf3
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Niveau notes Ordre'
+
+		relatedColumnDetails
+			groupByColumn: 'Niveau notes Champs'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Niveau notes Champs'
+		dataType: string
+		isHidden
+		lineageTag: 64bc673d-7f4b-4775-bf4e-bdece03ff386
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Niveau notes Ordre'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Niveau notes Ordre'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 90a31c30-920a-4dde-ae85-e2d2c3e3a4bb
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Niveau notes' = calculated
+		mode: import
+		source =
+				{
+				    ("Localisation", NAMEOF ( 'dim_trad_batch_note_location'[label] ), 0),
+				    ("Impact", NAMEOF ( 'dim_trad_batch_note_impact'[label] ), 1),
+				    ("Événement", NAMEOF ( 'dim_trad_batch_note_event'[label] ), 2),
+				    ("Détail", NAMEOF ( 'dim_trad_batch_note_detail'[label] ), 3)
+				}
+
+	annotation PBI_Id = fecd9004e4cd6f5c178076bf9503649a

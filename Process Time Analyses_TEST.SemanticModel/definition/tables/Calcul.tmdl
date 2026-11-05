@@ -606,6 +606,23 @@ table Calcul
 		displayFolder: Mesures\Synthese
 		lineageTag: da83a5f2-67dd-41aa-820f-de0fb0546b2a
 
+	measure Synthese_Temps_perdu_hhmm =
+			
+			VAR TotalMinutes = ROUND ( SUM ( fact_batch_note[gap_minutes] ), 0 )
+			VAR Hours = QUOTIENT ( TotalMinutes, 60 )
+			VAR Minutes = TotalMinutes - Hours * 60
+			RETURN
+			IF ( ISBLANK ( TotalMinutes ), BLANK (), Hours & "h" & FORMAT ( Minutes, "00" ) )
+		displayFolder: Mesures\Synthese
+		lineageTag: 7c2d7438-5785-42c2-9dc7-bf3aba3a51eb
+
+	measure Synthese_Nb_notes_temps_perdu =
+			
+			CALCULATE ( COUNTROWS ( fact_batch_note ), fact_batch_note[gap_minutes] > 0 )
+		formatString: 0
+		displayFolder: Mesures\Synthese
+		lineageTag: 3c4bda5c-74e6-4de9-8d24-8b08d6471ac2
+
 	measure DBG_NbLignesTrad = COUNTROWS ( dim_trad_specy )
 		formatString: 0
 		lineageTag: da61084f-9609-4a54-8636-329328ca6b6e

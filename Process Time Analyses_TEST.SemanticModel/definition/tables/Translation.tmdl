@@ -337,6 +337,78 @@ table Translation
 			COALESCE ( TitleTranslated, TitleDefault, "Process times per batch" )
 		lineageTag: f77e0258-f867-4202-a58f-69c7a37b920b
 
+	measure TITLE_SYNTHESE_MACRO =
+			
+			VAR CurrentCulture = USERCULTURE()
+			
+			VAR TitleTranslated =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE_SYNTHESE_MACRO",
+			        Translation[LanguageCode] = CurrentCulture
+			    )
+			
+			VAR TitleDefault =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE_SYNTHESE_MACRO",
+			        Translation[LanguageCode] = "en-US"
+			    )
+			
+			RETURN
+			COALESCE ( TitleTranslated, TitleDefault, "Weekly production line review" )
+		lineageTag: 1df5b517-42df-4b80-ac46-a360e0609e0c
+
+	measure TITLE1_SYNTHESE_MACRO =
+			
+			VAR CurrentCulture = USERCULTURE()
+			
+			VAR TitleTranslated =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE1_SYNTHESE_MACRO",
+			        Translation[LanguageCode] = CurrentCulture
+			    )
+			
+			VAR TitleDefault =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE1_SYNTHESE_MACRO",
+			        Translation[LanguageCode] = "en-US"
+			    )
+			
+			RETURN
+			COALESCE ( TitleTranslated, TitleDefault, "Lost time" )
+		lineageTag: c3a722f2-dcd8-434a-bd78-3b237dd4c8ae
+
+	measure TITLE2_SYNTHESE_MACRO =
+			
+			VAR CurrentCulture = USERCULTURE()
+			
+			VAR TitleTranslated =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE2_SYNTHESE_MACRO",
+			        Translation[LanguageCode] = CurrentCulture
+			    )
+			
+			VAR TitleDefault =
+			    CALCULATE (
+			        SELECTEDVALUE ( Translation[TranslationText] ),
+			        Translation[ReportCode] = "ProcessTimeAnalyses",
+			        Translation[TranslationKey] = "TITLE2_SYNTHESE_MACRO",
+			        Translation[LanguageCode] = "en-US"
+			    )
+			
+			RETURN
+			COALESCE ( TitleTranslated, TitleDefault, "Production notes lost time - Top 10" )
+		lineageTag: 290f97ab-dfe0-43fd-a222-31ab4514506f
+
 	measure TITLE1_MEASURES_ALL =
 			
 			VAR CurrentCulture = USERCULTURE()

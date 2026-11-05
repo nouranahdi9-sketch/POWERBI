@@ -23,6 +23,7 @@ ref table dim_calendar_months
 ref table Periode
 ref table Translation
 ref table Calcul
+ref table 'Niveau notes'
 ref table dim_variety
 ref table dim_variable
 ref table dim_trad_variety

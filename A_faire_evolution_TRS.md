@@ -18,6 +18,18 @@ Textes proposés pour TITLE_SYNTHESE (à valider) :
 
 Tant que la clé n'existe pas, le titre s'affiche en anglais (« Process times per batch »).
 
+Clés de l'onglet Synthèse macro (même table, même ReportCode), textes proposés à valider :
+
+| TranslationKey | fr-FR | en-US | ro-RO | cs-CZ |
+|---|---|---|---|---|
+| TITLE_SYNTHESE_MACRO | Revue hebdomadaire de la ligne de production | Weekly production line review | Analiza săptămânală a liniei de producție | Týdenní přehled výrobní linky |
+| TITLE1_SYNTHESE_MACRO | Temps perdu | Lost time | Timp pierdut | Ztracený čas |
+| TITLE2_SYNTHESE_MACRO | Notes production temps perdu - Top 10 | Production notes lost time - Top 10 | Note de producție timp pierdut - Top 10 | Výrobní poznámky ztracený čas - Top 10 |
+
+| # | Quoi | Où | Statut |
+|---|---|---|---|
+| 3 | Les boutons Localisation / Impact / Événement / Détail (onglet Synthèse macro) sont écrits en français dans toutes les langues | Table `Niveau notes` du modèle | À décider |
+
 ## Autres points
 
 | # | Quoi | Statut |
