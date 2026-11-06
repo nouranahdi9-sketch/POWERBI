@@ -29,6 +29,7 @@ Clés de l'onglet Synthèse macro (même table, même ReportCode), textes propos
 | # | Quoi | Où | Statut |
 |---|---|---|---|
 | 3 | Les boutons Localisation / Impact / Événement / Détail (onglet Synthèse macro) sont écrits en français dans toutes les langues | Table `Niveau notes` du modèle | À décider |
+| 4 | Dans Desktop, en « Afficher en tant que : Translation », les libellés s'affichent dans les 4 langues à la fois (ex. tableau des temps de cycle, Top 10 des notes). Déjà le cas sur l'onglet Cycle time de la version de test | Rôle `Translation` (filtre sur USERCULTURE) | À vérifier, dans le service et dans le rôle |
 
 ## Autres points
 
