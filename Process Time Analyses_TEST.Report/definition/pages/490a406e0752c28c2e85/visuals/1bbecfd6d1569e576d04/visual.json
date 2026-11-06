@@ -5,7 +5,7 @@
     "x": 1010.6298003072197,
     "y": 165.16129032258073,
     "z": 16000,
-    "height": 68.817204301075279,
+    "height": 68.81720430107528,
     "width": 243.80952380952382,
     "tabOrder": 16000
   },
@@ -84,5 +84,58 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "caaee1981f290eb0222b",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Calcul"
+              }
+            },
+            "Property": "Une_seule_mesure_selectionnee"
+          }
+        },
+        "type": "Advanced",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "c",
+              "Entity": "Calcul",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "Comparison": {
+                  "ComparisonKind": 0,
+                  "Left": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Source": "c"
+                        }
+                      },
+                      "Property": "Une_seule_mesure_selectionnee"
+                    }
+                  },
+                  "Right": {
+                    "Literal": {
+                      "Value": "1L"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User"
+      }
+    ]
   }
 }
