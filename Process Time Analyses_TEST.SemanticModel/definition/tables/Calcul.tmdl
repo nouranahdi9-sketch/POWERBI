@@ -623,7 +623,7 @@ table Calcul
 		displayFolder: Mesures\Synthese
 		lineageTag: 3c4bda5c-74e6-4de9-8d24-8b08d6471ac2
 
-	measure Une_seule_mesure_selectionnee = IF ( HASONEVALUE ( dim_trs_measure[key] ), 1, 0 )
+	measure Une_seule_mesure_selectionnee = IF ( DISTINCTCOUNT ( fact_process_time_analyses[measure_key] ) = 1, 1, 0 )
 		formatString: 0
 		displayFolder: Mesures\Synthese
 		lineageTag: 5094f01e-b4ad-4b3d-a49a-986678540f69
