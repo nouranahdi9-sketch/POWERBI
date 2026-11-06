@@ -23,11 +23,11 @@
                       "Entity": "Calcul"
                     }
                   },
-                  "Property": "BatchNumber_MaxMesureValue"
+                  "Property": "Carte Batch max"
                 }
               },
-              "queryRef": "fact_process_time_analyses.BatchNumber_MaxMesureValue",
-              "nativeQueryRef": "BatchNumber_MaxMesureValue"
+              "queryRef": "Calcul.Carte Batch max",
+              "nativeQueryRef": "Carte Batch max"
             }
           ]
         }
@@ -84,58 +84,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "caaee1981f290eb0222b",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Calcul"
-              }
-            },
-            "Property": "Une_seule_mesure_selectionnee"
-          }
-        },
-        "type": "Advanced",
-        "filter": {
-          "Version": 2,
-          "From": [
-            {
-              "Name": "c",
-              "Entity": "Calcul",
-              "Type": 0
-            }
-          ],
-          "Where": [
-            {
-              "Condition": {
-                "Comparison": {
-                  "ComparisonKind": 0,
-                  "Left": {
-                    "Measure": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Source": "c"
-                        }
-                      },
-                      "Property": "Une_seule_mesure_selectionnee"
-                    }
-                  },
-                  "Right": {
-                    "Literal": {
-                      "Value": "1L"
-                    }
-                  }
-                }
-              }
-            }
-          ]
-        },
-        "howCreated": "User"
-      }
-    ]
   }
 }

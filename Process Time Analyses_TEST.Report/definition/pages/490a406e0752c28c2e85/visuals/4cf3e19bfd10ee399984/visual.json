@@ -23,11 +23,11 @@
                       "Entity": "Calcul"
                     }
                   },
-                  "Property": "Batch-cycle Moyenne hh:mm"
+                  "Property": "Carte Moyenne hh:mm"
                 }
               },
-              "queryRef": "fact_process_time_analyses.Batch-cycle Moyenne hh:mm",
-              "nativeQueryRef": "Batch-cycle Moyenne hh:mm"
+              "queryRef": "Calcul.Carte Moyenne hh:mm",
+              "nativeQueryRef": "Carte Moyenne hh:mm"
             }
           ]
         }
@@ -84,58 +84,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "8e6acb4bc30dea739c71",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Calcul"
-              }
-            },
-            "Property": "Une_seule_mesure_selectionnee"
-          }
-        },
-        "type": "Advanced",
-        "filter": {
-          "Version": 2,
-          "From": [
-            {
-              "Name": "c",
-              "Entity": "Calcul",
-              "Type": 0
-            }
-          ],
-          "Where": [
-            {
-              "Condition": {
-                "Comparison": {
-                  "ComparisonKind": 0,
-                  "Left": {
-                    "Measure": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Source": "c"
-                        }
-                      },
-                      "Property": "Une_seule_mesure_selectionnee"
-                    }
-                  },
-                  "Right": {
-                    "Literal": {
-                      "Value": "1L"
-                    }
-                  }
-                }
-              }
-            }
-          ]
-        },
-        "howCreated": "User"
-      }
-    ]
   }
 }

@@ -628,6 +628,26 @@ table Calcul
 		displayFolder: Mesures\Synthese
 		lineageTag: 5094f01e-b4ad-4b3d-a49a-986678540f69
 
+	measure 'Carte Moyenne hh:mm' = IF ( [Une_seule_mesure_selectionnee] = 1, [Batch-cycle Moyenne hh:mm] )
+		displayFolder: Mesures\Synthese
+		lineageTag: 1c9628b8-b910-4115-8518-6ca7ff2d483a
+
+	measure 'Carte Min hh:mm' = IF ( [Une_seule_mesure_selectionnee] = 1, [Min hh:mm] )
+		displayFolder: Mesures\Synthese
+		lineageTag: 1f7b8058-ff4d-42a4-8fd5-2acffbf52f21
+
+	measure 'Carte Max hh:mm' = IF ( [Une_seule_mesure_selectionnee] = 1, [Max hh:mm] )
+		displayFolder: Mesures\Synthese
+		lineageTag: 69405b26-8b49-4689-b16e-f594819c7826
+
+	measure 'Carte Batch min' = IF ( [Une_seule_mesure_selectionnee] = 1, [BatchNumber_MinMesureValue] )
+		displayFolder: Mesures\Synthese
+		lineageTag: bec0147e-b96a-4756-941b-4dea9daa430f
+
+	measure 'Carte Batch max' = IF ( [Une_seule_mesure_selectionnee] = 1, [BatchNumber_MaxMesureValue] )
+		displayFolder: Mesures\Synthese
+		lineageTag: 2a47278e-de35-46fa-9d40-869861268b42
+
 	measure DBG_NbLignesTrad = COUNTROWS ( dim_trad_specy )
 		formatString: 0
 		lineageTag: da61084f-9609-4a54-8636-329328ca6b6e

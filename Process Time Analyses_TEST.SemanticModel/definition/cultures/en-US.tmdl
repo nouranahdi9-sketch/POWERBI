@@ -137,6 +137,16 @@ cultureInfo en-US
 					caption: Lost time
 				measure Synthese_Nb_notes_temps_perdu
 					caption: notes with lost time
+				measure 'Carte Moyenne hh:mm'
+					caption: Average
+				measure 'Carte Min hh:mm'
+					caption: Min
+				measure 'Carte Max hh:mm'
+					caption: Max
+				measure 'Carte Batch min'
+					caption: Batch of min duration
+				measure 'Carte Batch max'
+					caption: Batch of max duration
 				measure Synthese_Objectif_metier_h
 					caption: Business target (h)
 				measure Moyenne_top_20_hh:mm

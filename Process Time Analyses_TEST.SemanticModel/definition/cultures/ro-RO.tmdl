@@ -137,6 +137,16 @@ cultureInfo ro-RO
 					caption: Timp pierdut
 				measure Synthese_Nb_notes_temps_perdu
 					caption: note cu timp pierdut
+				measure 'Carte Moyenne hh:mm'
+					caption: Medie
+				measure 'Carte Min hh:mm'
+					caption: Min
+				measure 'Carte Max hh:mm'
+					caption: Max
+				measure 'Carte Batch min'
+					caption: Șarjă cu durată minimă
+				measure 'Carte Batch max'
+					caption: Șarjă cu durată maximă
 				measure Synthese_Objectif_metier_h
 					caption: Țintă de business (h)
 				measure Moyenne_top_20_hh:mm

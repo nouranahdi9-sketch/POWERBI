@@ -23,11 +23,11 @@
                       "Entity": "Calcul"
                     }
                   },
-                  "Property": "Max hh:mm"
+                  "Property": "Carte Max hh:mm"
                 }
               },
-              "queryRef": "fact_process_time_analyses.Max hh:mm",
-              "nativeQueryRef": "Max hh:mm"
+              "queryRef": "Calcul.Carte Max hh:mm",
+              "nativeQueryRef": "Carte Max hh:mm"
             }
           ]
         }
@@ -84,58 +84,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "36edbd53f2e09fbb983f",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Calcul"
-              }
-            },
-            "Property": "Une_seule_mesure_selectionnee"
-          }
-        },
-        "type": "Advanced",
-        "filter": {
-          "Version": 2,
-          "From": [
-            {
-              "Name": "c",
-              "Entity": "Calcul",
-              "Type": 0
-            }
-          ],
-          "Where": [
-            {
-              "Condition": {
-                "Comparison": {
-                  "ComparisonKind": 0,
-                  "Left": {
-                    "Measure": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Source": "c"
-                        }
-                      },
-                      "Property": "Une_seule_mesure_selectionnee"
-                    }
-                  },
-                  "Right": {
-                    "Literal": {
-                      "Value": "1L"
-                    }
-                  }
-                }
-              }
-            }
-          ]
-        },
-        "howCreated": "User"
-      }
-    ]
   }
 }

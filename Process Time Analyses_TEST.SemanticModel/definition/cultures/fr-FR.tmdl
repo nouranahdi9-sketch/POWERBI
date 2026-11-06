@@ -137,6 +137,16 @@ cultureInfo fr-FR
 					caption: Temps perdu
 				measure Synthese_Nb_notes_temps_perdu
 					caption: notes avec temps perdu
+				measure 'Carte Moyenne hh:mm'
+					caption: Moyenne
+				measure 'Carte Min hh:mm'
+					caption: Min
+				measure 'Carte Max hh:mm'
+					caption: Max
+				measure 'Carte Batch min'
+					caption: Batch de durée min
+				measure 'Carte Batch max'
+					caption: Batch de durée max
 				measure Synthese_Objectif_metier_h
 					caption: Objectif métier (h)
 				measure Moyenne_top_20_hh:mm

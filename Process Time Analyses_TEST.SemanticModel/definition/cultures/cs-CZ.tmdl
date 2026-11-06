@@ -137,6 +137,16 @@ cultureInfo cs-CZ
 					caption: Ztracený čas
 				measure Synthese_Nb_notes_temps_perdu
 					caption: poznámky se ztraceným časem
+				measure 'Carte Moyenne hh:mm'
+					caption: Průměr
+				measure 'Carte Min hh:mm'
+					caption: Min.
+				measure 'Carte Max hh:mm'
+					caption: Max.
+				measure 'Carte Batch min'
+					caption: Hromada s nejkratší dobou trvání
+				measure 'Carte Batch max'
+					caption: Hromada s nejdelší dobou trvání
 				measure Synthese_Objectif_metier_h
 					caption: Obchodní cíl (h)
 				measure Moyenne_top_20_hh:mm
