@@ -37,3 +37,5 @@ Clés de l'onglet Synthèse macro (même table, même ReportCode), textes propos
 |---|---|---|
 | 1 | Fixer les valeurs de départ des 4 listes de l'onglet Synthèse (Déchargement touraille, Transfert vers germoir, Transfert vers touraille, Temps de cycle touraille) | À faire en fin de développement |
 | 2 | Supprimer les onglets Cycle time, Transfer time et Waiting time (masqués pour l'instant) | Après validation de l'onglet Synthèse |
+| 3 | Supprimer l'onglet Batch-cycle (masqué, fusionné dans Measures) | Après validation de l'onglet Measures |
+| 4 | Bouton « Détail » sélectionné par défaut sur Synthèse macro (aujourd'hui Localisation) | Avec les valeurs de départ |

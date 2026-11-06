@@ -178,6 +178,20 @@
                       "Entity": "fact_process_time_analyses"
                     }
                   },
+                  "Property": "batch_prd_cell"
+                }
+              },
+              "queryRef": "fact_process_time_analyses.batch_prd_cell",
+              "nativeQueryRef": "batch_prd_cell"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_process_time_analyses"
+                    }
+                  },
                   "Property": "columns_source"
                 }
               },

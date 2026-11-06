@@ -107,5 +107,6 @@
       "target": "aeb8b1366f06df8dcb2e",
       "type": "DataFilter"
     }
-  ]
+  ],
+  "visibility": "HiddenInViewMode"
 }
