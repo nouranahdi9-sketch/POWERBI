@@ -1,0 +1,224 @@
+table features_front_too_high_low
+	lineageTag: d5e38962-3f81-4bb5-b241-d26210ae386d
+
+	measure DistinctCount_TooHigh =
+			
+			CALCULATE(
+			    COUNT('features_front_too_high_low'[values]),
+			    'features_front_too_high_low'[rate] = "too_high"
+			)
+		formatString: 0
+		lineageTag: 56bc4b68-f227-4a60-9112-1ac54ef51cf5
+
+	measure DistinctCount_TooLow =
+			
+			CALCULATE(
+			    COUNT('features_front_too_high_low'[id_recommendation]),
+			    'features_front_too_high_low'[rate] = "too_low"
+			)
+		formatString: 0
+		lineageTag: 7e63f459-1a4f-47d7-bc73-9a369d680d11
+
+	measure Percent_TooHigh =
+			
+			DIVIDE(
+			    CALCULATE(COUNT('features_front_too_high_low'[values]), 'features_front_too_high_low'[rate] = "too_high"),
+			    CALCULATE(COUNT('features_front_too_high_low'[values]), 'features_front_too_high_low'[rate] = "too_high") + CALCULATE(COUNT('features_front_too_high_low'[values]), 'features_front_too_high_low'[rate] = "too_low"),
+			    0
+			)
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 528abde9-9818-43d6-9ab4-ad6ef82d6868
+
+	measure Percent_TooLow =
+			
+			DIVIDE(
+			    CALCULATE(COUNT('features_front_too_high_low'[values]), 'features_front_too_high_low'[rate] = "too_low"),
+			    CALCULATE(COUNT('features_front_too_high_low'[values]), 'features_front_too_high_low'[rate] = "too_low") + CALCULATE(COUNT('features_front_too_high_low'[values]), 'features_front_too_high_low'[rate] = "too_high"),
+			    0
+			)
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: ca3b0898-df5d-4bbc-bb09-0619a2dd2241
+
+	column batch
+		dataType: string
+		lineageTag: 97e0b96a-32f9-4ee0-9019-a0891af890e1
+		summarizeBy: none
+		sourceColumn: batch
+
+		annotation SummarizationSetBy = Automatic
+
+	column batch_number
+		dataType: string
+		lineageTag: a00cff9a-f9c9-443a-bbb7-3de8a14c4ebc
+		summarizeBy: none
+		sourceColumn: batch_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column values
+		dataType: string
+		lineageTag: d33e2b01-3e6a-4eac-99be-30ef5920388f
+		summarizeBy: none
+		sourceColumn: values
+
+		annotation SummarizationSetBy = Automatic
+
+	column rate
+		dataType: string
+		lineageTag: aa4cd730-bc79-4f34-a610-1ef1c3c3eb32
+		summarizeBy: none
+		sourceColumn: rate
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_crea_reco
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: faf2dc4d-4a14-40f2-a6e3-26ce57a0ede6
+		summarizeBy: none
+		sourceColumn: date_crea_reco
+
+		variation Variation
+			isDefault
+			relationship: f4afb606-6676-45b8-8a56-634e0e63944f
+			defaultHierarchy: LocalDateTable_74cd05aa-305c-4b24-aba7-29c54339a088.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_recommendation
+		dataType: string
+		lineageTag: ae699359-3636-472c-a48d-751c3f547f71
+		summarizeBy: none
+		sourceColumn: id_recommendation
+
+		annotation SummarizationSetBy = Automatic
+
+	column production_line
+		dataType: string
+		lineageTag: 290f8780-d186-40f0-96a1-f266dd94700b
+		summarizeBy: none
+		sourceColumn: production_line
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_crea_reco_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 680fd4d8-2ee1-4409-965c-b0d4a374920d
+		summarizeBy: none
+		sourceColumn: date_crea_reco_date
+
+		variation Variation
+			isDefault
+			relationship: ad4dcfc1-d6da-4506-b388-1d9ff41a7377
+			defaultHierarchy: LocalDateTable_beaf549b-31a5-4b89-a54f-d4b83741ebc1.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column realized_value
+		dataType: double
+		lineageTag: 63920766-016f-4662-a198-36ce8279392b
+		summarizeBy: sum
+		sourceColumn: realized_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column predicted_value
+		dataType: double
+		lineageTag: 1e7dcafb-c962-414f-ac2e-b4e6de3eec69
+		summarizeBy: sum
+		sourceColumn: predicted_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 69cb9035-be8b-42cd-9898-e6cf839d836e
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 62de2f8d-c54f-46de-ac69-68deb3062174
+			defaultHierarchy: LocalDateTable_27f46677-918b-468f-8cf8-e86d58e63216.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: ae21fc98-88bb-4ed2-bffd-afb10d275eff
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: 46925949-266c-4eed-a870-c3a7b0464ac2
+			defaultHierarchy: LocalDateTable_654b0aa4-eaee-43ae-b07a-aa27dfdd59c9.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 94d55262-29e2-4464-b144-dc969c6f0a2f
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 91af8314-0521-45b4-b321-7f080a638d57
+			defaultHierarchy: LocalDateTable_14343fcc-5ee3-42c3-86c1-04ac88a1dac6.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column eval_localisation
+		dataType: string
+		lineageTag: 50279f18-3c63-4f1d-a593-33da2db4128e
+		summarizeBy: none
+		sourceColumn: eval_localisation
+
+		annotation SummarizationSetBy = Automatic
+
+	column realized_value_measure
+		dataType: double
+		lineageTag: 831303a4-c1da-4aa9-81b7-c839ae515b90
+		summarizeBy: sum
+		sourceColumn: realized_value_measure
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column realized_value_bpm
+		dataType: double
+		lineageTag: 33ae0c30-86e3-4af8-9876-3acd42299890
+		summarizeBy: sum
+		sourceColumn: realized_value_bpm
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition features_front_too_high_low = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    parameters_Schema = mal_maite_bi_prd_Database{[Name="parameters",Kind="Schema"]}[Data],
+				    features_front_too_high_low_Table = parameters_Schema{[Name="features_front_too_high_low",Kind="Table"]}[Data]
+				in
+				    features_front_too_high_low_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,85 @@
+table DIM_profiles_users
+	lineageTag: 1c5461c6-65b6-418d-92c1-55ab07bc0f65
+
+	column id_profile_user
+		dataType: string
+		lineageTag: 9fec2f74-3bf4-4de5-8bd0-b1cad18a6a51
+		summarizeBy: none
+		sourceColumn: id_profile_user
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: 61a688cc-3839-4fa7-91a8-ba5b56facc8a
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column surname
+		dataType: string
+		lineageTag: 77d2436b-f73c-431e-81b5-f33a7380def3
+		summarizeBy: none
+		sourceColumn: surname
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 938043a1-3b6a-4607-bd9a-3f5f5cc6d415
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 8158c6fa-7989-4d47-81a8-1558b59db49b
+			defaultHierarchy: LocalDateTable_84a353f2-fba4-44e8-8042-1e1417a14332.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 26f07fc9-2142-455b-be6f-4f87d1459baa
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: f8c14367-606b-4502-9842-fa65343755f5
+			defaultHierarchy: LocalDateTable_ca42aaa6-c212-4d66-acd3-29ee14d18a3b.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 1799a1e0-0a8d-4311-b0e5-9d2fc8fc7b75
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 5b320afc-01a8-4f9f-9f22-208e8cd283fd
+			defaultHierarchy: LocalDateTable_5b2bc52c-0083-49c5-ade5-ba411819ed13.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_profiles_users = m
+		mode: import
+		queryGroup: dimension
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    recommendations_Schema = mal_maite_bi_prd_Database{[Name="recommendations",Kind="Schema"]}[Data],
+				    dim_profiles_users_Table = recommendations_Schema{[Name="dim_profiles_users",Kind="Table"]}[Data]
+				in
+				    dim_profiles_users_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

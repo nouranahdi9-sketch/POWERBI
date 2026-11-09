@@ -1,0 +1,111 @@
+table LocalDateTable_d2221592-7e4d-4192-9423-a5f64a1804cb
+	isHidden
+	showAsVariationsOnly
+	lineageTag: 6aafc043-aca2-4a26-b29b-d9b5db22f87b
+
+	column Date
+		dataType: dateTime
+		isHidden
+		lineageTag: ecfac80e-7476-4fde-8dcc-8cc753cb4ea1
+		dataCategory: PaddedDateTableDates
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		annotation SummarizationSetBy = User
+
+	column Année = YEAR([Date])
+		dataType: int64
+		isHidden
+		lineageTag: 0020e7ed-0f7c-4be0-ab8c-28915d05889a
+		dataCategory: Years
+		summarizeBy: none
+
+		annotation SummarizationSetBy = User
+
+		annotation TemplateId = Year
+
+	column NoMois = MONTH([Date])
+		dataType: int64
+		isHidden
+		lineageTag: ffc30846-1b6e-4c55-9dbf-ca4fa54b6ddf
+		dataCategory: MonthOfYear
+		summarizeBy: none
+
+		annotation SummarizationSetBy = User
+
+		annotation TemplateId = MonthNumber
+
+	column Mois = FORMAT([Date], "MMMM")
+		dataType: string
+		isHidden
+		lineageTag: a7a1494c-6b1d-4603-a79a-78cdbcdca127
+		dataCategory: Months
+		summarizeBy: none
+		sortByColumn: NoMois
+
+		annotation SummarizationSetBy = User
+
+		annotation TemplateId = Month
+
+	column NoTrimestre = INT(([NoMois] + 2) / 3)
+		dataType: int64
+		isHidden
+		lineageTag: 84c22f33-9829-4c64-b4aa-7a4f89d7c5df
+		dataCategory: QuarterOfYear
+		summarizeBy: none
+
+		annotation SummarizationSetBy = User
+
+		annotation TemplateId = QuarterNumber
+
+	column Trimestre = "Trim " & [NoTrimestre]
+		dataType: string
+		isHidden
+		lineageTag: 4983a4c3-875e-495e-87e8-ba44997e5d76
+		dataCategory: Quarters
+		summarizeBy: none
+		sortByColumn: NoTrimestre
+
+		annotation SummarizationSetBy = User
+
+		annotation TemplateId = Quarter
+
+	column Jour = DAY([Date])
+		dataType: int64
+		isHidden
+		lineageTag: 5a851988-f24a-4bb2-beae-ae34ea5a5b0c
+		dataCategory: DayOfMonth
+		summarizeBy: none
+
+		annotation SummarizationSetBy = User
+
+		annotation TemplateId = Day
+
+	hierarchy 'Hiérarchie de dates'
+		lineageTag: 6f25476e-4e34-4482-a633-28800fc5df34
+
+		level Année
+			lineageTag: ea217b93-6e97-4d1d-a265-810cefb57fc6
+			column: Année
+
+		level Trimestre
+			lineageTag: d2344acd-8715-4aac-9fc8-0afe9d98013f
+			column: Trimestre
+
+		level Mois
+			lineageTag: 0f37796c-9c62-4c32-b99f-dc52b07533ef
+			column: Mois
+
+		level Jour
+			lineageTag: edcba50d-0168-4cd0-af46-da21c4d7a650
+			column: Jour
+
+		annotation TemplateId = DateHierarchy
+
+	partition LocalDateTable_d2221592-7e4d-4192-9423-a5f64a1804cb = calculated
+		mode: import
+		source = Calendar(Date(Year(MIN('fact_batches_parameter_realized_recommended'[deleted_at])), 1, 1), Date(Year(MAX('fact_batches_parameter_realized_recommended'[deleted_at])), 12, 31))
+
+	annotation __PBI_LocalDateTable = true
+

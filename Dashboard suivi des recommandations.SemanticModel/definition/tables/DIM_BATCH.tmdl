@@ -1,0 +1,146 @@
+table DIM_BATCH
+	lineageTag: 1f1015e4-01c7-4b00-8df8-ded698330b35
+
+	column id_batch
+		dataType: string
+		lineageTag: c85765b9-76f9-4527-adc9-d31fe8b57c31
+		summarizeBy: none
+		sourceColumn: id_batch
+
+		annotation SummarizationSetBy = Automatic
+
+	column batch_number
+		dataType: string
+		lineageTag: 42c78542-257a-4c9c-b290-7e5d6574f57e
+		summarizeBy: none
+		sourceColumn: batch_number
+		sortByColumn: planned_date
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_plant
+		dataType: int64
+		formatString: 0
+		lineageTag: 7c165877-7e58-428e-a3e9-5502aaadb5e4
+		summarizeBy: none
+		sourceColumn: id_plant
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_cdc
+		dataType: int64
+		formatString: 0
+		lineageTag: e4bd74fd-8217-4d67-bd0f-0afdec2b25d0
+		summarizeBy: none
+		sourceColumn: id_cdc
+
+		annotation SummarizationSetBy = Automatic
+
+	column planned_date
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 9056c1ce-0d19-4308-961a-a0070a7fecdf
+		summarizeBy: none
+		sourceColumn: planned_date
+
+		variation Variation
+			isDefault
+			relationship: b88877a3-e77d-4b57-93e1-978c07854139
+			defaultHierarchy: LocalDateTable_0c87c9a3-9962-447d-b684-d93a486fcb07.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c268934c-bc62-49be-b2b5-00a6cb996293
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 3a353d7e-eeba-4721-bf4a-76d758e50a0e
+			defaultHierarchy: LocalDateTable_ee0ca19b-7161-46bf-bc58-ce3fabcfe626.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c561feaf-5c65-4fdf-a48d-0a9f7c1e97eb
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: 28034f94-e9a0-4644-8266-cd600b9c24b7
+			defaultHierarchy: LocalDateTable_41c11ac5-e3c4-40ab-95dd-14dc3cf90502.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 42f8f0d6-1381-419d-844e-3589b544bd0e
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 701b465b-ebdf-49e6-b098-b88412f3f088
+			defaultHierarchy: LocalDateTable_471e2020-2d66-4981-b183-60cc19d2a0d0.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column batch_status
+		dataType: string
+		lineageTag: a4f14de4-8b39-4fe4-8852-ab6f43729d5b
+		summarizeBy: none
+		sourceColumn: batch_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_variety
+		dataType: int64
+		formatString: 0
+		lineageTag: 629fb5d5-f3df-45a1-992a-88a68325268c
+		summarizeBy: none
+		sourceColumn: id_variety
+
+		annotation SummarizationSetBy = Automatic
+
+	column harvest
+		dataType: int64
+		formatString: 0
+		lineageTag: 0cc0c8e5-43b7-4d87-a098-11ed64769086
+		summarizeBy: sum
+		sourceColumn: harvest
+
+		annotation SummarizationSetBy = Automatic
+
+	column mes_number
+		dataType: string
+		lineageTag: fab6fdba-769d-40fb-88f2-6654e1926833
+		summarizeBy: none
+		sourceColumn: mes_number
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_BATCH = m
+		mode: import
+		queryGroup: dimension
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    recommendations_Schema = mal_maite_bi_prd_Database{[Name="recommendations",Kind="Schema"]}[Data],
+				    dim_batch_Table = recommendations_Schema{[Name="dim_batch",Kind="Table"]}[Data]
+				in
+				    dim_batch_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

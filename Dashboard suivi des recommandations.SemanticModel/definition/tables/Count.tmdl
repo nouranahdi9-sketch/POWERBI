@@ -1,0 +1,28 @@
+table Count
+	lineageTag: d70b015f-c9ad-485b-a57e-2f5aa590492b
+
+	measure 'Valeur Count' = SELECTEDVALUE('Count'[Count], 0)
+		lineageTag: b7169d54-c4bb-44d0-956d-6989b5c0e291
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Count
+		dataType: double
+		formatString: 0
+		lineageTag: 998bbf45-3389-4bdd-bf69-f1d16b04efe5
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+	partition Count = calculated
+		mode: import
+		source = GENERATESERIES(0, 500, 1)
+
+	annotation PBI_Id = 7e8f93f722c14ddcad10377f82c8c2f9
+

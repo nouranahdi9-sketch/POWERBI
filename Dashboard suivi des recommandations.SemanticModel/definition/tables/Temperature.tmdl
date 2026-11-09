@@ -1,0 +1,26 @@
+table Temperature
+	lineageTag: e9766782-9c53-4674-9973-a195ccdc4158
+
+	measure 'Valeur Temperature' = SELECTEDVALUE('Temperature'[Temperature], 0)
+		formatString: 0
+		lineageTag: c533ef75-b1aa-4db6-8327-397ac358724e
+
+	column Temperature
+		formatString: 0
+		lineageTag: 9942667f-d802-4379-8f30-152a76359a99
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+	partition Temperature = calculated
+		mode: import
+		source = GENERATESERIES(0, 500, 1)
+
+	annotation PBI_Id = 7505083bf45c4b248882b26f04097cae
+

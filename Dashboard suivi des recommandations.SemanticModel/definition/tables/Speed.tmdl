@@ -1,0 +1,26 @@
+table Speed
+	lineageTag: a618b86f-3335-4580-b11e-4beb951ff9d4
+
+	measure 'Valeur Speed' = SELECTEDVALUE('Speed'[Speed], 0)
+		formatString: 0
+		lineageTag: 4708d1d1-6d1a-4184-a98b-472a8370f656
+
+	column Speed
+		formatString: 0
+		lineageTag: 8daf4f56-1410-411e-85f3-53f6d8684b43
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+	partition Speed = calculated
+		mode: import
+		source = GENERATESERIES(0, 500, 1)
+
+	annotation PBI_Id = 7f5a417c6a134640be5d34e50e50e58f
+
