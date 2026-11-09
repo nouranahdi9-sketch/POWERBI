@@ -1,0 +1,87 @@
+table fact_batch_moisture_pivot
+	lineageTag: 79976511-c669-4654-8aee-1f19c8a0a85d
+
+	column value
+		dataType: double
+		lineageTag: 0efaab61-81bb-4220-b51a-91bea6eff0b5
+		summarizeBy: sum
+		sourceColumn: value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column id_parameter_variable
+		dataType: int64
+		formatString: 0
+		lineageTag: be751d36-3a7e-4369-af29-f843b9fad696
+		summarizeBy: none
+		sourceColumn: id_parameter_variable
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 389571c1-a1d5-4ed9-af3f-4d8f67bf376a
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: b8280d9a-aa31-4d10-936c-9bd34077dc9d
+			defaultHierarchy: LocalDateTable_34828888-ba48-44d5-845a-fd7ba11f5feb.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f834a6f9-8a07-4597-be91-36880275a0bd
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: 2a2ede7a-12a7-46c1-a8e6-caa7cbd0809e
+			defaultHierarchy: LocalDateTable_cd70058b-ac82-49a7-8b85-cb663d07cc6f.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: b4d4f2de-ac78-4ff8-a9a1-b57ffb88fa61
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: cec1c936-852f-4efd-8b16-9f4b29d265f1
+			defaultHierarchy: LocalDateTable_1b7f0ee3-83d9-4d4a-8862-d834dd272eea.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_batch
+		dataType: string
+		lineageTag: 01a03251-0b95-409f-86e2-9068922fe89d
+		summarizeBy: none
+		sourceColumn: id_batch
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_batch_moisture_pivot = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    humidity_Schema = mal_maite_bi_prd_Database{[Name="humidity",Kind="Schema"]}[Data],
+				    fact_batch_moisture_pivot_Table = humidity_Schema{[Name="fact_batch_moisture_pivot",Kind="Table"]}[Data]
+				in
+				    fact_batch_moisture_pivot_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

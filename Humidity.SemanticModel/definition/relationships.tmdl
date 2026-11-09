@@ -1,0 +1,58 @@
+relationship fbdcd2f3-5650-4aaa-bf72-e2e48c06e1f1
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_batch_moisture.planned_date
+	toColumn: LocalDateTable_c3929d64-e1dd-42a9-8086-93671698a946.Date
+
+relationship AutoDetected_176a3d52-6881-4207-a41a-87ce574df713
+	fromColumn: fact_batch_moisture_pivot.id_parameter_variable
+	toColumn: dim_parameter_variable.id_parameter_variable
+
+relationship 7066eb7b-30b1-4993-9510-07113bd87107
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_batch_moisture.created_at
+	toColumn: LocalDateTable_3f1bed25-cd96-42d9-9bb0-2cc1a5ea70e1.Date
+
+relationship 4733336e-81f9-4dae-a3d2-5663b45112e9
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_batch_moisture.updated_at
+	toColumn: LocalDateTable_1df4e619-d7ac-4b35-8839-e18b31723d00.Date
+
+relationship 052d245e-225c-45c8-bbbc-31e6fbb525ca
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_batch_moisture.deleted_at
+	toColumn: LocalDateTable_adf87206-8e92-4653-8d38-91d10d1906af.Date
+
+relationship b8280d9a-aa31-4d10-936c-9bd34077dc9d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_batch_moisture_pivot.created_at
+	toColumn: LocalDateTable_34828888-ba48-44d5-845a-fd7ba11f5feb.Date
+
+relationship 2a2ede7a-12a7-46c1-a8e6-caa7cbd0809e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_batch_moisture_pivot.updated_at
+	toColumn: LocalDateTable_cd70058b-ac82-49a7-8b85-cb663d07cc6f.Date
+
+relationship cec1c936-852f-4efd-8b16-9f4b29d265f1
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_batch_moisture_pivot.deleted_at
+	toColumn: LocalDateTable_1b7f0ee3-83d9-4d4a-8862-d834dd272eea.Date
+
+relationship e600674c-9690-400f-8e5e-0b8b4e70ca74
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_parameter_variable.created_at
+	toColumn: LocalDateTable_8f88b9e4-b1de-4808-bc5b-ced1b3823403.Date
+
+relationship 1381e20b-4a1c-4a9b-98f7-3319d960a890
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_parameter_variable.updated_at
+	toColumn: LocalDateTable_40c7359a-c7d7-44c7-a114-34f781227b31.Date
+
+relationship f38e77a1-7680-462e-a466-b9d61c43ab09
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_parameter_variable.deleted_at
+	toColumn: LocalDateTable_9ada6e5c-7a27-4e44-905f-868a0f356bae.Date
+
+relationship AutoDetected_18c366bd-7ae7-4896-bba5-19e0b37f13df
+	fromColumn: fact_batch_moisture_pivot.id_batch
+	toColumn: fact_batch_moisture.id_batch
+

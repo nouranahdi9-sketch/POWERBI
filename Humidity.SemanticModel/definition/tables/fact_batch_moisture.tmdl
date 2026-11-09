@@ -1,0 +1,452 @@
+table fact_batch_moisture
+	lineageTag: 6b902e6a-1550-43ce-9b33-94587e8faa94
+
+	measure Difference_Germ_c1_c2 = ```
+			
+			VAR Avg_GermC1 = AVERAGE(fact_batch_moisture[germ_c1_moisture])
+			VAR Avg_GermC2 = AVERAGE(fact_batch_moisture[germ_c2_moisture])
+			RETURN
+			    ABS(Avg_GermC1 - Avg_GermC2)
+			
+			
+			
+			```
+		lineageTag: d882064c-bd35-4753-908c-a246623062fb
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Difference_Germ_c2_c3 = ```
+			
+			VAR Avg_GermC2 = AVERAGE(fact_batch_moisture[germ_c2_moisture])
+			VAR Avg_GermC3 = AVERAGE(fact_batch_moisture[germ_c3_moisture])
+			RETURN
+			    ABS(Avg_GermC2 - Avg_GermC3)
+			
+			```
+		lineageTag: 3d93fc11-8746-4a1b-99d3-11e3feed40be
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Difference_Germ_c3_c4 =
+			
+			VAR Avg_GermC3 = AVERAGE(fact_batch_moisture[germ_c3_moisture])
+			VAR Avg_GermC4 = AVERAGE(fact_batch_moisture[germ_c4_moisture])
+			RETURN
+			    ABS(Avg_GermC3 - Avg_GermC4)
+		lineageTag: bf576d07-ee55-4a27-bb47-fd8019eb726c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Difference_Germ_C4_kiln = ```
+			
+			VAR Avg_GermC4 = AVERAGE(fact_batch_moisture[germ_c4_moisture])
+			VAR Avg_kiln = AVERAGE(fact_batch_moisture[kiln_load_moisture])
+			RETURN
+			    ABS(Avg_GermC4 - Avg_kiln)
+			
+			
+			
+			```
+		lineageTag: 783bf713-ebf0-4168-8016-c91f991ad250
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Difference_kiln_malt = ```
+			
+			VAR Avg_kiln = AVERAGE(fact_batch_moisture[kiln_load_moisture])
+			VAR Avg_malt = AVERAGE(fact_batch_moisture[malt_moisture])
+			RETURN
+			    ABS(Avg_kiln - Avg_malt)
+			
+			```
+		lineageTag: d1413fe7-d39d-4d98-a0f4-7cac3858b875
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Differencepregerm_c1 = ```
+			
+			VAR Avg_pregerm = AVERAGE(fact_batch_moisture[pregerm_moisture])
+			VAR Avg_GermC1 = AVERAGE(fact_batch_moisture[germ_c1_moisture])
+			RETURN
+			    ABS(Avg_pregerm - Avg_GermC1)
+			
+			
+			```
+		lineageTag: ebf5be0e-19d5-4a45-9989-5dbe18ff09c6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Diff_steep_c2_pregerm = ```
+			
+			VAR Avg_steep_c2 = AVERAGE(fact_batch_moisture[steep_c2_moisture])
+			VAR Avg_pregerm = AVERAGE(fact_batch_moisture[pregerm_moisture])
+			RETURN
+			    ABS(Avg_steep_c2 - Avg_pregerm)
+			
+			```
+		lineageTag: 949b7416-551d-4e2b-b71e-fb4adc9c824f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Diff_steep_c1_c2 = ```
+			
+			VAR Avg_steep_c1 = AVERAGE(fact_batch_moisture[steep_c1_moisture])
+			VAR Avg_steep_c2 = AVERAGE(fact_batch_moisture[steep_c2_moisture])
+			RETURN
+			    ABS(Avg_steep_c1 - Avg_steep_c2)
+			
+			```
+		lineageTag: e86a8223-d05f-40ef-a8e0-7e05f8dda42a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Diff_goodsmoisture_c1 =
+			
+			VAR Avg_goodsmoisture = AVERAGE(fact_batch_moisture[goods_moisture])
+			VAR Avg_steep_c1 = AVERAGE(fact_batch_moisture[steep_c1_moisture])
+			RETURN
+			    ABS(Avg_goodsmoisture - Avg_steep_c1)
+		lineageTag: 79263c04-59f8-4b02-9591-aa6d1c75ffe1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Diff_goodsmoisture_c2 =
+			
+			VAR Avg_goodsmoisture = AVERAGE(fact_batch_moisture[goods_moisture])
+			VAR Avg_steep_c2 = AVERAGE(fact_batch_moisture[steep_c2_moisture])
+			RETURN
+			    ABS(Avg_goodsmoisture - Avg_steep_c2)
+		lineageTag: 695dde66-e7f3-4099-a6bc-07f6d17ed225
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Diff_steep_c2_germ_c4 =
+			
+			VAR Avg_steep_c2 = AVERAGE(fact_batch_moisture[steep_c2_moisture])
+			VAR Avg_germ_c4 = AVERAGE(fact_batch_moisture[germ_c4_moisture])
+			RETURN
+			    ABS(Avg_steep_c2 - Avg_germ_c4)
+		lineageTag: 88411892-f985-48b9-8fae-7ab389647340
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Difference_Germ_c4_kiln_load = ```
+			
+			VAR Avg_GermC4 = AVERAGE(fact_batch_moisture[germ_c4_moisture])
+			VAR Avg_kiln = AVERAGE(fact_batch_moisture[kiln_load_moisture])
+			RETURN
+			    ABS(Avg_GermC4 - Avg_kiln)
+			
+			```
+		lineageTag: 8fd28e26-0c22-4622-845e-1db3b350934f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column production_type
+		dataType: string
+		lineageTag: 0c1d4d4f-2835-439e-bad2-1a5e20da5b12
+		summarizeBy: none
+		sourceColumn: production_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column production_line
+		dataType: string
+		lineageTag: 457f0544-e404-48b9-a315-69bf16aeb68d
+		summarizeBy: none
+		sourceColumn: production_line
+
+		annotation SummarizationSetBy = Automatic
+
+	column germ_c1_moisture
+		dataType: double
+		lineageTag: a886a445-feb3-41d7-98fb-1ff1d591d5a6
+		summarizeBy: sum
+		sourceColumn: germ_c1_moisture
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column germ_c2_moisture
+		dataType: double
+		lineageTag: 5744d996-f0a5-4f57-911c-9c309178f6ad
+		summarizeBy: sum
+		sourceColumn: germ_c2_moisture
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column germ_c3_moisture
+		dataType: double
+		lineageTag: 2b96c4a4-e06a-49fa-8935-cb472c809d2c
+		summarizeBy: sum
+		sourceColumn: germ_c3_moisture
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column goods_moisture
+		dataType: double
+		lineageTag: e9730e2f-e60c-439a-b3ee-1b60a5524d39
+		summarizeBy: sum
+		sourceColumn: goods_moisture
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column kiln_load_moisture
+		dataType: double
+		lineageTag: 1676958c-96e0-4f5b-90f2-f3d826e182e1
+		summarizeBy: sum
+		sourceColumn: kiln_load_moisture
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column malt_moisture
+		dataType: double
+		lineageTag: 1c70593c-6197-4b5f-a04b-a8c25e2e1967
+		summarizeBy: sum
+		sourceColumn: malt_moisture
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column steep_c1_moisture
+		dataType: double
+		lineageTag: b67ba2b6-4181-4a30-8c64-af83459ced61
+		summarizeBy: sum
+		sourceColumn: steep_c1_moisture
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column steep_c2_moisture
+		dataType: double
+		lineageTag: af6a8688-e9e1-4ea6-908b-f260e62d128b
+		summarizeBy: sum
+		sourceColumn: steep_c2_moisture
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column batch
+		dataType: string
+		lineageTag: cd7187cd-3acf-4f96-9423-d53a4f1c8968
+		summarizeBy: none
+		sourceColumn: batch
+		sortByColumn: planned_date
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column specifications_name
+		dataType: string
+		lineageTag: 20775996-a24d-4ace-af66-ad164ed4487e
+		summarizeBy: none
+		sourceColumn: specifications_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column goods_variety
+		dataType: string
+		lineageTag: ed480b5b-93d3-4fd0-820f-f59e9bcbbc0a
+		summarizeBy: none
+		sourceColumn: goods_variety
+
+		annotation SummarizationSetBy = Automatic
+
+	column goods_weight
+		dataType: double
+		lineageTag: 45e6a205-36d0-402b-8df9-5cce9992b889
+		summarizeBy: sum
+		sourceColumn: goods_weight
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column malt_weight
+		dataType: double
+		lineageTag: 732560f8-b305-48e6-a186-b5f63d891ae6
+		summarizeBy: sum
+		sourceColumn: malt_weight
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column malt_yield_r2
+		dataType: double
+		lineageTag: dbf5ea79-4502-4e87-bfcf-9bee6972f1d1
+		summarizeBy: sum
+		sourceColumn: malt_yield_r2
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column germ_watering_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 0e76a9a8-0eb9-47dc-8684-f1cd4c507c83
+		summarizeBy: sum
+		sourceColumn: germ_watering_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column goods_protein
+		dataType: double
+		lineageTag: e3f010d5-7011-47ec-8f80-00e8d5acded7
+		summarizeBy: sum
+		sourceColumn: goods_protein
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column malt_dry_yield
+		dataType: double
+		lineageTag: 2ee0bbb1-e8a3-4149-91cd-c9e0954cabae
+		summarizeBy: sum
+		sourceColumn: malt_dry_yield
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column germ_c1_grains_piques
+		dataType: int64
+		formatString: 0
+		lineageTag: 53a411a6-efd4-4d6b-beaf-092b446a7fa1
+		summarizeBy: sum
+		sourceColumn: germ_c1_grains_piques
+
+		annotation SummarizationSetBy = Automatic
+
+	column malting_index
+		dataType: double
+		lineageTag: 6b479db9-9fcc-44cc-9593-ffc429cc872e
+		summarizeBy: sum
+		sourceColumn: malting_index
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column pregerm_moisture
+		dataType: double
+		lineageTag: 77aafcdb-7306-45a6-83b8-2ed64e18ab14
+		summarizeBy: sum
+		sourceColumn: pregerm_moisture
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column germ_c4_moisture
+		dataType: double
+		lineageTag: 87df2adb-01eb-42d8-8006-780e5bf7d055
+		summarizeBy: sum
+		sourceColumn: germ_c4_moisture
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column planned_date
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: fb8fb12e-9d29-41a7-b2ff-83243718ea09
+		summarizeBy: none
+		sourceColumn: planned_date
+
+		variation Variation
+			isDefault
+			relationship: fbdcd2f3-5650-4aaa-bf72-e2e48c06e1f1
+			defaultHierarchy: LocalDateTable_c3929d64-e1dd-42a9-8086-93671698a946.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 4a3b444a-66a0-4881-8ac8-4d1f6fc36d86
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 7066eb7b-30b1-4993-9510-07113bd87107
+			defaultHierarchy: LocalDateTable_3f1bed25-cd96-42d9-9bb0-2cc1a5ea70e1.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e9e17173-ca8c-4ec8-b039-ab607a09f7e2
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: 4733336e-81f9-4dae-a3d2-5663b45112e9
+			defaultHierarchy: LocalDateTable_1df4e619-d7ac-4b35-8839-e18b31723d00.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 9717dfc9-308e-46db-86ce-356927579a28
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 052d245e-225c-45c8-bbbc-31e6fbb525ca
+			defaultHierarchy: LocalDateTable_adf87206-8e92-4653-8d38-91d10d1906af.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_batch
+		dataType: string
+		lineageTag: af8d0911-0ad0-428e-a006-df88a6f2c3d1
+		summarizeBy: none
+		sourceColumn: id_batch
+
+		annotation SummarizationSetBy = Automatic
+
+	column goods_species
+		dataType: string
+		lineageTag: 9aae745c-d4e4-4828-9609-05235f40cafe
+		summarizeBy: none
+		sourceColumn: goods_species
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_batch_moisture = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    humidity_Schema = mal_maite_bi_prd_Database{[Name="humidity",Kind="Schema"]}[Data],
+				    fact_batch_moisture_Table = humidity_Schema{[Name="fact_batch_moisture",Kind="Table"]}[Data]
+				in
+				    fact_batch_moisture_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

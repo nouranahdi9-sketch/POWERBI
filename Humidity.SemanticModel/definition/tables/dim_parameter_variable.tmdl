@@ -1,0 +1,100 @@
+table dim_parameter_variable
+	lineageTag: 6069cefb-6d38-4917-be2a-2c695ae9db96
+
+	column parameter_variable
+		dataType: string
+		lineageTag: b97171df-1bea-4320-b1f7-430d839f15b4
+		summarizeBy: none
+		sourceColumn: parameter_variable
+		sortByColumn: custom_order
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_parameter_variable
+		dataType: int64
+		formatString: 0
+		lineageTag: c812f609-1f7b-4845-81f1-7d6d972b662e
+		summarizeBy: none
+		sourceColumn: id_parameter_variable
+
+		annotation SummarizationSetBy = Automatic
+
+	column parameter_variable_label
+		dataType: string
+		lineageTag: a883c3b1-d5ab-4841-ab7a-e358b7e66943
+		summarizeBy: none
+		sourceColumn: parameter_variable_label
+		sortByColumn: custom_order
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column custom_order
+		dataType: int64
+		formatString: 0
+		lineageTag: 5086f43a-7897-47e0-b8c2-16310765b15e
+		summarizeBy: sum
+		sourceColumn: custom_order
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f0ce3793-6e07-4873-806c-132d0c3539c4
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: e600674c-9690-400f-8e5e-0b8b4e70ca74
+			defaultHierarchy: LocalDateTable_8f88b9e4-b1de-4808-bc5b-ced1b3823403.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 7175944f-2cc0-4af4-8c27-22b2e1a4fed1
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: 1381e20b-4a1c-4a9b-98f7-3319d960a890
+			defaultHierarchy: LocalDateTable_40c7359a-c7d7-44c7-a114-34f781227b31.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 1a003288-217c-49ee-ade0-22d218cd6f9d
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: f38e77a1-7680-462e-a466-b9d61c43ab09
+			defaultHierarchy: LocalDateTable_9ada6e5c-7a27-4e44-905f-868a0f356bae.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_parameter_variable = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    humidity_Schema = mal_maite_bi_prd_Database{[Name="humidity",Kind="Schema"]}[Data],
+				    dim_parameter_variable_Table = humidity_Schema{[Name="dim_parameter_variable",Kind="Table"]}[Data]
+				in
+				    dim_parameter_variable_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

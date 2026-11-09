@@ -1,0 +1,31 @@
+model Model
+	culture: fr-FR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: fr-FR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["fact_batch_moisture","fact_batch_moisture_pivot","dim_parameter_variable"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table fact_batch_moisture
+ref table fact_batch_moisture_pivot
+ref table dim_parameter_variable
+ref table DateTableTemplate_38664ea4-a435-4db0-bd51-689d6e05e893
+ref table LocalDateTable_c3929d64-e1dd-42a9-8086-93671698a946
+ref table LocalDateTable_3f1bed25-cd96-42d9-9bb0-2cc1a5ea70e1
+ref table LocalDateTable_1df4e619-d7ac-4b35-8839-e18b31723d00
+ref table LocalDateTable_adf87206-8e92-4653-8d38-91d10d1906af
+ref table LocalDateTable_34828888-ba48-44d5-845a-fd7ba11f5feb
+ref table LocalDateTable_cd70058b-ac82-49a7-8b85-cb663d07cc6f
+ref table LocalDateTable_1b7f0ee3-83d9-4d4a-8862-d834dd272eea
+ref table LocalDateTable_8f88b9e4-b1de-4808-bc5b-ced1b3823403
+ref table LocalDateTable_40c7359a-c7d7-44c7-a114-34f781227b31
+ref table LocalDateTable_9ada6e5c-7a27-4e44-905f-868a0f356bae
+
+ref cultureInfo fr-FR
+
