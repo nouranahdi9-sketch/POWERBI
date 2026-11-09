@@ -1,0 +1,225 @@
+table fact_parameter_predicted_realized
+	lineageTag: e2a1ef6f-c84e-4460-aaf8-570dd7ddb604
+
+	measure Median_gap_IA_reel = ```
+			
+			CALCULATE(
+			    MEDIANX(
+			        VALUES('fact_parameter_predicted_realized'[gap_IA_reel]),
+			        'fact_parameter_predicted_realized'[gap_IA_reel]
+			    )
+			)
+			
+			
+			```
+		lineageTag: 96ab792a-fbcf-48b9-9ce7-7ae7da49e85e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure IQR_gap_IA_reel = ```
+			
+			VAR Q1 = CALCULATE(
+			    PERCENTILEX.INC(
+			        'fact_parameter_predicted_realized',
+			        'fact_parameter_predicted_realized'[gap_IA_reel],
+			        0.25
+			    )
+			)
+			VAR Q3 = CALCULATE(
+			    PERCENTILEX.INC(
+			        'fact_parameter_predicted_realized',
+			        'fact_parameter_predicted_realized'[gap_IA_reel],
+			        0.75
+			    )
+			)
+			RETURN
+			Q3 - Q1
+			
+			
+			
+			```
+		lineageTag: dbd47eeb-8f49-45c2-affc-d6eb9d613736
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure MinValeur = ```
+			MINX(ALLSELECTED('fact_parameter_predicted_realized'), MIN('fact_parameter_predicted_realized'[recommended_value], 'fact_parameter_predicted_realized'[realized_value]))
+			
+			```
+		lineageTag: bd894d7c-5a09-4c73-9312-7802eeeca04d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure MaxValeur = ```
+			MAXX(ALLSELECTED('fact_parameter_predicted_realized'), MAX('fact_parameter_predicted_realized'[recommended_value], 'fact_parameter_predicted_realized'[realized_value]))
+			
+			```
+		lineageTag: d16b4176-23c6-4bdc-8727-17433713ef9c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column acceptance_status
+		dataType: int64
+		formatString: 0
+		lineageTag: d29f1ec8-d35f-4a36-aafe-86a653829adc
+		summarizeBy: sum
+		sourceColumn: acceptance_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column applied_status
+		dataType: string
+		lineageTag: 9fbda48e-cb0a-41ca-9d2e-6c5e244783bb
+		summarizeBy: none
+		sourceColumn: applied_status
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column gap_IA_reel
+		dataType: double
+		lineageTag: 2f182c08-d992-400b-bd4d-6dc7be003690
+		summarizeBy: sum
+		sourceColumn: gap_IA_reel
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column calculation_date
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 0a9d571a-586a-4dff-a54d-9d3430bcf6d3
+		summarizeBy: none
+		sourceColumn: calculation_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column realized_value
+		dataType: double
+		lineageTag: 0e6f368c-d1d8-43a0-9471-4befd4d483c8
+		summarizeBy: sum
+		sourceColumn: realized_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column gap_ia_reel_percent
+		dataType: double
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 427b6a9b-0027-4a33-853f-4a78f4837437
+		summarizeBy: sum
+		sourceColumn: gap_ia_reel_percent
+
+		annotation SummarizationSetBy = Automatic
+
+	column applied_status_tolerance
+		dataType: string
+		lineageTag: cace9962-ac2b-49a3-ae92-2e60c4ab59ee
+		summarizeBy: none
+		sourceColumn: applied_status_tolerance
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_recommendation
+		dataType: string
+		lineageTag: a10e0c34-a9d1-4ce5-aaa6-54c477c6aae2
+		summarizeBy: none
+		sourceColumn: id_recommendation
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_parameter_production_line
+		dataType: string
+		lineageTag: 61e09014-d5e0-4322-9e86-dbc288251853
+		summarizeBy: none
+		sourceColumn: id_parameter_production_line
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f02637c4-b947-433e-b15b-89432ac8979e
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 7390469c-0b5c-4d9d-897f-393a90c1426f
+			defaultHierarchy: LocalDateTable_d61cb70a-cb7b-458b-99e3-239b6bf74373.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 94101c88-8c67-41f3-96aa-c78cdaccc9b1
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: fca0fad6-dad4-4345-b9fa-e88eaf675167
+			defaultHierarchy: LocalDateTable_14db3135-1376-4b9f-8d97-3ce1dc9e70fa.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 1a85fd07-7f55-4995-9309-fa41b54d112a
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 41750676-e432-44d2-816f-119748140dde
+			defaultHierarchy: LocalDateTable_cfd80e3b-71c5-4308-ae83-9a48fad719e6.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_batch
+		dataType: string
+		lineageTag: e4500b9f-9ead-493e-882f-d1c46df8a1bf
+		summarizeBy: none
+		sourceColumn: id_batch
+
+		annotation SummarizationSetBy = Automatic
+
+	column recommended_value
+		dataType: double
+		lineageTag: aaf76f63-dc50-4e7f-842f-e9e6b1d47b5f
+		summarizeBy: sum
+		sourceColumn: recommended_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column target_localization
+		dataType: string
+		lineageTag: 632f0f33-3515-4446-965a-534ed86b37c2
+		summarizeBy: none
+		sourceColumn: target_localization
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_parameter_predicted_realized = m
+		mode: import
+		queryGroup: parameters
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    parameters_Schema = mal_maite_bi_prd_Database{[Name="parameters",Kind="Schema"]}[Data],
+				    fact_parameter_predicted_realized_Table = parameters_Schema{[Name="fact_parameter_predicted_realized",Kind="Table"]}[Data]
+				in
+				    fact_parameter_predicted_realized_Table
+
+	annotation PBI_ResultType = Exception
+
+	annotation PBI_NavigationStepName = Navigation
+

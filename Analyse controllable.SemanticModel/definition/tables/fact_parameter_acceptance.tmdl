@@ -1,0 +1,552 @@
+table fact_parameter_acceptance
+	lineageTag: 8b22ad7d-73de-4021-b3af-ff4fa627aae7
+
+	measure 'Quartile_25_gap_en attente' = ```
+			
+			PERCENTILEX.INC(
+			    FILTER(
+			        'fact_parameter_acceptance', 
+			        NOT(ISBLANK('fact_parameter_acceptance'[gap_en_attente]))
+			    ),
+			    'fact_parameter_acceptance'[gap_en_attente],
+			    0.25
+			)
+			
+			
+			```
+		lineageTag: 34047f0a-778b-4717-a662-2881d1151a6d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Quartile_75_gap_en attente' = ```
+			
+			PERCENTILEX.INC(
+			    FILTER(
+			        'fact_parameter_acceptance', 
+			        NOT(ISBLANK('fact_parameter_acceptance'[gap_en_attente]))
+			    ),
+			    'fact_parameter_acceptance'[gap_en_attente],
+			    0.75
+			)
+			
+			```
+		lineageTag: 264329d9-04fb-41ac-9ae8-5052b1331633
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'IQR_en attente' = ```
+			[Quartile_75_gap_en attente] - [Quartile_25_gap_en attente]
+			
+			```
+		lineageTag: 99feddcf-9bd0-4557-8910-df2d8e435ae1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Quartile_25_gap_acceptée = ```
+			
+			PERCENTILEX.INC(
+			    FILTER(
+			        'fact_parameter_acceptance', 
+			        NOT(ISBLANK('fact_parameter_acceptance'[gap_acceptee_mais_non_appliquee]))
+			    ),
+			    'fact_parameter_acceptance'[gap_acceptee_mais_non_appliquee],
+			    0.25
+			)
+			```
+		lineageTag: e0b9ed77-1960-495b-9253-44f1882e0b84
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Quartile_75_gap_acceptée = ```
+			
+			PERCENTILEX.INC(
+			    FILTER(
+			        'fact_parameter_acceptance', 
+			        NOT(ISBLANK('fact_parameter_acceptance'[gap_acceptee_mais_non_appliquee]))
+			    ),
+			    'fact_parameter_acceptance'[gap_acceptee_mais_non_appliquee],
+			    0.75
+			)
+			```
+		lineageTag: 0a400ae8-47a3-4da7-a609-193df79bfa6d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Quartile_25_gap_appliquée = ```
+			
+			PERCENTILEX.INC(
+			    FILTER(
+			        'fact_parameter_acceptance', 
+			        NOT(ISBLANK('fact_parameter_acceptance'[gap_acceptee_et_appliquee]))
+			    ),
+			    'fact_parameter_acceptance'[gap_acceptee_et_appliquee],
+			    0.25
+			)
+			```
+		lineageTag: 65767dab-beb9-421a-8c6e-0dd84170766f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Quartile_25_gap_refusée_ia = ```
+			
+			PERCENTILEX.INC(
+			    FILTER(
+			        'fact_parameter_acceptance', 
+			        NOT(ISBLANK('fact_parameter_acceptance'[gap_refusee_ia]))
+			    ),
+			    'fact_parameter_acceptance'[gap_refusee_ia],
+			    0.25
+			)
+			```
+		lineageTag: 7129f06b-bd0d-4992-bbcc-25a9af21abf9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Quartile_75_gap_appliquée = ```
+			
+			PERCENTILEX.INC(
+			    FILTER(
+			        'fact_parameter_acceptance', 
+			        NOT(ISBLANK('fact_parameter_acceptance'[gap_acceptee_et_appliquee]))
+			    ),
+			    'fact_parameter_acceptance'[gap_acceptee_et_appliquee],
+			    0.75
+			)
+			```
+		lineageTag: fa21ce77-4f74-4968-bf71-40e9d63f7c9d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Quartile_75_gap_refusée_ia = ```
+			
+			PERCENTILEX.INC(
+			    FILTER(
+			        'fact_parameter_acceptance', 
+			        NOT(ISBLANK('fact_parameter_acceptance'[gap_refusee_ia]))
+			    ),
+			    'fact_parameter_acceptance'[gap_refusee_ia],
+			    0.75
+			)
+			```
+		lineageTag: 4554a165-d965-496b-bd91-730a92aa679d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure IQR_appliquée = [Quartile_75_gap_appliquée] - [Quartile_25_gap_appliquée]
+		lineageTag: e2fb1034-142a-4204-92ae-824cd5562d1b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure IQR_acceptée = [Quartile_75_gap_acceptée] - [Quartile_25_gap_acceptée]
+		lineageTag: 9f63dd1f-0a58-4750-96bc-8eaf498e4495
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure IQR_refusée_ia = [Quartile_75_gap_refusée_ia] - [Quartile_25_gap_refusée_ia]
+		lineageTag: 7cb14590-84ab-41f5-821a-777264185fbe
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure MinLigne_iqr = ```
+			
+			MINX(
+			    {
+			        [IQR_appliquée],
+			        [IQR_acceptée],
+			        [IQR_en attente],
+			        [IQR_refusée_ia],
+			        [IQR_refusée_usine]
+			    },
+			    [Value]
+			)
+			
+			```
+		lineageTag: 99cd06fa-a138-48bf-a529-79ba3a04bc96
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure MaxLigne_iqr =
+			
+			MAXX(
+			    {
+			        [IQR_appliquée],
+			        [IQR_acceptée],
+			        [IQR_en attente],
+			        [IQR_refusée_ia],
+			        [IQR_refusée_usine]
+			    },
+			    [Value]
+			)
+		formatString: 0
+		lineageTag: 590d5dcc-7767-45bd-895f-5eb8dffcc09a
+
+	measure Appliquee_Normalisee_iqr = ```
+			
+			DIVIDE([IQR_appliquée] - [MinLigne_iqr], [MaxLigne_iqr] - [MinLigne_iqr], 0)
+			
+			```
+		lineageTag: fb058e9e-efc3-4152-8f3f-6b9971131294
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure acceptee_Normalisee_iqr =
+			
+			DIVIDE([IQR_acceptée] - [MinLigne_iqr], [MaxLigne_iqr] - [MinLigne_iqr], 0)
+		lineageTag: 74e8be6e-9f03-4ac1-acb7-81ab2a971c48
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure en_attente_Normalisee_iqr =
+			
+			DIVIDE([IQR_en attente] - [MinLigne_iqr], [MaxLigne_iqr] - [MinLigne_iqr], 0)
+		lineageTag: 563e486f-9b12-40bf-a843-7b5f0cfa54b5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure refusée_ia_Normalisee_iqr =
+			
+			DIVIDE([IQR_refusée_ia] - [MinLigne_iqr], [MaxLigne_iqr] - [MinLigne_iqr], 0)
+		lineageTag: eb8ae0b8-a0e1-4e9a-ad08-d38b919f04e1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Médiane_appliquée = ```
+			MEDIAN('fact_parameter_acceptance'[gap_acceptee_et_appliquee])
+			
+			```
+		lineageTag: aa4fe92c-e53b-4976-b2c3-2b8b4306f3db
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Médiane_acceptée = MEDIAN('fact_parameter_acceptance'[gap_acceptee_mais_non_appliquee])
+		lineageTag: 68b4ead2-15e9-480c-8f8f-dd90cebaf07f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Médiane_en_attente = MEDIAN('fact_parameter_acceptance'[gap_en_attente])
+		lineageTag: b375fca5-c175-4c50-a7d0-1adbe7f66af3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Médiane_refusée_ia = MEDIAN('fact_parameter_acceptance'[gap_refusee_ia])
+		lineageTag: c69b7e50-a8a1-4af0-9de7-c27b127fbfc2
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure MinLigne_mediane =
+			
+			MINX(
+			    {
+			        [Médiane_appliquée],
+			        [Médiane_acceptée],
+			        [Médiane_en_attente],
+			        [Médiane_refusée_ia],
+			        [Médiane_refusée_usine]
+			    },
+			    [Value]
+			)
+		lineageTag: 0aa574b6-f678-4180-a53e-aba2786d9deb
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure MaxLigne_mediane =
+			
+			MAXX(
+			    {
+			        [Médiane_appliquée],
+			        [Médiane_acceptée],
+			        [Médiane_en_attente],
+			        [Médiane_refusée_ia],
+			        [Médiane_refusée_usine]
+			    },
+			    [Value]
+			)
+		lineageTag: 3258814c-97fc-4a28-b77a-d5b5542f0d36
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure appliquee_Normalisee_mediane =
+			
+			DIVIDE([Médiane_appliquée] - [MinLigne_mediane], [MaxLigne_mediane] - [MinLigne_mediane], 0)
+		lineageTag: 0e451740-029f-4195-b7ac-39cf35e1ede4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure acceptee_Normalisee_mediane =
+			
+			DIVIDE([Médiane_acceptée] - [MinLigne_mediane], [MaxLigne_mediane] - [MinLigne_mediane], 0)
+		lineageTag: ee7d1c52-a2f8-4ecc-8848-426c087acc2d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure En_attente_Normalisee_mediane =
+			
+			DIVIDE([Médiane_en_attente] - [MinLigne_mediane], [MaxLigne_mediane] - [MinLigne_mediane], 0)
+		lineageTag: 6a62f73e-3971-4374-85a6-a2b18ab50779
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure refusee_ia_Normalisee_mediane =
+			
+			DIVIDE([Médiane_refusée_ia] - [MinLigne_mediane], [MaxLigne_mediane] - [MinLigne_mediane], 0)
+		lineageTag: 0feeea6b-7f60-42c5-8314-e29e4e932050
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Quartile_25_gap_refusée_usine = ```
+			
+			PERCENTILEX.INC(
+			    FILTER(
+			        'fact_parameter_acceptance', 
+			        NOT(ISBLANK('fact_parameter_acceptance'[gap_refusee_usine]))
+			    ),
+			    'fact_parameter_acceptance'[gap_refusee_usine],
+			    0.25
+			)
+			```
+		lineageTag: e9e5b1f3-8d6c-4566-81a7-e13cf8652b1b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Quartile_75_gap_refusée_usine = ```
+			
+			PERCENTILEX.INC(
+			    FILTER(
+			        'fact_parameter_acceptance', 
+			        NOT(ISBLANK('fact_parameter_acceptance'[gap_refusee_usine]))
+			    ),
+			    'fact_parameter_acceptance'[gap_refusee_usine],
+			    0.75
+			)
+			```
+		lineageTag: aa9861a7-7638-41b4-8e66-7ee692e6ff9c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure IQR_refusée_usine = [Quartile_75_gap_refusée_usine] - [Quartile_25_gap_refusée_usine]
+		lineageTag: bd54427e-948f-432f-9253-88d7503bdd56
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Médiane_refusée_usine = MEDIAN('fact_parameter_acceptance'[gap_refusee_usine])
+		lineageTag: 6798ef01-9aac-4665-8cb4-21dc744e7ddc
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure refusée_usine_Normalisee_iqr =
+			
+			DIVIDE([IQR_refusée_usine] - [MinLigne_iqr], [MaxLigne_iqr] - [MinLigne_iqr], 0)
+		lineageTag: d38958dc-8894-4f52-bec1-b7fc82a08b60
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure refusee_usine_Normalisee_mediane =
+			
+			DIVIDE([Médiane_refusée_usine] - [MinLigne_mediane], [MaxLigne_mediane] - [MinLigne_mediane], 0)
+		lineageTag: 5f2797a2-7ced-4575-8aa8-2202d275d6ba
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column parameter_localization
+		dataType: string
+		lineageTag: 8d224464-78e8-425a-af29-89c3117c3665
+		summarizeBy: none
+		sourceColumn: parameter_localization
+
+		annotation SummarizationSetBy = Automatic
+
+	column nb_en_attente
+		dataType: int64
+		formatString: 0
+		lineageTag: 3be58ff2-dd48-442b-857b-34fd6338cea4
+		summarizeBy: sum
+		sourceColumn: nb_en_attente
+
+		annotation SummarizationSetBy = Automatic
+
+	column nb_acceptee
+		dataType: int64
+		formatString: 0
+		lineageTag: 0185b150-f089-4d05-b520-ae191c66c8a6
+		summarizeBy: sum
+		sourceColumn: nb_acceptee
+
+		annotation SummarizationSetBy = Automatic
+
+	column nb_acceptee_et_appliquee
+		dataType: int64
+		formatString: 0
+		lineageTag: de77bede-9c2f-4605-8b77-0c37ea4df6db
+		summarizeBy: sum
+		sourceColumn: nb_acceptee_et_appliquee
+
+		annotation SummarizationSetBy = Automatic
+
+	column nb_acceptee_mais_non_appliquee
+		dataType: int64
+		formatString: 0
+		lineageTag: a58d80c6-ee14-4dde-9db4-5bf5f6cb4eac
+		summarizeBy: sum
+		sourceColumn: nb_acceptee_mais_non_appliquee
+
+		annotation SummarizationSetBy = Automatic
+
+	column gap_en_attente
+		dataType: double
+		lineageTag: accf30c1-5461-48b2-86ec-7e720785d98f
+		summarizeBy: sum
+		sourceColumn: gap_en_attente
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column calculation_date
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 058d3cb5-1c62-4965-9651-d05c646cbbaf
+		summarizeBy: none
+		sourceColumn: calculation_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column gap_acceptee_mais_non_appliquee
+		dataType: double
+		lineageTag: ad37d55f-77a5-4a2c-94ff-73ffada14d56
+		summarizeBy: sum
+		sourceColumn: gap_acceptee_mais_non_appliquee
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column gap_acceptee_et_appliquee
+		dataType: double
+		lineageTag: be878f7a-7988-40b3-b592-ecb2f4bb12f6
+		summarizeBy: sum
+		sourceColumn: gap_acceptee_et_appliquee
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column id_parameter_production_line
+		dataType: string
+		lineageTag: 141e9f14-a44a-4f76-81ac-8230ba3c6773
+		summarizeBy: none
+		sourceColumn: id_parameter_production_line
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: fddf7821-8d1b-4a94-8a4c-8a33bcac75ec
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 66515745-faf2-489e-baba-daf6d077a545
+			defaultHierarchy: LocalDateTable_030132eb-2ad6-4384-97d6-dadccee42c2f.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 5d4d26d8-9ecf-4f4a-951e-21a3915cfb65
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: e3d959b1-5b01-48f0-9fc3-55ab30cd3908
+			defaultHierarchy: LocalDateTable_4b705ff8-2b22-46cf-824c-e68ebb718d11.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: cda74648-f542-4312-ac8e-04b280fcec77
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 88e195ca-3fb0-4820-aa54-136bc3eeda64
+			defaultHierarchy: LocalDateTable_e6899c53-afad-46ef-b405-ffb011c006b5.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_recommendation
+		dataType: string
+		lineageTag: c8a43d84-0d5f-4b90-8b04-9057f71aab66
+		summarizeBy: none
+		sourceColumn: id_recommendation
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_batch
+		dataType: string
+		lineageTag: 0c04571c-05fb-488c-8608-aa177e998e6c
+		summarizeBy: none
+		sourceColumn: id_batch
+
+		annotation SummarizationSetBy = Automatic
+
+	column gap_refusee_ia
+		dataType: double
+		lineageTag: 9cfdd72d-e746-4bca-b1ce-c6b563643d63
+		summarizeBy: sum
+		sourceColumn: gap_refusee_ia
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column gap_refusee_usine
+		dataType: double
+		lineageTag: 7d58fbcc-7a74-457d-814b-6a13ab848cb8
+		summarizeBy: sum
+		sourceColumn: gap_refusee_usine
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nb_refusee_ia
+		dataType: int64
+		formatString: 0
+		lineageTag: 84f9c8d2-aafa-412b-8334-ce1e517ea79c
+		summarizeBy: sum
+		sourceColumn: nb_refusee_ia
+
+		annotation SummarizationSetBy = Automatic
+
+	column nb_refusee_usine
+		dataType: int64
+		formatString: 0
+		lineageTag: 1b252017-731b-44dc-860d-ed94fdef11c8
+		summarizeBy: sum
+		sourceColumn: nb_refusee_usine
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_parameter_acceptance = m
+		mode: import
+		queryGroup: parameters
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    parameters_Schema = mal_maite_bi_prd_Database{[Name="parameters",Kind="Schema"]}[Data],
+				    fact_parameter_acceptance_Table = parameters_Schema{[Name="fact_parameter_acceptance",Kind="Table"]}[Data]
+				in
+				    fact_parameter_acceptance_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

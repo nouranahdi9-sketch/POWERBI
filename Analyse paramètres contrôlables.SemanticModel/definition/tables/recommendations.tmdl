@@ -1,0 +1,182 @@
+table recommendations
+	lineageTag: b080ad4b-7815-411a-9396-be726cf10898
+
+	column batch
+		dataType: string
+		lineageTag: 3bd4e7be-b4d5-4949-b336-88f74c292e13
+		summarizeBy: none
+		sourceColumn: batch
+
+		annotation SummarizationSetBy = Automatic
+
+	column acceptance_user
+		dataType: string
+		lineageTag: ec32c15e-17b6-41a5-ae94-14bc578a6f18
+		summarizeBy: none
+		sourceColumn: acceptance_user
+
+		annotation SummarizationSetBy = Automatic
+
+	column acceptance_comments
+		dataType: string
+		lineageTag: ebbe3e18-0bb8-4022-a614-3d8b562eff21
+		summarizeBy: none
+		sourceColumn: acceptance_comments
+
+		annotation SummarizationSetBy = Automatic
+
+	column target_localization
+		dataType: int64
+		formatString: 0
+		lineageTag: 0ef59ad9-5303-4ed3-a2ad-187f0d211f59
+		summarizeBy: none
+		sourceColumn: target_localization
+
+		annotation SummarizationSetBy = Automatic
+
+	column acceptance_status
+		dataType: int64
+		formatString: 0
+		lineageTag: 145ecda6-7957-4bd5-9057-d6bf5dd350ba
+		summarizeBy: none
+		sourceColumn: acceptance_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8899a56f-621b-407c-95c6-c5a6566bc97f
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: eda65488-df0e-4d5f-8f5b-aa411f74e2bf
+			defaultHierarchy: LocalDateTable_32cc8dd3-ffb1-4ae1-aa59-d767d90e61ba.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: ae1506cd-0b28-4a3f-9a67-cde304373d12
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: 52f999e1-eea9-4a27-8db7-121d2250a931
+			defaultHierarchy: LocalDateTable_93e48e41-7541-48de-96ba-f928567b24cc.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: ac9af285-cd97-47c6-8303-a634138e1f00
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 795df69f-0791-4f91-a9c0-90502bcafce7
+			defaultHierarchy: LocalDateTable_c012ffb3-b667-4278-921b-8310f3f75c77.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column calculation_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f7017781-71f6-4996-9833-fa8d3d530dbf
+		summarizeBy: none
+		sourceColumn: calculation_date
+
+		variation Variation
+			isDefault
+			relationship: 91ba4c89-796f-457a-93bd-748e9bdc52bf
+			defaultHierarchy: LocalDateTable_d3eef5b2-0c1b-410c-ae85-e3f187014b9c.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column days_before
+		dataType: int64
+		formatString: 0
+		lineageTag: a70e521c-0e0e-4207-84fb-89a2c600f51f
+		summarizeBy: sum
+		sourceColumn: days_before
+
+		annotation SummarizationSetBy = Automatic
+
+	column note_1
+		dataType: string
+		lineageTag: 23a07903-a104-46e8-aca7-8d228eb1cd12
+		summarizeBy: none
+		sourceColumn: note_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column user_note_1
+		dataType: string
+		lineageTag: 8093730d-5570-46d8-a06f-6acb478581e6
+		summarizeBy: none
+		sourceColumn: user_note_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column note_2
+		dataType: string
+		lineageTag: bcb997b5-6c0a-4146-8a64-0c0993d94d18
+		summarizeBy: none
+		sourceColumn: note_2
+
+		annotation SummarizationSetBy = Automatic
+
+	column user_note_2
+		dataType: string
+		lineageTag: dd106d8b-e6c2-47d7-84a3-e15b4c7aff68
+		summarizeBy: none
+		sourceColumn: user_note_2
+
+		annotation SummarizationSetBy = Automatic
+
+	column note_3
+		dataType: string
+		lineageTag: 15190c3c-4b53-4da3-b0be-fdec702d0816
+		summarizeBy: none
+		sourceColumn: note_3
+
+		annotation SummarizationSetBy = Automatic
+
+	column user_note_3
+		dataType: string
+		lineageTag: 125b0e6c-7eac-4f0b-a1f7-54e2454ac47e
+		summarizeBy: none
+		sourceColumn: user_note_3
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_recommendation
+		dataType: string
+		lineageTag: 1602c5f2-8f9b-4e79-b5a2-730151614891
+		summarizeBy: none
+		sourceColumn: id_recommendation
+
+		annotation SummarizationSetBy = Automatic
+
+	partition recommendations = m
+		mode: import
+		queryGroup: recommendations
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    recommendations_Schema = mal_maite_bi_prd_Database{[Name="recommendations",Kind="Schema"]}[Data],
+				    fact_recommendations_Table = recommendations_Schema{[Name="fact_recommendations",Kind="Table"]}[Data]
+				in
+				    fact_recommendations_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

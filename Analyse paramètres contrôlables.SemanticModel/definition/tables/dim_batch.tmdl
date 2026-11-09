@@ -1,0 +1,206 @@
+table dim_batch
+	lineageTag: 7aea20da-d4a4-4065-a180-cffc74f7f28e
+
+	measure DistinctCount_TooHigh =
+			
+			CALCULATE(
+			    COUNT('features_front_too_high_low'[values]),
+			    'features_front_too_high_low'[rate] = "too_high"
+			)
+		formatString: 0
+		lineageTag: 35f5c15a-5d62-45f9-bcba-e22cbdadda5d
+
+	measure DistinctCount_TooLow =
+			
+			CALCULATE(
+			    COUNT('features_front_too_high_low'[id_recommendation]),
+			    'features_front_too_high_low'[rate] = "too_low"
+			)
+		formatString: 0
+		lineageTag: 8428522f-567f-41a6-b7a8-b1b04ff36997
+
+	measure Percent_TooHigh =
+			
+			DIVIDE(
+			    CALCULATE(COUNT('features_front_too_high_low'[values]), 'features_front_too_high_low'[rate] = "too_high"),
+			    CALCULATE(COUNT('features_front_too_high_low'[values]), 'features_front_too_high_low'[rate] = "too_high") + CALCULATE(COUNT('features_front_too_high_low'[values]), 'features_front_too_high_low'[rate] = "too_low"),
+			    0
+			)
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 32d6bf37-3b23-4ade-a002-ccd8d04bee59
+
+	measure Percent_TooLow =
+			
+			DIVIDE(
+			    CALCULATE(COUNT('features_front_too_high_low'[values]), 'features_front_too_high_low'[rate] = "too_low"),
+			    CALCULATE(COUNT('features_front_too_high_low'[values]), 'features_front_too_high_low'[rate] = "too_low") + CALCULATE(COUNT('features_front_too_high_low'[values]), 'features_front_too_high_low'[rate] = "too_high"),
+			    0
+			)
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 21a3ab7f-52c2-415b-b71d-838e441ee8d9
+
+	column batch_number
+		dataType: string
+		lineageTag: dc81db8e-ffa6-4cec-9f48-4ddbc4e384a3
+		summarizeBy: none
+		sourceColumn: batch_number
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_cdc
+		dataType: int64
+		formatString: 0
+		lineageTag: 69fcff48-b7c2-455a-92c4-54a03515f5cf
+		summarizeBy: none
+		sourceColumn: id_cdc
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_batch
+		dataType: string
+		lineageTag: 4d8be6bc-4366-4ff8-afca-8f403ad68e59
+		summarizeBy: none
+		sourceColumn: id_batch
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: aa8ebf19-5579-4e57-8607-8079abdaca6c
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 8a9bdcd5-1817-4f1f-ae87-420c81d9d3b9
+			defaultHierarchy: LocalDateTable_38771e52-c380-497b-becd-797125af884c.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 224c8c53-2c02-423b-b3c4-4eae9ee02537
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: 2f620332-34bf-4a0e-8146-7566d8598a3e
+			defaultHierarchy: LocalDateTable_9dd3896b-9c07-4cc5-b295-fa7962d8d4e7.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 31252559-b120-4e33-a666-dcb91c06804e
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: c1eee840-9bb1-4836-961b-0f35bfb51546
+			defaultHierarchy: LocalDateTable_722fdce4-d42d-49cc-8315-f4695e77b99e.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column mes_number
+		dataType: string
+		lineageTag: b853e76f-d6c5-4fa3-9b9e-065886b5c45e
+		summarizeBy: none
+		sourceColumn: mes_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column ordre_fabrication
+		dataType: int64
+		formatString: 0
+		lineageTag: 6ad0c2f6-e859-4bc0-a00d-b7508eb8fdea
+		summarizeBy: sum
+		sourceColumn: ordre_fabrication
+
+		annotation SummarizationSetBy = Automatic
+
+	column annee_recolte
+		dataType: int64
+		formatString: 0
+		lineageTag: 07775f2c-406f-4e90-aefd-32414e1906d8
+		summarizeBy: sum
+		sourceColumn: annee_recolte
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_site
+		dataType: int64
+		formatString: 0
+		lineageTag: 0b2d8d4a-b459-4c90-8c45-80cd625c8990
+		summarizeBy: none
+		sourceColumn: id_site
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_type
+		dataType: int64
+		formatString: 0
+		lineageTag: 2223c90d-26fc-4e66-8e06-d8b208e6b97a
+		summarizeBy: sum
+		sourceColumn: id_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_variete
+		dataType: int64
+		formatString: 0
+		lineageTag: 73487b73-a590-46ae-8b70-3ae51e935258
+		summarizeBy: sum
+		sourceColumn: id_variete
+
+		annotation SummarizationSetBy = Automatic
+
+	column debut_de_production
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: ac547da5-90cb-4f07-a68b-f8f69000086b
+		summarizeBy: none
+		sourceColumn: debut_de_production
+
+		variation Variation
+			isDefault
+			relationship: 49b41fdc-dc3b-4098-9283-1f403931a0dd
+			defaultHierarchy: LocalDateTable_1b6f687d-81ba-4554-9ea8-23d4bade0d67.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column fin_de_production
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 3ad97cb9-596f-464b-baef-b65206f98241
+		summarizeBy: none
+		sourceColumn: fin_de_production
+
+		variation Variation
+			isDefault
+			relationship: 6591a130-d63f-4a01-91d7-3d883fff5649
+			defaultHierarchy: LocalDateTable_27ecdb31-f57b-4055-a581-5b9672a6f10b.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_batch = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    self_service_Schema = mal_maite_bi_prd_Database{[Name="self_service",Kind="Schema"]}[Data],
+				    dim_batch_Table = self_service_Schema{[Name="dim_batch",Kind="Table"]}[Data]
+				in
+				    dim_batch_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

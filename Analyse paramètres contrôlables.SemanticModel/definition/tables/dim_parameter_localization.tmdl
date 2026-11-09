@@ -1,0 +1,54 @@
+table dim_parameter_localization
+	lineageTag: 2002aa19-55c4-4dcd-8d3d-e95379f5c0dc
+
+	column parameter_localization
+		dataType: string
+		lineageTag: 07925c6f-9c3e-4e0f-acab-ddb6c9433fb1
+		summarizeBy: none
+		sourceColumn: parameter_localization
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column custom_order
+		dataType: int64
+		formatString: 0
+		lineageTag: 482d532e-331f-4244-b9c7-709002ec0546
+		summarizeBy: sum
+		sourceColumn: custom_order
+
+		annotation SummarizationSetBy = Automatic
+
+	column localisation_fr
+		dataType: string
+		lineageTag: 417ed4dd-e32d-4443-9355-3d959a5af8bd
+		summarizeBy: none
+		sourceColumn: localisation_fr
+		sortByColumn: custom_order
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column localization
+		dataType: string
+		lineageTag: e377699c-5a6b-45eb-892d-7066c412bf35
+		summarizeBy: none
+		sourceColumn: localization
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_parameter_localization = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("bdBNCsMgEAXgqxTX2WTU/pyg0HV3EiSIBKkxwSaL3r5q2kli3MnzfQw8IUhNKvKetB6N66T6KKslRlLF59PrftSnR02aShA49mHtw6YPqU9D0mnfG9dOZnCbEzFdLtzX//8ZVmSADHK2XONFRpHRnNHEzkXGkLGcscQuRcaR8ZzxxK4hfhnr9ovH5Df4MPvWWIub3w4AEMAehBmaLw==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [custom_order = _t, localization = _t, parameter_localization = _t, localisation_fr = _t]),
+				    #"Type modifié" = Table.TransformColumnTypes(Source,{{"custom_order", Int64.Type}, {"localization", type text}, {"parameter_localization", type text}, {"localisation_fr", type text}})
+				in
+				    #"Type modifié"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

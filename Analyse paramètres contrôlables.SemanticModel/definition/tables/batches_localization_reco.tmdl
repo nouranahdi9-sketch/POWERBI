@@ -1,0 +1,172 @@
+table batches_localization_reco
+	lineageTag: db10d437-67a9-41b7-94bf-76225a35a77a
+
+	column id_batch
+		dataType: string
+		lineageTag: b25de56a-e671-495f-9ac9-c7952a15f9b4
+		summarizeBy: none
+		sourceColumn: id_batch
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_localization
+		dataType: int64
+		formatString: 0
+		lineageTag: 7a080764-267b-4f23-a197-34f254deb955
+		summarizeBy: none
+		sourceColumn: id_localization
+
+		annotation SummarizationSetBy = Automatic
+
+	column calculation_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 30a36886-174e-4d34-8def-8a50a95bcfec
+		summarizeBy: none
+		sourceColumn: calculation_date
+
+		variation Variation
+			isDefault
+			relationship: 5809e45f-4fa2-4987-9a93-53e926061d9e
+			defaultHierarchy: LocalDateTable_2a05d21b-fae2-4af5-a1cd-385929124464.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column acceptee
+		dataType: int64
+		formatString: 0
+		lineageTag: 51cdeab7-255c-4a02-a781-26452b84c97d
+		summarizeBy: sum
+		sourceColumn: acceptee
+
+		annotation SummarizationSetBy = Automatic
+
+	column en_attente
+		dataType: int64
+		formatString: 0
+		lineageTag: 97a93df2-2f14-4a33-959e-2be93050417d
+		summarizeBy: sum
+		sourceColumn: en_attente
+
+		annotation SummarizationSetBy = Automatic
+
+	column evaluee
+		dataType: int64
+		formatString: 0
+		lineageTag: ce988a1c-72f4-4927-baff-3e8789630cbe
+		summarizeBy: sum
+		sourceColumn: evaluee
+
+		annotation SummarizationSetBy = Automatic
+
+	column total
+		dataType: int64
+		formatString: 0
+		lineageTag: 5aa96dca-43a4-4cb9-92d7-e393d0fc6a30
+		summarizeBy: sum
+		sourceColumn: total
+
+		annotation SummarizationSetBy = Automatic
+
+	column acceptee_et_appliquee
+		dataType: int64
+		formatString: 0
+		lineageTag: 23c053cb-1181-4c90-9afb-58665f2d2626
+		summarizeBy: sum
+		sourceColumn: acceptee_et_appliquee
+
+		annotation SummarizationSetBy = Automatic
+
+	column acceptee_mais_non_appliquee
+		dataType: int64
+		formatString: 0
+		lineageTag: 175a1fb6-39d2-4e17-b7aa-a1e8d83f5606
+		summarizeBy: sum
+		sourceColumn: acceptee_mais_non_appliquee
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 2d43af6e-476a-4e3a-9e60-05dc7b0966e1
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 990094e2-6649-4dbd-b57d-b0325a77a7cb
+			defaultHierarchy: LocalDateTable_6248ccc3-7c0b-4a2e-aa9a-35f116c40645.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 3d54fa94-2049-46cd-b3d6-a7ca28f231f0
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: 2dd4f4ef-2bff-4caf-82e9-a1fbaa7ec5cb
+			defaultHierarchy: LocalDateTable_58658f59-7825-423c-99eb-bed7eb1720ee.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 2f9ddf49-7fd7-4b21-863d-fc483970e9d1
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: dcdc8f24-ef75-417d-b9c6-5fe1b1a73bfb
+			defaultHierarchy: LocalDateTable_a027beda-9522-4889-ac3b-9618ae938bdf.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_recommendation
+		dataType: string
+		lineageTag: 3e8e867e-f8ec-4988-95f6-7daccbdd8b13
+		summarizeBy: none
+		sourceColumn: id_recommendation
+
+		annotation SummarizationSetBy = Automatic
+
+	column refusee_ia
+		dataType: int64
+		formatString: 0
+		lineageTag: fdeca6f0-416d-4717-adbe-70d2342c4b57
+		summarizeBy: sum
+		sourceColumn: refusee_ia
+
+		annotation SummarizationSetBy = Automatic
+
+	column refusee_usine
+		dataType: int64
+		formatString: 0
+		lineageTag: 19246f42-de1c-483f-b31a-3645ebb5cc5a
+		summarizeBy: sum
+		sourceColumn: refusee_usine
+
+		annotation SummarizationSetBy = Automatic
+
+	partition batches_localization_reco = m
+		mode: import
+		queryGroup: recommendations
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    recommendations_Schema = mal_maite_bi_prd_Database{[Name="recommendations",Kind="Schema"]}[Data],
+				    fact_batches_localization_reco_Table = recommendations_Schema{[Name="fact_batches_localization_reco",Kind="Table"]}[Data]
+				in
+				    fact_batches_localization_reco_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

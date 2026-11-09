@@ -1,0 +1,155 @@
+table batches_calculation_date_reco
+	lineageTag: 08d1ef24-035a-43d8-83c6-7407311bbf6c
+
+	column batch
+		dataType: string
+		lineageTag: 19c01cce-5aa5-410b-a1ef-847407e6e521
+		summarizeBy: none
+		sourceColumn: batch
+
+		annotation SummarizationSetBy = Automatic
+
+	column calculation_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f1429413-a074-480f-a810-2da4659309ec
+		summarizeBy: none
+		sourceColumn: calculation_date
+
+		variation Variation
+			isDefault
+			relationship: 31634371-7660-435d-b2ea-ee05dd773361
+			defaultHierarchy: LocalDateTable_fa38938e-155c-4744-bdcf-a3fc8df43ec9.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column acceptee
+		dataType: int64
+		formatString: 0
+		lineageTag: 0c27e1e1-1f5d-4da3-ae3f-5e46e1b65ba9
+		summarizeBy: sum
+		sourceColumn: acceptee
+
+		annotation SummarizationSetBy = Automatic
+
+	column en_attente
+		dataType: int64
+		formatString: 0
+		lineageTag: e1845fb1-8992-436c-ba3b-c5894bb280d4
+		summarizeBy: sum
+		sourceColumn: en_attente
+
+		annotation SummarizationSetBy = Automatic
+
+	column evaluee
+		dataType: int64
+		formatString: 0
+		lineageTag: c907c273-f6d5-4ebf-bb79-42978a39e73b
+		summarizeBy: sum
+		sourceColumn: evaluee
+
+		annotation SummarizationSetBy = Automatic
+
+	column total
+		dataType: int64
+		formatString: 0
+		lineageTag: 8498a704-e371-40c7-abf9-2a85c05b9df4
+		summarizeBy: sum
+		sourceColumn: total
+
+		annotation SummarizationSetBy = Automatic
+
+	column acceptee_et_appliquee
+		dataType: int64
+		formatString: 0
+		lineageTag: e64ca2b6-fc73-4b38-bf5e-2508f19f8d22
+		summarizeBy: sum
+		sourceColumn: acceptee_et_appliquee
+
+		annotation SummarizationSetBy = Automatic
+
+	column acceptee_mais_non_appliquee
+		dataType: int64
+		formatString: 0
+		lineageTag: f2032764-5887-443d-a098-42d8b9dc8b49
+		summarizeBy: sum
+		sourceColumn: acceptee_mais_non_appliquee
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d8818d57-ae28-49ff-8859-07b000cf4ac0
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: c170d549-3dec-4e2b-b4a7-c4dcb1a12652
+			defaultHierarchy: LocalDateTable_e87fc3dc-199d-4428-8b61-cb6d44e25096.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 3829db2a-67c0-4f2f-a744-74875f28f456
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: 77001dc7-1596-4ff0-a525-8ff3da3bc51e
+			defaultHierarchy: LocalDateTable_69b34241-b1a1-4797-afcb-396e46750f5e.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: da612c88-8759-48e3-b545-0fa5959b4ad6
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 15bf44c6-576c-4a7e-8b5f-ffe51a91dcc2
+			defaultHierarchy: LocalDateTable_ec521b52-4785-477c-b708-b7eef4cbb24d.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column refusee_ia
+		dataType: int64
+		formatString: 0
+		lineageTag: 659b0c88-a218-4a62-8d5a-0b433b99a898
+		summarizeBy: sum
+		sourceColumn: refusee_ia
+
+		annotation SummarizationSetBy = Automatic
+
+	column refusee_usine
+		dataType: int64
+		formatString: 0
+		lineageTag: e43a8adc-b0ee-4c7b-a072-cb1843f74ad7
+		summarizeBy: sum
+		sourceColumn: refusee_usine
+
+		annotation SummarizationSetBy = Automatic
+
+	partition batches_calculation_date_reco = m
+		mode: import
+		queryGroup: recommendations
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    recommendations_Schema = mal_maite_bi_prd_Database{[Name="recommendations",Kind="Schema"]}[Data],
+				    fact_batches_calculation_date_reco_Table = recommendations_Schema{[Name="fact_batches_calculation_date_reco",Kind="Table"]}[Data]
+				in
+				    fact_batches_calculation_date_reco_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,70 @@
+table dim_date
+	lineageTag: 99d78553-52e7-4590-bb46-b353e52e91a7
+
+	column Date
+		formatString: Short Date
+		lineageTag: 554ee666-e5b7-443c-9886-6e39884dacf8
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		variation Variation
+			isDefault
+			relationship: 76b88577-846b-4ead-9a15-f18eaac8d84c
+			defaultHierarchy: LocalDateTable_fac41aa4-0fd5-41cc-95f4-a29a7cf71d04.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		formatString: 0
+		lineageTag: 7d924ba7-a9d1-439b-9ec3-cd0cca97afcf
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Year]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		formatString: 0
+		lineageTag: 3585f666-f904-438b-9140-a251b0bb90aa
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Month]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Day
+		formatString: 0
+		lineageTag: caf0bfef-d80a-48ce-a18b-924f240af0cf
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Day]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Week Number'
+		formatString: 0
+		lineageTag: 2ded7e0c-3345-41d5-a432-c82fed363df2
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Week Number]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_date = calculated
+		mode: import
+		source =
+				
+				VAR MIN_DATE = "01/01/2024"
+				VAR MAX_DATE = TODAY()
+				RETURN
+				ADDCOLUMNS(
+				    CALENDAR(MIN_DATE, MAX_DATE),
+				    "Year", YEAR([Date]),
+				    "Month", MONTH([Date]),
+				    "Day", DAY([Date]),
+				    "Week Number", WEEKNUM([Date], 2)
+				)
+
+	annotation PBI_Id = 2b617de29bf845de8b406b67c21d9df2
+

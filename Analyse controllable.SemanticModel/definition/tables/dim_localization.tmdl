@@ -1,0 +1,89 @@
+table dim_localization
+	lineageTag: 9e1869a3-3e91-43ba-94de-375c9a3ad8e8
+
+	column id_localization
+		dataType: int64
+		formatString: 0
+		lineageTag: e9c5bafa-370e-40be-b552-6b1fd8bb956c
+		summarizeBy: none
+		sourceColumn: id_localization
+
+		annotation SummarizationSetBy = Automatic
+
+	column localization
+		dataType: string
+		lineageTag: 685f0c92-4c29-4522-8dfd-aa96837044e9
+		summarizeBy: none
+		sourceColumn: localization
+		sortByColumn: sequence
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column sequence
+		dataType: int64
+		formatString: 0
+		lineageTag: 96233699-3254-4a01-90ed-0d0df85755c4
+		summarizeBy: sum
+		sourceColumn: sequence
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d98dc6cc-e92d-476b-8661-388e5605d3f8
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: bdb20f30-94df-4e21-947a-94af867c5aee
+			defaultHierarchy: LocalDateTable_4ee5797e-6e74-4df8-b98a-fb138603dae8.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c9628128-01e3-4c3c-ba80-bfaa18edcf8c
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: cc17228c-6f5a-4b88-ba69-00181b1b1f84
+			defaultHierarchy: LocalDateTable_e123ac1f-6015-425e-aa5b-5faa16308403.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a7a3f458-06f5-4ec4-9f98-f210f66dd474
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 4e7fae1e-b2f2-411c-a28e-312161480211
+			defaultHierarchy: LocalDateTable_60e38213-d0fb-4250-934c-8c3b558b4158.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_localization = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    recommendations_Schema = mal_maite_bi_prd_Database{[Name="recommendations",Kind="Schema"]}[Data],
+				    dim_localization_Table = recommendations_Schema{[Name="dim_localization",Kind="Table"]}[Data]
+				in
+				    dim_localization_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

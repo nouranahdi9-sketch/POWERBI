@@ -1,0 +1,36 @@
+table dim_acceptance_status
+	lineageTag: 10ba664d-ca10-4a2b-97e2-89327d157d3f
+
+	column status_brut
+		dataType: int64
+		formatString: 0
+		lineageTag: 9d1edba9-2365-4e84-8f10-53efe8797117
+		summarizeBy: none
+		sourceColumn: status_brut
+
+		annotation SummarizationSetBy = Automatic
+
+	column status
+		dataType: string
+		lineageTag: 3b1e3aae-240d-4405-b0f5-5754bb99358e
+		summarizeBy: none
+		sourceColumn: status
+		sortByColumn: status_brut
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_acceptance_status = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45W0jVU0lEKSk0rLT68MlUpVidayQAo4JqnkFhSkppXAhECqXFMTk4tKIEpMgKJFBTkZBaWgoViAQ==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [status_brut = _t, status = _t]),
+				    #"Type modifié" = Table.TransformColumnTypes(Source,{{"status_brut", Int64.Type}, {"status", type text}})
+				in
+				    #"Type modifié"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
