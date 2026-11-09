@@ -1,0 +1,15 @@
+relationship 2cd51e88-7183-461c-a166-255c170a3a16
+	joinOnDateBehavior: datePartOnly
+	fromColumn: batches_parameter_realized_predicted.date_debut_production
+	toColumn: LocalDateTable_dd81ac9d-35ef-40d5-b6a5-3dc45ac9606f.Date
+
+relationship b9da6a36-73a4-4b53-bac3-8d75cbfbab1b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'batches_parameter_realized_predicted pivot'.date_debut_production
+	toColumn: LocalDateTable_927dd965-56cb-4250-a252-40d96f373b4f.Date
+
+relationship 3eb5c909-a9ca-454e-8ff4-b671087a6159
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'batches_parameter_realized_predicted pivot meme axe'.date_debut_production
+	toColumn: LocalDateTable_a8378abf-7309-456a-9a19-1131ebc5669c.Date
+

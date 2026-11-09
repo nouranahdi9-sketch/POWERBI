@@ -1,0 +1,505 @@
+table 'Main table'
+	lineageTag: d144f93d-d9ab-4e78-b8e1-72549dd5a169
+
+	measure Coge_PCI_kwh_avg = ```
+			
+			AVERAGEX(
+			    FILTER(
+			        'Main table',
+			        NOT(ISBLANK('Main table'[Conso_cogeneration_PCI])) &&
+			        'Main table'[Conso_cogeneration_PCI] <> 0
+			    ),
+			    'Main table'[Conso_cogeneration_PCI]
+			)
+			
+			```
+		lineageTag: fd3acb0f-e024-47c8-8b38-7aebb47b514e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column plant
+		dataType: string
+		lineageTag: 77f97093-16e5-4400-a1f0-f0bd2f3f8046
+		summarizeBy: none
+		sourceColumn: plant
+
+		annotation SummarizationSetBy = Automatic
+
+	column batch_number
+		dataType: string
+		lineageTag: b0e503b5-f081-43cd-af62-9edf07616b43
+		summarizeBy: none
+		sourceColumn: batch_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: c7110d4f-d1b7-4132-896d-9e178ba44eda
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column production_line
+		dataType: int64
+		formatString: 0
+		lineageTag: 8e887371-3b17-4d35-bd66-7bd556da34cc
+		summarizeBy: sum
+		sourceColumn: production_line
+
+		annotation SummarizationSetBy = Automatic
+
+	column kiln_unload_end_date
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: dbdba236-0caa-45dd-8954-c1e56dd09ace
+		summarizeBy: none
+		sourceColumn: kiln_unload_end_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column malt_R3
+		dataType: double
+		lineageTag: 81b7bd8d-fa6b-44fb-aca3-dae69d476b53
+		summarizeBy: sum
+		sourceColumn: malt_R3
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Malt_deculming_ton
+		dataType: double
+		lineageTag: 1277bb16-342e-4075-8c3c-6f9d64b11960
+		summarizeBy: sum
+		sourceColumn: Malt_deculming_ton
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Barley_tonnage
+		dataType: double
+		lineageTag: 72928b64-df57-4c39-9d5c-2d215635a2b8
+		summarizeBy: sum
+		sourceColumn: Barley_tonnage
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column R2
+		dataType: double
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: e552f77a-ebad-4906-a66c-fad89db9c0ea
+		summarizeBy: sum
+		sourceColumn: R2
+
+		annotation SummarizationSetBy = Automatic
+
+	column budget_R3
+		dataType: double
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: b8cbc432-a725-400e-aef6-ff992edbe87c
+		summarizeBy: sum
+		sourceColumn: budget_R3
+
+		annotation SummarizationSetBy = Automatic
+
+	column obj_R3
+		dataType: double
+		lineageTag: ad367860-2f2c-40e5-b9bc-5d156f76b5af
+		summarizeBy: sum
+		sourceColumn: obj_R3
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column obj_R2
+		dataType: double
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 41d603da-7495-4ca4-9557-1792a94eda3a
+		summarizeBy: sum
+		sourceColumn: obj_R2
+
+		annotation SummarizationSetBy = Automatic
+
+	column Conso_Anox_T1_1
+		dataType: int64
+		formatString: 0
+		lineageTag: 17e19c11-bcf4-4eff-ad3c-4f2c4088abaa
+		summarizeBy: sum
+		sourceColumn: Conso_Anox_T1_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column Conso_Anox_T1_2
+		dataType: int64
+		formatString: 0
+		lineageTag: a178e579-f708-4f69-8e65-2ebf02429848
+		summarizeBy: sum
+		sourceColumn: Conso_Anox_T1_2
+
+		annotation SummarizationSetBy = Automatic
+
+	column Conso_Anox_T2_1
+		dataType: int64
+		formatString: 0
+		lineageTag: fd21c97b-8800-4d47-a964-4513e74b4fd6
+		summarizeBy: sum
+		sourceColumn: Conso_Anox_T2_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column Conso_Anox_T2_2
+		dataType: int64
+		formatString: 0
+		lineageTag: 8d2f2c82-ee01-4d68-b060-20a29d971249
+		summarizeBy: sum
+		sourceColumn: Conso_Anox_T2_2
+
+		annotation SummarizationSetBy = Automatic
+
+	column conso_compteur_anox
+		dataType: int64
+		formatString: 0
+		lineageTag: ba4e6a42-ab86-41e4-832b-208baf7ad78f
+		summarizeBy: sum
+		sourceColumn: conso_compteur_anox
+
+		annotation SummarizationSetBy = Automatic
+
+	column Conso_gas_Nm3
+		dataType: int64
+		formatString: 0
+		lineageTag: 3f19cbe5-aa47-42ec-a034-d2731da2db35
+		summarizeBy: sum
+		sourceColumn: Conso_gas_Nm3
+
+		annotation SummarizationSetBy = Automatic
+
+	column Conso_gas_m3
+		dataType: int64
+		formatString: 0
+		lineageTag: d2815aac-4f04-4f86-9c9b-e602bbacea56
+		summarizeBy: sum
+		sourceColumn: Conso_gas_m3
+
+		annotation SummarizationSetBy = Automatic
+
+	column Coel_conv_m3_Nm3
+		dataType: double
+		lineageTag: 6ea42a3c-c4b7-4c02-a33f-31ef65f69337
+		summarizeBy: sum
+		sourceColumn: Coel_conv_m3_Nm3
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Coef_conv_Nm_Kwh_PCS
+		dataType: double
+		lineageTag: 4e4ed887-caea-4c03-8892-7aaa4ec6c7d8
+		summarizeBy: sum
+		sourceColumn: Coef_conv_Nm_Kwh_PCS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Conso_gaz_kwh_PCI
+		dataType: double
+		lineageTag: 38e990ec-92da-4ffc-8c7b-a60801e08710
+		summarizeBy: sum
+		sourceColumn: Conso_gaz_kwh_PCI
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Conso_cogeneration_PCI
+		dataType: int64
+		formatString: 0
+		lineageTag: 8bde822e-744e-4d35-a91d-b9bbe91517b9
+		summarizeBy: sum
+		sourceColumn: Conso_cogeneration_PCI
+
+		annotation SummarizationSetBy = Automatic
+
+	column Conso_PAC_PCI
+		dataType: double
+		lineageTag: 7dd3804c-b2c9-41c8-94cb-1578241fd386
+		summarizeBy: sum
+		sourceColumn: Conso_PAC_PCI
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column COP_3_3
+		dataType: double
+		lineageTag: 5585e365-fab4-40fb-841b-c9bd415e79c3
+		summarizeBy: sum
+		sourceColumn: COP_3_3
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Conso_PAC_kwh_elec
+		dataType: int64
+		formatString: 0
+		lineageTag: bbc18418-cead-4b8b-8712-239c215a802f
+		summarizeBy: sum
+		sourceColumn: Conso_PAC_kwh_elec
+
+		annotation SummarizationSetBy = Automatic
+
+	column Conso_site_kwh_elec
+		dataType: int64
+		formatString: 0
+		lineageTag: 56c167b9-9d8a-44de-9902-d5d017e6709e
+		summarizeBy: sum
+		sourceColumn: Conso_site_kwh_elec
+
+		annotation SummarizationSetBy = Automatic
+
+	column conso_ventil_kwh_1
+		dataType: int64
+		formatString: 0
+		lineageTag: 8f81bf59-e527-4dfb-9c1a-b42c6776d30b
+		summarizeBy: sum
+		sourceColumn: conso_ventil_kwh_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column conso_ventil_kwh_2
+		dataType: int64
+		formatString: 0
+		lineageTag: 4ebe9e69-75fb-45cb-b9ec-6b972be9877f
+		summarizeBy: sum
+		sourceColumn: conso_ventil_kwh_2
+
+		annotation SummarizationSetBy = Automatic
+
+	column elec_kwh_ton_R2
+		dataType: double
+		lineageTag: 31f94420-1520-4f46-88b8-c358454bfb12
+		summarizeBy: sum
+		sourceColumn: elec_kwh_ton_R2
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Gas_kwh_pci_ton_R2
+		dataType: double
+		lineageTag: 2b8c2e09-75c4-46e6-aff8-e481b10efe8c
+		summarizeBy: sum
+		sourceColumn: Gas_kwh_pci_ton_R2
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PAC_kwh_pci_ton_R2
+		dataType: double
+		lineageTag: e748b10b-8ebd-4e72-a1ac-9f6345ef7098
+		summarizeBy: sum
+		sourceColumn: PAC_kwh_pci_ton_R2
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column coge_kwh_ton_R2
+		dataType: double
+		lineageTag: 117cad0c-8360-4d29-99d7-26800f784d10
+		summarizeBy: sum
+		sourceColumn: coge_kwh_ton_R2
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column total_thermique_kwht_R2
+		dataType: double
+		lineageTag: 18bc0ade-8bbb-4deb-9622-edf81eda94d6
+		summarizeBy: sum
+		sourceColumn: total_thermique_kwht_R2
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column total_energie_ton_R2
+		dataType: double
+		lineageTag: af712acb-26ed-4904-ad0f-830fa3268c86
+		summarizeBy: sum
+		sourceColumn: total_energie_ton_R2
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column elec_kwh_R3
+		dataType: double
+		lineageTag: f9125c6f-d2f1-44d1-86b3-c03d7db947d3
+		summarizeBy: sum
+		sourceColumn: elec_kwh_R3
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Gas_kwh_pci_ton_R3
+		dataType: double
+		lineageTag: a688316e-8b3e-47a1-b669-85f7e78d5135
+		summarizeBy: sum
+		sourceColumn: Gas_kwh_pci_ton_R3
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PAC_kwh_pci_ton_R3
+		dataType: double
+		lineageTag: 0d3e0a95-1533-40c5-823c-0f7a59867614
+		summarizeBy: sum
+		sourceColumn: PAC_kwh_pci_ton_R3
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column coge_kwh_pci_ton_R3
+		dataType: double
+		lineageTag: 89131d8f-1794-4504-a3ea-4ff874e787de
+		summarizeBy: sum
+		sourceColumn: coge_kwh_pci_ton_R3
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column total_thermique_ton_R3
+		dataType: double
+		lineageTag: eccf454a-4f61-4299-9712-91aa1a8f3975
+		summarizeBy: sum
+		sourceColumn: total_thermique_ton_R3
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column total_energie_ton_R3
+		dataType: double
+		lineageTag: e0bd4e22-6022-44bc-9d68-70484981b3a1
+		summarizeBy: sum
+		sourceColumn: total_energie_ton_R3
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Elec_touraille_kwh
+		dataType: int64
+		formatString: 0
+		lineageTag: 7b0d28f6-4280-4ba5-96aa-93dc4a40f941
+		summarizeBy: sum
+		sourceColumn: Elec_touraille_kwh
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gaz_par_touraille_kwh_PCI_ton
+		dataType: double
+		lineageTag: 37d899e0-0049-4ce2-8a1f-44d4777163c4
+		summarizeBy: sum
+		sourceColumn: Gaz_par_touraille_kwh_PCI_ton
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PAC_kwh_pci_ton_R2_1
+		dataType: double
+		lineageTag: 145d0c9c-a0e3-484d-98de-07ccb8e2839f
+		summarizeBy: sum
+		sourceColumn: PAC_kwh_pci_ton_R2_1
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column coge_kwh_ton_R2_2
+		dataType: double
+		lineageTag: 40066447-6792-40a9-8281-7f41dfe0f40c
+		summarizeBy: sum
+		sourceColumn: coge_kwh_ton_R2_2
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Elec_touraille_kwh_ton
+		dataType: double
+		lineageTag: 862a0a4a-67e5-4525-bf9b-8bce66872246
+		summarizeBy: sum
+		sourceColumn: Elec_touraille_kwh_ton
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column total_thermique
+		dataType: double
+		lineageTag: d96c761b-4811-4f16-8960-169017c7d4ec
+		summarizeBy: sum
+		sourceColumn: total_thermique
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column total_thermique_kwh_ton
+		dataType: double
+		lineageTag: 63cba660-8249-4814-98b9-09079f5ee8af
+		summarizeBy: sum
+		sourceColumn: total_thermique_kwh_ton
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column R2_sec
+		dataType: double
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 19cdded1-04fc-4d33-b564-3d0322ff51ee
+		summarizeBy: sum
+		sourceColumn: R2_sec
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Main table' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\E007012\OneDrive - InVivo\Bureau\CQU\Dash ernegie\export_dash_energie_main_table.xlsx"), null, true),
+				    #"export (15)_Sheet" = Source{[Item="export (15)",Kind="Sheet"]}[Data],
+				    #"En-têtes promus" = Table.PromoteHeaders(#"export (15)_Sheet", [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"plant", type text}, {"batch_number", type text}, {"name", type text}, {"production_line", Int64.Type}, {"kiln_unload_end_date", type datetimezone}, {"malt_R3", type number}, {"Malt_deculming_ton", type number}, {"Barley_tonnage", type number}, {"R2", type number}, {"budget_R3", type number}, {"obj_R3", type number}, {"obj_R2", type number}, {"Conso_Anox_T1_1", Int64.Type}, {"Conso_Anox_T1_2", Int64.Type}, {"Conso_Anox_T2_1", Int64.Type}, {"Conso_Anox_T2_2", Int64.Type}, {"conso_compteur_anox", Int64.Type}, {"Conso_gas_Nm3", Int64.Type}, {"Conso_gas_m3", Int64.Type}, {"Coel_conv_m3_Nm3", type number}, {"Coef_conv_Nm_Kwh_PCS", type number}, {"Conso_gaz_kwh_PCI", type number}, {"Conso_cogeneration_PCI", Int64.Type}, {"Conso_PAC_PCI", type number}, {"COP_3_3", type number}, {"Conso_PAC_kwh_elec", Int64.Type}, {"Conso_site_kwh_elec", Int64.Type}, {"conso_ventil_kwh_1", Int64.Type}, {"conso_ventil_kwh_2", Int64.Type}, {"elec_kwh_ton_R2", type number}, {"Gas_kwh_pci_ton_R2", type number}, {"PAC_kwh_pci_ton_R2", type number}, {"coge_kwh_ton_R2", type number}, {"total_thermique_kwht_R2", type number}, {"total_energie_ton_R2", type number}, {"elec_kwh_R3", type number}, {"Gas_kwh_pci_ton_R3", type number}, {"PAC_kwh_pci_ton_R3", type number}, {"coge_kwh_pci_ton_R3", type number}, {"total_thermique_ton_R3", type number}, {"total_energie_ton_R3", type number}, {"Elec_touraille_kwh", Int64.Type}, {"Gaz_par_touraille_kwh_PCI_ton", type number}, {"PAC_kwh_pci_ton_R2_1", type number}, {"coge_kwh_ton_R2_2", type number}, {"Elec_touraille_kwh_ton", type number}, {"total_thermique", type number}, {"total_thermique_kwh_ton", type number}}),
+				    #"Date extraite" = Table.TransformColumns(#"Type modifié",{{"kiln_unload_end_date", DateTime.Date, type date}}),
+				    #"Colonnes renommées" = Table.RenameColumns(#"Date extraite",{{"R2", "R2"}, {"malt_R3", "malt_R3"}})
+				in
+				    #"Colonnes renommées"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

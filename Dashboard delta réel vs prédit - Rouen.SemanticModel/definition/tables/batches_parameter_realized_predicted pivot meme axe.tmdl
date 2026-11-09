@@ -1,0 +1,160 @@
+table 'batches_parameter_realized_predicted pivot meme axe'
+	lineageTag: 3ae9d9c2-b529-442c-8120-0d66c48fd854
+
+	measure nb_valeur_prédites = "Nombre de valeur recommandée : " & IF(CALCULATE(COUNT('batches_parameter_realized_predicted pivot meme axe'[Attribut]),'batches_parameter_realized_predicted pivot meme axe'[Attribut]="Valeur Prédite")=0,0,CALCULATE(COUNT('batches_parameter_realized_predicted pivot meme axe'[Attribut]),'batches_parameter_realized_predicted pivot meme axe'[Attribut]="Valeur Prédite"))
+		lineageTag: cef2c5d9-ca57-498f-a6d1-9cf43d16e07f
+
+	measure nb_valeur_réelles = "Nombre de valeur réelle : " & if(CALCULATE(COUNT('batches_parameter_realized_predicted pivot meme axe'[Attribut]),'batches_parameter_realized_predicted pivot meme axe'[Attribut]="Valeur réelle")=0,0,CALCULATE(COUNT('batches_parameter_realized_predicted pivot meme axe'[Attribut]),'batches_parameter_realized_predicted pivot meme axe'[Attribut]="Valeur réelle"))
+		lineageTag: 6bfc0eff-0ce6-449e-91a3-35aa40e5eb96
+
+	measure texte_moyenne_delta = "En moyenne le delta entre les valeurs réelles et les valeurs recommandées sur cette sélection est de " & ROUND(CALCULATE(AVERAGE('batches_parameter_realized_predicted pivot meme axe'[Valeur]),'batches_parameter_realized_predicted pivot meme axe'[Attribut]="Realized_value")-CALCULATE(AVERAGE('batches_parameter_realized_predicted pivot meme axe'[Valeur]),'batches_parameter_realized_predicted pivot meme axe'[Attribut]="Predicted_value"),1)
+		lineageTag: c1023b12-0a54-47c9-80f6-976f87fa7409
+
+	column id_batch
+		dataType: string
+		lineageTag: cf9be3ef-879c-47a8-a54f-5580a246e5ff
+		summarizeBy: none
+		sourceColumn: id_batch
+
+		annotation SummarizationSetBy = Automatic
+
+	column batch_number
+		dataType: string
+		lineageTag: 1d396a9e-84a3-4e97-9976-7b085f9dcf45
+		summarizeBy: none
+		sourceColumn: batch_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column cahier_des_charges
+		dataType: string
+		lineageTag: 87f2748e-573d-4cff-abea-596e57739cb1
+		summarizeBy: none
+		sourceColumn: cahier_des_charges
+
+		annotation SummarizationSetBy = Automatic
+
+	column espece
+		dataType: string
+		lineageTag: 0e914e9d-087e-40d3-80ba-4cf4ef287629
+		summarizeBy: none
+		sourceColumn: espece
+
+		annotation SummarizationSetBy = Automatic
+
+	column production_type
+		dataType: string
+		lineageTag: 27f46fb8-368d-4b72-9666-4476d729b87a
+		summarizeBy: none
+		sourceColumn: production_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column duree_de_cycle
+		dataType: string
+		lineageTag: 2530ce99-151c-4e0e-88c8-4906c401d10c
+		summarizeBy: none
+		sourceColumn: duree_de_cycle
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_debut_production
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 0ec03d7b-8edc-42e2-b35e-19a7e2f99046
+		summarizeBy: none
+		sourceColumn: date_debut_production
+
+		variation Variation
+			isDefault
+			relationship: 3eb5c909-a9ca-454e-8ff4-b671087a6159
+			defaultHierarchy: LocalDateTable_a8378abf-7309-456a-9a19-1131ebc5669c.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column id_parameter_variable
+		dataType: int64
+		formatString: 0
+		lineageTag: 4aa42109-5d62-44f9-bf01-e578903bd657
+		summarizeBy: sum
+		sourceColumn: id_parameter_variable
+
+		annotation SummarizationSetBy = Automatic
+
+	column parameter
+		dataType: string
+		lineageTag: 2bffbc1c-9b5e-4f01-84ca-d113e49c25f1
+		summarizeBy: none
+		sourceColumn: parameter
+
+		annotation SummarizationSetBy = Automatic
+
+	column type
+		dataType: string
+		lineageTag: 17621ef4-9a5f-4c21-b022-0090915d23d8
+		summarizeBy: none
+		sourceColumn: type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Attribut
+		dataType: string
+		lineageTag: 9e6486fc-4f12-4313-8f54-de95d437773c
+		summarizeBy: none
+		sourceColumn: Attribut
+
+		annotation SummarizationSetBy = Automatic
+
+	column Valeur
+		dataType: double
+		formatString: 0
+		lineageTag: 0ae1506d-c738-4920-8c55-b46e147016b6
+		summarizeBy: sum
+		sourceColumn: Valeur
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column Index
+		dataType: int64
+		formatString: 0
+		lineageTag: 03034a4a-18c3-4211-96c9-b1d2b4972520
+		summarizeBy: sum
+		sourceColumn: Index
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'group ou valeur'
+		dataType: string
+		lineageTag: 896ced0d-c34e-4b98-8b4e-69bbdfcad802
+		summarizeBy: none
+		sourceColumn: group ou valeur
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'batches_parameter_realized_predicted pivot meme axe' = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\analy\Downloads\batches_parameter_realized_predicted.csv"),[Delimiter=",", Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"En-têtes promus" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Valeur remplacée" = Table.ReplaceValue(#"En-têtes promus",".",",",Replacer.ReplaceText,{"predicted_value", "realized_value", "delta_realized_predicted", "group_realized_value", "group_predicted_value"}),
+				    #"Type modifié" = Table.TransformColumnTypes(#"Valeur remplacée",{{"id_batch", type text}, {"batch_number", type text}, {"cahier_des_charges", type text}, {"espece", type text}, {"production_type", type text}, {"duree_de_cycle", type text}, {"date_debut_production", type date}, {"parameter", type text}, {"predicted_value", type number}, {"realized_value", type number}, {"delta_realized_predicted", type number}, {"id_parameter_variable", Int64.Type}, {"group_realized_value", type number}, {"group_predicted_value", type number}}),
+				    #"Colonnes supprimées" = Table.RemoveColumns(#"Type modifié",{"delta_realized_predicted"}),
+				    #"Supprimer le tableau croisé dynamique des autres colonnes1" = Table.UnpivotOtherColumns(#"Colonnes supprimées", {"id_batch", "batch_number", "cahier_des_charges", "espece", "production_type", "duree_de_cycle", "date_debut_production", "id_parameter_variable", "parameter", "type"}, "Attribut", "Valeur"),
+				    #"Duplication de la colonne" = Table.DuplicateColumn(#"Supprimer le tableau croisé dynamique des autres colonnes1", "Attribut", "Attribut - Copier"),
+				    #"Colonnes supprimées1" = Table.RemoveColumns(#"Duplication de la colonne",{"Attribut - Copier"}),
+				    #"Personnalisée ajoutée" = Table.AddColumn(#"Colonnes supprimées1", "group ou valeur", each if Text.StartsWith([Attribut], "group") then "group" else "valeur"),
+				    #"Index ajouté" = Table.AddIndexColumn(#"Personnalisée ajoutée", "Index", 0, 1, Int64.Type),
+				    #"Valeur remplacée1" = Table.ReplaceValue(#"Index ajouté","group_realized_value","Valeur réelle",Replacer.ReplaceText,{"Attribut"}),
+				    #"Valeur remplacée2" = Table.ReplaceValue(#"Valeur remplacée1","group_predicted_value","Valeur prédite",Replacer.ReplaceText,{"Attribut"})
+				in
+				    #"Valeur remplacée2"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+

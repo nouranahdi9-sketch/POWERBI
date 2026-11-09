@@ -1,0 +1,24 @@
+model Model
+	culture: fr-FR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: fr-FR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["batches_parameter_realized_predicted","batches_parameter_realized_predicted pivot","batches_parameter_realized_predicted pivot meme axe"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table batches_parameter_realized_predicted
+ref table DateTableTemplate_512571a9-77f2-45fe-b7be-3de796736112
+ref table LocalDateTable_dd81ac9d-35ef-40d5-b6a5-3dc45ac9606f
+ref table 'batches_parameter_realized_predicted pivot'
+ref table LocalDateTable_927dd965-56cb-4250-a252-40d96f373b4f
+ref table 'batches_parameter_realized_predicted pivot meme axe'
+ref table LocalDateTable_a8378abf-7309-456a-9a19-1131ebc5669c
+
+ref cultureInfo fr-FR
+

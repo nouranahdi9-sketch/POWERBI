@@ -1,0 +1,139 @@
+table dim_batches
+	lineageTag: ca14174a-39d3-43df-b29f-a4dcfe1adb1c
+
+	column id_batch
+		dataType: string
+		lineageTag: 5a264af9-e909-46ea-8e7f-d12403c8dd8c
+		summarizeBy: none
+		sourceColumn: id_batch
+
+		annotation SummarizationSetBy = Automatic
+
+	column batch_number
+		dataType: string
+		lineageTag: 303699a7-5c85-4ee8-806f-32f0230a9020
+		summarizeBy: none
+		sourceColumn: batch_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_plant_production_line
+		dataType: int64
+		formatString: 0
+		lineageTag: 0a0d702a-7f51-4c87-8adb-bc642f94441e
+		summarizeBy: none
+		sourceColumn: id_plant_production_line
+
+		annotation SummarizationSetBy = Automatic
+
+	column planned_datetime
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 409c7149-193c-40a7-8872-eb8a9e19c745
+		summarizeBy: none
+		sourceColumn: planned_datetime
+
+		variation Variation
+			isDefault
+			relationship: 9acd9aa3-ad6e-490c-bbc2-a6cf980712d7
+			defaultHierarchy: LocalDateTable_e93e00bd-0c12-4b83-8fe9-d767cd43e805.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 50f82e60-b486-4270-bcf9-232853c2b930
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 6ac9c4d5-6a8a-4b80-8b10-5c8e4f4926b7
+			defaultHierarchy: LocalDateTable_00ea64a2-c7c1-469e-8559-14bb42c76cad.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d02732bf-4b3d-4c08-afe7-df417592fdac
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: 1ae9a6f0-0df0-4386-8b64-0ef2c2876b12
+			defaultHierarchy: LocalDateTable_c3d0cfe4-b182-4cff-9459-bf847a8c15a4.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c4471503-2db3-4da3-94ee-fdced693bd14
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: bb2dedaf-abf1-4357-b48d-5c24e9e44850
+			defaultHierarchy: LocalDateTable_5e20ecf3-9a6a-47a1-9823-f574841ac572.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column production_line
+		dataType: string
+		lineageTag: cb01b971-185f-4b42-83ea-34fe805e981e
+		summarizeBy: none
+		sourceColumn: production_line
+
+		annotation SummarizationSetBy = Automatic
+
+	column Batch_number_Colors = ```
+			
+			'dim_batches'[batch_number] & 
+			IF(
+			    CALCULATE(
+			        MAX('fact_monitoring_auto_manual_entries'[flg_echec]), 
+			        ALLEXCEPT('dim_batches', 'dim_batches'[batch_number])
+			    ) = 1, 
+			    " (🔵)", 
+			    " (🟢)"
+			)
+			
+			```
+		lineageTag: 8cd4ab20-7e8d-43ab-add2-9e14174979d9
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column batch_creation_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 2f98cc5a-753d-4aec-8ea8-f845916e5157
+		summarizeBy: none
+		sourceColumn: batch_creation_date
+
+		variation Variation
+			isDefault
+			relationship: 71ddaf8a-c227-4dd1-bdc1-b114177f8dae
+			defaultHierarchy: LocalDateTable_dd74ca73-15cf-4934-a906-acab03412304.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_batches = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    recommendations_monitoring_Schema = mal_maite_bi_prd_Database{[Name="recommendations_monitoring",Kind="Schema"]}[Data],
+				    dim_batches_Table = recommendations_monitoring_Schema{[Name="dim_batches",Kind="Table"]}[Data]
+				in
+				    dim_batches_Table
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

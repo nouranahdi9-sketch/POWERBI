@@ -1,0 +1,144 @@
+table dim_features_constraint
+	lineageTag: dcd2a76c-61a1-43ac-93d1-1cdfa6373205
+
+	column section
+		dataType: string
+		lineageTag: f5f60016-1d2b-46ac-9bef-659c8d0ae90a
+		summarizeBy: none
+		sourceColumn: section
+
+		annotation SummarizationSetBy = Automatic
+
+	column features
+		dataType: string
+		lineageTag: 876412f9-590d-4762-a573-03a788cabc91
+		summarizeBy: none
+		sourceColumn: features
+
+		annotation SummarizationSetBy = Automatic
+
+	column description
+		dataType: string
+		lineageTag: 6ecad074-7cd8-4240-87a8-8176ebbe6657
+		summarizeBy: none
+		sourceColumn: description
+
+		annotation SummarizationSetBy = Automatic
+
+	column borne_min
+		dataType: double
+		lineageTag: 53421f61-f385-4698-8ce8-901d5fc51818
+		summarizeBy: sum
+		sourceColumn: borne_min
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column borne_max
+		dataType: double
+		lineageTag: adcbf850-81c6-4ddf-b5a2-a168b06096ad
+		summarizeBy: sum
+		sourceColumn: borne_max
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column columns
+		dataType: string
+		lineageTag: e47a42d0-2666-4556-ab87-eb5e4a646cc7
+		summarizeBy: none
+		sourceColumn: columns
+
+		annotation SummarizationSetBy = Automatic
+
+	column condition
+		dataType: string
+		lineageTag: 777418c3-95b5-4c97-af09-f435ab75461b
+		summarizeBy: none
+		sourceColumn: condition
+
+		annotation SummarizationSetBy = Automatic
+
+	column prd_line
+		dataType: string
+		lineageTag: b6de4ea1-337b-43fd-ac71-1c6dd09a26a6
+		summarizeBy: none
+		sourceColumn: prd_line
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8e9be06c-0d1d-433f-b273-533ba1eee23b
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: c5ab9caf-87ae-495f-af98-799c447d586e
+			defaultHierarchy: LocalDateTable_f5c5cb57-f1cc-4003-b939-9dba879a76b1.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 25f68db3-897d-4d27-8b70-eba050609cd8
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: 8cd34934-3d9d-4ac0-b7ba-ee1d612c152d
+			defaultHierarchy: LocalDateTable_4e8a68a3-69b3-41a1-9317-98148e07163a.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 5f9107e8-e15f-41f3-b567-edf9597fe353
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: cb59cbf7-fa60-48c6-9b66-422f38e908c2
+			defaultHierarchy: LocalDateTable_08d96a65-f271-435e-9304-f87488b31f84.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column goods_specy
+		dataType: string
+		lineageTag: 0ee6a782-598e-4aeb-a1fc-2ac75f659525
+		summarizeBy: none
+		sourceColumn: goods_specy
+
+		annotation SummarizationSetBy = Automatic
+
+	column production_type
+		dataType: string
+		lineageTag: 1e11c3ee-2225-4ce6-9563-101fb17cadd5
+		summarizeBy: none
+		sourceColumn: production_type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_features_constraint = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    parameters_Schema = mal_maite_bi_prd_Database{[Name="parameters",Kind="Schema"]}[Data],
+				    dim_features_constraint_Table = parameters_Schema{[Name="dim_features_constraint",Kind="Table"]}[Data]
+				in
+				    dim_features_constraint_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

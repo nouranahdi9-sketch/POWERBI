@@ -1,0 +1,20 @@
+relationship 55833f96-ab6e-5718-221e-4a308dcdef9a
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Main table'.kiln_unload_end_date
+	toColumn: Calendrier.kiln_unload_end_date_day_fr
+
+relationship 88896c5c-9743-4ca0-9ea2-f1aff8c2c3bf
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Budget.Mois-année
+	toColumn: LocalDateTable_6650a361-784e-4920-af55-e382d8ff23b6.Date
+
+relationship c2d0d1fe-4fff-4135-8f9a-5eff90cad902
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Calendrier.kiln_unload_end_date_day_fr
+	toColumn: LocalDateTable_538b1913-85eb-4bc9-a915-37ea445f8a18.Date
+
+relationship e599e395-4a5e-eeb8-f271-7f71280766ff
+	crossFilteringBehavior: bothDirections
+	fromColumn: Calendrier.kiln_unload_end_date_Month_fr
+	toColumn: Budget.Mois-année
+

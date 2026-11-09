@@ -1,0 +1,87 @@
+table Calendrier
+	lineageTag: 195ffa59-b675-4f81-a60a-1bb82f140522
+
+	column kiln_unload_end_date_Year
+		dataType: string
+		formatString: Whole number
+		lineageTag: 80227f60-34c3-432e-a7e2-93268dd880ae
+		summarizeBy: none
+		sourceColumn: kiln_unload_end_date_Year
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column kiln_unload_end_date_day_fr
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: f838ad33-633e-4d22-bd5f-be151f401a9c
+		summarizeBy: none
+		sourceColumn: kiln_unload_end_date_day_fr
+
+		variation Variation
+			isDefault
+			relationship: c2d0d1fe-4fff-4135-8f9a-5eff90cad902
+			defaultHierarchy: LocalDateTable_538b1913-85eb-4bc9-a915-37ea445f8a18.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column kiln_unload_end_date_Month_fr
+		dataType: dateTime
+		formatString: mmmm yyyy
+		lineageTag: bb6f9fff-6505-4861-b7d4-f6eb6d78779e
+		summarizeBy: none
+		sourceColumn: kiln_unload_end_date_Month_fr
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column Month_eng = ```
+			
+			FORMAT('Calendrier'[kiln_unload_end_date_Month_fr], "mmmm yyyy", "en-US")
+			
+			
+			```
+		lineageTag: ba749489-fb5f-4d4d-96f8-d30ecb6409ec
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column day_eng = ```
+			
+			FORMAT('Calendrier'[kiln_unload_end_date_day_fr], "mmmm dd yyyy", "en-US")
+			
+			```
+		lineageTag: 00c6afb0-9f99-4cb5-a89a-da5fcd95059e
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Calendrier = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\E007012\OneDrive - InVivo\Bureau\CQU\Dash ernegie\Calendrier_2.xlsx"), null, true),
+				    #"export (22)_Sheet" = Source{[Item="export (43)",Kind="Sheet"]}[Data],
+				    #"En-têtes promus" = Table.PromoteHeaders(#"export (22)_Sheet", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"En-têtes promus",{{"kiln_unload_end_date_day_fr", type date}}),
+				    #"Removed Blank Rows" = Table.SelectRows(#"Changed Type", each not List.IsEmpty(List.RemoveMatchingItems(Record.FieldValues(_), {"", null}))),
+				    #"Removed Blank Rows1" = Table.SelectRows(#"Removed Blank Rows", each not List.IsEmpty(List.RemoveMatchingItems(Record.FieldValues(_), {"", null}))),
+				    #"Removed Blank Rows2" = Table.SelectRows(#"Removed Blank Rows1", each not List.IsEmpty(List.RemoveMatchingItems(Record.FieldValues(_), {"", null}))),
+				    #"Removed Blank Rows3" = Table.SelectRows(#"Removed Blank Rows2", each not List.IsEmpty(List.RemoveMatchingItems(Record.FieldValues(_), {"", null}))),
+				    #"Removed Errors" = Table.RemoveRowsWithErrors(#"Removed Blank Rows3"),
+				    #"Removed Alternate Rows" = Table.AlternateRows(#"Removed Errors",62,1,69),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Removed Alternate Rows",{{"kiln_unload_end_date_Month_fr", type date}}),
+				    #"Extracted Date" = Table.TransformColumns(#"Changed Type1",{})
+				in
+				    #"Extracted Date"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

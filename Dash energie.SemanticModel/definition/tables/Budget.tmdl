@@ -1,0 +1,565 @@
+table Budget
+	lineageTag: 2ecc6c6f-e537-4523-8c04-e84bf0f08796
+
+	measure Baseline_avg_Thermal_total_ByMonth =
+			
+			CALCULATE(
+			    AVERAGE('Main table'[total_thermique]),
+			    REMOVEFILTERS('Main table'[batch_number]),
+			    VALUES('Calendrier'[kiln_unload_end_date_Month_fr]),
+			    VALUES('Calendrier'[kiln_unload_end_date_Year])
+			)
+		lineageTag: a34ec986-3a1f-4ca9-9368-24019274af2b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Baseline_avg_Elec_total_ByMonth = ```
+			
+			CALCULATE(
+			    AVERAGE('Main table'[elec_kwh_ton_R2]),
+			    REMOVEFILTERS('Main table'[batch_number]),
+			    VALUES('Calendrier'[kiln_unload_end_date_Month_fr]),
+			    VALUES('Calendrier'[kiln_unload_end_date_Year])
+			)
+			
+			
+			```
+		lineageTag: d8741040-de03-4734-93cb-1a439ac1c741
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Moyenne_courbe_gauss_gas = ```
+			AVERAGE('Main table'[Gaz_par_touraille_kwh_PCI_ton])
+			
+			```
+		lineageTag: fb4391c5-0ded-4b81-973c-d90584e0eacd
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Ecart_Type_courbe_gauss_gas = STDEV.P('Main table'[Gaz_par_touraille_kwh_PCI_ton])
+		lineageTag: 974ad243-d636-4d7f-8957-36c55d55005e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Ecart_Type_courbe_gauss_elec = STDEV.P('Main table'[Elec_touraille_kwh_ton])
+		lineageTag: 3d6cd903-5645-43b6-b090-36f2088c57a2
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Moyenne_courbe_gauss_elec = AVERAGE('Main table'[Elec_touraille_kwh_ton])
+		lineageTag: 049215e9-602f-405b-bb9c-311c8f305888
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure x+30_gas = [Moyenne_courbe_gauss_gas]+3*[Ecart_Type_courbe_gauss_gas]
+		lineageTag: 7369ed42-8e5c-4c5f-b7fe-cc1eefa7adce
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure x-30_gas = [Moyenne_courbe_gauss_gas]-3*[Ecart_Type_courbe_gauss_gas]
+		lineageTag: 0d0846bb-62b2-4445-9137-244f00c0396f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Seuil_Top15_Gaz = ```
+			
+			CALCULATE(
+			    PERCENTILE.EXC('Main table'[Gaz_par_touraille_kwh_PCI_ton], 0.15)
+			)
+			
+			```
+		lineageTag: f7dac312-78a5-45d8-aa36-568b18de1d85
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure x-30_elec = [Moyenne_courbe_gauss_elec]-3*[Ecart_Type_courbe_gauss_elec]
+		lineageTag: b0dcdac0-b491-4c26-addf-04a6c5ee5612
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure x+30_elec = [Moyenne_courbe_gauss_elec]+3*[Ecart_Type_courbe_gauss_elec]
+		lineageTag: 88075f6d-4569-4e12-98fb-0e97a1c5f9a5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Seuil_Top15_elec =
+			
+			CALCULATE(
+			    PERCENTILE.EXC('Main table'[Elec_touraille_kwh_ton], 0.15)
+			)
+		lineageTag: 802381c8-b5ae-4fdf-bfe6-b199f20055d2
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Diff_gas = [Seuil_Top15_Gaz] -[Moyenne_courbe_gauss_gas]
+		lineageTag: 05965d26-b71c-4dad-a6ab-8412e8990ee8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Diff_elec = [Seuil_Top15_elec] -[Moyenne_courbe_gauss_elec]
+		lineageTag: 12dee28b-9bd7-4d47-ae8d-91de790b4747
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'NORMAL DISTRIBUTION gas bis' =
+			
+			var minvalue=Floor([x-30_gas],1)
+			var maxvalue=Floor([x+30_gas],1)
+			return
+			SELECTCOLUMNS(CALENDAR(minvalue,maxvalue),"X_gas",int([Date]))
+		formatString: 0
+		lineageTag: 1fd06081-005c-480a-a596-c7d1f9a6be3c
+
+	measure f(x)_gas_bis = ```
+			
+			EXP(
+			    ( [NORMAL DISTRIBUTION gas bis] - [Moyenne_courbe_gauss_gas] )^2 / 
+			    (2 * [Ecart_Type_courbe_gauss_gas]^2) * -1
+			) /
+			SQRT(2 * PI() * [Ecart_Type_courbe_gauss_gas])
+			
+			
+			```
+		lineageTag: d2f800b0-3a22-4a2c-b505-e60fa14fe995
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Courbe_Gauss_Gas = ```
+			
+			VAR X_gas = SELECTEDVALUE('NORMAL DISTRIBUTION gas'[X_gas])
+			RETURN
+			    IF(
+			        X_gas >= [x-30_gas] && X_gas <= [x+30_gas],
+			        EXP(
+			            ((X_gas - [Moyenne_courbe_gauss_gas])^2) / 
+			            (2 * ([Ecart_Type_courbe_gauss_gas]^2)) * -1
+			        ) / SQRT(2 * PI() * [Ecart_Type_courbe_gauss_gas]),
+			        BLANK()
+			    )
+			
+			```
+		lineageTag: 4a5cf929-7fda-48dc-9e9c-7e0a12b364a1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure gauss_gas_main_table =
+			
+			var X = SELECTEDVALUE('NORMAL DISTRIBUTION gas'[X_gas])
+			return NORM.DIST(X, [Moyenne_courbe_gauss_gas], [Ecart_Type_courbe_gauss_gas], FALSE())
+		lineageTag: b4e53f76-7f98-46ce-8b5b-5c0a43f380b2
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure gauss_elec_main_table =
+			
+			var X = SELECTEDVALUE('NORMAL DISTRIBUTION elec'[X_elec])
+			return NORM.DIST(X, [Moyenne_courbe_gauss_elec], [Ecart_Type_courbe_gauss_elec], FALSE())
+		lineageTag: 346a6e02-af81-4cb5-8b42-de38d552ff3f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure day_eng = ```
+			
+			FORMAT('Calendrier'[kiln_unload_end_date_day_fr], "mmmm yyyy", "en-US")
+			
+			```
+		lineageTag: 42a0841d-5f38-45bb-bf60-a06a9eb7ef2f
+
+	measure Conso_Moyenne_Thermique = ```
+			AVERAGE('Main table'[total_thermique_kwht_R2])
+			
+			```
+		lineageTag: e34f0e03-8b89-4270-8206-3a1f1287dba8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Budget_Thermique = ```
+			AVERAGE('Budget'[thermique])
+			
+			```
+		lineageTag: 2abac858-3e6e-4b3c-9320-192b876dcbcf
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Max_Jauge_Thermique = ```
+			
+			MAX([Conso_Moyenne_Thermique], Budget[Budget_Thermique]) * 1.5
+			
+			```
+		lineageTag: 9de8385a-2b07-493a-9647-2e7cd8688333
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Conso_Moyenne_Elec = ```
+			AVERAGE('Main table'[elec_kwh_ton_R2])
+			
+			
+			
+			```
+		lineageTag: 534bf58b-9947-423f-bf73-749e5ca647b3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Max_Jauge_Elec = ```
+			
+			MAX([Conso_Moyenne_Elec], [Budget_Elec]) * 1.2
+			
+			```
+		lineageTag: b044e7a3-f8cd-4008-9231-6f52c0a5ec99
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Budget_Elec = ```
+			AVERAGE('Main table'[elec_kwh_ton_R2])
+			
+			```
+		lineageTag: 1a800e6a-4951-40a2-8ade-8b76216974be
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Evolution_Elec_vs_Budget = ```
+			
+			VAR Moyenne_Conso_Elec = AVERAGE('Main Table'[elec_kwh_ton_R2])
+			VAR Moyenne_Budget_Elec = AVERAGE(Budget[Electricité])
+			VAR Ecart_Reel = Moyenne_Conso_Elec - Moyenne_Budget_Elec
+			VAR Taux_Evolution = DIVIDE(Ecart_Reel, Moyenne_Budget_Elec, 0)
+			RETURN 
+			    "vs budget " & FORMAT(Ecart_Reel, "0.0") & "   (" & FORMAT(Taux_Evolution, "0.0%)")
+			     
+			
+			
+			```
+		lineageTag: 96a87023-9b26-4436-8e97-7bed2e7308ae
+
+	measure Evolution_gas_vs_Budget = ```
+			
+			VAR Moyenne_Conso_gas = AVERAGE('Main table'[Gas_kwh_pci_ton_R2])
+			VAR Moyenne_Budget_gas = AVERAGE(Budget[GAZ PCS])
+			VAR Ecart_Reel = Moyenne_Conso_gas - Moyenne_Budget_gas
+			VAR Taux_Evolution = DIVIDE(Ecart_Reel, Moyenne_Budget_gas, 0)
+			RETURN 
+			    "vs budget " & FORMAT(Ecart_Reel, "0.0") & "   (" & FORMAT(Taux_Evolution, "0.0%)")
+			     
+			
+			```
+		lineageTag: a4e018d2-4106-4b8f-943a-aba11393bb0e
+
+	measure Evolution_Ventil_vs_Min_Year = ```
+			
+			VAR Moyenne_Conso_Ventil = AVERAGE('Main Table'[conso_ventil_kwh_1]) 
+			VAR Top15_Conso_Ventil_Year = 
+			    AVERAGEX(
+			        TOPN(
+			            15,
+			            CALCULATETABLE(
+			                'Main Table',
+			                ALL('Main Table'),
+			                VALUES('Calendrier'[kiln_unload_end_date_Year]) -- Filtrage sur l'année
+			            ),
+			            'Main Table'[conso_ventil_kwh_1], ASC
+			        ),
+			        'Main Table'[conso_ventil_kwh_1]
+			    )
+			VAR Ecart_Reel = Moyenne_Conso_Ventil - Top15_Conso_Ventil_Year
+			VAR Taux_Evolution = DIVIDE(Ecart_Reel, Top15_Conso_Ventil_Year, 0)
+			RETURN 
+			    "vs top 15 perf. " & FORMAT(Ecart_Reel, "0.0") & "   (" & FORMAT(Taux_Evolution, "0.0%)") 
+			    
+			
+			```
+		lineageTag: 447abd4f-093f-4878-ab5d-e5f687c127fe
+
+	measure Evolution_Ventil2_vs_Min_Year = ```
+			
+			VAR Moyenne_Conso_Ventil2 = AVERAGE('Main Table'[conso_ventil_kwh_2]) 
+			VAR Top15_Conso_Ventil_Year = 
+			    AVERAGEX(
+			        TOPN(
+			            15,
+			            CALCULATETABLE(
+			                'Main Table',
+			                ALL('Main Table'),
+			                VALUES('Calendrier'[kiln_unload_end_date_Year]) -- Filtrage sur l'année
+			            ),
+			            'Main Table'[conso_ventil_kwh_1], ASC
+			        ),
+			        'Main Table'[conso_ventil_kwh_1]
+			    )
+			VAR Ecart_Reel = Moyenne_Conso_Ventil2 - Top15_Conso_Ventil_Year
+			VAR Taux_Evolution = DIVIDE(Ecart_Reel, Top15_Conso_Ventil_Year, 0)
+			RETURN 
+			    "vs top 15 perf. " & FORMAT(Ecart_Reel, "0.0") & "   (" & FORMAT(Taux_Evolution, "0.0%)") 
+			    
+			
+			```
+		lineageTag: 51b2f704-c882-4229-ad8b-3733be6aedbf
+
+	measure Evolution_gaskiln_vs_top15 = ```
+			
+			VAR Moyenne_Conso_gas_kiln = AVERAGE('Main table'[Gaz_par_touraille_kwh_PCI_ton]) 
+			VAR Top15_Conso_gaskiln_Year = 
+			    AVERAGEX(
+			        TOPN(
+			            15,
+			            CALCULATETABLE(
+			                'Main Table',
+			                ALL('Main Table'),
+			                VALUES('Calendrier'[kiln_unload_end_date_Year]) -- Filtrage sur l'année
+			            ),
+			            'Main Table'[Gaz_par_touraille_kwh_PCI_ton], ASC
+			        ),
+			        'Main Table'[Gaz_par_touraille_kwh_PCI_ton]
+			    )
+			VAR Ecart_Reel = Moyenne_Conso_gas_kiln - Top15_Conso_gaskiln_Year 
+			VAR Taux_Evolution = DIVIDE(Ecart_Reel, Top15_Conso_gaskiln_Year, 0)
+			RETURN 
+			    "vs top 15 perf. " & FORMAT(Ecart_Reel, "0.0") & "   (" & FORMAT(Taux_Evolution, "0.0%)") 
+			    
+			
+			```
+		lineageTag: d139c4ac-c639-423c-b276-fc23a446552c
+
+	measure Evolution_eleckiln_vs_top15 = ```
+			
+			VAR Moyenne_Conso_elec_kiln = AVERAGE('Main table'[Elec_touraille_kwh_ton]) 
+			VAR Top15_Conso_eleckiln_Year = 
+			    AVERAGEX(
+			        TOPN(
+			            15,
+			            CALCULATETABLE(
+			                'Main Table',
+			                ALL('Main Table'),
+			                VALUES('Calendrier'[kiln_unload_end_date_Year]) -- Filtrage sur l'année
+			            ),
+			            'Main Table'[Elec_touraille_kwh_ton], ASC
+			        ),
+			        'Main Table'[Elec_touraille_kwh_ton]
+			    )
+			VAR Ecart_Reel = Moyenne_Conso_elec_kiln - Top15_Conso_eleckiln_Year 
+			VAR Taux_Evolution = DIVIDE(Ecart_Reel, Top15_Conso_eleckiln_Year, 0)
+			RETURN 
+			    "vs top 15 perf. " & FORMAT(Ecart_Reel, "0.0") & "   (" & FORMAT(Taux_Evolution, "0.0%)") 
+			    
+			
+			```
+		lineageTag: c09b5b38-6d5c-4f4d-91c6-8b900c9ae026
+
+	measure Evolution_pac_vs_Budget = ```
+			
+			VAR Moyenne_Conso_pac = AVERAGE('Main table'[PAC_kwh_pci_ton_R2])
+			VAR Moyenne_Budget_pac = AVERAGE(Budget[PAC])
+			VAR Ecart_Reel = Moyenne_Conso_pac - Moyenne_Budget_pac
+			VAR Taux_Evolution = DIVIDE(Ecart_Reel, Moyenne_Budget_pac, 0)
+			RETURN 
+			    "vs budget " & FORMAT(Ecart_Reel, "0.0") & "   (" & FORMAT(Taux_Evolution, "0.0%)")
+			     
+			
+			```
+		lineageTag: 66e8afd6-a7dc-467e-9b47-86d14c670fe7
+
+	measure Moyenne_Somme_Conso_Ventil = ```
+			
+			AVERAGEX(
+			    'Main table',
+			    'Main table'[conso_ventil_kwh_1] + 'Main table'[conso_ventil_kwh_2]
+			)
+			
+			```
+		lineageTag: 29650981-22fc-4492-8ea9-9cd1fa2a45ca
+
+		extendedProperty MeasureTemplate =
+				{
+				  "version": 0,
+				  "daxTemplateName": "MathematicalAddition"
+				}
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Evolution_Elec_vs_Budget_ecart_reel = ```
+			
+			VAR Moyenne_Conso_Elec = AVERAGE('Main Table'[elec_kwh_ton_R2])
+			VAR Moyenne_Budget_Elec = AVERAGE(Budget[Electricité])
+			VAR Ecart_Reel = Moyenne_Conso_Elec - Moyenne_Budget_Elec
+			RETURN 
+			    FORMAT(Ecart_Reel, "0.0")
+			     
+			
+			```
+		lineageTag: c17d2320-2769-4f47-8b50-b1e40de096bf
+
+	measure Evolution_Elec_vs_Budget_ecart_% = ```
+			
+			VAR Moyenne_Conso_Elec = AVERAGE('Main Table'[elec_kwh_ton_R2])
+			VAR Moyenne_Budget_Elec = AVERAGE(Budget[Electricité])
+			VAR Ecart_Reel = Moyenne_Conso_Elec - Moyenne_Budget_Elec
+			VAR Taux_Evolution = DIVIDE(Ecart_Reel, Moyenne_Budget_Elec, 0)
+			RETURN 
+			    FORMAT(Taux_Evolution, "0.0%")
+			    
+			```
+		lineageTag: 3a7f283f-1376-45d4-af10-0c9fa296b621
+
+	measure Evolution_gas_vs_Budget_ecart_% = ```
+			
+			VAR Moyenne_Conso_Gas = AVERAGE('Main table'[Gas_kwh_pci_ton_R2])
+			VAR Moyenne_Budget_Gas = AVERAGE(Budget[GAZ PCS])
+			VAR Ecart_Reel = Moyenne_Conso_Gas - Moyenne_Budget_Gas
+			VAR Taux_Evolution = DIVIDE(Ecart_Reel, Moyenne_Budget_Gas, 0)
+			RETURN 
+			    FORMAT(Taux_Evolution, "0.0%")
+			    
+			```
+		lineageTag: 24c46150-6bc5-4910-81c8-95e6a95ab48f
+
+	measure Evolution_gas_vs_Budget_ecart_reel = ```
+			
+			VAR Moyenne_Conso_Gas = AVERAGE('Main table'[Gas_kwh_pci_ton_R2])
+			VAR Moyenne_Budget_Gas = AVERAGE(Budget[GAZ PCS])
+			VAR Ecart_Reel = Moyenne_Conso_Gas - Moyenne_Budget_Gas
+			VAR Taux_Evolution = DIVIDE(Ecart_Reel, Moyenne_Budget_Gas, 0)
+			RETURN 
+			    FORMAT(Ecart_Reel, "0.0")
+			    
+			```
+		lineageTag: f87ce8af-301a-4b13-a9b0-2208e8766d56
+
+	measure Evolution_PAC_vs_Budget_ecart_% = ```
+			
+			VAR Moyenne_Conso_PAC = AVERAGE('Main table'[PAC_kwh_pci_ton_R2])
+			VAR Moyenne_Budget_PAC = AVERAGE(Budget[PAC])
+			VAR Ecart_Reel = Moyenne_Conso_PAC - Moyenne_Budget_PAC
+			VAR Taux_Evolution = DIVIDE(Ecart_Reel, Moyenne_Budget_PAC, 0)
+			RETURN 
+			    FORMAT(Taux_Evolution, "0.0%")
+			    
+			```
+		lineageTag: 481060b5-4311-4b08-9c2f-845e47d1cb81
+
+	measure Evolution_PAC_vs_Budget_ecart_reel = ```
+			
+			VAR Moyenne_Conso_PAC = AVERAGE('Main table'[PAC_kwh_pci_ton_R2])
+			VAR Moyenne_Budget_PAC = AVERAGE(Budget[PAC])
+			VAR Ecart_Reel = Moyenne_Conso_PAC - Moyenne_Budget_PAC
+			VAR Taux_Evolution = DIVIDE(Ecart_Reel, Moyenne_Budget_PAC, 0)
+			RETURN 
+			    FORMAT(Ecart_Reel, "0.0")
+			```
+		lineageTag: 9b56185e-2fb8-485d-9d78-6008cafdfdcb
+
+	measure Evolution_coge_vs_Budget_ecart_% = ```
+			
+			VAR Moyenne_Conso_Coge = AVERAGE('Main table'[coge_kwh_ton_R2])
+			VAR Moyenne_Budget_Coge = AVERAGE(Budget[Cogé])
+			VAR Ecart_Reel = Moyenne_Conso_Coge- Moyenne_Budget_Coge
+			VAR Taux_Evolution = DIVIDE(Ecart_Reel, Moyenne_Budget_Coge, 0)
+			RETURN 
+			    FORMAT(Taux_Evolution, "0.0%")
+			```
+		lineageTag: 6b5189f5-7787-490b-a0a9-fec3f942432a
+
+	measure Evolution_Coge_vs_Budget_ecart_reel = ```
+			
+			VAR Moyenne_Conso_Coge = AVERAGE('Main table'[coge_kwh_ton_R2])
+			VAR Moyenne_Budget_Coge = AVERAGE(Budget[Cogé])
+			VAR Ecart_Reel = Moyenne_Conso_Coge - Moyenne_Budget_Coge
+			VAR Taux_Evolution = DIVIDE(Ecart_Reel, Moyenne_Budget_Coge, 0)
+			RETURN 
+			    FORMAT(Ecart_Reel, "0.0")
+			```
+		lineageTag: a07a940f-5385-4c76-b22b-b7a076cba323
+
+	column 'GAZ PCS'
+		dataType: double
+		lineageTag: 5a398ef4-2880-48d6-8e8b-6ecd2ce5da55
+		summarizeBy: sum
+		sourceColumn: GAZ PCS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PAC
+		dataType: int64
+		formatString: 0
+		lineageTag: 8be08a1f-a309-4016-b1ad-26a03ea1b329
+		summarizeBy: sum
+		sourceColumn: PAC
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cogé
+		dataType: int64
+		formatString: 0
+		lineageTag: a8af1080-da10-4ca1-b0a8-92e74d147e47
+		summarizeBy: sum
+		sourceColumn: Cogé
+
+		annotation SummarizationSetBy = Automatic
+
+	column thermique
+		dataType: double
+		lineageTag: 95876a44-915f-48ee-94f5-7593b58d384b
+		summarizeBy: sum
+		sourceColumn: thermique
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Electricité
+		dataType: int64
+		formatString: 0
+		lineageTag: 93fe34e4-a948-492f-864c-f44c197a0c1f
+		summarizeBy: sum
+		sourceColumn: Electricité
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Total Energie'
+		dataType: double
+		lineageTag: f38ac519-0d0b-4c73-8153-85fd91ec806b
+		summarizeBy: sum
+		sourceColumn: Total Energie
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Mois-année
+		dataType: dateTime
+		formatString: mmmm yyyy
+		lineageTag: e5e35bfc-e2de-4b56-af58-9a2262adf35b
+		summarizeBy: none
+		sourceColumn: Mois-année
+
+		variation Variation
+			isDefault
+			relationship: 88896c5c-9743-4ca0-9ea2-f1aff8c2c3bf
+			defaultHierarchy: LocalDateTable_6650a361-784e-4920-af55-e382d8ff23b6.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	partition Budget = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\E007012\OneDrive - InVivo\Bureau\CQU\Dash ernegie\table_budget_2.xlsx"), null, true),
+				    Sheet1_Sheet = Source{[Item="Sheet1",Kind="Sheet"]}[Data],
+				    #"En-têtes promus" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"Mois-année", type date}, {"GAZ PCS", type number}, {"PAC", Int64.Type}, {"Cogé", Int64.Type}, {"thermique", type number}, {"Electricité", Int64.Type}, {"Total Energie", type number}}),
+				    #"Removed Blank Rows" = Table.SelectRows(#"Type modifié", each not List.IsEmpty(List.RemoveMatchingItems(Record.FieldValues(_), {"", null}))),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Removed Blank Rows",{{"Mois-année", type date}}),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Changed Type",{"Total Energie", "Electricité", "thermique", "Cogé", "PAC", "GAZ PCS", "Mois-année"})
+				in
+				    #"Removed Other Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

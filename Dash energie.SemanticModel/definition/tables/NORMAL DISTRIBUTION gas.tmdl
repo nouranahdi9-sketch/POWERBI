@@ -1,0 +1,49 @@
+table 'NORMAL DISTRIBUTION gas'
+	lineageTag: 9b688384-1976-4a17-81e2-19eecf62862d
+
+	column Z_gas = ```
+			('NORMAL DISTRIBUTION gas'[X_gas] - [Moyenne_courbe_gauss_gas]) / [Ecart_Type_courbe_gauss_gas]
+			
+			```
+		formatString: 0.00000
+		lineageTag: 5f6025bf-e8c9-4f92-a1b5-2d52954c0647
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column f(x)_gas = ```
+			
+			EXP(
+			    ( 'NORMAL DISTRIBUTION gas'[X_gas] - [Moyenne_courbe_gauss_gas] )^2 / 
+			    (2 * [Ecart_Type_courbe_gauss_gas]^2) * -1
+			) /
+			SQRT(2 * PI() * [Ecart_Type_courbe_gauss_gas])
+			
+			
+			```
+		formatString: 0.00000000000000
+		lineageTag: 8093fd39-b9a6-49c7-9e2b-f07b43756fae
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column X_gas
+		formatString: 0
+		lineageTag: 51f81ad2-cf79-4fe8-b121-2e2d0ecd6c11
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [X_gas]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'NORMAL DISTRIBUTION gas' = calculated
+		mode: import
+		source =
+				
+				var minvalue=Floor([x-30_gas],1)
+				var maxvalue=Floor([x+30_gas],1)
+				return
+				SELECTCOLUMNS(CALENDAR(minvalue,maxvalue),"X_gas",int([Date]))
+
+	annotation PBI_Id = 9baf1077192547d5a71266d7b2e0f7b8
+

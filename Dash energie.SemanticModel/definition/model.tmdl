@@ -1,0 +1,25 @@
+model Model
+	culture: fr-FR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-150
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["Budget","Main table","Calendrier"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table DateTableTemplate_f3f44efe-3b58-4389-a3a7-46a2e9566c46
+ref table Budget
+ref table 'Main table'
+ref table Calendrier
+ref table 'NORMAL DISTRIBUTION gas'
+ref table 'NORMAL DISTRIBUTION elec'
+ref table LocalDateTable_6650a361-784e-4920-af55-e382d8ff23b6
+ref table LocalDateTable_538b1913-85eb-4bc9-a915-37ea445f8a18
+
+ref cultureInfo fr-FR
+

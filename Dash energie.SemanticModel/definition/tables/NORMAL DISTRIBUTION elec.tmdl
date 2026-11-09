@@ -1,0 +1,39 @@
+table 'NORMAL DISTRIBUTION elec'
+	lineageTag: 67368146-b27b-46eb-9297-7a35ffd87410
+
+	column X_elec
+		formatString: 0
+		lineageTag: 5b8ef204-b602-4dc8-b4da-5633ef4b20c1
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [X_elec]
+
+		annotation SummarizationSetBy = Automatic
+
+	column f(x)_elec = ```
+			
+			EXP(
+			    ( 'NORMAL DISTRIBUTION elec'[X_elec] - [Moyenne_courbe_gauss_elec] )^2 / 
+			    (2 * [Ecart_Type_courbe_gauss_elec]^2) * -1
+			) /
+			SQRT(2 * PI() * [Ecart_Type_courbe_gauss_elec])
+			
+			```
+		lineageTag: 44c9823f-887a-450b-b05a-4bc45ab5de46
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'NORMAL DISTRIBUTION elec' = calculated
+		mode: import
+		source =
+				
+				var minvalue=Floor([x-30_elec],1)
+				var maxvalue=Floor([x+30_elec],1)
+				return
+				SELECTCOLUMNS(CALENDAR(minvalue,maxvalue),"X_elec",int([Date]))
+
+	annotation PBI_Id = 74eeb259179347d8bc3aa4edc67d1c4c
+

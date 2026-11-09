@@ -1,0 +1,53 @@
+relationship 2cd51e88-7183-461c-a166-255c170a3a16
+	joinOnDateBehavior: datePartOnly
+	fromColumn: delta_realized_recommended.date_debut_production
+	toColumn: LocalDateTable_dd81ac9d-35ef-40d5-b6a5-3dc45ac9606f.Date
+
+relationship b9da6a36-73a4-4b53-bac3-8d75cbfbab1b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'delta_realized_recommended pivot'.date_debut_production
+	toColumn: LocalDateTable_927dd965-56cb-4250-a252-40d96f373b4f.Date
+
+relationship 3eb5c909-a9ca-454e-8ff4-b671087a6159
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'delta_realized_recommended pivot meme axe'.date_debut_production
+	toColumn: LocalDateTable_a8378abf-7309-456a-9a19-1131ebc5669c.Date
+
+relationship AutoDetected_e9556661-292c-4b77-9a8d-fb512100c0e4
+	fromColumn: 'delta_realized_recommended pivot'.id_recommendation_production
+	toColumn: delta_realized_recommended.id_recommendation_production
+
+relationship AutoDetected_693cc32c-e471-47ee-be36-1bc6b52f8b64
+	fromColumn: 'delta_realized_recommended pivot meme axe'.id_recommendation_production
+	toColumn: delta_realized_recommended.id_recommendation_production
+
+relationship bd4449fa-ee7a-4c40-aea8-7b63533adc6a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: delta_realized_recommended.created_at
+	toColumn: LocalDateTable_43c5fda8-d429-4179-9207-97e8894c9a35.Date
+
+relationship 97cc5bfe-3fe0-4931-8a7d-cdb49c87010b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: delta_realized_recommended.updated_at
+	toColumn: LocalDateTable_db1ee444-243f-44fa-8ac7-5fb6daafe8c4.Date
+
+relationship d5e86a36-e113-4d2c-93f4-2170562bb8ab
+	joinOnDateBehavior: datePartOnly
+	fromColumn: delta_realized_recommended.deleted_at
+	toColumn: LocalDateTable_2cb6163e-3ce0-488e-a341-5752c511d557.Date
+
+relationship a46e6235-47f3-4fbe-9199-d8285f6fe22e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: delta_realized_recommended.calculation_date
+	toColumn: LocalDateTable_48f5492a-bd82-4909-8c68-7673ee601c42.Date
+
+relationship 4e6ef7fa-dc29-4b0b-b14a-c657e4ba2f88
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'delta_realized_recommended pivot'.calculation_date
+	toColumn: LocalDateTable_ceb5252d-5e04-4ac1-bf79-7b179695a3c8.Date
+
+relationship 76736f04-b958-477b-95da-c13227481048
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'delta_realized_recommended pivot meme axe'.calculation_date
+	toColumn: LocalDateTable_040cf8df-a4a8-4d74-99be-18c425871332.Date
+

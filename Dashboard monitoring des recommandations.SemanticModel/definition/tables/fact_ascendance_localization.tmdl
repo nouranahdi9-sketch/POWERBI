@@ -1,0 +1,269 @@
+table fact_ascendance_localization
+	lineageTag: 2dcab0fe-8cd1-4a82-b424-6b40ffb0e151
+
+	measure BatchsAvecMesureNegatives_v2 = ```
+			
+			COUNTROWS (
+			    SUMMARIZE (
+			        FILTER (
+			            fact_ascendance_localization,
+			            fact_ascendance_localization[measure_value] < 0
+			        ),
+			        fact_ascendance_localization[batch_id],
+			        fact_ascendance_localization[measure_name]
+			    )
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 2fa62519-f02c-4178-911e-aa96837388fc
+
+	measure NbrMesuresNulle_v2 = ```
+			
+			SUMX(
+			    VALUES(fact_ascendance_localization[batch_id]),
+			    COUNTROWS(
+			        DISTINCT(
+			            SELECTCOLUMNS(
+			                FILTER(
+			                    fact_ascendance_localization,
+			                    ISBLANK(fact_ascendance_localization[measure_value]) &&
+			                    fact_ascendance_localization[batch_id] = EARLIER(fact_ascendance_localization[batch_id])
+			                ),
+			                "measure_name", fact_ascendance_localization[measure_name]
+			            )
+			        )
+			    )
+			)
+			
+			```
+		formatString: 0
+		lineageTag: e5d9e322-79b5-4dbf-8c15-e0ab45ea92c2
+
+	measure NbrMesuresNulles_V2 = ```
+			
+			SUMX(
+			    VALUES(fact_ascendance_localization[batch_id]),
+			    COUNTROWS(
+			        DISTINCT(
+			            SELECTCOLUMNS(
+			                FILTER(
+			                    fact_ascendance_localization,
+			                    ISBLANK(fact_ascendance_localization[measure_value]) &&
+			                    fact_ascendance_localization[batch_id] = EARLIER(fact_ascendance_localization[batch_id])
+			                ),
+			                "measure_name", fact_ascendance_localization[measure_name]
+			            )
+			        )
+			    )
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 2c12c71e-29fd-42f0-a6fd-8234be40b97b
+
+	column batch_id
+		dataType: string
+		lineageTag: c387e74c-d03d-43c4-9c86-78b908708038
+		summarizeBy: none
+		sourceColumn: batch_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column prd_workshop
+		dataType: string
+		lineageTag: 9f95e4a8-764b-4818-9488-30bc18c59c33
+		summarizeBy: none
+		sourceColumn: prd_workshop
+
+		annotation SummarizationSetBy = Automatic
+
+	column prd_cell
+		dataType: int64
+		formatString: 0
+		lineageTag: e008bd19-9c53-470d-a44f-0325874d1a72
+		summarizeBy: sum
+		sourceColumn: prd_cell
+
+		annotation SummarizationSetBy = Automatic
+
+	column measure_calculation_datetime
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 85ab8031-c193-467a-9bd8-cf943c77af58
+		summarizeBy: none
+		sourceColumn: measure_calculation_datetime
+
+		variation Variation
+			isDefault
+			relationship: 49e100ff-715a-4358-bb24-e3022d9f3720
+			defaultHierarchy: LocalDateTable_8b9664f1-dbb3-4a03-b6c1-4dccb68962ef.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column measure_name
+		dataType: string
+		lineageTag: 83cc5a21-02b8-439f-b5fc-889a7d0f7a3b
+		summarizeBy: none
+		sourceColumn: measure_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column measure_value
+		dataType: double
+		lineageTag: 97c27862-9042-408b-a01c-5499d2529f54
+		summarizeBy: sum
+		sourceColumn: measure_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column tagname
+		dataType: string
+		lineageTag: 53227384-d9a3-4eed-b1e7-48b7c4e677a0
+		summarizeBy: none
+		sourceColumn: tagname
+
+		annotation SummarizationSetBy = Automatic
+
+	column calculation_interval_after
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 4fbf3bf5-296d-40a3-a02b-c1c4adbfd0fe
+		summarizeBy: none
+		sourceColumn: calculation_interval_after
+
+		variation Variation
+			isDefault
+			relationship: ebb7314c-0f52-46c6-bc3a-63057097d0d3
+			defaultHierarchy: LocalDateTable_9da11d81-348f-4d52-b16c-e0434fa6fee4.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column mean_occurrences
+		dataType: double
+		lineageTag: 5315c2e3-b5e3-4e77-8d0c-08c01399ee91
+		summarizeBy: sum
+		sourceColumn: mean_occurrences
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column map_hour_occurrences
+		dataType: string
+		lineageTag: 26c3e7ed-bc73-4d31-a77f-e7950604211f
+		summarizeBy: none
+		sourceColumn: map_hour_occurrences
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_missing_occurrences
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: f4c8b502-877a-47f5-8c5e-dbf11ba93bc6
+		summarizeBy: none
+		sourceColumn: is_missing_occurrences
+
+		annotation SummarizationSetBy = Automatic
+
+	column target_localization
+		dataType: string
+		lineageTag: 2c39dfff-245d-4db6-a48e-f01bf53e6a1a
+		summarizeBy: none
+		sourceColumn: target_localization
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: db43de34-a5cf-4cfc-b838-9216cc417230
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 4a86c6b5-47f1-4784-8a26-d49fad26f0ac
+			defaultHierarchy: LocalDateTable_be03101a-7f1f-4130-b096-908d04f16b52.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 94428923-db0e-454f-890f-b413ea6b00d1
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: 5d37038c-4c14-49cb-9543-18c8ebc1c749
+			defaultHierarchy: LocalDateTable_b49529b2-5ca2-43bd-ab42-6d6e4f2ff141.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: b628cc1a-7c59-4d3c-8083-6ec67ce60684
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: c16e2123-6890-4589-b062-196872f4201d
+			defaultHierarchy: LocalDateTable_ca4e2b46-bfaf-4027-b87c-2a524b6b9cfd.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column production_line
+		dataType: string
+		lineageTag: 9974c681-8e6b-4cea-ba0a-296721488804
+		summarizeBy: none
+		sourceColumn: production_line
+
+		annotation SummarizationSetBy = Automatic
+
+	column localizations_used
+		dataType: string
+		lineageTag: 297549b2-ba4b-4148-9885-c7525add7e2b
+		summarizeBy: none
+		sourceColumn: localizations_used
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_late
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: f7b5432b-7bd6-4692-af4e-30292f4c8c83
+		summarizeBy: none
+		sourceColumn: is_late
+
+		annotation SummarizationSetBy = Automatic
+
+	column calculation_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 6129aa1a-a3c6-45aa-ae46-6861c3e4f1d4
+		summarizeBy: none
+		sourceColumn: calculation_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition fact_ascendance_localization = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    recommendations_monitoring_Schema = mal_maite_bi_prd_Database{[Name="recommendations_monitoring",Kind="Schema"]}[Data],
+				    fact_ascendance_localization_Table = recommendations_monitoring_Schema{[Name="fact_ascendance_localization",Kind="Table"]}[Data]
+				in
+				    fact_ascendance_localization_Table
+
+	annotation PBI_ResultType = Table
+

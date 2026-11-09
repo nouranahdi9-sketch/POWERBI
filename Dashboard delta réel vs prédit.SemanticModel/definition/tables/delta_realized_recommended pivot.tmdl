@@ -1,0 +1,283 @@
+table 'delta_realized_recommended pivot'
+	lineageTag: ef12d162-ff55-43bb-907e-492cd0b3d152
+
+	column id_batch
+		dataType: string
+		lineageTag: 8c6e500a-04c5-4200-86f3-57430b9ab271
+		summarizeBy: none
+		sourceColumn: id_batch
+
+		annotation SummarizationSetBy = Automatic
+
+	column batch_number
+		dataType: string
+		lineageTag: cbb794ff-d4e8-4db3-a816-fa6b64f74e26
+		summarizeBy: none
+		sourceColumn: batch_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column cahier_des_charges
+		dataType: string
+		lineageTag: 9ce90c1a-b415-4452-9096-845b23c4559d
+		summarizeBy: none
+		sourceColumn: cahier_des_charges
+
+		annotation SummarizationSetBy = Automatic
+
+	column espece
+		dataType: string
+		lineageTag: 40f863e9-4ac6-4c97-b925-e924afaec0e1
+		summarizeBy: none
+		sourceColumn: espece
+
+		annotation SummarizationSetBy = Automatic
+
+	column production_type
+		dataType: string
+		lineageTag: eb033bc5-6397-4792-a605-c80a87c5d4e8
+		summarizeBy: none
+		sourceColumn: production_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column duree_de_cycle
+		dataType: string
+		lineageTag: fe335c7c-b791-4c5d-bd12-bc851196c284
+		summarizeBy: none
+		sourceColumn: duree_de_cycle
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_debut_production
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 7fff9311-2a19-4273-aa00-46a4d78217e4
+		summarizeBy: none
+		sourceColumn: date_debut_production
+
+		variation Variation
+			isDefault
+			relationship: b9da6a36-73a4-4b53-bac3-8d75cbfbab1b
+			defaultHierarchy: LocalDateTable_927dd965-56cb-4250-a252-40d96f373b4f.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column id_parameter_variable
+		dataType: int64
+		formatString: 0
+		lineageTag: 1b3aa75e-b14b-49cc-97d0-0f096144cdde
+		summarizeBy: sum
+		sourceColumn: id_parameter_variable
+
+		annotation SummarizationSetBy = Automatic
+
+	column Attribut
+		dataType: string
+		lineageTag: 79ba5e06-cadc-44cd-aaaa-8a8a641168fc
+		summarizeBy: none
+		sourceColumn: Attribut
+
+		annotation SummarizationSetBy = Automatic
+
+	column Valeur
+		dataType: double
+		lineageTag: 70aeb9aa-3ee9-4395-932a-e17ac81ef750
+		summarizeBy: sum
+		sourceColumn: Valeur
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation __PBI_SemanticLinks = [{"LinkTarget":{"TableName":"delta_realized_recommended pivot","TableItemName":"Valeur (compartiments)","ObjectType":4},"LinkType":"UsedInGroup"}]
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Valeur (compartiments)' = ```
+			VAR __Count = 12
+			
+			VAR __Min = MIN('delta_realized_recommended pivot'[Valeur])
+			
+			VAR __Max = MAX('delta_realized_recommended pivot'[Valeur])
+			
+			VAR __Difference = (__Max - __Min)
+			
+			VAR __Size = IF(__Difference > 0, __Difference / __Count, 1)
+			
+			VAR __BinNumber = 
+				IF(
+					ISBLANK('delta_realized_recommended pivot'[Valeur]),
+					BLANK(),
+					ROUNDDOWN(('delta_realized_recommended pivot'[Valeur] - __Min) / __Size, 0)
+				)
+			
+			RETURN
+				IF(
+					ISBLANK('delta_realized_recommended pivot'[Valeur]),
+					BLANK(),
+					__Min + (MIN(__BinNumber, __Count - 1) * __Size)
+				)
+			```
+		lineageTag: 9e7b39c4-9fbe-43fa-a00c-2aa88369ec2e
+		summarizeBy: none
+
+		extendedProperty GroupingMetadata =
+				{
+				  "version": 0,
+				  "groupedColumns": [
+				    {
+				      "Column": {
+				        "Expression": {
+				          "SourceRef": {
+				            "Entity": "delta_realized_recommended pivot"
+				          }
+				        },
+				        "Property": "Valeur"
+				      }
+				    }
+				  ]
+				}
+
+		annotation GroupingDesignState = {"Version":0,"Sources":[{"Name":"b","Entity":"delta_realized_recommended pivot"}],"GroupedColumns":[{"Column":{"Expression":{"SourceRef":{"Source":"b"}},"Property":"Valeur"}}],"BinItem":{"Expression":{"Member":{"Expression":{"Discretize":{"Expression":{"Column":{"Expression":{"SourceRef":{"Source":"b"}},"Property":"Valeur"}},"Count":12}},"Member":"Min"}}}}
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Index
+		dataType: int64
+		formatString: 0
+		lineageTag: 4b3da9ad-5559-44f6-9f42-80b794dd0984
+		summarizeBy: sum
+		sourceColumn: Index
+
+		annotation SummarizationSetBy = Automatic
+
+	column type
+		dataType: string
+		lineageTag: ad40772e-e027-4431-817a-6d337a5fd592
+		summarizeBy: none
+		sourceColumn: type
+
+		annotation SummarizationSetBy = Automatic
+
+	column production_line
+		dataType: int64
+		formatString: 0
+		lineageTag: ec7d15f6-7eda-4bc1-b2c3-70ba304592ba
+		summarizeBy: sum
+		sourceColumn: production_line
+
+		annotation SummarizationSetBy = Automatic
+
+	column site_production
+		dataType: string
+		lineageTag: bed7eb5a-55d2-48a8-94b4-8f1edac487af
+		summarizeBy: none
+		sourceColumn: site_production
+		sortByColumn: production_line
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column parameter_variable
+		dataType: string
+		lineageTag: b02ceb73-46f5-4aa4-9318-67ae91612ee0
+		summarizeBy: none
+		sourceColumn: parameter_variable
+
+		annotation SummarizationSetBy = Automatic
+
+	column campagne
+		dataType: int64
+		formatString: 0
+		lineageTag: 972f9005-2359-410a-a6d6-8e2f941e203a
+		summarizeBy: sum
+		sourceColumn: campagne
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_recommendation
+		dataType: string
+		lineageTag: 582b4e2d-daf6-431a-b44c-5761d3c361e4
+		summarizeBy: none
+		sourceColumn: id_recommendation
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_target_localization
+		dataType: int64
+		formatString: 0
+		lineageTag: 442124ba-475b-4c00-b153-ce550525de62
+		summarizeBy: sum
+		sourceColumn: id_target_localization
+
+		annotation SummarizationSetBy = Automatic
+
+	column target_localization
+		dataType: string
+		lineageTag: bd10f6c3-5228-41c0-bc2a-7cf38301b391
+		summarizeBy: none
+		sourceColumn: target_localization
+
+		annotation SummarizationSetBy = Automatic
+
+	column calculation_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 3ee76ac4-656d-46c9-a696-9948f956ca4e
+		summarizeBy: none
+		sourceColumn: calculation_date
+
+		variation Variation
+			isDefault
+			relationship: 4e6ef7fa-dc29-4b0b-b14a-c657e4ba2f88
+			defaultHierarchy: LocalDateTable_ceb5252d-5e04-4ac1-bf79-7b179695a3c8.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_recommendation_production
+		dataType: int64
+		formatString: 0
+		lineageTag: 925e1faa-de85-4d40-ae34-25c31e6557c2
+		summarizeBy: none
+		sourceColumn: id_recommendation_production
+
+		annotation SummarizationSetBy = Automatic
+
+	column process_activity
+		dataType: string
+		lineageTag: ba25757d-a8b3-48cd-bc25-3f19d7d48f49
+		summarizeBy: none
+		sourceColumn: process_activity
+
+		annotation SummarizationSetBy = Automatic
+
+	column unit
+		dataType: string
+		lineageTag: 844169fa-d648-4145-958c-a024adaaec44
+		summarizeBy: none
+		sourceColumn: unit
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'delta_realized_recommended pivot' = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    parameters_Schema = mal_maite_bi_prd_Database{[Name="parameters",Kind="Schema"]}[Data],
+				    fact_delta_realized_recommended_Table = parameters_Schema{[Name="fact_delta_realized_recommended",Kind="Table"]}[Data],
+				    #"Colonnes supprimées" = Table.RemoveColumns(fact_delta_realized_recommended_Table,{"group_recommended_value", "group_realized_value", "delta_realized_recommended", "created_at", "updated_at", "deleted_at"}),
+				    #"Tableau croisé dynamique des colonnes supprimé" = Table.UnpivotOtherColumns(#"Colonnes supprimées", {"id_batch", "batch_number", "production_line", "site_production", "cahier_des_charges", "espece", "production_type", "duree_de_cycle", "date_debut_production", "id_parameter_variable", "parameter_variable","type", "id_recommendation", "id_target_localization", "target_localization", "id_recommendation_production", "campagne", "process_activity", "unit", "calculation_date"}, "Attribut", "Valeur"),
+				    #"Index ajouté" = Table.AddIndexColumn(#"Tableau croisé dynamique des colonnes supprimé", "Index", 0, 1, Int64.Type)
+				in
+				    #"Index ajouté"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

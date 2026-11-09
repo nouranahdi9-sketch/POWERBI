@@ -1,0 +1,92 @@
+table dim_target_localization
+	lineageTag: 2245dbdf-4700-4073-8889-ee75b30a0b70
+
+	column sequence
+		dataType: int64
+		formatString: 0
+		lineageTag: a5b1220d-97ca-4688-9d8a-8336eb6a3dab
+		summarizeBy: sum
+		sourceColumn: sequence
+
+		annotation SummarizationSetBy = Automatic
+
+	column code
+		dataType: string
+		lineageTag: a3c57efa-ccd5-4220-80ad-f9b04d4a8a1a
+		summarizeBy: none
+		sourceColumn: code
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_parameter_localization
+		dataType: int64
+		formatString: 0
+		lineageTag: 78089f76-5a9c-406c-989e-a4a75a9b8284
+		summarizeBy: none
+		sourceColumn: id_parameter_localization
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: edfff370-2f97-4d51-92f5-5e80e396359a
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 8150d897-c9d9-4c12-b58b-2f4caf173f79
+			defaultHierarchy: LocalDateTable_5c23be31-0b90-4857-8657-64a162d62398.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 2db5723f-9d7d-4688-a2f5-631a12e84cfb
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: dedac98d-4b81-4596-9fab-d1ef315645a0
+			defaultHierarchy: LocalDateTable_b37a3194-c89e-4313-88c0-064683aebf31.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 87d251ba-5a07-410d-b302-d3d9646c0df4
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 0aae05e4-8fcc-46d1-bc67-88e3f921850c
+			defaultHierarchy: LocalDateTable_7a7e9a9c-3419-4804-a0ae-9db4dd44ce84.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column target_localization
+		dataType: string
+		lineageTag: 356dbcc8-a01c-4622-b471-105a5f5fafb7
+		summarizeBy: none
+		sourceColumn: target_localization
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_target_localization = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    recommendations_monitoring_Schema = mal_maite_bi_prd_Database{[Name="recommendations_monitoring",Kind="Schema"]}[Data],
+				    dim_target_localization_Table = recommendations_monitoring_Schema{[Name="dim_target_localization",Kind="Table"]}[Data]
+				in
+				    dim_target_localization_Table
+
+	annotation PBI_ResultType = Table
+

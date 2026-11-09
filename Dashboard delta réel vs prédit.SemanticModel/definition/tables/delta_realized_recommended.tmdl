@@ -1,0 +1,366 @@
+table delta_realized_recommended
+	lineageTag: 4f3cf615-d25c-40ff-b9be-61152961fc64
+
+	measure 'texte_moy._delta' = "En moyenne le delta entre les valeurs réelles et les valeurs recommandées sur cette sélection est de " & ROUND(AVERAGE(delta_realized_recommended[realized_value])-AVERAGE(delta_realized_recommended[recommended_value]),1)
+		lineageTag: 571c7bfe-0115-4d89-b0ed-7780165ab73e
+
+	measure nb_valeur_réelle = "Nombre de valeur réelle : " & IF(COUNT(delta_realized_recommended[realized_value]) = 0,0,COUNT(delta_realized_recommended[realized_value]))
+		lineageTag: 8a97af40-78e5-4482-ac6d-e74b66b10d08
+
+	measure nb_valeur_prédite = "Nombre de valeur recommandée : " & IF(COUNT(delta_realized_recommended[recommended_value]) = 0,0,COUNT(delta_realized_recommended[recommended_value]))
+		lineageTag: b5902fb0-27d3-4805-9dca-ed0602b5f97a
+
+	column id_batch
+		dataType: string
+		lineageTag: 5ca34166-f365-455c-bca2-fbb29930972f
+		summarizeBy: none
+		sourceColumn: id_batch
+
+		annotation SummarizationSetBy = Automatic
+
+	column batch_number
+		dataType: string
+		lineageTag: 43091ae6-c77d-4e8c-ab8c-80580fcb0fa4
+		summarizeBy: none
+		sourceColumn: batch_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column cahier_des_charges
+		dataType: string
+		lineageTag: 4ea3e5f7-891a-4637-aa21-c99c01654bdf
+		summarizeBy: none
+		sourceColumn: cahier_des_charges
+
+		annotation SummarizationSetBy = Automatic
+
+	column espece
+		dataType: string
+		lineageTag: 9d204528-ba03-4bea-a143-8ed5e1cf5667
+		summarizeBy: none
+		sourceColumn: espece
+
+		annotation SummarizationSetBy = Automatic
+
+	column production_type
+		dataType: string
+		lineageTag: 1f2d8710-f9d0-4531-bb8e-13d4f164f039
+		summarizeBy: none
+		sourceColumn: production_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column duree_de_cycle
+		dataType: string
+		lineageTag: 70ad024c-73a3-4cb3-9a70-b4c716f8c20a
+		summarizeBy: none
+		sourceColumn: duree_de_cycle
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_debut_production
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 4972acd1-80dd-4f97-b901-1dfb19091141
+		summarizeBy: none
+		sourceColumn: date_debut_production
+
+		variation Variation
+			isDefault
+			relationship: 2cd51e88-7183-461c-a166-255c170a3a16
+			defaultHierarchy: LocalDateTable_dd81ac9d-35ef-40d5-b6a5-3dc45ac9606f.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column realized_value
+		dataType: double
+		lineageTag: cbfc1ef9-04bc-47c0-bd14-f1c5e32583ba
+		summarizeBy: sum
+		sourceColumn: realized_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+		annotation __PBI_SemanticLinks = [{"LinkTarget":{"TableName":"delta_realized_recommended","TableItemName":"realized_value (compartiments)","ObjectType":4},"LinkType":"UsedInGroup"}]
+
+	column id_parameter_variable
+		dataType: int64
+		formatString: 0
+		lineageTag: 34c2398e-81dc-4b7a-8096-44dbbdc13d1b
+		summarizeBy: sum
+		sourceColumn: id_parameter_variable
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'realized_value (compartiments)' = ```
+			VAR __Count = 12
+			
+			VAR __Min = MIN('delta_realized_recommended'[realized_value])
+			
+			VAR __Max = MAX('delta_realized_recommended'[realized_value])
+			
+			VAR __Difference = (__Max - __Min)
+			
+			VAR __Size = IF(__Difference > 0, __Difference / __Count, 1)
+			
+			VAR __BinNumber = 
+				IF(
+					ISBLANK('delta_realized_recommended'[realized_value]),
+					BLANK(),
+					ROUNDDOWN(('delta_realized_recommended'[realized_value] - __Min) / __Size, 0)
+				)
+			
+			RETURN
+				IF(
+					ISBLANK('delta_realized_recommended'[realized_value]),
+					BLANK(),
+					__Min + (MIN(__BinNumber, __Count - 1) * __Size)
+				)
+			```
+		lineageTag: 6093af19-9e68-4c86-8825-9022fef6d0ca
+		summarizeBy: none
+
+		extendedProperty GroupingMetadata =
+				{
+				  "version": 0,
+				  "groupedColumns": [
+				    {
+				      "Column": {
+				        "Expression": {
+				          "SourceRef": {
+				            "Entity": "delta_realized_recommended"
+				          }
+				        },
+				        "Property": "realized_value"
+				      }
+				    }
+				  ]
+				}
+
+		annotation GroupingDesignState = {"Version":0,"Sources":[{"Name":"b","Entity":"delta_realized_recommended"}],"GroupedColumns":[{"Column":{"Expression":{"SourceRef":{"Source":"b"}},"Property":"realized_value"}}],"BinItem":{"Expression":{"Member":{"Expression":{"Discretize":{"Expression":{"Column":{"Expression":{"SourceRef":{"Source":"b"}},"Property":"realized_value"}},"Count":12}},"Member":"Min"}}}}
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column type
+		dataType: string
+		lineageTag: d0e873d9-a043-4b9a-87b6-28d74e3e09ca
+		summarizeBy: none
+		sourceColumn: type
+
+		annotation SummarizationSetBy = Automatic
+
+	column group_realized_value
+		dataType: int64
+		formatString: 0
+		lineageTag: 8311427b-c536-4e3d-b45a-591c6be8d030
+		summarizeBy: sum
+		sourceColumn: group_realized_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column site_production
+		dataType: string
+		lineageTag: f7c41ccb-99e1-4f94-b42c-5169fac54f69
+		summarizeBy: none
+		sourceColumn: site_production
+		sortByColumn: production_line
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column production_line
+		dataType: int64
+		formatString: 0
+		lineageTag: 1382b8f9-247c-429a-b4c2-86a671041a89
+		summarizeBy: sum
+		sourceColumn: production_line
+
+		annotation SummarizationSetBy = Automatic
+
+	column process_activity
+		dataType: string
+		lineageTag: 6fe1aaf9-da37-460a-811d-90789cd15324
+		summarizeBy: none
+		sourceColumn: process_activity
+
+		annotation SummarizationSetBy = Automatic
+
+	column campagne
+		dataType: int64
+		formatString: 0
+		lineageTag: 10b473ec-3698-4887-9e84-d6aacfbc8557
+		summarizeBy: sum
+		sourceColumn: campagne
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_recommendation
+		dataType: string
+		lineageTag: 28a6247f-594f-4248-970b-61bc0bf6f114
+		summarizeBy: none
+		sourceColumn: id_recommendation
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_target_localization
+		dataType: int64
+		formatString: 0
+		lineageTag: 1817eebf-0aff-446a-858c-42a1722415cc
+		summarizeBy: sum
+		sourceColumn: id_target_localization
+
+		annotation SummarizationSetBy = Automatic
+
+	column target_localization
+		dataType: string
+		lineageTag: a91a08df-31a7-4f8c-ad19-c49530d44833
+		summarizeBy: none
+		sourceColumn: target_localization
+
+		annotation SummarizationSetBy = Automatic
+
+	column calculation_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f195f751-8fa8-4aec-afba-feb9b5d6c7ad
+		summarizeBy: none
+		sourceColumn: calculation_date
+
+		variation Variation
+			isDefault
+			relationship: a46e6235-47f3-4fbe-9199-d8285f6fe22e
+			defaultHierarchy: LocalDateTable_48f5492a-bd82-4909-8c68-7673ee601c42.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_recommendation_production
+		dataType: int64
+		formatString: 0
+		lineageTag: 9323a6da-6b55-4907-a8a4-8e13c9c39079
+		summarizeBy: none
+		sourceColumn: id_recommendation_production
+
+		annotation SummarizationSetBy = Automatic
+
+	column parameter_variable
+		dataType: string
+		lineageTag: 8a4ae111-717f-42fe-95ee-9eea30f95743
+		summarizeBy: none
+		sourceColumn: parameter_variable
+
+		annotation SummarizationSetBy = Automatic
+
+	column recommended_value
+		dataType: double
+		lineageTag: 32b5fa1a-1ed6-4111-b50c-bbc4a9fd2dee
+		summarizeBy: sum
+		sourceColumn: recommended_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column unit
+		dataType: string
+		lineageTag: d72aa109-818f-4625-a3c9-a805dcddbb80
+		summarizeBy: none
+		sourceColumn: unit
+
+		annotation SummarizationSetBy = Automatic
+
+	column group_recommended_value
+		dataType: int64
+		formatString: 0
+		lineageTag: a49bdb94-e788-475d-b4dc-8a7d0e7b98f6
+		summarizeBy: sum
+		sourceColumn: group_recommended_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column delta_realized_recommended
+		dataType: double
+		lineageTag: a2797c69-c392-48e6-ad43-d04e6836f725
+		summarizeBy: sum
+		sourceColumn: delta_realized_recommended
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 5b3bc14e-a8b6-4ce8-95cd-6ca393ab836e
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: bd4449fa-ee7a-4c40-aea8-7b63533adc6a
+			defaultHierarchy: LocalDateTable_43c5fda8-d429-4179-9207-97e8894c9a35.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 0f02ea7e-b93b-448b-b86c-8131ff42376d
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: 97cc5bfe-3fe0-4931-8a7d-cdb49c87010b
+			defaultHierarchy: LocalDateTable_db1ee444-243f-44fa-8ac7-5fb6daafe8c4.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 9130b4b6-1dc7-44d4-ac4f-b61791974a0c
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: d5e86a36-e113-4d2c-93f4-2170562bb8ab
+			defaultHierarchy: LocalDateTable_2cb6163e-3ce0-488e-a341-5752c511d557.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column delta_percent_realized_recommended
+		dataType: double
+		lineageTag: 54d8a590-70f9-4507-945c-044110761614
+		summarizeBy: sum
+		sourceColumn: delta_percent_realized_recommended
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition delta_realized_recommended = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    parameters_Schema = mal_maite_bi_prd_Database{[Name="parameters",Kind="Schema"]}[Data],
+				    fact_delta_realized_recommended_Table = parameters_Schema{[Name="fact_delta_realized_recommended",Kind="Table"]}[Data]
+				in
+				    fact_delta_realized_recommended_Table
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

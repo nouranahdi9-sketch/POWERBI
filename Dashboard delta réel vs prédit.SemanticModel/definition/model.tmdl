@@ -1,0 +1,30 @@
+model Model
+	culture: fr-FR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: fr-FR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["delta_realized_recommended","delta_realized_recommended pivot","delta_realized_recommended pivot meme axe"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table delta_realized_recommended
+ref table DateTableTemplate_512571a9-77f2-45fe-b7be-3de796736112
+ref table LocalDateTable_dd81ac9d-35ef-40d5-b6a5-3dc45ac9606f
+ref table 'delta_realized_recommended pivot'
+ref table LocalDateTable_927dd965-56cb-4250-a252-40d96f373b4f
+ref table 'delta_realized_recommended pivot meme axe'
+ref table LocalDateTable_a8378abf-7309-456a-9a19-1131ebc5669c
+ref table LocalDateTable_43c5fda8-d429-4179-9207-97e8894c9a35
+ref table LocalDateTable_db1ee444-243f-44fa-8ac7-5fb6daafe8c4
+ref table LocalDateTable_2cb6163e-3ce0-488e-a341-5752c511d557
+ref table LocalDateTable_48f5492a-bd82-4909-8c68-7673ee601c42
+ref table LocalDateTable_ceb5252d-5e04-4ac1-bf79-7b179695a3c8
+ref table LocalDateTable_040cf8df-a4a8-4d74-99be-18c425871332
+
+ref cultureInfo fr-FR
+

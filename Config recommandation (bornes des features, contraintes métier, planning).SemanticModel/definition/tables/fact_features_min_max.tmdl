@@ -1,0 +1,159 @@
+table fact_features_min_max
+	lineageTag: 38739b29-410a-4e95-bcf0-b2073f9e5d85
+
+	column production_line
+		dataType: string
+		lineageTag: 47c6bb1e-6765-41b6-81df-cbcc5d4dc0ba
+		summarizeBy: none
+		sourceColumn: production_line
+
+		annotation SummarizationSetBy = Automatic
+
+	column feature_reference
+		dataType: string
+		lineageTag: 086c7229-491a-46ac-9e19-b88379f2d2ef
+		summarizeBy: none
+		sourceColumn: feature_reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column min_value
+		dataType: double
+		lineageTag: e3cedf07-73d3-499d-8a17-4c8f2d1ff406
+		summarizeBy: sum
+		sourceColumn: min_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column max_value
+		dataType: double
+		lineageTag: 18ebf97f-26c5-4d05-ba05-39801232521a
+		summarizeBy: sum
+		sourceColumn: max_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column is_controllable
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 8b226ef3-9bb7-4709-969a-9072b1268b59
+		summarizeBy: none
+		sourceColumn: is_controllable
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_intermediate_production_data
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 89036868-a34a-4eef-b6ef-256d7804789f
+		summarizeBy: none
+		sourceColumn: is_intermediate_production_data
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 5c7f832c-1767-4c5b-9a6b-2d99ed7fcd26
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 512b22b8-1ddb-4dab-b8ef-45d177e4cb38
+			defaultHierarchy: LocalDateTable_ea23c270-92b0-474d-bf33-ae87af70cc50.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 88ab8364-88f3-4098-a49e-bf7c55284cf2
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: 8754f09d-28d1-4a58-96ee-f70f085b62d6
+			defaultHierarchy: LocalDateTable_726d98f6-a3b2-462e-9828-b806d3414323.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: bea058c7-f2fb-4520-9a67-315680c4b01a
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: f40c091d-bd86-4e12-ad37-f0b291e09c36
+			defaultHierarchy: LocalDateTable_71e74a2e-1171-4650-ade3-421b5ad8bb68.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 9659ca16-8230-4128-8aab-fa091f139449
+		summarizeBy: none
+		sourceColumn: deleted
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_categorical
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: f3459073-ceab-459a-b1b7-3dafd83fc35d
+		summarizeBy: none
+		sourceColumn: is_categorical
+
+		annotation SummarizationSetBy = Automatic
+
+	column step
+		dataType: double
+		lineageTag: ded47f6f-1e33-4931-8f31-f8b3cee78afc
+		summarizeBy: sum
+		sourceColumn: step
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column activity
+		dataType: string
+		lineageTag: fbbfea50-bc03-46c6-afff-a086549e619b
+		summarizeBy: none
+		sourceColumn: activity
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_stratification
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 99911f95-9ce9-40f2-a681-166191ea609b
+		summarizeBy: none
+		sourceColumn: is_stratification
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_features_min_max = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    parameters_Schema = mal_maite_bi_prd_Database{[Name="parameters",Kind="Schema"]}[Data],
+				    fact_features_min_max_Table = parameters_Schema{[Name="fact_features_min_max",Kind="Table"]}[Data]
+				in
+				    fact_features_min_max_Table
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

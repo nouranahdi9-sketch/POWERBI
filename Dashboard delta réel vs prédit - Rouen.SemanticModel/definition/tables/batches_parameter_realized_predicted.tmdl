@@ -1,0 +1,281 @@
+table batches_parameter_realized_predicted
+	lineageTag: 4f3cf615-d25c-40ff-b9be-61152961fc64
+
+	measure 'texte_moy._delta' = ```
+			"En moyenne le delta entre les valeurs réelles et les valeurs recommandées sur cette sélection est de " & ROUND(AVERAGE(batches_parameter_realized_predicted[realized_value])-AVERAGE(batches_parameter_realized_predicted[predicted_value]),1)
+			
+			
+			```
+		lineageTag: 571c7bfe-0115-4d89-b0ed-7780165ab73e
+
+	measure nb_valeur_réelle = "Nombre de valeur réelle : " & IF(COUNT(batches_parameter_realized_predicted[realized_value]) = 0,0,COUNT(batches_parameter_realized_predicted[realized_value]))
+		lineageTag: 8a97af40-78e5-4482-ac6d-e74b66b10d08
+
+	measure nb_valeur_prédite = "Nombre de valeur recommandée : " & IF(COUNT(batches_parameter_realized_predicted[predicted_value]) = 0,0,COUNT(batches_parameter_realized_predicted[predicted_value]))
+		lineageTag: b5902fb0-27d3-4805-9dca-ed0602b5f97a
+
+	column id_batch
+		dataType: string
+		lineageTag: 5ca34166-f365-455c-bca2-fbb29930972f
+		summarizeBy: none
+		sourceColumn: id_batch
+
+		annotation SummarizationSetBy = Automatic
+
+	column batch_number
+		dataType: string
+		lineageTag: 43091ae6-c77d-4e8c-ab8c-80580fcb0fa4
+		summarizeBy: none
+		sourceColumn: batch_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column cahier_des_charges
+		dataType: string
+		lineageTag: 4ea3e5f7-891a-4637-aa21-c99c01654bdf
+		summarizeBy: none
+		sourceColumn: cahier_des_charges
+
+		annotation SummarizationSetBy = Automatic
+
+	column espece
+		dataType: string
+		lineageTag: 9d204528-ba03-4bea-a143-8ed5e1cf5667
+		summarizeBy: none
+		sourceColumn: espece
+
+		annotation SummarizationSetBy = Automatic
+
+	column production_type
+		dataType: string
+		lineageTag: 1f2d8710-f9d0-4531-bb8e-13d4f164f039
+		summarizeBy: none
+		sourceColumn: production_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column duree_de_cycle
+		dataType: string
+		lineageTag: 70ad024c-73a3-4cb3-9a70-b4c716f8c20a
+		summarizeBy: none
+		sourceColumn: duree_de_cycle
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_debut_production
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 4972acd1-80dd-4f97-b901-1dfb19091141
+		summarizeBy: none
+		sourceColumn: date_debut_production
+
+		variation Variation
+			isDefault
+			relationship: 2cd51e88-7183-461c-a166-255c170a3a16
+			defaultHierarchy: LocalDateTable_dd81ac9d-35ef-40d5-b6a5-3dc45ac9606f.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column parameter
+		dataType: string
+		lineageTag: 93c324f8-e8aa-49ef-baa5-8ba421080159
+		summarizeBy: none
+		sourceColumn: parameter
+		sortByColumn: id_parameter_variable
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column predicted_value
+		dataType: double
+		lineageTag: 75d679d7-c066-4f1c-a767-c3e7a55a7830
+		summarizeBy: sum
+		sourceColumn: predicted_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+		annotation __PBI_SemanticLinks = [{"LinkTarget":{"TableName":"batches_parameter_realized_predicted","TableItemName":"predicted_value (compartiments)","ObjectType":4},"LinkType":"UsedInGroup"}]
+
+	column realized_value
+		dataType: double
+		lineageTag: cbfc1ef9-04bc-47c0-bd14-f1c5e32583ba
+		summarizeBy: sum
+		sourceColumn: realized_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+		annotation __PBI_SemanticLinks = [{"LinkTarget":{"TableName":"batches_parameter_realized_predicted","TableItemName":"realized_value (compartiments)","ObjectType":4},"LinkType":"UsedInGroup"}]
+
+	column delta_realized_predicted
+		dataType: double
+		lineageTag: 3c51a77b-640e-408a-8697-4e18c5574011
+		summarizeBy: sum
+		sourceColumn: delta_realized_predicted
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column id_parameter_variable
+		dataType: int64
+		formatString: 0
+		lineageTag: 34c2398e-81dc-4b7a-8096-44dbbdc13d1b
+		summarizeBy: sum
+		sourceColumn: id_parameter_variable
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'realized_value (compartiments)' = ```
+			VAR __Count = 12
+			
+			VAR __Min = MIN('batches_parameter_realized_predicted'[realized_value])
+			
+			VAR __Max = MAX('batches_parameter_realized_predicted'[realized_value])
+			
+			VAR __Difference = (__Max - __Min)
+			
+			VAR __Size = IF(__Difference > 0, __Difference / __Count, 1)
+			
+			VAR __BinNumber = 
+				IF(
+					ISBLANK('batches_parameter_realized_predicted'[realized_value]),
+					BLANK(),
+					ROUNDDOWN(('batches_parameter_realized_predicted'[realized_value] - __Min) / __Size, 0)
+				)
+			
+			RETURN
+				IF(
+					ISBLANK('batches_parameter_realized_predicted'[realized_value]),
+					BLANK(),
+					__Min + (MIN(__BinNumber, __Count - 1) * __Size)
+				)
+			```
+		lineageTag: 6093af19-9e68-4c86-8825-9022fef6d0ca
+		summarizeBy: none
+
+		extendedProperty GroupingMetadata =
+				{
+				  "version": 0,
+				  "groupedColumns": [
+				    {
+				      "Column": {
+				        "Expression": {
+				          "SourceRef": {
+				            "Entity": "batches_parameter_realized_predicted"
+				          }
+				        },
+				        "Property": "realized_value"
+				      }
+				    }
+				  ]
+				}
+
+		annotation GroupingDesignState = {"Version":0,"Sources":[{"Name":"b","Entity":"batches_parameter_realized_predicted"}],"GroupedColumns":[{"Column":{"Expression":{"SourceRef":{"Source":"b"}},"Property":"realized_value"}}],"BinItem":{"Expression":{"Member":{"Expression":{"Discretize":{"Expression":{"Column":{"Expression":{"SourceRef":{"Source":"b"}},"Property":"realized_value"}},"Count":12}},"Member":"Min"}}}}
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'predicted_value (compartiments)' = ```
+			VAR __Count = 12
+			
+			VAR __Min = MIN('batches_parameter_realized_predicted'[predicted_value])
+			
+			VAR __Max = MAX('batches_parameter_realized_predicted'[predicted_value])
+			
+			VAR __Difference = (__Max - __Min)
+			
+			VAR __Size = IF(__Difference > 0, __Difference / __Count, 1)
+			
+			VAR __BinNumber = 
+				IF(
+					ISBLANK('batches_parameter_realized_predicted'[predicted_value]),
+					BLANK(),
+					ROUNDDOWN(('batches_parameter_realized_predicted'[predicted_value] - __Min) / __Size, 0)
+				)
+			
+			RETURN
+				IF(
+					ISBLANK('batches_parameter_realized_predicted'[predicted_value]),
+					BLANK(),
+					__Min + (MIN(__BinNumber, __Count - 1) * __Size)
+				)
+			```
+		lineageTag: 2847effd-ed90-4c86-9edd-79306b74968c
+		summarizeBy: none
+
+		extendedProperty GroupingMetadata =
+				{
+				  "version": 0,
+				  "groupedColumns": [
+				    {
+				      "Column": {
+				        "Expression": {
+				          "SourceRef": {
+				            "Entity": "batches_parameter_realized_predicted"
+				          }
+				        },
+				        "Property": "predicted_value"
+				      }
+				    }
+				  ]
+				}
+
+		annotation GroupingDesignState = {"Version":0,"Sources":[{"Name":"b","Entity":"batches_parameter_realized_predicted"}],"GroupedColumns":[{"Column":{"Expression":{"SourceRef":{"Source":"b"}},"Property":"predicted_value"}}],"BinItem":{"Expression":{"Member":{"Expression":{"Discretize":{"Expression":{"Column":{"Expression":{"SourceRef":{"Source":"b"}},"Property":"predicted_value"}},"Count":12}},"Member":"Min"}}}}
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column type
+		dataType: string
+		lineageTag: d0e873d9-a043-4b9a-87b6-28d74e3e09ca
+		summarizeBy: none
+		sourceColumn: type
+
+		annotation SummarizationSetBy = Automatic
+
+	column group_realized_value
+		dataType: double
+		formatString: 0
+		lineageTag: 8311427b-c536-4e3d-b45a-591c6be8d030
+		summarizeBy: sum
+		sourceColumn: group_realized_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column group_predicted_value
+		dataType: double
+		formatString: 0
+		lineageTag: b5f94542-b881-4213-bba1-0a077804eab1
+		summarizeBy: sum
+		sourceColumn: group_predicted_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	partition batches_parameter_realized_predicted = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\analy\Downloads\batches_parameter_realized_predicted.csv"),[Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"En-têtes promus" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Valeur remplacée" = Table.ReplaceValue(#"En-têtes promus",".",",",Replacer.ReplaceText,{"predicted_value", "realized_value", "delta_realized_predicted", "group_realized_value", "group_predicted_value"}),
+				    #"Type modifié" = Table.TransformColumnTypes(#"Valeur remplacée",{{"id_batch", type text}, {"batch_number", type text}, {"cahier_des_charges", type text}, {"espece", type text}, {"production_type", type text}, {"duree_de_cycle", type text}, {"date_debut_production", type date}, {"parameter", type text}, {"predicted_value", type number}, {"realized_value", type number}, {"delta_realized_predicted", type number},  {"id_parameter_variable", Int64.Type}, {"group_realized_value", type number}, {"group_predicted_value", type number}})
+				in
+				    #"Type modifié"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

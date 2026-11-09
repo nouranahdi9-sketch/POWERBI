@@ -1,0 +1,84 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 278,
+            "y": 0
+          },
+          "nodeIndex": "Budget",
+          "nodeLineageTag": "2ecc6c6f-e537-4523-8c04-e84bf0f08796",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 277,
+            "y": 291.5
+          },
+          "nodeIndex": "Main table",
+          "nodeLineageTag": "d144f93d-d9ab-4e78-b8e1-72549dd5a169",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 562,
+            "y": 195.75
+          },
+          "nodeIndex": "NORMAL DISTRIBUTION gas",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 846,
+            "y": 195.75
+          },
+          "nodeIndex": "NORMAL DISTRIBUTION elec",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 89.5
+          },
+          "nodeIndex": "Calendrier",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Toutes les tables",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Toutes les tables",
+  "defaultDiagram": "Toutes les tables"
+}
