@@ -1,0 +1,151 @@
+table fact_quality_ai
+	lineageTag: 89f62cdd-2497-4d84-be92-138e2acb8f2a
+
+	column target_localization
+		dataType: int64
+		formatString: 0
+		lineageTag: aa762f1f-000c-4315-a3a2-889252bcfda8
+		summarizeBy: none
+		sourceColumn: target_localization
+
+		annotation SummarizationSetBy = Automatic
+
+	column calculation_localization
+		dataType: int64
+		formatString: 0
+		lineageTag: 2a115148-2b0e-4394-8e27-2516b7fb684a
+		summarizeBy: sum
+		sourceColumn: calculation_localization
+
+		annotation SummarizationSetBy = Automatic
+
+	column parameter_quality
+		dataType: int64
+		formatString: 0
+		lineageTag: f0c1c3fe-f88e-4328-b839-fa8c856f89f5
+		summarizeBy: sum
+		sourceColumn: parameter_quality
+
+		annotation SummarizationSetBy = Automatic
+
+	column lower_limit
+		dataType: double
+		lineageTag: 3fd5f622-f125-4a43-9541-be2a119e314d
+		summarizeBy: sum
+		sourceColumn: lower_limit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column upper_limit
+		dataType: double
+		lineageTag: 2bf8542a-50c3-4721-8728-92df1bc3f528
+		summarizeBy: sum
+		sourceColumn: upper_limit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column predicted_value
+		dataType: double
+		lineageTag: 445dc515-8436-426e-a29a-e3cb348c4cba
+		summarizeBy: sum
+		sourceColumn: predicted_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column calculation_sequence
+		dataType: int64
+		formatString: 0
+		lineageTag: 0fa380ff-308a-43fc-a8dc-bcc091d99cc0
+		summarizeBy: sum
+		sourceColumn: calculation_sequence
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_predicted_value
+		dataType: string
+		lineageTag: 83220707-3b0b-47ed-92d9-2883def5c044
+		summarizeBy: none
+		sourceColumn: last_predicted_value
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 165b9f1f-202c-466c-9b11-48d5a2885c27
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: aec3c2f1-1e2f-41b2-b083-ab909a3d380e
+			defaultHierarchy: LocalDateTable_c1805771-26c8-406a-8c7f-e06758a8532e.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d962a49d-d567-4569-880c-ae7b7e85fbe8
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: bceec3b7-c1a7-4f05-9f18-c498800c6bd5
+			defaultHierarchy: LocalDateTable_f2eac102-0486-42d3-93a9-73e21a92c987.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 26bf6f7d-992d-4f15-8643-f8927c93b803
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: f52b5cd4-328e-4e40-b674-48c7e89e51e7
+			defaultHierarchy: LocalDateTable_d02eb988-4b80-4dde-b850-a26fe2cf3e31.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_recommendation_quality
+		dataType: int64
+		formatString: 0
+		lineageTag: e46bae20-8e4f-484a-9b0b-3df23455a01d
+		summarizeBy: sum
+		sourceColumn: id_recommendation_quality
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_batch
+		dataType: string
+		lineageTag: 459540e3-6a6a-42a5-bcc9-c058aebc0872
+		summarizeBy: none
+		sourceColumn: id_batch
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_quality_ai = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    quality_Schema = mal_maite_bi_prd_Database{[Name="quality",Kind="Schema"]}[Data],
+				    fact_quality_ai_Table = quality_Schema{[Name="fact_quality_ai",Kind="Table"]}[Data]
+				in
+				    fact_quality_ai_Table
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

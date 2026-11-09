@@ -1,0 +1,108 @@
+table fact_steeping_kilning_y2_AI
+	lineageTag: becbd178-7058-4dc4-97f8-4fdc6072e4aa
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 43a50203-1781-47b2-9b7c-61c423f0e008
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 615763f0-613c-40ac-bbb3-21569eb9b95d
+			defaultHierarchy: LocalDateTable_5928b427-52dc-4dc8-b03f-54705c7f78e6.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 0bd12962-04d9-48c0-bd61-5e3e24af012e
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: 8793ccc8-2450-4347-a71f-1cecad370475
+			defaultHierarchy: LocalDateTable_df7f8cf8-547c-4b4f-8c9d-fa18ded5e794.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 2e875a51-0ad9-4120-8643-18ea42428e87
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 5051413a-59cb-4a76-8488-293675b7e494
+			defaultHierarchy: LocalDateTable_c83aeb8b-6eb8-404a-a45a-3f42be105d44.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column malt_yield_r2_predicted_Tr1
+		dataType: double
+		lineageTag: ef88f084-64f0-4cfa-a1a2-3b141c0d50d3
+		summarizeBy: sum
+		sourceColumn: malt_yield_r2_predicted_Tr1
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column malt_yield_r2_predicted_To1
+		dataType: double
+		lineageTag: e4538422-3ab3-4cfb-878b-be00e2a98ce8
+		summarizeBy: sum
+		sourceColumn: malt_yield_r2_predicted_To1
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column malt_dry_yield_predicted_Tr1
+		dataType: double
+		lineageTag: 3faa6400-2072-4e11-868a-ed2acfd22c15
+		summarizeBy: sum
+		sourceColumn: malt_dry_yield_predicted_Tr1
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column malt_dry_yield_predicted_To1
+		dataType: double
+		lineageTag: a8883a95-f0cc-4778-a898-3d88199b6f4e
+		summarizeBy: sum
+		sourceColumn: malt_dry_yield_predicted_To1
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column id_batch
+		dataType: string
+		lineageTag: 25548ddf-a63c-4e4f-962b-3597f53bc9fa
+		summarizeBy: none
+		sourceColumn: id_batch
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_steeping_kilning_y2_AI = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    quality_Schema = mal_maite_bi_prd_Database{[Name="quality",Kind="Schema"]}[Data],
+				    fact_steeping_kilning_y2_ai_Table = quality_Schema{[Name="fact_steeping_kilning_y2_ai",Kind="Table"]}[Data]
+				in
+				    fact_steeping_kilning_y2_ai_Table
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

@@ -1,0 +1,146 @@
+table fact_y2_ai
+	lineageTag: ef0ae979-4ed6-4b36-bc1f-bc4dbfef0f3f
+
+	column target_localization
+		dataType: int64
+		formatString: 0
+		lineageTag: 90dc9265-596b-4a39-80a4-b4543086f67b
+		summarizeBy: none
+		sourceColumn: target_localization
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 3d6bfd74-4c88-49a3-a30d-0ee9c182d2e3
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 3709cd29-158f-40bd-9ece-2be02566cefb
+			defaultHierarchy: LocalDateTable_dc889ffb-aeca-41ff-a15a-6812c877cdb7.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 60f0b173-7ef6-4f0a-b02f-143c0ce383c9
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: fdf69e3e-b171-4e4b-a3dc-a7b8952dbcc2
+			defaultHierarchy: LocalDateTable_88aa3c66-93a9-41ac-b6d4-283908420813.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8c2a4e5d-f126-4d76-8e2d-4f53eecebe51
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 45f62c15-31f8-4165-b31b-cc6e776e2392
+			defaultHierarchy: LocalDateTable_6633f72f-a430-4cfc-9430-b72bf5cb7154.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_recommendation
+		dataType: int64
+		formatString: 0
+		lineageTag: 19417734-3ce7-48ba-81e7-13a556f7e94d
+		summarizeBy: sum
+		sourceColumn: id_recommendation
+
+		annotation SummarizationSetBy = Automatic
+
+	column goods_weight
+		dataType: double
+		lineageTag: a598cdd2-ed6d-4a67-9dfc-212e63328647
+		summarizeBy: sum
+		sourceColumn: goods_weight
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column goods_moisture
+		dataType: double
+		lineageTag: 8104ec27-d53d-49ed-9a4e-5749219b46af
+		summarizeBy: sum
+		sourceColumn: goods_moisture
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column malt_moisture_predicted
+		dataType: double
+		lineageTag: a3f93157-f1be-47e1-bd94-8d04ee8baf65
+		summarizeBy: sum
+		sourceColumn: malt_moisture_predicted
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column malt_yield_r2_predicted
+		dataType: double
+		lineageTag: 9c3cfadc-da7e-43f0-92a4-3854369f25b4
+		summarizeBy: sum
+		sourceColumn: malt_yield_r2_predicted
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column malt_weight_predicted
+		dataType: double
+		lineageTag: 3c5f6327-6268-485d-8cad-b48e051e3d54
+		summarizeBy: sum
+		sourceColumn: malt_weight_predicted
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column malt_dry_yield_predicted
+		dataType: double
+		lineageTag: 062b169c-dca8-42c8-9e36-3c5793dd9c28
+		summarizeBy: sum
+		sourceColumn: malt_dry_yield_predicted
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column id_batch
+		dataType: string
+		lineageTag: 4c60a928-c925-42c5-b1c3-04480010babc
+		summarizeBy: none
+		sourceColumn: id_batch
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_y2_ai = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    quality_Schema = mal_maite_bi_prd_Database{[Name="quality",Kind="Schema"]}[Data],
+				    fact_y2_ai_Table = quality_Schema{[Name="fact_y2_ai",Kind="Table"]}[Data]
+				in
+				    fact_y2_ai_Table
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

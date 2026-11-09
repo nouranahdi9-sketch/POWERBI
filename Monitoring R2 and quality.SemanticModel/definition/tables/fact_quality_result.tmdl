@@ -1,0 +1,262 @@
+table fact_quality_result
+	lineageTag: 2684ad3d-6cbf-43f0-b8e9-e09f4f7b78db
+
+	column malt_color_ebc
+		dataType: double
+		lineageTag: 27606e89-2afe-4dda-b52e-baad335e4936
+		summarizeBy: sum
+		sourceColumn: malt_color_ebc
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column malt_moisture
+		dataType: double
+		lineageTag: 78a392ca-c1fc-447b-b731-f65fc698dbc0
+		summarizeBy: sum
+		sourceColumn: malt_moisture
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column malt_soluble_beta_glucan
+		dataType: double
+		lineageTag: 238b1067-ec05-4074-abcc-4ced4c6f3627
+		summarizeBy: sum
+		sourceColumn: malt_soluble_beta_glucan
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column malt_friability
+		dataType: double
+		lineageTag: 4a81886f-9a5c-4b5a-b811-f725bc81dc4b
+		summarizeBy: sum
+		sourceColumn: malt_friability
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column malt_free_amino_nitrogen
+		dataType: double
+		lineageTag: cf940e45-1a8b-4006-9d4e-a4898de96974
+		summarizeBy: sum
+		sourceColumn: malt_free_amino_nitrogen
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column min_beta_glucan
+		dataType: double
+		formatString: 0
+		lineageTag: df0d9587-da45-4124-8d1f-4312257652d4
+		summarizeBy: sum
+		sourceColumn: min_beta_glucan
+
+		annotation SummarizationSetBy = Automatic
+
+	column max_beta_glucan
+		dataType: double
+		formatString: 0
+		lineageTag: 7f8a24a1-0a67-45bd-a1f2-ebbd6ac577fc
+		summarizeBy: sum
+		sourceColumn: max_beta_glucan
+
+		annotation SummarizationSetBy = Automatic
+
+	column min_color_ebc
+		dataType: double
+		lineageTag: c1a6c06e-a166-4d16-93c5-5b4ec42a4d6c
+		summarizeBy: sum
+		sourceColumn: min_color_ebc
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column max_color_ebc
+		dataType: double
+		lineageTag: 47e0c5e9-9b96-4803-b848-5bc6fad0be54
+		summarizeBy: sum
+		sourceColumn: max_color_ebc
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column min_fan
+		dataType: double
+		formatString: 0
+		lineageTag: 2947568f-9746-42e5-8ef0-c549c8d45606
+		summarizeBy: sum
+		sourceColumn: min_fan
+
+		annotation SummarizationSetBy = Automatic
+
+	column max_fan
+		dataType: double
+		formatString: 0
+		lineageTag: 6769eb07-b619-40f9-ae8f-5193e8c48314
+		summarizeBy: sum
+		sourceColumn: max_fan
+
+		annotation SummarizationSetBy = Automatic
+
+	column min_moisture
+		dataType: double
+		lineageTag: 76e7bb41-550e-41c8-9cfe-fb56facada76
+		summarizeBy: sum
+		sourceColumn: min_moisture
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column max_moisture
+		dataType: double
+		lineageTag: 25953a03-04b4-4f40-8ec0-05779139db7d
+		summarizeBy: sum
+		sourceColumn: max_moisture
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column min_friability
+		dataType: double
+		formatString: 0
+		lineageTag: b78f4c52-a865-4749-b8bc-46012e686f38
+		summarizeBy: sum
+		sourceColumn: min_friability
+
+		annotation SummarizationSetBy = Automatic
+
+	column max_friability
+		dataType: double
+		formatString: 0
+		lineageTag: 58978c8a-9503-4ffc-80a3-3dfd0cc9c252
+		summarizeBy: sum
+		sourceColumn: max_friability
+
+		annotation SummarizationSetBy = Automatic
+
+	column goods_moisture
+		dataType: double
+		lineageTag: fc998f96-a7d3-4827-9201-7a63bcb32399
+		summarizeBy: sum
+		sourceColumn: goods_moisture
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column goods_weight
+		dataType: double
+		lineageTag: ff7763ce-dc02-4a4c-97e7-0321f2417fae
+		summarizeBy: sum
+		sourceColumn: goods_weight
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column malt_weight
+		dataType: double
+		lineageTag: 4ddf0a32-27e6-4d23-8ba1-afcddc07306c
+		summarizeBy: sum
+		sourceColumn: malt_weight
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column malt_yield_r2
+		dataType: double
+		lineageTag: 8ccc5170-409e-4783-b34a-bda8bd1fc9c5
+		summarizeBy: sum
+		sourceColumn: malt_yield_r2
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column malt_dry_yield
+		dataType: double
+		lineageTag: b2ea1c20-9b97-4003-b056-1ec943b63c28
+		summarizeBy: sum
+		sourceColumn: malt_dry_yield
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d1012a91-adb6-49b2-a0eb-ebff54cc321d
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: fffdae3c-17f7-4678-a2ef-7c66857fb9c2
+			defaultHierarchy: LocalDateTable_794fcf7c-add9-429c-b5d9-10df9fb57025.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 684f51e4-5bad-47db-8be9-8a9f1d5fa993
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: bb10f145-5b3e-467b-90b0-2bc692a4e516
+			defaultHierarchy: LocalDateTable_fc5cb6be-868b-4ca7-861f-9bf123fb693e.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 21e1c034-20b7-4129-8075-ad023ff4ac3f
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 3b8c7a8a-a366-49a0-9400-2934b70423a5
+			defaultHierarchy: LocalDateTable_2c65038d-9881-4da4-b9e1-310055820deb.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_batch
+		dataType: string
+		lineageTag: fc86b365-3bfe-4977-8fa7-d4c91b305d7c
+		summarizeBy: none
+		sourceColumn: id_batch
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_quality_result = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    quality_Schema = mal_maite_bi_prd_Database{[Name="quality",Kind="Schema"]}[Data],
+				    fact_quality_results_Table = quality_Schema{[Name="fact_quality_results",Kind="Table"]}[Data]
+				in
+				    fact_quality_results_Table
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

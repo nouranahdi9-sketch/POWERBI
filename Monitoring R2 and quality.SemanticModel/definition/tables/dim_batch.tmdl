@@ -1,0 +1,112 @@
+table dim_batch
+	lineageTag: 9f298227-9486-452b-adf6-0699d29e95cd
+
+	column batch_number
+		dataType: string
+		lineageTag: 39e6b67a-b970-4f5a-a19b-07a1c7d05d5e
+		summarizeBy: none
+		sourceColumn: batch_number
+		sortByColumn: planned_date
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_plant
+		dataType: string
+		lineageTag: d5d05008-43dd-4049-9dc1-58ececd86037
+		summarizeBy: none
+		sourceColumn: id_plant
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_cdc
+		dataType: string
+		lineageTag: 18bfa972-5bc2-415a-849f-badfdf6cc7b1
+		summarizeBy: none
+		sourceColumn: id_cdc
+
+		annotation SummarizationSetBy = Automatic
+
+	column planned_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 715202cc-0536-4771-a85a-9738a62bd8c2
+		summarizeBy: none
+		sourceColumn: planned_date
+
+		variation Variation
+			isDefault
+			relationship: d9481794-63c2-4597-825e-9a4749fd1f08
+			defaultHierarchy: LocalDateTable_c259ada7-a63a-412c-be87-abcbafe8946e.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column id_batch
+		dataType: string
+		lineageTag: cfc9c7ea-674d-46fc-9f40-0dde5e021bd5
+		summarizeBy: none
+		sourceColumn: id_batch
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d6f27ef7-d073-4c2c-bcb8-49b572a3f0ad
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 58850c53-ce9d-4a73-8454-34f57d53568a
+			defaultHierarchy: LocalDateTable_402bb842-c0f7-46fe-9193-c561ac1a3fae.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c4229c34-9d2c-40ba-8880-9f9bc99238f5
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: 9d2dfe67-570f-4c57-aca6-55b78d4f64a4
+			defaultHierarchy: LocalDateTable_febc55ad-34ea-4303-a788-f4e7f7deded6.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 6c72e352-13d1-46af-8cbd-dadaa1fad2b1
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: a87c1777-3d01-470d-9a5c-81a6702e1932
+			defaultHierarchy: LocalDateTable_e0755b39-24d2-4c77-bcdc-ce7158e32dbe.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_batch = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    quality_Schema = mal_maite_bi_prd_Database{[Name="quality",Kind="Schema"]}[Data],
+				    dim_batch_Table = quality_Schema{[Name="dim_batch",Kind="Table"]}[Data],
+				    #"Type modifié" = Table.TransformColumnTypes(dim_batch_Table,{{"batch_number", type text}, {"id_plant", type text}, {"id_cdc", type text}, {"planned_date", type date}})
+				in
+				    #"Type modifié"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

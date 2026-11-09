@@ -1,0 +1,77 @@
+table dim_cdc
+	lineageTag: bbd61188-ed6e-4cb3-afba-2f2e130f8210
+
+	column id_cdc
+		dataType: string
+		lineageTag: 44dde9ff-101d-4e8c-9e58-1abfa855afd3
+		summarizeBy: none
+		sourceColumn: id_cdc
+
+		annotation SummarizationSetBy = Automatic
+
+	column cdc
+		dataType: string
+		lineageTag: 4e251091-2b44-4dc8-a03a-475aa69d9ebf
+		summarizeBy: none
+		sourceColumn: cdc
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f35583b1-714c-4afa-8b46-480c8d012071
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 1982e9a9-1047-40ca-86eb-0c332b27ae56
+			defaultHierarchy: LocalDateTable_e8d63c1d-ca9f-427f-8e37-632e70ef6597.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 09b87475-5d94-4339-950b-59003ae91617
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: 2e8aef3b-d5a4-40cb-b992-1455e22a5fbd
+			defaultHierarchy: LocalDateTable_68356b2a-835f-448a-853d-95dc7c66e1a7.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c33caffd-fe8a-40da-961f-36a6834c7a61
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 1a3ab56b-7704-4802-8c07-36ac37d9dfe0
+			defaultHierarchy: LocalDateTable_f6564506-e326-4ae1-ae32-7885a0631c1c.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_cdc = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    quality_Schema = mal_maite_bi_prd_Database{[Name="quality",Kind="Schema"]}[Data],
+				    dim_specification_Table = quality_Schema{[Name="dim_specification",Kind="Table"]}[Data],
+				    #"Type modifié" = Table.TransformColumnTypes(dim_specification_Table,{{"id_cdc", type text}})
+				in
+				    #"Type modifié"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

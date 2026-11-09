@@ -1,0 +1,80 @@
+table dim_site
+	lineageTag: e240cad9-be82-4559-914d-418bd09b419c
+
+	column id_plant
+		dataType: string
+		lineageTag: bc49a215-496d-41c3-8e37-43087a9cc83d
+		summarizeBy: none
+		sourceColumn: id_plant
+
+		annotation SummarizationSetBy = Automatic
+
+	column plant
+		dataType: string
+		lineageTag: c52f8755-1108-4cd6-9f60-0aafba2e220c
+		summarizeBy: none
+		sourceColumn: plant
+		sortByColumn: id_plant
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c864cfd7-16c1-4a25-9ed2-3c9a6131ca3a
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 29dada77-d750-4599-99d8-44b190776423
+			defaultHierarchy: LocalDateTable_406b883c-f6c7-47cd-944f-2f4d865ed5b9.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: dd63d3d0-5a05-4e1b-983d-5e5b11d086e8
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: 6fe0e4d7-31b1-4016-b092-5af84aa5ef8b
+			defaultHierarchy: LocalDateTable_8103f693-f752-4ab1-a2f7-77645d190501.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 9c1cf3cd-2ad8-4455-81b9-aaca5a5bd62a
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 7ade62bf-9a8c-4ba0-878f-c63081b3e133
+			defaultHierarchy: LocalDateTable_fc02728d-e9c2-49a1-b9ff-825a8df99ebc.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_site = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    quality_Schema = mal_maite_bi_prd_Database{[Name="quality",Kind="Schema"]}[Data],
+				    dim_site_Table = quality_Schema{[Name="dim_site",Kind="Table"]}[Data],
+				    #"Type modifié" = Table.TransformColumnTypes(dim_site_Table,{{"id_plant", type text}, {"plant", type text}})
+				in
+				    #"Type modifié"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+
