@@ -1,0 +1,141 @@
+table fact_parameter_board_status
+	lineageTag: 132afa04-0306-40a6-9a38-0e642195e9f4
+
+	column steeping_cycle_1
+		dataType: string
+		lineageTag: 3b18cb95-9109-4780-be3d-b3350c58692e
+		summarizeBy: none
+		sourceColumn: steeping_cycle_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column steeping_cycle_2
+		dataType: string
+		lineageTag: 31576edc-49fb-490e-b009-e6b427319aab
+		summarizeBy: none
+		sourceColumn: steeping_cycle_2
+
+		annotation SummarizationSetBy = Automatic
+
+	column germination_cycle_1
+		dataType: string
+		lineageTag: fdf84584-f0c5-4abc-a350-7b2c986163e1
+		summarizeBy: none
+		sourceColumn: germination_cycle_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column germination_cycle_2
+		dataType: string
+		lineageTag: dd6bfb52-0b81-45a9-812c-e49f78ab81f2
+		summarizeBy: none
+		sourceColumn: germination_cycle_2
+
+		annotation SummarizationSetBy = Automatic
+
+	column germination_cycle_3
+		dataType: string
+		lineageTag: fe4c1b71-9514-400f-8ae5-14ba7ed6a293
+		summarizeBy: none
+		sourceColumn: germination_cycle_3
+
+		annotation SummarizationSetBy = Automatic
+
+	column germination_cycle_4
+		dataType: string
+		lineageTag: 4cc8d348-2923-485e-8ca6-aa970f828226
+		summarizeBy: none
+		sourceColumn: germination_cycle_4
+
+		annotation SummarizationSetBy = Automatic
+
+	column germination_cycle_5
+		dataType: string
+		lineageTag: c588c8c1-a424-4c67-8989-eadafb068fcb
+		summarizeBy: none
+		sourceColumn: germination_cycle_5
+
+		annotation SummarizationSetBy = Automatic
+
+	column kilning_cycle_1
+		dataType: string
+		lineageTag: 0ef885a8-24a2-4567-853e-5d004428b972
+		summarizeBy: none
+		sourceColumn: kilning_cycle_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column kilning_cycle_2
+		dataType: string
+		lineageTag: 1d6bfdbb-0719-41c7-a658-5ad956f26d5d
+		summarizeBy: none
+		sourceColumn: kilning_cycle_2
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: b35024a8-7544-4c0a-869a-2010085edb6e
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: d779b13a-6d6c-4b60-9d94-7b408563f9ea
+			defaultHierarchy: LocalDateTable_9b2fdd7e-3b17-44b2-9f06-f087b791c19e.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8456fec0-b3b1-41a9-b7cf-fd294d18a80d
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: 2956a8a4-ad03-4f30-a7a1-86c5fdc6b759
+			defaultHierarchy: LocalDateTable_cad27bc5-74ef-4ff9-bffe-e2ec6ac63a31.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f5cbd47a-a5cf-495b-9892-22a0af09a3b1
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: f0278401-35e7-458e-857a-c72172574399
+			defaultHierarchy: LocalDateTable_23e31ff7-d3cd-43d8-9437-1d9521b435b6.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_batch
+		dataType: string
+		lineageTag: 8d704cb3-a638-4759-aff3-3d76935a950f
+		summarizeBy: none
+		sourceColumn: id_batch
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_parameter_board_status = m
+		mode: import
+		queryGroup: parameters
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    parameters_Schema = mal_maite_bi_prd_Database{[Name="parameters",Kind="Schema"]}[Data],
+				    fact_parameter_board_status_Table = parameters_Schema{[Name="fact_parameter_board_status",Kind="Table"]}[Data]
+				in
+				    fact_parameter_board_status_Table
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

@@ -1,0 +1,184 @@
+table fact_parameter_board
+	lineageTag: b8f1369d-1cec-450a-a989-0847853d31c3
+
+	column realized_value
+		dataType: double
+		lineageTag: 90e3bfda-f7f1-44c4-a609-c1d9b8e81185
+		summarizeBy: sum
+		sourceColumn: realized_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column steeping_cycle_1
+		dataType: double
+		formatString: 0
+		lineageTag: f71b151f-157a-4fed-b00b-ce5e61200945
+		summarizeBy: none
+		sourceColumn: steeping_cycle_1
+
+		annotation SummarizationSetBy = User
+
+	column steeping_cycle_2
+		dataType: double
+		lineageTag: a49ae33d-745f-40a3-970a-f95f8b4f8a1f
+		summarizeBy: sum
+		sourceColumn: steeping_cycle_2
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column germination_cycle_1
+		dataType: double
+		formatString: 0
+		lineageTag: b0da22a1-f6e5-4927-9a76-01226875c0f5
+		summarizeBy: sum
+		sourceColumn: germination_cycle_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column germination_cycle_2
+		dataType: double
+		lineageTag: 12eba662-42eb-41e3-9bdb-f107660b2889
+		summarizeBy: sum
+		sourceColumn: germination_cycle_2
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column germination_cycle_3
+		dataType: double
+		lineageTag: 73db5518-1bca-4b11-8e9f-ccd3a6dd08db
+		summarizeBy: sum
+		sourceColumn: germination_cycle_3
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column germination_cycle_4
+		dataType: double
+		lineageTag: e87fd4db-37cd-4675-a624-bd9c534a2c16
+		summarizeBy: sum
+		sourceColumn: germination_cycle_4
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column germination_cycle_5
+		dataType: double
+		lineageTag: 4ef2480d-e696-47aa-8d71-44e239f90ea3
+		summarizeBy: sum
+		sourceColumn: germination_cycle_5
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column kilning_cycle_1
+		dataType: double
+		lineageTag: 0e00871f-b207-45df-a575-135b9bcbdffa
+		summarizeBy: sum
+		sourceColumn: kilning_cycle_1
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column kilning_cycle_2
+		dataType: double
+		lineageTag: 990f6118-2a58-4baa-8321-0766b18afd5d
+		summarizeBy: sum
+		sourceColumn: kilning_cycle_2
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column custom_order
+		dataType: int64
+		formatString: 0
+		lineageTag: 14ab0c81-8a2e-4ea9-94ad-2adb46ad569e
+		summarizeBy: sum
+		sourceColumn: custom_order
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_parameter_production_line
+		dataType: string
+		lineageTag: 0ec16be8-8f1b-4d2e-a6d4-657ebb15a080
+		summarizeBy: none
+		sourceColumn: id_parameter_production_line
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: df9e36cb-fa49-47a2-8d88-5f2adf81a9e7
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 0d57bb63-b555-499c-b9c3-a3f770dfef62
+			defaultHierarchy: LocalDateTable_8f9f8e7a-27cc-4c99-a874-04438ebba1ea.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 95a1da57-230b-4601-a754-207271dada20
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: b21c3c0d-e7a9-479c-be19-7239013f4db5
+			defaultHierarchy: LocalDateTable_04f4c11e-664d-4f3b-bf60-e89803aa5d59.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 540ec14f-5b98-499b-aab2-9d8b8474732d
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 1f381a61-95d9-4a6a-8db7-1ea9b3443b2c
+			defaultHierarchy: LocalDateTable_6450c71c-a3ad-4db8-af6b-c9db5dc9f741.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_batch
+		dataType: string
+		lineageTag: 8e6606f9-4576-4533-96d6-8dac82e36085
+		summarizeBy: none
+		sourceColumn: id_batch
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_parameter_board = m
+		mode: import
+		queryGroup: parameters
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    parameters_Schema = mal_maite_bi_prd_Database{[Name="parameters",Kind="Schema"]}[Data],
+				    fact_parameter_board_Table = parameters_Schema{[Name="fact_parameter_board",Kind="Table"]}[Data]
+				in
+				    fact_parameter_board_Table
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+
