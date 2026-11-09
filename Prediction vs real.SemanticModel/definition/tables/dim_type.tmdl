@@ -1,0 +1,40 @@
+table dim_type
+	lineageTag: 98ac58a0-a18f-4300-854e-b897eab2b706
+
+	column id_parameter_production_type
+		dataType: int64
+		formatString: 0
+		lineageTag: 879f330e-4210-49db-b464-5f2394d8254c
+		summarizeBy: none
+		sourceColumn: id_parameter_production_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column code
+		dataType: string
+		lineageTag: cd7c936d-3154-4d38-b62c-860b1990231b
+		summarizeBy: none
+		sourceColumn: code
+		sortByColumn: id_parameter_production_type
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_type = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    ext_mal_psql_maite_vision_board_prd_Database = Source{[Name="ext_mal_psql_maite_vision_board_prd",Kind="Database"]}[Data],
+				    public_Schema = ext_mal_psql_maite_vision_board_prd_Database{[Name="public",Kind="Schema"]}[Data],
+				    parameters_production_types_Table = public_Schema{[Name="parameters_production_types",Kind="Table"]}[Data],
+				    #"Lignes filtrées" = Table.SelectRows(parameters_production_types_Table, each ([deleted] = false)),
+				    #"Autres colonnes supprimées" = Table.SelectColumns(#"Lignes filtrées",{"id_parameter_production_type", "code"})
+				in
+				    #"Autres colonnes supprimées"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

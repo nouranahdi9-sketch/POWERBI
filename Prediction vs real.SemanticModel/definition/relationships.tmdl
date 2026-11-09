@@ -1,0 +1,144 @@
+relationship d6813050-74ef-427b-b76c-86a39ce19e06
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_batch.debut_de_production
+	toColumn: LocalDateTable_a90f6ec4-644f-4080-a5ae-b53f03c75f8c.Date
+
+relationship e1b5ac52-719c-4f94-b09f-25929d992f5e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_batch.fin_de_production
+	toColumn: LocalDateTable_bf86b800-c26a-45e0-9a0a-810c287cb033.Date
+
+relationship AutoDetected_c5c1c886-d3c2-4dff-b0db-37cdccdbf2e8
+	crossFilteringBehavior: bothDirections
+	fromColumn: delta_quality_realized_recommended.id_batch
+	toColumn: dim_batch.id_batch
+
+relationship 7df4d4d6-5e2c-4f45-d334-26c816a0bc1d
+	crossFilteringBehavior: bothDirections
+	fromColumn: dim_batch.id_variete
+	toColumn: dim_variety_specy.id_variety
+
+relationship e46cd9f3-8bd5-c77e-41eb-61252f16e24d
+	crossFilteringBehavior: bothDirections
+	fromColumn: summary.id_batch
+	toColumn: dim_batch.id_batch
+
+relationship 0d6e438f-5eaf-5b3e-a468-9924c44f6d1e
+	crossFilteringBehavior: bothDirections
+	fromColumn: delta_moisture_realized_recommended.id_batch
+	toColumn: dim_batch.id_batch
+
+relationship 3f040430-1c7b-1bfa-a586-e244a81eb0d7
+	fromColumn: recommendation_pdf_score_production_type_specy.id_recommendation
+	toColumn: delta_quality_realized_recommended.id_recommendation
+
+relationship 1f648b06-e7db-4c24-bccc-3a01b6b441dc
+	joinOnDateBehavior: datePartOnly
+	fromColumn: delta_quality_realized_recommended.created_at
+	toColumn: LocalDateTable_e40dcaab-57ba-480d-952d-f1b99ece2a2f.Date
+
+relationship 91a1dfd4-41fd-4daa-b22a-699515bbfdc8
+	joinOnDateBehavior: datePartOnly
+	fromColumn: delta_quality_realized_recommended.updated_at
+	toColumn: LocalDateTable_7e9f5d67-447d-4316-a80d-2abb17a1b2b8.Date
+
+relationship 8918b674-2b71-4421-bf5a-5e1ea906a060
+	joinOnDateBehavior: datePartOnly
+	fromColumn: delta_quality_realized_recommended.deleted_at
+	toColumn: LocalDateTable_4425cd3b-61e8-408a-83ee-45f3875b4b06.Date
+
+relationship a414caa4-4df5-43ef-b180-a9ed8f366786
+	joinOnDateBehavior: datePartOnly
+	fromColumn: delta_moisture_realized_recommended.created_at
+	toColumn: LocalDateTable_73f03813-ca24-4c38-8b07-82c2f0af0263.Date
+
+relationship 2fa00a1a-9e59-422c-8a52-2e91ff608ebf
+	joinOnDateBehavior: datePartOnly
+	fromColumn: delta_moisture_realized_recommended.updated_at
+	toColumn: LocalDateTable_c0e91026-f8cd-4d44-b353-3fe93e80abee.Date
+
+relationship 9df24435-a696-414d-992e-e399de9b87a7
+	joinOnDateBehavior: datePartOnly
+	fromColumn: delta_moisture_realized_recommended.deleted_at
+	toColumn: LocalDateTable_564824aa-2b59-4094-9764-bd13e897afb5.Date
+
+relationship 336c104e-7aef-47c8-a197-1f625a6542d4
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_batch.created_at
+	toColumn: LocalDateTable_2ff8c5b6-744f-4698-89a9-c5c0b3fd4708.Date
+
+relationship df64cd39-0720-4d4f-baf2-e7fb0f30e405
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_batch.updated_at
+	toColumn: LocalDateTable_cd1ff371-09f9-4895-9815-a414a04a221b.Date
+
+relationship 578e5f4d-52ba-4787-ac1c-4bb4ad18d82f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_batch.deleted_at
+	toColumn: LocalDateTable_16337221-72df-4970-9f9b-77f6a696aa8b.Date
+
+relationship 80d6a500-b8bf-411a-95ab-e115681e5388
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_variety_specy.created_at
+	toColumn: LocalDateTable_c3056ebd-bb0f-4722-94cd-0e8a2b2aabd0.Date
+
+relationship 4dc61c76-0eca-4edf-91d7-46c8bb72dfea
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_variety_specy.updated_at
+	toColumn: LocalDateTable_1c877627-094e-4514-baff-81b77828bef1.Date
+
+relationship e00d2934-8e35-422c-8ab1-451296a0756e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_variety_specy.deleted_at
+	toColumn: LocalDateTable_f3e7792d-a055-4eea-8a76-65a72e59d851.Date
+
+relationship 3e0452be-1e9f-4b09-94b5-f50ced34856d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: recommendation_pdf_score_production_type_specy.created_at
+	toColumn: LocalDateTable_4dcc76b6-ac21-4444-bb2b-d1289b1959a3.Date
+
+relationship 33bfa761-93b3-4b4d-8b20-5f2a5f6c65c6
+	joinOnDateBehavior: datePartOnly
+	fromColumn: recommendation_pdf_score_production_type_specy.updated_at
+	toColumn: LocalDateTable_2034604d-e62f-4db7-8968-c5884456cf4a.Date
+
+relationship d9429914-9601-4731-b0b8-8aaa7db7e5ba
+	joinOnDateBehavior: datePartOnly
+	fromColumn: recommendation_pdf_score_production_type_specy.deleted_at
+	toColumn: LocalDateTable_60593d86-208f-4270-a9e1-74213898aab6.Date
+
+relationship 44fb92f7-8a7a-4d21-7d21-09f8674f1237
+	crossFilteringBehavior: bothDirections
+	fromColumn: dim_batch.id_cdc
+	toColumn: dim_cdc.id_requirement_specification
+
+relationship d42473d5-017e-8b80-15bd-14955f097e9a
+	crossFilteringBehavior: bothDirections
+	fromColumn: dim_batch.id_site
+	toColumn: dim_site.id_plant_production_line
+
+relationship c7e1d90c-5ece-f4d3-5dde-6184407d9c9e
+	crossFilteringBehavior: bothDirections
+	fromColumn: dim_batch.id_type
+	toColumn: dim_type.id_parameter_production_type
+
+relationship 3638dffb-c10a-41c2-abf6-82a60f5177cd
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_localization.created_at
+	toColumn: LocalDateTable_0be135b4-41b5-4aba-9fab-f40daa84b6f4.Date
+
+relationship b35c3dcd-430e-46ed-b1e1-d26973bbbbb4
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_localization.updated_at
+	toColumn: LocalDateTable_19e98dbd-6a48-48e5-9b19-969b56535cc4.Date
+
+relationship c683b80f-bcb6-4e67-be9d-50ab291c7e14
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_localization.deleted_at
+	toColumn: LocalDateTable_712d4880-33a3-4617-ab7f-f4ac91b27e48.Date
+
+relationship 702da7cc-d253-6a6e-6c11-30c8fda67935
+	crossFilteringBehavior: bothDirections
+	fromColumn: delta_quality_realized_recommended.id_target_localization
+	toColumn: dim_localization.id_localization
+

@@ -1,0 +1,169 @@
+table dim_batch
+	lineageTag: 2055ecf7-0d6d-4811-9a25-a7d730a96883
+
+	column id_batch
+		dataType: string
+		lineageTag: 1d268922-02be-4230-8057-59f0af9fe111
+		summarizeBy: none
+		sourceColumn: id_batch
+		sortByColumn: debut_de_production
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column batch_number
+		dataType: string
+		lineageTag: 33f2b681-5e24-4c7d-8fdd-f863b2b18487
+		summarizeBy: none
+		sourceColumn: batch_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column mes_number
+		dataType: string
+		lineageTag: 64ad9e77-b28d-494f-bd10-0fbfd5c20fbe
+		summarizeBy: none
+		sourceColumn: mes_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column ordre_fabrication
+		dataType: int64
+		formatString: 0
+		lineageTag: 5a35bd65-71aa-4f8e-9031-9fcbdbfce931
+		summarizeBy: sum
+		sourceColumn: ordre_fabrication
+
+		annotation SummarizationSetBy = Automatic
+
+	column annee_recolte
+		dataType: int64
+		formatString: 0
+		lineageTag: 967ddc2f-2006-4064-9ec7-8ae21c714f3e
+		summarizeBy: sum
+		sourceColumn: annee_recolte
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_site
+		dataType: int64
+		formatString: 0
+		lineageTag: effe6c48-a005-4f73-bf50-a7ffa0611b75
+		summarizeBy: none
+		sourceColumn: id_site
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_cdc
+		dataType: int64
+		formatString: 0
+		lineageTag: dc432995-9ccb-4aef-9ee3-460303383c35
+		summarizeBy: none
+		sourceColumn: id_cdc
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_type
+		dataType: int64
+		formatString: 0
+		lineageTag: 2039c392-838b-4958-9a38-79d98fe00b9a
+		summarizeBy: none
+		sourceColumn: id_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_variete
+		dataType: int64
+		formatString: 0
+		lineageTag: ab46ee29-71c1-419e-9854-164f63c66d09
+		summarizeBy: none
+		sourceColumn: id_variete
+
+		annotation SummarizationSetBy = Automatic
+
+	column debut_de_production
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 2b627e10-02a4-443b-935d-d2f29f2d1344
+		summarizeBy: none
+		sourceColumn: debut_de_production
+
+		variation Variation
+			isDefault
+			relationship: d6813050-74ef-427b-b76c-86a39ce19e06
+			defaultHierarchy: LocalDateTable_a90f6ec4-644f-4080-a5ae-b53f03c75f8c.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column fin_de_production
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 3d669ee7-497f-41f9-966d-d8aa6b63e19a
+		summarizeBy: none
+		sourceColumn: fin_de_production
+
+		variation Variation
+			isDefault
+			relationship: e1b5ac52-719c-4f94-b09f-25929d992f5e
+			defaultHierarchy: LocalDateTable_bf86b800-c26a-45e0-9a0a-810c287cb033.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 197b8623-6b7e-4343-b623-2ebfed7c865a
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 336c104e-7aef-47c8-a197-1f625a6542d4
+			defaultHierarchy: LocalDateTable_2ff8c5b6-744f-4698-89a9-c5c0b3fd4708.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: db505e02-a750-44f1-9eba-cc59726b0c64
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: df64cd39-0720-4d4f-baf2-e7fb0f30e405
+			defaultHierarchy: LocalDateTable_cd1ff371-09f9-4895-9815-a414a04a221b.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 503add37-f806-45b8-a51d-cd74dae974c1
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 578e5f4d-52ba-4787-ac1c-4bb4ad18d82f
+			defaultHierarchy: LocalDateTable_16337221-72df-4970-9f9b-77f6a696aa8b.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_batch = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    self_service_Schema = mal_maite_bi_prd_Database{[Name="self_service",Kind="Schema"]}[Data],
+				    dim_batch_Table = self_service_Schema{[Name="dim_batch",Kind="Table"]}[Data]
+				in
+				    dim_batch_Table
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

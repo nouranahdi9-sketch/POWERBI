@@ -1,0 +1,181 @@
+table summary
+	lineageTag: d919fd6a-1c89-4dee-a51a-93dc3f164ed4
+
+	measure 'result_statut_reco.' = "Recommendation status : " & FIRSTNONBLANK(summary[Acceptance_Status_EN],1)
+		lineageTag: 62b2bb42-a7a0-4707-b46a-dfdba7c3a43e
+
+	column id_batch
+		dataType: string
+		lineageTag: d809705b-741b-4322-9915-54ea35ffd599
+		summarizeBy: none
+		sourceColumn: id_batch
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_recommendation
+		dataType: string
+		lineageTag: 13503e09-4edb-43bc-b01a-00b6b5a268e4
+		summarizeBy: none
+		sourceColumn: id_recommendation
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_target_localization
+		dataType: int64
+		formatString: 0
+		lineageTag: a22bd428-e172-406c-9dce-0471ca0f8746
+		summarizeBy: sum
+		sourceColumn: id_target_localization
+
+		annotation SummarizationSetBy = Automatic
+
+	column target_localization
+		dataType: string
+		lineageTag: 111c491e-4a99-4ae4-9020-734c4afd825d
+		summarizeBy: none
+		sourceColumn: target_localization
+		sortByColumn: id_target_localization
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column acceptance_status
+		dataType: string
+		lineageTag: 02b7220f-d767-42e6-a3ef-0fee9e11b8dc
+		summarizeBy: none
+		sourceColumn: acceptance_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column Valeur
+		dataType: double
+		formatString: 0.0
+		lineageTag: 58c21c13-528c-4356-9529-9cd629b50287
+		summarizeBy: sum
+		sourceColumn: Valeur
+
+		annotation SummarizationSetBy = Automatic
+
+	column parameter
+		dataType: string
+		lineageTag: ea95f79f-b945-4bf6-9e94-2f5100e05e97
+		summarizeBy: none
+		sourceColumn: parameter
+		sortByColumn: parameter_order
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column attribut
+		dataType: string
+		lineageTag: b7fff78d-72bf-4d7d-b403-83e3acbc6cc8
+		summarizeBy: none
+		sourceColumn: attribut
+		sortByColumn: attribut_order
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column attribut_order
+		dataType: int64
+		formatString: 0
+		lineageTag: e2e676b0-6739-4f68-b3e1-53fc3690a18d
+		summarizeBy: sum
+		sourceColumn: attribut_order
+
+		annotation SummarizationSetBy = Automatic
+
+	column parameter_order
+		dataType: int64
+		formatString: 0
+		lineageTag: 32041b68-3f91-447d-b43a-a524e1aa9d8d
+		summarizeBy: sum
+		sourceColumn: parameter_order
+
+		annotation SummarizationSetBy = Automatic
+
+	column taux_application_localization
+		dataType: double
+		formatString: 0\ %;-0\ %;0\ %
+		lineageTag: 7904d54c-1300-4332-852d-27a1bc5db437
+		summarizeBy: sum
+		sourceColumn: taux_application_localization
+
+		annotation SummarizationSetBy = Automatic
+
+	column Attribute_EN = ```
+			
+			SWITCH(
+			    TRUE(),
+			    'summary'[attribut] = "Reco.",                 "Predicted",
+			    'summary'[attribut] = "Réel",                  "Real",
+			    'summary'[attribut] = "Ecart reco. - réel",    "Gap Predicted – Real",
+			    'summary'[attribut] = "Target IA min",         "AI min target",
+			    'summary'[attribut] = "Target IA max",         "AI max target",
+			    'summary'[attribut]                           -- valeur par défaut (on garde tel quel)
+			)
+			
+			```
+		lineageTag: 15eaa0a1-0370-4f57-a758-fc14c1700109
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Acceptance_Status_EN = ```
+			
+			SWITCH(
+			    TRUE(),
+			    'summary'[acceptance_status] = "Acceptée",       "Accepted",
+			    'summary'[acceptance_status] = "En attente",     "Pending",
+			    'summary'[acceptance_status] = "Refusée IA",     "AI Rejected",
+			    'summary'[acceptance_status] = "Refusée usine",  "Plant Rejected",
+			    'summary'[acceptance_status]                    -- garde la valeur originale si aucune correspondance
+			)
+			
+			```
+		lineageTag: fa1a2793-ec09-488f-b8af-46ceac787f8e
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column localization_eng
+		dataType: string
+		lineageTag: 09758fd1-a25b-487d-993c-988c9690462f
+		summarizeBy: none
+		sourceColumn: localization_eng
+		sortByColumn: id_target_localization
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	partition summary = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    parameters_Schema = mal_maite_bi_prd_Database{[Name="parameters",Kind="Schema"]}[Data],
+				    fact_delta_quality_realized_recommended_Table = parameters_Schema{[Name="fact_delta_quality_realized_recommended",Kind="Table"]}[Data],
+				    #"Colonnes supprimées" = Table.RemoveColumns(fact_delta_quality_realized_recommended_Table,{"color_ebc_recommended_result", "fan_recommended_result", "friability_recommended_result", "color_ebc_result", "fan_result", "friability_result", "betaglucan_recommended_result", "betaglucan_result", "product_moisture_recommended_result", "product_moisture_result", "delta_percent_color_ebc", "delta_percent_fan", "delta_percent_friability", "delta_percent_betaglucan", "delta_percent_product_moisture", "classement_2_bornes_taux_application", "classement_4_bornes_taux_application", "created_at", "updated_at", "deleted_at"}),
+				    #"Requêtes fusionnées" = Table.NestedJoin(#"Colonnes supprimées", {"id_recommendation"}, delta_moisture_realized_recommended, {"id_recommendation"}, "delta_moisture_realized_recommended", JoinKind.LeftOuter),
+				    #"delta_moisture_realized_recommended développé" = Table.ExpandTableColumn(#"Requêtes fusionnées", "delta_moisture_realized_recommended", {"steep_c1_moisture", "steep_c1_moisture_recommended", "delta_steep_c1_moisture", "steep_c2_moisture", "steep_c2_moisture_recommended", "delta_steep_c2_moisture", "steep_c2_moisture_min", "steep_c2_moisture_max", "pregerm_moisture", "pregerm_moisture_recommended", "delta_pregerm_moisture", "pregerm_moisture_min", "pregerm_moisture_max", "germ_c1_moisture", "germ_c1_moisture_recommended", "delta_germ_c1_moisture", "germ_c2_moisture", "germ_c2_moisture_recommended", "delta_germ_c2_moisture", "germ_c3_moisture", "germ_c3_moisture_recommended", "delta_germ_c3_moisture", "germ_c4_moisture", "germ_c4_moisture_recommended", "delta_germ_c4_moisture", "kiln_load_moisture", "kiln_load_moisture_recommended", "delta_kiln_load_moisture", "kiln_load_moisture_min", "kiln_load_moisture_max"}, {"steep_c1_moisture", "steep_c1_moisture_recommended", "delta_steep_c1_moisture", "steep_c2_moisture", "steep_c2_moisture_recommended", "delta_steep_c2_moisture", "steep_c2_moisture_min", "steep_c2_moisture_max", "pregerm_moisture", "pregerm_moisture_recommended", "delta_pregerm_moisture", "pregerm_moisture_min", "pregerm_moisture_max", "germ_c1_moisture", "germ_c1_moisture_recommended", "delta_germ_c1_moisture", "germ_c2_moisture", "germ_c2_moisture_recommended", "delta_germ_c2_moisture", "germ_c3_moisture", "germ_c3_moisture_recommended", "delta_germ_c3_moisture", "germ_c4_moisture", "germ_c4_moisture_recommended", "delta_germ_c4_moisture", "kiln_load_moisture", "kiln_load_moisture_recommended", "delta_kiln_load_moisture", "kiln_load_moisture_min", "kiln_load_moisture_max"}),
+				    #"Supprimer le tableau croisé dynamique des autres colonnes" = Table.UnpivotOtherColumns(#"delta_moisture_realized_recommended développé", {"id_batch", "id_recommendation", "taux_application_localization", "id_target_localization", "target_localization", "acceptance_status"}, "Attribut", "Valeur"),
+				    #"Colonne conditionnelle ajoutée" = Table.AddColumn(#"Supprimer le tableau croisé dynamique des autres colonnes", "parameter", each if Text.Contains([Attribut], "color_ebc") then "Color EBC" else if Text.Contains([Attribut], "betaglucan") then "Betaglucanes" else if Text.Contains([Attribut], "friability") then "Fria." else if Text.Contains([Attribut], "fan") then "FAN" else if Text.Contains([Attribut], "product_moisture") then "Malt moisture" else if Text.Contains([Attribut], "steep_c1_moisture") then "Steep C1 moisture" else if Text.Contains([Attribut], "steep_c2_moisture") then "Steep C2 moisture" else if Text.Contains([Attribut], "pregerm_moisture") then "Pré-germ moisture" else if Text.Contains([Attribut], "germ_c1_moisture") then "Germ C1 moisture" else if Text.Contains([Attribut], "germ_c2_moisture") then "Germ C2 moisture" else if Text.Contains([Attribut], "germ_c3_moisture") then "Germ C3 moisture" else if Text.Contains([Attribut], "germ_c4_moisture") then "Germ C4 moisture" else if Text.Contains([Attribut], "kiln_load_moisture") then "Kiln load moisture" else null),
+				    #"Colonne conditionnelle ajoutée1" = Table.AddColumn(#"Colonne conditionnelle ajoutée", "attribut", each if Text.Contains([Attribut], "recommended") then "Reco." else if Text.Contains([Attribut], "max") then "Target IA max" else if Text.Contains([Attribut], "min") then "Target IA min" else if Text.Contains([Attribut], "delta") then "Ecart reco. - réel" else "Réel"),
+				    #"Colonnes supprimées1" = Table.RemoveColumns(#"Colonne conditionnelle ajoutée1",{"Attribut"}),
+				    #"Colonne conditionnelle ajoutée2" = Table.AddColumn(#"Colonnes supprimées1", "attribut_order", each if [attribut] = "Reco." then 1 else if [attribut] = "Réel" then 2 else if [attribut] = "Ecart reco. - réel" then 3 else if [attribut] = "Target IA min" then 4 else if [attribut] = "Target IA max" then 5 else null),
+				    #"Colonne conditionnelle ajoutée3" = Table.AddColumn(#"Colonne conditionnelle ajoutée2", "parameter_order", each if [parameter] = "Steep C1 moisture" then 1 else if [parameter] = "Steep C2 moisture" then 2 else if [parameter] = "Pré-germ moisture" then 3 else if [parameter] = "Germ C1 moisture" then 4 else if [parameter] = "Germ C2 moisture" then 5 else if [parameter] = "Germ C3 moisture" then 6 else if [parameter] = "Germ C4 moisture" then 7 else if [parameter] = "Kiln load moisture" then 8 else if [parameter] = "Malt moisture" then 9 else if [parameter] = "Betaglucanes" then 10 else if [parameter] = "FAN" then 11 else if [parameter] = "Fria." then 12 else if [parameter] = "Color EBC" then 13 else null),
+				    #"Type modifié" = Table.TransformColumnTypes(#"Colonne conditionnelle ajoutée3",{{"id_batch", type text}, {"id_recommendation", type text}, {"id_target_localization", Int64.Type}, {"target_localization", type text}, {"acceptance_status", type text}, {"taux_application_localization", type number}, {"Valeur", type number}, {"parameter", type text}, {"attribut", type text}, {"attribut_order", Int64.Type}, {"parameter_order", Int64.Type}}),
+				    #"Requêtes fusionnées1" = Table.NestedJoin(#"Type modifié", {"id_target_localization"}, dim_localization, {"id_localization"}, "dim_localization", JoinKind.LeftOuter),
+				    #"dim_localization développé" = Table.ExpandTableColumn(#"Requêtes fusionnées1", "dim_localization", {"localization_eng"}, {"localization_eng"})
+				in
+				    #"dim_localization développé"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,158 @@
+table recommendation_pdf_score_production_type_specy
+	lineageTag: e4409ba2-6361-410b-9316-fa0549885fa2
+
+	measure Nb_Commun =
+			
+			CALCULATE (
+			    COUNTROWS ( recommendation_pdf_score_production_type_specy ),
+			    recommendation_pdf_score_production_type_specy[rarete] = "Commun"
+			)
+		formatString: 0
+		lineageTag: 731993f7-80bd-4f7f-a274-7397e714a172
+
+	measure Nb_PeuCommun =
+			
+			CALCULATE (
+			    COUNTROWS ( recommendation_pdf_score_production_type_specy ),
+			    recommendation_pdf_score_production_type_specy[rarete] = "Peu commun"
+			)
+		formatString: 0
+		lineageTag: 7ceed41c-0cb3-4a42-bfd5-b86bf1564adf
+
+	measure Nb_Rare =
+			
+			CALCULATE (
+			    COUNTROWS ( recommendation_pdf_score_production_type_specy ),
+			    recommendation_pdf_score_production_type_specy[rarete] = "Rare"
+			)
+		formatString: 0
+		lineageTag: 23ae609b-9c2f-4191-98d6-10861a303079
+
+	measure Nb_TresRare =
+			
+			CALCULATE (
+			    COUNTROWS ( recommendation_pdf_score_production_type_specy ),
+			    recommendation_pdf_score_production_type_specy[rarete] = "Très rare"
+			)
+		formatString: 0
+		lineageTag: e0864ec2-ffde-400b-b403-39d01a285680
+
+	column id_recommendation
+		dataType: string
+		lineageTag: 83c14b4d-4a49-43e5-a78c-07a70cc100f8
+		summarizeBy: none
+		sourceColumn: id_recommendation
+
+		annotation SummarizationSetBy = Automatic
+
+	column pdf_score
+		dataType: double
+		lineageTag: dc2191a5-befa-4519-b2d9-79817292fb72
+		summarizeBy: sum
+		sourceColumn: pdf_score
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column rarete
+		dataType: string
+		lineageTag: 8a5b2c68-dcb8-4805-a610-4360d7ab4bf9
+		summarizeBy: none
+		sourceColumn: rarete
+
+		annotation SummarizationSetBy = Automatic
+
+	column score
+		dataType: int64
+		formatString: 0
+		lineageTag: f75a1b2d-34ae-404b-bf4b-63b2b24ffbae
+		summarizeBy: sum
+		sourceColumn: score
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_batch
+		dataType: string
+		lineageTag: 6e8d3ad8-7ea2-4c97-8d01-1d5bbd496c0f
+		summarizeBy: none
+		sourceColumn: id_batch
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_parameter
+		dataType: int64
+		formatString: 0
+		lineageTag: 2f11eb5f-7abc-4102-8760-f3eea7b8d2f9
+		summarizeBy: sum
+		sourceColumn: id_parameter
+
+		annotation SummarizationSetBy = Automatic
+
+	column predicted_value
+		dataType: double
+		lineageTag: 28717127-b470-4f0d-944b-25724550b5d4
+		summarizeBy: sum
+		sourceColumn: predicted_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: ea8b6304-6969-4fdf-81ba-6573265523b9
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 3e0452be-1e9f-4b09-94b5-f50ced34856d
+			defaultHierarchy: LocalDateTable_4dcc76b6-ac21-4444-bb2b-d1289b1959a3.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 017b9843-42a0-4913-bc24-9e0c69701d64
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: 33bfa761-93b3-4b4d-8b20-5f2a5f6c65c6
+			defaultHierarchy: LocalDateTable_2034604d-e62f-4db7-8968-c5884456cf4a.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 35b36096-3410-4b17-8079-c4ae46da9b14
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: d9429914-9601-4731-b0b8-8aaa7db7e5ba
+			defaultHierarchy: LocalDateTable_60593d86-208f-4270-a9e1-74213898aab6.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition recommendation_pdf_score_production_type_specy = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    parameters_Schema = mal_maite_bi_prd_Database{[Name="parameters",Kind="Schema"]}[Data],
+				    fact_pdf_score_Table = parameters_Schema{[Name="fact_pdf_score",Kind="Table"]}[Data]
+				in
+				    fact_pdf_score_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

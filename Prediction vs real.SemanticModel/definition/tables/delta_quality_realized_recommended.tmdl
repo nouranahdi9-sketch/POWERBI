@@ -1,0 +1,845 @@
+table delta_quality_realized_recommended
+	lineageTag: 5237a42f-53a0-4fec-8f19-14e04d39fe44
+
+	measure borne_max_betaG = IF(MAX(delta_quality_realized_recommended[betaglucan]) > MAX(delta_quality_realized_recommended[betaglucan_recommended]), MAX(delta_quality_realized_recommended[betaglucan])*1.05, MAX(delta_quality_realized_recommended[betaglucan_recommended])*1.05)
+		lineageTag: 524235cd-b037-4545-95f7-6c0eb7deee25
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure borne_max_colorEBC = IF(MAX(delta_quality_realized_recommended[color_ebc]) > MAX(delta_quality_realized_recommended[color_ebc_recommended]), MAX(delta_quality_realized_recommended[color_ebc])*1.05, MAX(delta_quality_realized_recommended[color_ebc_recommended])*1.05)
+		lineageTag: 2bab95a5-8a70-405d-9716-db144c2e8495
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure borne_max_fan = IF(MAX(delta_quality_realized_recommended[fan]) > MAX(delta_quality_realized_recommended[fan_recommended]), MAX(delta_quality_realized_recommended[fan])*1.05, MAX(delta_quality_realized_recommended[fan_recommended])*1.05)
+		lineageTag: eaf19bd9-2bf3-45fe-a6df-6c12789c8007
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure borne_max_friability = IF(MAX(delta_quality_realized_recommended[friability]) > MAX(delta_quality_realized_recommended[friability_recommended]), MAX(delta_quality_realized_recommended[friability])*1.05, MAX(delta_quality_realized_recommended[friability_recommended])*1.05)
+		lineageTag: 2dea9258-52fc-476b-8208-7299ae3439d1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure borne_min_betaG = IF(MIN(delta_quality_realized_recommended[betaglucan]) < MIN(delta_quality_realized_recommended[betaglucan_recommended]), MIN(delta_quality_realized_recommended[betaglucan])*0.2, MIN(delta_quality_realized_recommended[betaglucan_recommended])*0.2)
+		lineageTag: c054eca2-5777-4881-b8e2-118645bf29eb
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure borne_min_color_ebc = IF(MIN(delta_quality_realized_recommended[color_ebc]) < MIN(delta_quality_realized_recommended[color_ebc_recommended]), MIN(delta_quality_realized_recommended[color_ebc])*0.9, MIN(delta_quality_realized_recommended[color_ebc_recommended])*0.9)
+		lineageTag: 510e91af-217e-4856-a6e3-2d1d5e716059
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure borne_min_fan = IF(MIN(delta_quality_realized_recommended[fan]) < MIN(delta_quality_realized_recommended[fan_recommended]), MIN(delta_quality_realized_recommended[fan])*0.9, MIN(delta_quality_realized_recommended[fan_recommended])*0.9)
+		lineageTag: aeda33f7-b2a1-47be-810b-255ea3c19124
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure borne_min_friability = IF(MIN(delta_quality_realized_recommended[friability]) < MIN(delta_quality_realized_recommended[friability_recommended]), MIN(delta_quality_realized_recommended[friability])*0.95, MIN(delta_quality_realized_recommended[friability_recommended])*0.95)
+		lineageTag: d60bd753-4f1a-44d9-b8f2-ac4a66f774dc
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure borne_max_product_moisture = IF(MAX(delta_quality_realized_recommended[product_moisture]) > MAX(delta_quality_realized_recommended[product_moisture_recommended]), MAX(delta_quality_realized_recommended[product_moisture])*1.05, MAX(delta_quality_realized_recommended[product_moisture_recommended])*1.05)
+		lineageTag: e96c7ff7-abc4-437a-a826-e5e4089535da
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure borne_min_product_moisture = IF(MIN(delta_quality_realized_recommended[product_moisture]) < MIN(delta_quality_realized_recommended[product_moisture_recommended]), MIN(delta_quality_realized_recommended[product_moisture])*0.95, MIN(delta_quality_realized_recommended[product_moisture_recommended])*0.95)
+		lineageTag: 2254379c-79d1-454f-9246-b03a3ea7694b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure betaglucan_%_IA_result =
+			
+			VAR Oui =
+			    CALCULATE(
+			        COUNTROWS('delta_quality_realized_recommended'),
+			        'delta_quality_realized_recommended'[betaglucan_recommended_result] = "OUI"
+			    )
+			VAR Total =
+			COUNTROWS(
+			    FILTER(
+			        'delta_quality_realized_recommended',
+			        'delta_quality_realized_recommended'[betaglucan_recommended_result] <> "null" &&
+			        NOT(ISBLANK('delta_quality_realized_recommended'[betaglucan_recommended_result]))
+			    )
+			)
+			RETURN
+			    DIVIDE(Oui, Total)
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		lineageTag: 21408bf1-36c2-4f9b-8479-9a6582b549b1
+
+	measure color_ebc_%_IA_result =
+			
+			VAR Oui =
+			    CALCULATE(
+			        COUNTROWS('delta_quality_realized_recommended'),
+			        'delta_quality_realized_recommended'[color_ebc_recommended_result] = "OUI"
+			    )
+			VAR Total =
+			COUNTROWS(
+			    FILTER(
+			        'delta_quality_realized_recommended',
+			        'delta_quality_realized_recommended'[color_ebc_recommended_result] <> "null" &&
+			        NOT(ISBLANK('delta_quality_realized_recommended'[color_ebc_recommended_result]))
+			    )
+			)
+			RETURN
+			    DIVIDE(Oui, Total)
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		lineageTag: c99c6d2a-f9f4-41e8-8038-a88da14fbdac
+
+	measure fan_%_IA_result =
+			
+			VAR Oui =
+			    CALCULATE(
+			        COUNTROWS('delta_quality_realized_recommended'),
+			        'delta_quality_realized_recommended'[fan_recommended_result] = "OUI"
+			    )
+			VAR Total =
+			COUNTROWS(
+			    FILTER(
+			        'delta_quality_realized_recommended',
+			        'delta_quality_realized_recommended'[fan_recommended_result] <> "null" &&
+			        NOT(ISBLANK('delta_quality_realized_recommended'[fan_recommended_result]))
+			    )
+			)
+			RETURN
+			    DIVIDE(Oui, Total)
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		lineageTag: c1ee8b57-0f41-4f10-adfc-c04a57161f66
+
+	measure friability_%_IA_result =
+			
+			VAR Oui =
+			    CALCULATE(
+			        COUNTROWS('delta_quality_realized_recommended'),
+			        'delta_quality_realized_recommended'[friability_recommended_result] = "OUI"
+			    )
+			VAR Total =
+			COUNTROWS(
+			    FILTER(
+			        'delta_quality_realized_recommended',
+			        'delta_quality_realized_recommended'[friability_recommended_result] <> "null" &&
+			        NOT(ISBLANK('delta_quality_realized_recommended'[friability_recommended_result]))
+			    )
+			)
+			RETURN
+			    DIVIDE(Oui, Total)
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		lineageTag: 1094a6da-fdce-4036-a7a2-fc66cb452d3d
+
+	measure product_moisture_%_IA_result =
+			
+			VAR Oui =
+			    CALCULATE(
+			        COUNTROWS('delta_quality_realized_recommended'),
+			        'delta_quality_realized_recommended'[product_moisture_recommended_result] = "OUI"
+			    )
+			VAR Total =
+			COUNTROWS(
+			    FILTER(
+			        'delta_quality_realized_recommended',
+			        'delta_quality_realized_recommended'[product_moisture_recommended_result] <> "null" &&
+			        NOT(ISBLANK('delta_quality_realized_recommended'[product_moisture_recommended_result]))
+			    )
+			)
+			RETURN
+			    DIVIDE(Oui, Total)
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		lineageTag: a549da15-2c52-4710-8cac-c306dc298c12
+
+	measure 'moy. borne_result_quality' = ([betaglucan_%_IA_result] + [color_ebc_%_IA_result] + [fan_%_IA_result] + [friability_%_IA_result] + [product_moisture_%_IA_result]) / 5
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		lineageTag: 5ee83b3a-a172-4d9a-bc6b-67668bb54bc4
+
+	measure betaglucan_%_result =
+			
+			VAR Oui =
+			    CALCULATE(
+			        COUNTROWS('delta_quality_realized_recommended'),
+			        'delta_quality_realized_recommended'[betaglucan_result] = "OUI"
+			    )
+			VAR Total =
+			COUNTROWS(
+			    FILTER(
+			        'delta_quality_realized_recommended',
+			        'delta_quality_realized_recommended'[betaglucan_result] <> "null" &&
+			        NOT(ISBLANK('delta_quality_realized_recommended'[betaglucan_result]))
+			    )
+			)
+			RETURN
+			    DIVIDE(Oui, Total)
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		lineageTag: 75e155fa-23e1-4e85-a95d-077c786b7d59
+
+	measure color_ebc_%_result =
+			
+			VAR Oui =
+			    CALCULATE(
+			        COUNTROWS('delta_quality_realized_recommended'),
+			        'delta_quality_realized_recommended'[color_ebc_result] = "OUI"
+			    )
+			VAR Total =
+			COUNTROWS(
+			    FILTER(
+			        'delta_quality_realized_recommended',
+			        'delta_quality_realized_recommended'[color_ebc_result] <> "null" &&
+			        NOT(ISBLANK('delta_quality_realized_recommended'[color_ebc_result]))
+			    )
+			)
+			RETURN
+			    DIVIDE(Oui, Total)
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		lineageTag: b4a133e7-5afd-4fac-a579-67d60ad03273
+
+	measure fan_%_result =
+			
+			VAR Oui =
+			    CALCULATE(
+			        COUNTROWS('delta_quality_realized_recommended'),
+			        'delta_quality_realized_recommended'[fan_result] = "OUI"
+			    )
+			VAR Total =
+			COUNTROWS(
+			    FILTER(
+			        'delta_quality_realized_recommended',
+			        'delta_quality_realized_recommended'[fan_result] <> "null" &&
+			        NOT(ISBLANK('delta_quality_realized_recommended'[fan_result]))
+			    )
+			)
+			RETURN
+			    DIVIDE(Oui, Total)
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		lineageTag: 19091d8b-8255-49b0-a9e6-d378fa7594c6
+
+	measure friability_%_result =
+			
+			VAR Oui =
+			    CALCULATE(
+			        COUNTROWS('delta_quality_realized_recommended'),
+			        'delta_quality_realized_recommended'[friability_result] = "OUI"
+			    )
+			VAR Total =
+			COUNTROWS(
+			    FILTER(
+			        'delta_quality_realized_recommended',
+			        'delta_quality_realized_recommended'[friability_result] <> "null" &&
+			        NOT(ISBLANK('delta_quality_realized_recommended'[friability_result]))
+			    )
+			)
+			RETURN
+			    DIVIDE(Oui, Total)
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		lineageTag: 573fc72c-4dcf-404d-bb62-39ebcc0945c0
+
+	measure product_moisture_%_result =
+			
+			VAR Oui =
+			    CALCULATE(
+			        COUNTROWS('delta_quality_realized_recommended'),
+			        'delta_quality_realized_recommended'[product_moisture_result] = "OUI"
+			    )
+			VAR Total =
+			COUNTROWS(
+			    FILTER(
+			        'delta_quality_realized_recommended',
+			        'delta_quality_realized_recommended'[product_moisture_result] <> "null" &&
+			        NOT(ISBLANK('delta_quality_realized_recommended'[product_moisture_result]))
+			    )
+			)
+			RETURN
+			    DIVIDE(Oui, Total)
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		lineageTag: a305717a-101b-465a-91b0-213fd1e7a2ee
+
+	measure 'delta_moy._quality' = (AVERAGE(delta_quality_realized_recommended[delta_percent_betaglucan]) + AVERAGE(delta_quality_realized_recommended[delta_percent_color_ebc]) + AVERAGE(delta_quality_realized_recommended[delta_percent_fan]) + AVERAGE(delta_quality_realized_recommended[delta_percent_friability]) + AVERAGE(delta_quality_realized_recommended[delta_product_moisture]))
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		lineageTag: 7c9230f4-bac3-47d8-88c1-b98009fcecbc
+
+	column id_batch
+		dataType: string
+		lineageTag: b161b673-c2d3-4695-b67e-996671377ac0
+		summarizeBy: none
+		sourceColumn: id_batch
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_recommendation
+		dataType: string
+		lineageTag: c237302f-70f4-4d32-b04b-fa07edb5ffe1
+		summarizeBy: none
+		sourceColumn: id_recommendation
+
+		annotation SummarizationSetBy = Automatic
+
+	column acceptance_status
+		dataType: string
+		lineageTag: 3b182f67-cc7f-4219-85c2-e97d4748154f
+		summarizeBy: none
+		sourceColumn: acceptance_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column color_ebc
+		dataType: double
+		lineageTag: 5ddb64ac-907b-49d9-943d-d707874d7efe
+		summarizeBy: sum
+		sourceColumn: color_ebc
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column color_ebc_recommended
+		dataType: double
+		lineageTag: 313214be-9e4c-48b4-98f5-48da0c28887a
+		summarizeBy: sum
+		sourceColumn: color_ebc_recommended
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column delta_percent_color_ebc
+		dataType: double
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		lineageTag: 0439b07e-6c46-4b7b-b16f-ddacac740a4f
+		summarizeBy: sum
+		sourceColumn: delta_percent_color_ebc
+
+		annotation SummarizationSetBy = Automatic
+
+	column fan
+		dataType: double
+		formatString: 0
+		lineageTag: bcf3aab9-f7fc-4509-80b6-306a1ba64665
+		summarizeBy: sum
+		sourceColumn: fan
+
+		annotation SummarizationSetBy = Automatic
+
+	column fan_recommended
+		dataType: double
+		formatString: 0.0
+		lineageTag: d8336d3c-71b4-4cd3-8b79-c4757f2d7b58
+		summarizeBy: sum
+		sourceColumn: fan_recommended
+
+		annotation SummarizationSetBy = Automatic
+
+	column delta_percent_fan
+		dataType: double
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		lineageTag: db3a193a-bf4a-472b-a75f-7d676af8bc5f
+		summarizeBy: sum
+		sourceColumn: delta_percent_fan
+
+		annotation SummarizationSetBy = Automatic
+
+	column friability
+		dataType: double
+		formatString: 0.0
+		lineageTag: 3a3f5138-70a3-4a87-a131-6bb2da363cd7
+		summarizeBy: sum
+		sourceColumn: friability
+
+		annotation SummarizationSetBy = Automatic
+
+	column friability_recommended
+		dataType: double
+		formatString: 0.0
+		lineageTag: 3a951b0e-2f22-4fc6-a672-00003f560852
+		summarizeBy: sum
+		sourceColumn: friability_recommended
+
+		annotation SummarizationSetBy = Automatic
+
+	column delta_percent_friability
+		dataType: double
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		lineageTag: 0b90974d-8ff9-45c3-b76e-797f489dda6c
+		summarizeBy: sum
+		sourceColumn: delta_percent_friability
+
+		annotation SummarizationSetBy = Automatic
+
+	column betaglucan
+		dataType: double
+		formatString: 0
+		lineageTag: 82f41867-2402-434a-af93-a70f4029a17c
+		summarizeBy: sum
+		sourceColumn: betaglucan
+
+		annotation SummarizationSetBy = Automatic
+
+	column betaglucan_recommended
+		dataType: double
+		formatString: 0.0
+		lineageTag: 2ece4af7-16c5-4448-a268-d539e752ddda
+		summarizeBy: sum
+		sourceColumn: betaglucan_recommended
+
+		annotation SummarizationSetBy = Automatic
+
+	column delta_percent_betaglucan
+		dataType: double
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		lineageTag: 8ef5f880-62d9-46f9-b428-45ec28ef3a49
+		summarizeBy: sum
+		sourceColumn: delta_percent_betaglucan
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_moisture
+		dataType: double
+		formatString: 0.0
+		lineageTag: 8d77ed66-a08d-4378-9c05-2d743cb7e0e6
+		summarizeBy: sum
+		sourceColumn: product_moisture
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_moisture_recommended
+		dataType: double
+		formatString: 0.0
+		lineageTag: cdf69f98-b816-466e-b53a-718b853b36b8
+		summarizeBy: sum
+		sourceColumn: product_moisture_recommended
+
+		annotation SummarizationSetBy = Automatic
+
+	column delta_percent_product_moisture
+		dataType: double
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		lineageTag: 5523e284-9630-4107-b572-286e75c847e0
+		summarizeBy: sum
+		sourceColumn: delta_percent_product_moisture
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_target_localization
+		dataType: int64
+		formatString: 0
+		lineageTag: a09a20de-64d5-4dfa-8105-90b62efb7c04
+		summarizeBy: none
+		sourceColumn: id_target_localization
+
+		annotation SummarizationSetBy = Automatic
+
+	column target_localization
+		dataType: string
+		lineageTag: 36512cc8-ec95-4565-835a-6cd13f076450
+		summarizeBy: none
+		sourceColumn: target_localization
+		sortByColumn: id_target_localization
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column taux_application_localization
+		dataType: double
+		formatString: 0\ %;-0\ %;0\ %
+		lineageTag: 569ac3e9-c1e0-4d31-945c-251e1935c40d
+		summarizeBy: sum
+		sourceColumn: taux_application_localization
+
+		annotation SummarizationSetBy = Automatic
+
+	column color_ebc_max
+		dataType: double
+		lineageTag: fa1f52e7-c098-4aad-86ef-dc71d7f75153
+		summarizeBy: sum
+		sourceColumn: color_ebc_max
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column color_ebc_min
+		dataType: double
+		lineageTag: 88c847fc-d317-4506-ac9b-608b26838ef8
+		summarizeBy: sum
+		sourceColumn: color_ebc_min
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column color_ebc_recommended_result
+		dataType: string
+		lineageTag: e7450514-99f1-411e-82fb-4c924daf507d
+		summarizeBy: none
+		sourceColumn: color_ebc_recommended_result
+
+		annotation SummarizationSetBy = Automatic
+
+	column fan_max
+		dataType: double
+		formatString: 0
+		lineageTag: 769340ed-06fb-49b7-93e8-845c4c198d61
+		summarizeBy: sum
+		sourceColumn: fan_max
+
+		annotation SummarizationSetBy = Automatic
+
+	column fan_min
+		dataType: double
+		formatString: 0
+		lineageTag: 56f55ff5-9e04-4ff9-8665-0339a2b2d0e7
+		summarizeBy: sum
+		sourceColumn: fan_min
+
+		annotation SummarizationSetBy = Automatic
+
+	column fan_recommended_result
+		dataType: string
+		lineageTag: e8919eef-2a00-4076-87e1-b7d4733141c8
+		summarizeBy: none
+		sourceColumn: fan_recommended_result
+
+		annotation SummarizationSetBy = Automatic
+
+	column friability_max
+		dataType: double
+		formatString: 0
+		lineageTag: 99886c2c-8cd3-4dc2-ac4a-011c12f244fe
+		summarizeBy: sum
+		sourceColumn: friability_max
+
+		annotation SummarizationSetBy = Automatic
+
+	column friability_min
+		dataType: double
+		formatString: 0
+		lineageTag: aacf515f-11e9-4d43-9d3d-2c4573f8ca51
+		summarizeBy: sum
+		sourceColumn: friability_min
+
+		annotation SummarizationSetBy = Automatic
+
+	column friability_recommended_result
+		dataType: string
+		lineageTag: 4daf917d-7f71-4f7e-972b-8bce8389f279
+		summarizeBy: none
+		sourceColumn: friability_recommended_result
+
+		annotation SummarizationSetBy = Automatic
+
+	column betaglucan_max
+		dataType: double
+		formatString: 0
+		lineageTag: 41420882-d6fc-40c1-914d-71debeee8127
+		summarizeBy: sum
+		sourceColumn: betaglucan_max
+
+		annotation SummarizationSetBy = Automatic
+
+	column betaglucan_min
+		dataType: double
+		formatString: 0
+		lineageTag: 21da3799-cf16-4a38-8216-2d21d9035504
+		summarizeBy: sum
+		sourceColumn: betaglucan_min
+
+		annotation SummarizationSetBy = Automatic
+
+	column betaglucan_recommended_result
+		dataType: string
+		lineageTag: 58332b11-6f1d-42b6-9a54-c0f675b6abaa
+		summarizeBy: none
+		sourceColumn: betaglucan_recommended_result
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_moisture_max
+		dataType: double
+		lineageTag: b27a5c8c-8f15-49dc-b39e-623b5fddf373
+		summarizeBy: sum
+		sourceColumn: product_moisture_max
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column product_moisture_min
+		dataType: double
+		lineageTag: e3c2ccec-db94-4aab-b44d-141a9ce830ae
+		summarizeBy: sum
+		sourceColumn: product_moisture_min
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column product_moisture_recommended_result
+		dataType: string
+		lineageTag: 52444431-346a-45a0-be51-85039796f419
+		summarizeBy: none
+		sourceColumn: product_moisture_recommended_result
+
+		annotation SummarizationSetBy = Automatic
+
+	column delta_color_ebc
+		dataType: double
+		lineageTag: 57ae3c77-56eb-47c0-92bf-ce4d5ab1b42c
+		summarizeBy: sum
+		sourceColumn: delta_color_ebc
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column delta_fan
+		dataType: double
+		lineageTag: 782e1737-a4e0-4025-b378-88d548b211fe
+		summarizeBy: sum
+		sourceColumn: delta_fan
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column delta_friability
+		dataType: double
+		lineageTag: 7fa70d11-880a-4e8d-bdfc-3041206c1b67
+		summarizeBy: sum
+		sourceColumn: delta_friability
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column delta_betaglucan
+		dataType: double
+		lineageTag: 3c3b7a1e-7371-4abb-be69-3977cc7544cc
+		summarizeBy: sum
+		sourceColumn: delta_betaglucan
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column delta_product_moisture
+		dataType: double
+		lineageTag: 246d3594-e843-45fd-bca2-2d03078b4525
+		summarizeBy: sum
+		sourceColumn: delta_product_moisture
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 91973fc7-e962-4cef-b718-ac57ca93c970
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 1f648b06-e7db-4c24-bccc-3a01b6b441dc
+			defaultHierarchy: LocalDateTable_e40dcaab-57ba-480d-952d-f1b99ece2a2f.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a84e8e94-cff9-4448-9cd1-c5773c37bc27
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		variation Variation
+			isDefault
+			relationship: 91a1dfd4-41fd-4daa-b22a-699515bbfdc8
+			defaultHierarchy: LocalDateTable_7e9f5d67-447d-4316-a80d-2abb17a1b2b8.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 7ef3d2f9-2a74-45e5-8fc7-e6078d9de08d
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: 8918b674-2b71-4421-bf5a-5e1ea906a060
+			defaultHierarchy: LocalDateTable_4425cd3b-61e8-408a-83ee-45f3875b4b06.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column color_ebc_result
+		dataType: string
+		lineageTag: a459cbc6-7e80-47df-aaa8-91fec2f8d4eb
+		summarizeBy: none
+		sourceColumn: color_ebc_result
+
+		annotation SummarizationSetBy = Automatic
+
+	column fan_result
+		dataType: string
+		lineageTag: 89f067f7-307f-4c23-b0e7-6bed30cfd1c4
+		summarizeBy: none
+		sourceColumn: fan_result
+
+		annotation SummarizationSetBy = Automatic
+
+	column friability_result
+		dataType: string
+		lineageTag: 6e09a143-2de5-4baa-bf95-8c169fea0fce
+		summarizeBy: none
+		sourceColumn: friability_result
+
+		annotation SummarizationSetBy = Automatic
+
+	column betaglucan_result
+		dataType: string
+		lineageTag: 4b678351-a00c-49c3-b0bb-b18a7324f81d
+		summarizeBy: none
+		sourceColumn: betaglucan_result
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_moisture_result
+		dataType: string
+		lineageTag: 8a2b977d-e474-46c4-aa9c-394ed6889139
+		summarizeBy: none
+		sourceColumn: product_moisture_result
+
+		annotation SummarizationSetBy = Automatic
+
+	column classement_2_bornes_taux_application
+		dataType: string
+		lineageTag: fd5c7a14-7f00-43f9-a007-c60d7bb3dbc9
+		summarizeBy: none
+		sourceColumn: classement_2_bornes_taux_application
+
+		annotation SummarizationSetBy = Automatic
+
+	column classement_4_bornes_taux_application
+		dataType: string
+		lineageTag: c7795113-c26f-4b49-8b4d-99986de1c4cc
+		summarizeBy: none
+		sourceColumn: classement_4_bornes_taux_application
+
+		annotation SummarizationSetBy = Automatic
+
+	column Acceptance_Status_EN = ```
+			
+			SWITCH(
+			    TRUE(),
+			    'delta_quality_realized_recommended'[acceptance_status] = "Acceptée",       "Accepted",
+			    'delta_quality_realized_recommended'[acceptance_status] = "En attente",     "Pending",
+			    'delta_quality_realized_recommended'[acceptance_status] = "Refusée IA",     "AI Rejected",
+			    'delta_quality_realized_recommended'[acceptance_status] = "Refusée usine",  "Plant Rejected",
+			    'delta_quality_realized_recommended'[acceptance_status]                    -- garde la valeur originale si aucune correspondance
+			)
+			
+			```
+		lineageTag: 4cf1e365-54c9-4350-b225-57ebfbccb063
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column r2_reel
+		dataType: double
+		lineageTag: 9f2e913d-b36b-4769-87d1-1e9e13b8b2fa
+		summarizeBy: sum
+		sourceColumn: r2_reel
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column r2_ia
+		dataType: double
+		lineageTag: 11b135a2-e96b-464e-a6f1-9e0fd686efd8
+		summarizeBy: sum
+		sourceColumn: r2_ia
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column r2_dry_yield_reel
+		dataType: double
+		lineageTag: 2ce9a031-934d-4162-aca6-75af8ec70dec
+		summarizeBy: sum
+		sourceColumn: r2_dry_yield_reel
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column r2_dry_yield_ia
+		dataType: double
+		lineageTag: cb6814e0-74aa-460d-961d-4bfc57220781
+		summarizeBy: sum
+		sourceColumn: r2_dry_yield_ia
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column delta_percent_r2
+		dataType: double
+		lineageTag: 16c0a2a4-3cf7-41d2-a21b-4f971b823d62
+		summarizeBy: sum
+		sourceColumn: delta_percent_r2
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column delta_percent_r2_dry_yield
+		dataType: double
+		lineageTag: 70b020d9-417e-4400-84c2-0379a62cdfef
+		summarizeBy: sum
+		sourceColumn: delta_percent_r2_dry_yield
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column delta_r2
+		dataType: double
+		lineageTag: 88ca7202-b7e8-45d2-8c62-3f155e12bb89
+		summarizeBy: sum
+		sourceColumn: delta_r2
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column delta_r2_dry_yield
+		dataType: double
+		lineageTag: de576ed2-237b-40e6-b46d-2db0f2cbe894
+		summarizeBy: sum
+		sourceColumn: delta_r2_dry_yield
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition delta_quality_realized_recommended = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_prd_Database = Source{[Name="mal_maite_bi_prd",Kind="Database"]}[Data],
+				    parameters_Schema = mal_maite_bi_prd_Database{[Name="parameters",Kind="Schema"]}[Data],
+				    fact_delta_quality_realized_recommended_Table = parameters_Schema{[Name="fact_delta_quality_realized_recommended",Kind="Table"]}[Data]
+				in
+				    fact_delta_quality_realized_recommended_Table
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+
