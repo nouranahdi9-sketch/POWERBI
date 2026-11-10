@@ -40,3 +40,4 @@ Clés de l'onglet Synthèse macro (même table, même ReportCode), textes propos
 | 2 | Supprimer les onglets Cycle time, Transfer time et Waiting time (masqués pour l'instant) | Après validation de l'onglet Synthèse |
 | 3 | Supprimer l'onglet Batch-cycle (masqué, fusionné dans Measures) | Après validation de l'onglet Measures |
 | 4 | Bouton « Détail » sélectionné par défaut sur Synthèse macro (aujourd'hui Localisation) | Avec les valeurs de départ |
+| 5 | Supprimer les onglets Pareto et Pareto - events & details (masqués, fusionnés dans Production notes et Synthèse macro) | Après validation de l'onglet Production notes |
