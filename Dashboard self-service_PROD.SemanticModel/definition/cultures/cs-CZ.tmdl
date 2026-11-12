@@ -1,0 +1,68 @@
+cultureInfo cs-CZ
+	translations
+		model Model
+			table batch_report
+				column 'Filtre DesiredFields'
+					caption: Požadované místo
+			table localisation
+				column Attribut
+					caption: Parametr
+				column Valeur
+					caption: Hodnota
+			table dim_batch
+				column batch_number
+					caption: Hromada
+				column ordre_fabrication
+					caption: Pokyn k výrobě
+				column annee_recolte
+					caption: Sklizeň
+				column debut_de_production
+					caption: Start výroby
+				column fin_de_production
+					caption: Konec výroby
+				column mes_number
+					caption: MES číslo
+			table dim_site
+				column plant
+					caption: Výrobní linka
+			table dim_specification
+				column cdc
+					caption: Specifikace
+			table dim_variety_specy
+				column variety
+					caption: Odrůda
+				column specy
+					caption: Druh
+			table dim_production_type
+				column code
+					caption: Typ výroby
+			table parameters_variables
+				column code
+					caption: Parametr
+			table phase
+				column prd_workshop
+					caption: Dílna
+				column prd_cell
+					caption: Cell
+				column start
+					caption: Buňka
+				column end
+					caption: Konec
+			table fact_weather
+				column fabrication_order
+					caption: Pokyn k výrobě
+				column production_planned_date
+					caption: Plánovaný den
+			table fact_energy
+				column value
+					caption: Hodnota
+			table fact_measurement
+				column measure_name
+					caption: Parametr
+				column value
+					caption: Hodnota
+				column status
+					caption: Kvalita dat
+				column label
+					caption: Etiketa
+

@@ -1,0 +1,70 @@
+relationship AutoDetected_1f2866ec-2e7b-4a83-806d-7f617c1f9cce
+	fromColumn: manual_entries.id_batch
+	toColumn: dim_batch.id_batch
+
+relationship AutoDetected_75bfc0e4-7aa3-4394-9793-96688ddbc8ee
+	crossFilteringBehavior: bothDirections
+	fromColumn: dim_batch.id_cdc
+	toColumn: dim_specification.id_cdc
+
+relationship AutoDetected_49457617-7c36-4d6d-bd5e-95925d5084a1
+	fromColumn: localisation.batch_id
+	toColumn: dim_batch.id_batch
+
+relationship 7e0cb81d-dcd0-3c2c-8958-ac186cd15364
+	crossFilteringBehavior: bothDirections
+	fromColumn: dim_batch.id_site
+	toColumn: dim_site.id_plant
+
+relationship 9140585b-7f98-63a4-5684-efd450c314b3
+	crossFilteringBehavior: bothDirections
+	fromColumn: dim_batch.id_variete
+	toColumn: dim_variety_specy.id_variety
+
+relationship a9c7bec0-2f2f-f57b-0af7-bcd38055c6ba
+	crossFilteringBehavior: bothDirections
+	fromColumn: dim_batch.id_type
+	toColumn: dim_production_type.id_parameter_production_type
+
+relationship 6b5788ce-b0a0-1872-d835-b48d71ac80d1
+	fromColumn: batch_report.id_batch
+	toColumn: dim_batch.id_batch
+
+relationship e89806c3-9f6f-a51b-0f01-f094da301a34
+	crossFilteringBehavior: bothDirections
+	fromColumn: dim_batch.ordre_fabrication
+	toColumn: malt_quality_results.fabrication_order
+
+relationship fba2d8f1-565e-26ec-0755-6705ada9ab9d
+	crossFilteringBehavior: bothDirections
+	fromColumn: dim_batch.ordre_fabrication
+	toColumn: goods_quality_results.fabrication_order
+
+relationship AutoDetected_a111d1ca-dabb-4e0f-aa2c-c0475fc25dae
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: parameters_variables_translations.parameter_variable
+	toColumn: parameters_variables.id_parameter_variable
+
+relationship AutoDetected_97cb0d8d-9e65-4ff5-b0a1-b15f5d0b2df1
+	fromColumn: phase.batch_id
+	toColumn: dim_batch.id_batch
+
+relationship da369b4e-2df4-006d-2de7-de543b56f645
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: fact_weather.id_batch
+	toColumn: dim_batch.id_batch
+
+relationship 1983c1ce-ef43-26fb-54eb-429f21d7face
+	fromColumn: fact_energy.id_batch
+	toColumn: dim_batch.id_batch
+
+relationship 474f0da4-c4a8-0e74-b77f-92384b2e24b9
+	fromColumn: fact_energy.id_parameter
+	toColumn: parameters_variables.id_parameter_variable
+
+relationship AutoDetected_b6c56671-22d6-4182-9ca2-fbbddc3f9e23
+	fromColumn: fact_measurement.batch_id
+	toColumn: dim_batch.id_batch
+
