@@ -41,3 +41,11 @@ Clés de l'onglet Synthèse macro (même table, même ReportCode), textes propos
 | 3 | Supprimer l'onglet Batch-cycle (masqué, fusionné dans Measures) | Après validation de l'onglet Measures |
 | 4 | Bouton « Détail » sélectionné par défaut sur Synthèse macro (aujourd'hui Localisation) | Avec les valeurs de départ |
 | 5 | Supprimer les onglets Pareto et Pareto - events & details (masqués, fusionnés dans Production notes et Synthèse macro) | Après validation de l'onglet Production notes |
+
+## Mise en production (MEP)
+
+| # | Quoi | Statut |
+|---|---|---|
+| 1 | Notebooks : la preprod (version traduite) n'a peut-être pas le correctif PROD du 14/10/2026 dans `transform_data` (`manual_entries_dedup` : une seule saisie de poids par batch). À fusionner avant la MEP, sans perdre `measure_key` ni les codes en anglais de la preprod | À faire à la MEP |
+| 2 | Correctif `manual_entries_dedup` : il trie sur `id_manual_entry`. Si c'est un UUID, le plus grand n'est pas forcément le plus récent ; trier plutôt sur une date de saisie (`created_at`) si elle existe | À vérifier |
+| 3 | Preprod : supprimer la ligne en double du batch 3298 dans `dim_batches_specifications` (`batch_id = 'bbbd9bb3-2ea5-4822-97e3-ca583296351b'`, ligne avec `updated_at` vide), sinon l'actualisation Power BI échoue | À faire |
