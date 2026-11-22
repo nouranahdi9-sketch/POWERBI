@@ -1,10 +1,6 @@
 table fact_batch_note
 	lineageTag: 5e427cef-6bce-4f45-aca4-5f9bfdb6339b
 
-	measure Test_NbNotes = COUNTROWS ( fact_batch_note )
-		formatString: 0.00
-		lineageTag: ddc41b1c-8324-4947-b205-bcdf72490c42
-
 	column batch
 		dataType: string
 		lineageTag: 10d40dda-3a4b-434d-afd7-a52a4c12c113

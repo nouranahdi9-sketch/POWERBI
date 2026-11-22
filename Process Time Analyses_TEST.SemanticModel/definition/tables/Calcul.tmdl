@@ -586,10 +586,6 @@ table Calcul
 			)
 		lineageTag: 69272839-9766-402b-835a-2e1689d50bef
 
-	measure DBG_NbLignesTrad = COUNTROWS ( dim_trad_specy )
-		formatString: 0
-		lineageTag: da61084f-9609-4a54-8636-329328ca6b6e
-
 	column Valeur
 		isHidden
 		formatString: 0

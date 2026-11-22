@@ -4,7 +4,7 @@
     {
       "ordinal": 0,
       "scrollPosition": {
-        "x": 7326.6351882810914,
+        "x": 4995.160817834485,
         "y": 386.08494251971439
       },
       "nodes": [
@@ -177,60 +177,8 @@
         },
         {
           "location": {
-            "x": 1136,
-            "y": 573.47256396551688
-          },
-          "nodeIndex": "dim_language",
-          "nodeLineageTag": "7893d90b-28a3-4149-b35d-cd09ad6b5bc5",
-          "size": {
-            "height": 200,
-            "width": 234
-          },
-          "zIndex": 0
-        },
-        {
-          "location": {
-            "x": 1420,
-            "y": 525.47256396551688
-          },
-          "nodeIndex": "dim_localization",
-          "nodeLineageTag": "c4aca37b-acdd-4467-b68c-4db53e763b3d",
-          "size": {
-            "height": 296,
-            "width": 234
-          },
-          "zIndex": 0
-        },
-        {
-          "location": {
-            "x": 1704,
-            "y": 549.47256396551688
-          },
-          "nodeIndex": "dim_localization_group",
-          "nodeLineageTag": "960a6ba9-89d8-4a60-bf67-479dcb166ae6",
-          "size": {
-            "height": 248,
-            "width": 234
-          },
-          "zIndex": 0
-        },
-        {
-          "location": {
-            "x": 1988,
-            "y": 523.47256396551688
-          },
-          "nodeIndex": "dim_production_line_variable",
-          "nodeLineageTag": "aa3ce65e-bdaa-41d4-b206-16d6f10021cf",
-          "size": {
-            "height": 300,
-            "width": 234
-          },
-          "zIndex": 0
-        },
-        {
-          "location": {
-            "x": 2272,
-            "y": 561.47256396551688
+            "x": 2240.5744814228142,
+            "y": 586.16404284759165
           },
           "nodeIndex": "dim_production_type",
           "nodeLineageTag": "f771a8bc-d228-4fb4-b86c-1cb1e069e5ca",
@@ -333,45 +281,6 @@
         },
         {
           "location": {
-            "x": 4544,
-            "y": 573.47256396551688
-          },
-          "nodeIndex": "dim_trad_localization",
-          "nodeLineageTag": "359f6f17-148e-4577-a57e-09cbb4b5c2f3",
-          "size": {
-            "height": 200,
-            "width": 234
-          },
-          "zIndex": 0
-        },
-        {
-          "location": {
-            "x": 4828,
-            "y": 573.47256396551688
-          },
-          "nodeIndex": "dim_trad_localization_group",
-          "nodeLineageTag": "eeae4a35-4175-4d79-b08c-6235bcfcb37a",
-          "size": {
-            "height": 200,
-            "width": 234
-          },
-          "zIndex": 0
-        },
-        {
-          "location": {
-            "x": 5112,
-            "y": 573.47256396551688
-          },
-          "nodeIndex": "dim_trad_production_line_variable",
-          "nodeLineageTag": "86b417a1-938d-45a6-9d33-a747c9667bae",
-          "size": {
-            "height": 200,
-            "width": 234
-          },
-          "zIndex": 0
-        },
-        {
-          "location": {
             "x": 5396,
             "y": 573.47256396551688
           },
@@ -411,8 +320,8 @@
         },
         {
           "location": {
-            "x": 6248,
-            "y": 523.47256396551688
+            "x": 5817.0214595128773,
+            "y": 967.91918384286259
           },
           "nodeIndex": "dim_variable",
           "nodeLineageTag": "f0c5b901-8707-4c44-9e09-805bf8cfc883",
