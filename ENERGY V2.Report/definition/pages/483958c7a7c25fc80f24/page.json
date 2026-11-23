@@ -1,0 +1,25 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "name": "483958c7a7c25fc80f24",
+  "displayName": "Energy",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "visualInteractions": [
+    {
+      "source": "da76c8339732cfd41ad7",
+      "target": "a3bc538198b6fef2bec1",
+      "type": "DataFilter"
+    },
+    {
+      "source": "1cc9a81129c298784c9b",
+      "target": "da76c8339732cfd41ad7",
+      "type": "DataFilter"
+    },
+    {
+      "source": "1cc9a81129c298784c9b",
+      "target": "d00ed3e94a11f048ad8e",
+      "type": "DataFilter"
+    }
+  ]
+}
