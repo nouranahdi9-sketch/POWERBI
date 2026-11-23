@@ -1,0 +1,95 @@
+table dim_variety_specy
+	lineageTag: b2424328-b52d-49a5-ac4e-9353553b1b24
+
+	measure Test = MIN ( dim_variety_specy[variety] )
+		lineageTag: 17aa735d-0e89-4e50-b972-1a0b331613ae
+
+	column id_variety
+		dataType: int64
+		formatString: 0
+		lineageTag: dbd267f3-1c25-4210-9817-a5ad07c06587
+		summarizeBy: none
+		sourceColumn: id_variety
+
+		annotation SummarizationSetBy = Automatic
+
+	column variety
+		dataType: string
+		lineageTag: a847961a-cced-4953-a533-5756261999b2
+		summarizeBy: none
+		sourceColumn: variety
+
+		annotation SummarizationSetBy = Automatic
+
+	column specy
+		dataType: string
+		lineageTag: 300c222a-f4d5-400a-a5c7-24cc2fdd9d3d
+		summarizeBy: none
+		sourceColumn: specy
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 3610282b-3a19-45d4-ab63-3b157d1d11f1
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c35a341e-1dab-4738-83b3-c2df7b3020eb
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 9b128fc1-fae7-46e3-8f8d-a85bae4b6b1a
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_specy
+		dataType: int64
+		formatString: 0
+		lineageTag: 9b9bc571-1b57-434f-9477-8b15569636bc
+		summarizeBy: none
+		sourceColumn: id_specy
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_variety_specy = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_preprd_Database = Source{[Name="mal_maite_bi_preprd",Kind="Database"]}[Data],
+				    common_Schema = mal_maite_bi_preprd_Database{[Name="common",Kind="Schema"]}[Data],
+				    dim_variety_Table = common_Schema{[Name="dim_variety",Kind="Table"]}[Data],
+				    dim_specy_Table = common_Schema{[Name="dim_specy",Kind="Table"]}[Data],
+				    #"Varietes" = Table.RenameColumns(
+				        Table.SelectColumns(dim_variety_Table,
+				            {"id_good_variety", "code", "specy", "created_at", "updated_at", "deleted_at"}),
+				        {{"id_good_variety", "id_variety"}, {"code", "variety"}, {"specy", "id_specy"}}),
+				    #"Especes" = Table.RenameColumns(
+				        Table.SelectColumns(dim_specy_Table, {"id_good_specy", "code"}),
+				        {{"code", "specy"}}),
+				    #"Jointure espece" = Table.NestedJoin(#"Varietes", {"id_specy"},
+				        #"Especes", {"id_good_specy"}, "espece", JoinKind.LeftOuter),
+				    #"Espece developpee" = Table.ExpandTableColumn(#"Jointure espece", "espece", {"specy"}, {"specy"}),
+				    #"Colonnes finales" = Table.SelectColumns(#"Espece developpee",
+				        {"id_variety", "variety", "specy", "id_specy", "created_at", "updated_at", "deleted_at"})
+				in
+				    #"Colonnes finales"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+

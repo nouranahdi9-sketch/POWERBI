@@ -1,0 +1,98 @@
+table dim_processes_phases
+	lineageTag: 94f007a8-6e3c-4d01-87cc-cfac9cee5e06
+
+	column id_process_phase
+		dataType: int64
+		formatString: 0
+		lineageTag: 362c9528-a079-4be7-a2c4-b0263fde7814
+		summarizeBy: none
+		sourceColumn: id_process_phase
+
+		annotation SummarizationSetBy = Automatic
+
+	column code
+		dataType: string
+		lineageTag: c9f75034-51ef-4ae4-ac1d-05090f5cf98a
+		summarizeBy: none
+		sourceColumn: code
+
+		annotation SummarizationSetBy = Automatic
+
+	column sequence
+		dataType: int64
+		formatString: 0
+		lineageTag: 42392af0-0667-42e1-8478-30355f7cdeb9
+		summarizeBy: sum
+		sourceColumn: sequence
+
+		annotation SummarizationSetBy = Automatic
+
+	column production_workshop
+		dataType: int64
+		formatString: 0
+		lineageTag: 61463e05-0add-4bf5-83b6-05833090721d
+		summarizeBy: sum
+		sourceColumn: production_workshop
+
+		annotation SummarizationSetBy = Automatic
+
+	column process
+		dataType: int64
+		formatString: 0
+		lineageTag: ae3eb4c4-dcdd-4feb-b758-6f44c6642f3d
+		summarizeBy: sum
+		sourceColumn: process
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 292c5826-d0e0-4841-b50e-7a7edc60b905
+		summarizeBy: none
+		sourceColumn: deleted
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8eb7600d-5c95-43f9-9860-38a526c28f1b
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c9c688c6-7029-4ab6-aed6-5c5abb1fd058
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: b3711a5d-7bf3-4473-b998-a3590dd82a1f
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_processes_phases = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_preprd_Database = Source{[Name="mal_maite_bi_preprd",Kind="Database"]}[Data],
+				    common_Schema = mal_maite_bi_preprd_Database{[Name="common",Kind="Schema"]}[Data],
+				    dim_processes_phases_Table = common_Schema{[Name="dim_processes_phases",Kind="Table"]}[Data]
+				in
+				    dim_processes_phases_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
