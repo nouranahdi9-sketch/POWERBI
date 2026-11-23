@@ -1,0 +1,49 @@
+table goods_quality_results
+	lineageTag: 0fc8c7b9-ba22-4f60-81fc-3b8c6432e9bf
+
+	column fabrication_order
+		dataType: int64
+		formatString: 0
+		lineageTag: 0685f618-6be3-489a-a9d1-231ae4c1432f
+		summarizeBy: none
+		sourceColumn: fabrication_order
+
+		annotation SummarizationSetBy = Automatic
+
+	column goods_bad_grains_percent
+		dataType: double
+		lineageTag: b162391a-0249-441e-bb61-de50c669873b
+		summarizeBy: none
+		sourceColumn: goods_bad_grains_percent
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column goods_broken_grains_percent
+		dataType: double
+		lineageTag: 868faf43-26b2-4bab-a55c-7abf17cf3108
+		summarizeBy: none
+		sourceColumn: goods_broken_grains_percent
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition goods_quality_results = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-6120597545375074.14.azuredatabricks.net", "/sql/1.0/warehouses/02983fe27612f7ca", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_common_prd_Database = Source{[Name="mal_maite_common_prd",Kind="Database"]}[Data],
+				    gold_Schema = mal_maite_common_prd_Database{[Name="gold",Kind="Schema"]}[Data],
+				    goods_quality_results_View = gold_Schema{[Name="goods_quality_results",Kind="View"]}[Data],
+				    #"Autres colonnes supprimées" = Table.SelectColumns(goods_quality_results_View,{"fabrication_order", "goods_bad_grains_percent", "goods_broken_grains_percent"}),
+				    #"Doublons supprimés" = Table.Distinct(#"Autres colonnes supprimées", {"fabrication_order"})
+				in
+				    #"Doublons supprimés"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
