@@ -580,7 +580,7 @@ table Calcul
 	/// Les filtres posés sur l'impact (segment) sont ignorés pour afficher
 	/// la liste complète des impacts de la note.
 	measure Impact =
-			
+
 			VAR _keys =
 			    CALCULATETABLE (
 			        VALUES ( fact_batch_note_impact[key_impact] ),
