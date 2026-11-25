@@ -91,13 +91,8 @@ relationship batch_note_detail
 	fromColumn: fact_batch_note.key_detail
 	toColumn: dim_batch_note_detail.id_batch_note_category
 
-relationship batch_note_impact_bridge_note
-	crossFilteringBehavior: bothDirections
-	fromColumn: fact_batch_note_impact.id_batch_note
-	toColumn: fact_batch_note.id_batch_note
-
-relationship batch_note_impact_bridge_impact
-	fromColumn: fact_batch_note_impact.key_impact
+relationship batch_note_impact
+	fromColumn: fact_batch_note.key_impact
 	toColumn: dim_batch_note_impact.id_batch_note_category
 
 relationship bc4a3ba5-21c0-4fa2-e52b-162e0cdf0b4f

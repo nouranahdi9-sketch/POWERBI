@@ -80,17 +80,6 @@ table fact_batch_note
 
 		annotation SummarizationSetBy = Automatic
 
-	/// Multi-impact : liste de clés séparées par des virgules (ex. impact_xxx,impact_yyy).
-	/// Exploitée via la table de liaison fact_batch_note_impact.
-	column impacts
-		dataType: string
-		isHidden
-		lineageTag: 7ee25e8d-dd2d-47d4-bde8-535820d9c303
-		summarizeBy: none
-		sourceColumn: impacts
-
-		annotation SummarizationSetBy = Automatic
-
 	column detail
 		dataType: string
 		lineageTag: a0399cd5-d8bc-47e0-862b-0f8c8bf34899
