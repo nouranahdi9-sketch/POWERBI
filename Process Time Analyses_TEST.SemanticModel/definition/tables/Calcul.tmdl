@@ -575,15 +575,40 @@ table Calcul
 			)
 		lineageTag: 6fd7a925-c526-4a17-82dd-d19ac50d9d21
 
+	/// Multi-impact : tous les libellés traduits des impacts de la note,
+	/// triés par category_order puis libellé, séparés par ", ".
+	/// Les filtres posés sur l'impact (segment) sont ignorés pour afficher
+	/// la liste complète des impacts de la note.
 	measure Impact =
-			
-			CALCULATE (
-			    MIN ( dim_trad_batch_note_impact[label] ),
-			    TREATAS (
-			        VALUES ( fact_batch_note[key_impact] ),
-			        dim_trad_batch_note_impact[batch_note_category]
+
+			VAR _keys =
+			    CALCULATETABLE (
+			        VALUES ( fact_batch_note_impact[key_impact] ),
+			        REMOVEFILTERS ( dim_batch_note_impact ),
+			        REMOVEFILTERS ( dim_trad_batch_note_impact )
 			    )
-			)
+			VAR _labels =
+			    CALCULATETABLE (
+			        SUMMARIZE (
+			            dim_trad_batch_note_impact,
+			            dim_trad_batch_note_impact[label],
+			            dim_batch_note_impact[category_order]
+			        ),
+			        REMOVEFILTERS ( dim_batch_note_impact ),
+			        REMOVEFILTERS ( dim_trad_batch_note_impact ),
+			        TREATAS ( _keys, dim_batch_note_impact[id_batch_note_category] )
+			    )
+			RETURN
+			    IF (
+			        NOT ISEMPTY ( _labels ),
+			        CONCATENATEX (
+			            _labels,
+			            dim_trad_batch_note_impact[label],
+			            ", ",
+			            dim_batch_note_impact[category_order], ASC,
+			            dim_trad_batch_note_impact[label], ASC
+			        )
+			    )
 		lineageTag: 69272839-9766-402b-835a-2e1689d50bef
 
 	measure Synthese_Duree_h =
