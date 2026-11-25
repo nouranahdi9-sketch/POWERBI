@@ -264,6 +264,20 @@
           ]
         },
         "howCreated": "User"
+      },
+      {
+        "name": "734152c90ff4bed38f75",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_trad_trs_measure"
+              }
+            },
+            "Property": "label_cycle_time"
+          }
+        },
+        "type": "Categorical"
       }
     ]
   }

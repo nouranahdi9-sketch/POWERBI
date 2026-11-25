@@ -157,6 +157,23 @@
             }
           ]
         }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Calcul"
+                  }
+                },
+                "Property": "Moyenne hh:mm"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
       }
     },
     "objects": {
@@ -322,6 +339,20 @@
           },
           "selector": {
             "metadata": "fact_process_time_analyses.BatchNumber_MaxMesureValue"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "229.83981741787684D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "dim_trad_trs_measure.label"
           }
         }
       ]

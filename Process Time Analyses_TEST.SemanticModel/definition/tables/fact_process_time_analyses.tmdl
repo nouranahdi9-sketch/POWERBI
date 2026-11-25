@@ -1,10 +1,6 @@
 table fact_process_time_analyses
 	lineageTag: 8a8c0b71-c35f-47c2-a78e-2952aa2498de
 
-	measure Test_NbFaits = COUNTROWS ( fact_process_time_analyses )
-		formatString: 0.000
-		lineageTag: 9f28a474-88a5-4517-a241-a2dcca85e3f4
-
 	measure 'Lignes de mesure' = COUNTROWS ( fact_process_time_analyses )
 		formatString: 0
 		lineageTag: fe01c108-a33f-4352-83d2-0d6309fec461

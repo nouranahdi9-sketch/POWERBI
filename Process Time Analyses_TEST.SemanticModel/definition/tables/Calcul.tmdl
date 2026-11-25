@@ -652,10 +652,6 @@ table Calcul
 		displayFolder: Mesures\Synthese
 		lineageTag: 51e61367-c854-4b8e-bbfe-f8aa2d73abf5
 
-	measure DBG_NbLignesTrad = COUNTROWS ( dim_trad_specy )
-		formatString: 0
-		lineageTag: da61084f-9609-4a54-8636-329328ca6b6e
-
 	column Valeur
 		isHidden
 		formatString: 0
