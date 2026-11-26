@@ -613,6 +613,11 @@ table Calcul
 			    )
 		lineageTag: 69272839-9766-402b-835a-2e1689d50bef
 
+	measure 'Temps total perdu (h)' = SUM ( fact_batch_note[Gap_Heures] )
+		formatString: #,0.00
+		displayFolder: Mesures\Synthese
+		lineageTag: 98b51f2b-670a-4f71-ae4c-713058baaa4a
+
 	measure Synthese_Duree_h =
 			
 			IF (

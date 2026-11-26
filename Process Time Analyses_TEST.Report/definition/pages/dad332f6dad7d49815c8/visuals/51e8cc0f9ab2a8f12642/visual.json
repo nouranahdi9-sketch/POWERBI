@@ -17,22 +17,17 @@
           "projections": [
             {
               "field": {
-                "Aggregation": {
+                "Measure": {
                   "Expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "fact_batch_note"
-                        }
-                      },
-                      "Property": "Gap_Heures"
+                    "SourceRef": {
+                      "Entity": "Calcul"
                     }
                   },
-                  "Function": 0
+                  "Property": "Temps total perdu (h)"
                 }
               },
-              "queryRef": "Sum(fact_batch_note.Gap_Heures)",
-              "nativeQueryRef": "Total time lost (h)"
+              "queryRef": "Calcul.Temps total perdu (h)",
+              "nativeQueryRef": "Temps total perdu (h)"
             }
           ]
         },

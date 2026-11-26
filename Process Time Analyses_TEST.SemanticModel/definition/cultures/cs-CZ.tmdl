@@ -145,6 +145,8 @@ cultureInfo cs-CZ
 					caption: Hromada s nejkratší dobou trvání
 				measure 'Carte Batch max'
 					caption: Hromada s nejdelší dobou trvání
+				measure 'Temps total perdu (h)'
+					caption: Celkový ztracený čas (h)
 				measure Synthese_Objectif_metier_h
 					caption: Obchodní cíl (h)
 				measure Moyenne_top_20_hh:mm

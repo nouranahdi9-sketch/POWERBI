@@ -145,6 +145,8 @@ cultureInfo ro-RO
 					caption: Șarjă cu durată minimă
 				measure 'Carte Batch max'
 					caption: Șarjă cu durată maximă
+				measure 'Temps total perdu (h)'
+					caption: Timp total pierdut (h)
 				measure Synthese_Objectif_metier_h
 					caption: Țintă de business (h)
 				measure Moyenne_top_20_hh:mm

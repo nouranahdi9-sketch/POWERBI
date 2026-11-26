@@ -145,6 +145,8 @@ cultureInfo en-US
 					caption: Batch of min duration
 				measure 'Carte Batch max'
 					caption: Batch of max duration
+				measure 'Temps total perdu (h)'
+					caption: Total time lost (h)
 				measure Synthese_Objectif_metier_h
 					caption: Business target (h)
 				measure Moyenne_top_20_hh:mm
