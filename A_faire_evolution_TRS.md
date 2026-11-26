@@ -66,3 +66,10 @@ Clés de l'onglet Synthèse macro (même table, même ReportCode), textes propos
 |---|---|---|
 | 1 | Script `sql/traductions_evolution_TRS.sql` : TITLE_SYNTHESE, TITLE_SYNTHESE_MACRO, TITLE1_SYNTHESE_MACRO, TITLE2_SYNTHESE_MACRO, TEXTE_CHOISIR_MESURE (4 langues) | Fait en preprod (20 lignes, le 26/11) |
 | 2 | Même script en PROD (`mal_maite_bi_prd`) | À faire à la MEP |
+
+## Clés des temps de cycle (registre trs_metadata)
+
+| # | Quoi | Statut |
+|---|---|---|
+| 1 | Les temps de cycle ont changé de clé dans les données : `duree_temps_cycle_trempe/germination/touraille` → `steep_cycle_duration`, `germ_cycle_duration`, `kiln_cycle_duration`. Tant que le job des traductions n'est pas relancé, ils n'ont plus de libellé et les visuels par mesure sont vides (tableau et liste des cycles de Synthèse macro, Cycle time) | Corrigé en preprod le 26/11 (job `main_translations` relancé) |
+| 2 | MEP : relancer le job `main_translations` en PROD après la mise à jour du registre `trs_nomenclature` / `trs_translation`, avant d'actualiser le rapport | À faire à la MEP |
