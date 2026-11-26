@@ -179,7 +179,7 @@
                   "identityValues": [
                     {
                       "Literal": {
-                        "Value": "'Organisation'"
+                        "Value": "'Panne'"
                       }
                     }
                   ],
@@ -198,7 +198,7 @@
             "effectiveBarsPerLevel": {
               "expr": {
                 "Literal": {
-                  "Value": "8L"
+                  "Value": "3L"
                 }
               }
             },

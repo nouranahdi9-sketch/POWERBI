@@ -27,8 +27,9 @@
                 }
               },
               "queryRef": "dim_trad_batch_note_detail.label",
-              "nativeQueryRef": "label",
-              "active": true
+              "nativeQueryRef": "Détail",
+              "active": true,
+              "displayName": "Détail"
             }
           ],
           "fieldParameters": [

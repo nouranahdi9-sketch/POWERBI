@@ -80,7 +80,7 @@
                                   "Source": "n"
                                 }
                               },
-                              "Property": "Niveau notes"
+                              "Property": "Niveau notes Champs"
                             }
                           }
                         ],
@@ -88,10 +88,60 @@
                           [
                             {
                               "Literal": {
-                                "Value": "'Détail'"
+                                "Value": "'''dim_trad_batch_note_detail''[label]'"
                               }
                             }
                           ]
+                        ]
+                      }
+                    },
+                    "Annotations": {
+                      "filterExpressionMetadata": {
+                        "expressions": [
+                          {
+                            "Column": {
+                              "Expression": {
+                                "SourceRef": {
+                                  "Entity": "Niveau notes"
+                                }
+                              },
+                              "Property": "Niveau notes"
+                            }
+                          }
+                        ],
+                        "decomposedIdentities": {
+                          "values": [
+                            [
+                              {
+                                "0": [
+                                  {
+                                    "Literal": {
+                                      "Value": "'''dim_trad_batch_note_detail''[label]'"
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          ],
+                          "columns": [
+                            {
+                              "value": {
+                                "Column": {
+                                  "Expression": {
+                                    "SourceRef": {
+                                      "Entity": "Niveau notes"
+                                    }
+                                  },
+                                  "Property": "Niveau notes Champs"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        "valueMap": [
+                          {
+                            "0": "Détail"
+                          }
                         ]
                       }
                     }
