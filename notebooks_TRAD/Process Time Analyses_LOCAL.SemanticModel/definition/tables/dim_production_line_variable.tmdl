@@ -1,0 +1,165 @@
+table dim_production_line_variable
+	lineageTag: aa3ce65e-bdaa-41d4-b206-16d6f10021cf
+
+	column id_parameter_production_line_variable
+		dataType: int64
+		formatString: 0
+		lineageTag: 5fec7e31-9c1d-4ef5-82e3-7e1d8686ec01
+		summarizeBy: sum
+		sourceColumn: id_parameter_production_line_variable
+
+		annotation SummarizationSetBy = Automatic
+
+	column variable
+		dataType: int64
+		formatString: 0
+		lineageTag: 887854db-a27f-45a6-90b1-0b1581f3fd28
+		summarizeBy: sum
+		sourceColumn: variable
+
+		annotation SummarizationSetBy = Automatic
+
+	column production_line
+		dataType: int64
+		formatString: 0
+		lineageTag: d2d0e282-c283-42ce-8756-c46810b9f0af
+		summarizeBy: sum
+		sourceColumn: production_line
+
+		annotation SummarizationSetBy = Automatic
+
+	column manual_entry
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 8e18e428-4662-4885-973f-14e4589ecfdf
+		summarizeBy: none
+		sourceColumn: manual_entry
+
+		annotation SummarizationSetBy = Automatic
+
+	column controllable
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: f8ff1902-6e79-43af-be80-92b7ea1b4918
+		summarizeBy: none
+		sourceColumn: controllable
+
+		annotation SummarizationSetBy = Automatic
+
+	column predictible
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: e551582e-9822-40c4-add0-d684b8b65927
+		summarizeBy: none
+		sourceColumn: predictible
+
+		annotation SummarizationSetBy = Automatic
+
+	column displayed
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 473b4168-759e-43c1-afca-74f66b333dec
+		summarizeBy: none
+		sourceColumn: displayed
+
+		annotation SummarizationSetBy = Automatic
+
+	column sequence
+		dataType: int64
+		formatString: 0
+		lineageTag: d02c76eb-d9de-410b-a0c9-0888baa5e122
+		summarizeBy: sum
+		sourceColumn: sequence
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 094db2b7-a9b4-41be-8b55-013f3ee3318c
+		summarizeBy: none
+		sourceColumn: deleted
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 5c5d557e-d618-406f-9716-4f6b3d969371
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 7bd1201e-c2d3-4e44-aac7-6dd626f4782a
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 4582e906-7234-4dd6-972a-23451730e405
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column lower_limit
+		dataType: double
+		lineageTag: 3b2ae027-e906-41f3-a0bc-5e507fa7199d
+		summarizeBy: sum
+		sourceColumn: lower_limit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column upper_limit
+		dataType: double
+		lineageTag: b7d092f4-2856-46f8-92a5-c0d736b0f4d0
+		summarizeBy: sum
+		sourceColumn: upper_limit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column reset_value
+		dataType: double
+		lineageTag: c1f55da4-9824-4967-9348-5abd4a49b0af
+		summarizeBy: sum
+		sourceColumn: reset_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column number_of_digits
+		dataType: int64
+		formatString: 0
+		lineageTag: a6c8f0fa-ccac-4e0b-b035-17557ee68854
+		summarizeBy: sum
+		sourceColumn: number_of_digits
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_production_line_variable = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_preprd_Database = Source{[Name="mal_maite_bi_preprd",Kind="Database"]}[Data],
+				    common_Schema = mal_maite_bi_preprd_Database{[Name="common",Kind="Schema"]}[Data],
+				    dim_production_line_variable_Table = common_Schema{[Name="dim_production_line_variable",Kind="Table"]}[Data]
+				in
+				    dim_production_line_variable_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

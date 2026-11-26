@@ -1,0 +1,44 @@
+table dim_trs_measure
+	lineageTag: a4e7855a-8cc0-4e07-8e27-e3f88b89c055
+
+	column key
+		dataType: string
+		lineageTag: 13053019-727b-4cbe-98ec-6c1a6cb0c942
+		summarizeBy: none
+		sourceColumn: key
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 3bee6477-6af0-4290-a2a7-49dc4d388d97
+		summarizeBy: none
+		sourceColumn: deleted
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 91e0fe2f-0420-4208-a144-bf0c5e1a3b64
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_trs_measure = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_preprd_Database = Source{[Name="mal_maite_bi_preprd",Kind="Database"]}[Data],
+				    common_Schema = mal_maite_bi_preprd_Database{[Name="common",Kind="Schema"]}[Data],
+				    dim_trs_measure_Table = common_Schema{[Name="dim_trs_measure",Kind="Table"]}[Data]
+				in
+				    dim_trs_measure_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

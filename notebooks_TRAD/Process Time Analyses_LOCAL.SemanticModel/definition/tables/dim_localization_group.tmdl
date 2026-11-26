@@ -1,0 +1,80 @@
+table dim_localization_group
+	lineageTag: 960a6ba9-89d8-4a60-bf67-479dcb166ae6
+
+	column id_parameter_localization_group
+		dataType: int64
+		formatString: 0
+		lineageTag: 8f30d78b-071e-4245-83de-9bcf97c8bf59
+		summarizeBy: sum
+		sourceColumn: id_parameter_localization_group
+
+		annotation SummarizationSetBy = Automatic
+
+	column code
+		dataType: string
+		lineageTag: 03906850-e407-47d9-8466-195026aeb064
+		summarizeBy: none
+		sourceColumn: code
+
+		annotation SummarizationSetBy = Automatic
+
+	column sequence
+		dataType: int64
+		formatString: 0
+		lineageTag: 780d7fba-9b39-4775-a8b2-c13bb870d287
+		summarizeBy: sum
+		sourceColumn: sequence
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: b87cd074-2d72-461e-a771-52dd1567fd1b
+		summarizeBy: none
+		sourceColumn: deleted
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: b96c7952-6a47-4768-a918-67d9554bc369
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c272d68f-f656-4554-a8e9-912e00776c99
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 0accbafa-d4fb-4ad6-a19a-b2e056d0e97f
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_localization_group = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_preprd_Database = Source{[Name="mal_maite_bi_preprd",Kind="Database"]}[Data],
+				    common_Schema = mal_maite_bi_preprd_Database{[Name="common",Kind="Schema"]}[Data],
+				    dim_localization_group_Table = common_Schema{[Name="dim_localization_group",Kind="Table"]}[Data]
+				in
+				    dim_localization_group_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

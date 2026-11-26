@@ -1,0 +1,80 @@
+table dim_variety
+	lineageTag: 749d888c-d742-4a1e-8824-34baeb5e8211
+
+	column id_good_variety
+		dataType: int64
+		formatString: 0
+		lineageTag: a2577b79-3037-4344-a335-a63b37d9db47
+		summarizeBy: sum
+		sourceColumn: id_good_variety
+
+		annotation SummarizationSetBy = Automatic
+
+	column code
+		dataType: string
+		lineageTag: 04a1b1a0-5f0a-4d6e-b037-1bc0b6566e20
+		summarizeBy: none
+		sourceColumn: code
+
+		annotation SummarizationSetBy = Automatic
+
+	column specy
+		dataType: int64
+		formatString: 0
+		lineageTag: f2a9621d-b34f-45b5-bd94-f81322facfba
+		summarizeBy: sum
+		sourceColumn: specy
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 1725d9ca-7b71-4d19-a5c9-a3df924fcc9f
+		summarizeBy: none
+		sourceColumn: deleted
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 558bbcbd-9a4d-453e-9df8-5edc333b0037
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 47761665-0df1-489d-8e2d-b7d5bc1ef2e1
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 912b897b-2b56-403c-86fe-a6489f740c21
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_variety = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_preprd_Database = Source{[Name="mal_maite_bi_preprd",Kind="Database"]}[Data],
+				    common_Schema = mal_maite_bi_preprd_Database{[Name="common",Kind="Schema"]}[Data],
+				    dim_variety_Table = common_Schema{[Name="dim_variety",Kind="Table"]}[Data]
+				in
+				    dim_variety_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
