@@ -59,3 +59,10 @@ Clés de l'onglet Synthèse macro (même table, même ReportCode), textes propos
 | 3 | Décommissionnement de la colonne `impact` à la source : retirer `"impact"` et la ligne `key_impact` du notebook `fact_batch_note`, sinon il plantera | Le jour du décommissionnement |
 | 4 | Les notes sans `impacts` (si l'ancienne colonne n'a pas été reprise) n'ont plus d'impact dans le rapport. Vérifier : `SELECT COUNT(*) FROM ext_mal_psql_maite_vision_board_test.public.batches_notes WHERE deleted = false AND impact IS NOT NULL AND (impacts IS NULL OR impacts = '')` | À vérifier |
 | 5 | MEP : `ALTER TABLE ... ADD COLUMNS (impacts STRING, key_impacts STRING)` sur `mal_maite_bi_prd.process_time_analyses.fact_batch_note` avant le premier lancement du notebook | À faire à la MEP |
+
+## Clés de traduction (table common.translation)
+
+| # | Quoi | Statut |
+|---|---|---|
+| 1 | Script `sql/traductions_evolution_TRS.sql` : TITLE_SYNTHESE, TITLE_SYNTHESE_MACRO, TITLE1_SYNTHESE_MACRO, TITLE2_SYNTHESE_MACRO, TEXTE_CHOISIR_MESURE (4 langues) | À lancer en preprod |
+| 2 | Même script en PROD (`mal_maite_bi_prd`) | À faire à la MEP |
