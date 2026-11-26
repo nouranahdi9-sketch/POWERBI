@@ -39,14 +39,36 @@ table 'Niveau notes'
 
 		annotation SummarizationSetBy = Automatic
 
+	column 'Niveau notes Langue'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f5ac181a-3830-4f06-90c1-d3aec48d6a3a
+		summarizeBy: none
+		sourceColumn: [Value4]
+
+		annotation SummarizationSetBy = Automatic
+
 	partition 'Niveau notes' = calculated
 		mode: import
 		source =
 				{
-				    ("Localisation", NAMEOF ( 'dim_trad_batch_note_location'[label] ), 0),
-				    ("Impact", NAMEOF ( 'dim_trad_batch_note_impact'[label] ), 1),
-				    ("Événement", NAMEOF ( 'dim_trad_batch_note_event'[label] ), 2),
-				    ("Détail", NAMEOF ( 'dim_trad_batch_note_detail'[label] ), 3)
+				    ("Localisation", NAMEOF ( 'dim_trad_batch_note_location'[label] ), 0, 1),
+				    ("Impact", NAMEOF ( 'dim_trad_batch_note_impact'[label] ), 1, 1),
+				    ("Événement", NAMEOF ( 'dim_trad_batch_note_event'[label] ), 2, 1),
+				    ("Détail", NAMEOF ( 'dim_trad_batch_note_detail'[label] ), 3, 1),
+				    ("Location", NAMEOF ( 'dim_trad_batch_note_location'[label] ), 0, 2),
+				    ("Impact", NAMEOF ( 'dim_trad_batch_note_impact'[label] ), 1, 2),
+				    ("Event", NAMEOF ( 'dim_trad_batch_note_event'[label] ), 2, 2),
+				    ("Detail", NAMEOF ( 'dim_trad_batch_note_detail'[label] ), 3, 2),
+				    ("Locație", NAMEOF ( 'dim_trad_batch_note_location'[label] ), 0, 5),
+				    ("Impact", NAMEOF ( 'dim_trad_batch_note_impact'[label] ), 1, 5),
+				    ("Eveniment", NAMEOF ( 'dim_trad_batch_note_event'[label] ), 2, 5),
+				    ("Detaliu", NAMEOF ( 'dim_trad_batch_note_detail'[label] ), 3, 5),
+				    ("Místo", NAMEOF ( 'dim_trad_batch_note_location'[label] ), 0, 6),
+				    ("Dopad", NAMEOF ( 'dim_trad_batch_note_impact'[label] ), 1, 6),
+				    ("Událost", NAMEOF ( 'dim_trad_batch_note_event'[label] ), 2, 6),
+				    ("Detail", NAMEOF ( 'dim_trad_batch_note_detail'[label] ), 3, 6)
 				}
 
 	annotation PBI_Id = fecd9004e4cd6f5c178076bf9503649a

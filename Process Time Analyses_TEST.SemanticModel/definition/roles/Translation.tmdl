@@ -170,5 +170,16 @@ role Translation
 			RETURN
 			    dim_trad_trs_measure_type[language] = __lang
 
+	tablePermission 'Niveau notes' =
+			VAR __culture =
+			    LOWER ( LEFT ( USERCULTURE (), 2 ) )
+			VAR __lang =
+			    COALESCE (
+			        LOOKUPVALUE ( dim_trad_language[language], dim_trad_language[culture_code], __culture ),
+			        LOOKUPVALUE ( dim_trad_language[language], dim_trad_language[culture_code], "en" )
+			    )
+			RETURN
+			    'Niveau notes'[Niveau notes Langue] = __lang
+
 	annotation PBI_Id = a00f9e61e79845f0b4eee53e79f30a39
 
