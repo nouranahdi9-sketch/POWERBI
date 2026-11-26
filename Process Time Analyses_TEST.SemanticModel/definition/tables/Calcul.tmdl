@@ -577,8 +577,9 @@ table Calcul
 
 	/// Multi-impact : tous les libellés traduits des impacts de la note,
 	/// triés par category_order puis libellé, séparés par ", ".
-	/// Les filtres posés sur l'impact (filtre Impact, filtre de visuel) sont ignorés
-	/// pour afficher la liste complète des impacts de la note.
+	/// Vide si la note n'a aucun des impacts filtrés (filtre Impact, filtre de visuel) :
+	/// la ligne de la note disparaît alors des tableaux. Sinon, la liste complète
+	/// des impacts de la note est affichée, sans tenir compte de ces filtres.
 	measure Impact =
 			
 			VAR _keys =
@@ -601,7 +602,7 @@ table Calcul
 			    )
 			RETURN
 			    IF (
-			        NOT ISEMPTY ( _labels ),
+			        NOT ISEMPTY ( fact_batch_note_impact ) && NOT ISEMPTY ( _labels ),
 			        CONCATENATEX (
 			            _labels,
 			            dim_trad_batch_note_impact[label],
