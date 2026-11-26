@@ -64,5 +64,5 @@ Clés de l'onglet Synthèse macro (même table, même ReportCode), textes propos
 
 | # | Quoi | Statut |
 |---|---|---|
-| 1 | Script `sql/traductions_evolution_TRS.sql` : TITLE_SYNTHESE, TITLE_SYNTHESE_MACRO, TITLE1_SYNTHESE_MACRO, TITLE2_SYNTHESE_MACRO, TEXTE_CHOISIR_MESURE (4 langues) | À lancer en preprod |
+| 1 | Script `sql/traductions_evolution_TRS.sql` : TITLE_SYNTHESE, TITLE_SYNTHESE_MACRO, TITLE1_SYNTHESE_MACRO, TITLE2_SYNTHESE_MACRO, TEXTE_CHOISIR_MESURE (4 langues) | Fait en preprod (20 lignes, le 26/11) |
 | 2 | Même script en PROD (`mal_maite_bi_prd`) | À faire à la MEP |
