@@ -68,14 +68,6 @@ table fact_batch_note
 
 		annotation SummarizationSetBy = Automatic
 
-	column impact
-		dataType: string
-		lineageTag: baa6c750-826f-47aa-b093-426d689ef787
-		summarizeBy: none
-		sourceColumn: impact
-
-		annotation SummarizationSetBy = Automatic
-
 	column detail
 		dataType: string
 		lineageTag: a0399cd5-d8bc-47e0-862b-0f8c8bf34899
@@ -175,14 +167,6 @@ table fact_batch_note
 		lineageTag: 7d0fa161-23f0-4fe3-bc8b-a15d52a51fa7
 		summarizeBy: none
 		sourceColumn: key_location
-
-		annotation SummarizationSetBy = Automatic
-
-	column key_impact
-		dataType: string
-		lineageTag: fd37588c-f6db-4e3e-baa4-1a059e677f32
-		summarizeBy: none
-		sourceColumn: key_impact
 
 		annotation SummarizationSetBy = Automatic
 

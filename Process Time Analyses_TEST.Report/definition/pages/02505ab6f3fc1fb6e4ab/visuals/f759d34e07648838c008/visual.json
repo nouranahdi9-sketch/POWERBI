@@ -5,7 +5,7 @@
     "x": 0,
     "y": 435.65461212164786,
     "z": 5000,
-    "height": 273.31943346034939,
+    "height": 273.3194334603494,
     "width": 1278.8036523114529,
     "tabOrder": 5000
   },
@@ -506,10 +506,10 @@
           "Column": {
             "Expression": {
               "SourceRef": {
-                "Entity": "fact_batch_note"
+                "Entity": "fact_batch_note_impact"
               }
             },
-            "Property": "impact"
+            "Property": "key_impact"
           }
         },
         "type": "Categorical",
@@ -518,7 +518,7 @@
           "From": [
             {
               "Name": "f",
-              "Entity": "fact_batch_note",
+              "Entity": "fact_batch_note_impact",
               "Type": 0
             }
           ],
@@ -534,7 +534,7 @@
                             "Source": "f"
                           }
                         },
-                        "Property": "impact"
+                        "Property": "key_impact"
                       }
                     }
                   ],

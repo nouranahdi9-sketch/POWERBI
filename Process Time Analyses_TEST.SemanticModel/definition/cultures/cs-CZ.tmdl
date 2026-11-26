@@ -105,8 +105,6 @@ cultureInfo cs-CZ
 					caption: Místo
 				column event
 					caption: Událoist
-				column impact
-					caption: Dopad
 				column detail
 					caption: Detail.
 				column gap_minutes

@@ -105,8 +105,6 @@ cultureInfo ro-RO
 					caption: Locație
 				column event
 					caption: Eveniment
-				column impact
-					caption: Impact.
 				column detail
 					caption: Detaliu
 				column gap_minutes

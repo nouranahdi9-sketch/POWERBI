@@ -520,22 +520,6 @@
         "howCreated": "User"
       },
       {
-        "name": "fd34ba6d76b029403d8b",
-        "ordinal": 10,
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "fact_batch_note"
-              }
-            },
-            "Property": "impact"
-          }
-        },
-        "type": "Categorical",
-        "howCreated": "User"
-      },
-      {
         "name": "7c408bd87c5abb97738d",
         "ordinal": 11,
         "field": {

@@ -49,3 +49,13 @@ Clés de l'onglet Synthèse macro (même table, même ReportCode), textes propos
 | 1 | Notebooks : la preprod (version traduite) n'a peut-être pas le correctif PROD du 14/10/2026 dans `transform_data` (`manual_entries_dedup` : une seule saisie de poids par batch). À fusionner avant la MEP, sans perdre `measure_key` ni les codes en anglais de la preprod | À faire à la MEP |
 | 2 | Correctif `manual_entries_dedup` : il trie sur `id_manual_entry`. Si c'est un UUID, le plus grand n'est pas forcément le plus récent ; trier plutôt sur une date de saisie (`created_at`) si elle existe | À vérifier |
 | 3 | Preprod : supprimer la ligne en double du batch 3298 dans `dim_batches_specifications` (`batch_id = 'bbbd9bb3-2ea5-4822-97e3-ca583296351b'`, ligne avec `updated_at` vide), sinon l'actualisation Power BI échoue | À faire |
+
+## Multi-impact
+
+| # | Quoi | Statut |
+|---|---|---|
+| 1 | Databricks preprod : colonnes `impacts` et `key_impacts` ajoutées à `process_time_analyses.fact_batch_note` (ALTER TABLE), notebook `fact_batch_note` mis à jour (`notebooks_TRAD/`) | Fait |
+| 2 | Power BI : multi-impact basé uniquement sur `key_impacts` (table de liaison `fact_batch_note_impact`) ; colonnes `impact` et `key_impact` retirées du modèle | Fait, à tester |
+| 3 | Décommissionnement de la colonne `impact` à la source : retirer `"impact"` et la ligne `key_impact` du notebook `fact_batch_note`, sinon il plantera | Le jour du décommissionnement |
+| 4 | Les notes sans `impacts` (si l'ancienne colonne n'a pas été reprise) n'ont plus d'impact dans le rapport. Vérifier : `SELECT COUNT(*) FROM ext_mal_psql_maite_vision_board_test.public.batches_notes WHERE deleted = false AND impact IS NOT NULL AND (impacts IS NULL OR impacts = '')` | À vérifier |
+| 5 | MEP : `ALTER TABLE ... ADD COLUMNS (impacts STRING, key_impacts STRING)` sur `mal_maite_bi_prd.process_time_analyses.fact_batch_note` avant le premier lancement du notebook | À faire à la MEP |
