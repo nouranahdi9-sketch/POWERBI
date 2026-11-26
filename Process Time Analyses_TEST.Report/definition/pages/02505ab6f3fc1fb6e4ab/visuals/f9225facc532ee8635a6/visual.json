@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
   "name": "f9225facc532ee8635a6",
   "position": {
-    "x": 892.84348263714139,
+    "x": 892.8434826371414,
     "y": 0,
     "z": 8000,
-    "height": 86.137033575382844,
-    "width": 352.83054137608741,
+    "height": 86.13703357538284,
+    "width": 352.8305413760874,
     "tabOrder": 8000
   },
   "visual": {
@@ -28,8 +28,7 @@
               },
               "queryRef": "Periode.Label",
               "nativeQueryRef": "Last hours",
-              "active": true,
-              "displayName": "Last hours"
+              "active": true
             }
           ]
         }

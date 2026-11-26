@@ -60,13 +60,13 @@ cultureInfo en-US
 				column flg_outlier
 					caption: Outlier
 				column target_business
-					caption: Busines Targets
+					caption: Business targets
 				column delta_target_business
 					caption: Business Delta
 				column delta_target_business_h
 					caption: Business Delta
 				column target_business_h
-					caption: Busines Targets
+					caption: Business targets
 				column batch_prd_cell
 					caption: Prod. Cell
 				column Date_fin_type_date
@@ -90,7 +90,7 @@ cultureInfo en-US
 				column 'label - CyTiWai'
 					caption: Measure
 				column targetbusiness_value_hhmm
-					caption: Busines Targets
+					caption: Business targets
 				column delta_targetbusiness_value_hhmm
 					caption: Business Delta
 			table dim_site

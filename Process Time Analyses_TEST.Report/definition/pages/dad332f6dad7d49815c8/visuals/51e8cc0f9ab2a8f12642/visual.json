@@ -32,8 +32,7 @@
                 }
               },
               "queryRef": "Sum(fact_batch_note.Gap_Heures)",
-              "nativeQueryRef": "Total time lost (h)",
-              "displayName": "Total time lost (h)"
+              "nativeQueryRef": "Total time lost (h)"
             }
           ]
         },

@@ -100,11 +100,11 @@ cultureInfo cs-CZ
 				column date_saisie
 					caption: Datum vložení
 				column note
-					caption: Poznámkla
+					caption: Poznámka
 				column location
 					caption: Místo
 				column event
-					caption: Událoist
+					caption: Událost
 				column detail
 					caption: Detail.
 				column gap_minutes
@@ -164,7 +164,7 @@ cultureInfo cs-CZ
 				measure Emplacement
 					caption: Místo
 				measure Événement
-					caption: Událoist
+					caption: Událost
 				measure Détail
 					caption: Detail
 				measure Impact
@@ -186,7 +186,7 @@ cultureInfo cs-CZ
 					caption: Dopad
 			table dim_trad_batch_note_event
 				column label
-					caption: Událoist
+					caption: Událost
 			table dim_trad_batch_note_detail
 				column label
 					caption: Detail
