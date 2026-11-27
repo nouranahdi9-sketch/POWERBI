@@ -27,11 +27,8 @@ table Semaines
 				VAR _debuts =
 				    DISTINCT (
 				        SELECTCOLUMNS (
-				            FILTER ( fact_process_time_analyses, NOT ISBLANK ( fact_process_time_analyses[date_fin] ) ),
-				            "Début semaine",
-				                VAR _d = fact_process_time_analyses[date_fin]
-				                VAR _jour = DATE ( YEAR ( _d ), MONTH ( _d ), DAY ( _d ) )
-				                RETURN _jour - WEEKDAY ( _jour, 2 ) + 1
+				            FILTER ( fact_process_time_analyses, NOT ISBLANK ( fact_process_time_analyses[Debut_semaine_fin] ) ),
+				            "Début semaine", fact_process_time_analyses[Debut_semaine_fin]
 				        )
 				    )
 				RETURN

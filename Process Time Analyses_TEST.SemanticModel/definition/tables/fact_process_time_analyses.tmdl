@@ -478,6 +478,21 @@ table fact_process_time_analyses
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Lundi de la semaine de date_fin : sert à la courbe 12 semaines de Synthèse macro (table Semaines).
+	column Debut_semaine_fin = ```
+			
+			VAR _d = fact_process_time_analyses[date_fin]
+			VAR _jour = DATE ( YEAR ( _d ), MONTH ( _d ), DAY ( _d ) )
+			RETURN IF ( ISBLANK ( _d ), BLANK (), _jour - WEEKDAY ( _jour, 2 ) + 1 )
+			```
+		isHidden
+		formatString: dd/mm/yyyy
+		displayFolder: ColonnesCalculees
+		lineageTag: b2815ebf-3a53-428f-a347-91001eb808bf
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	column ColonneDateMoisTri = DATE([year_mesure],[month_num_mesure],1)
 		formatString: General Date
 		displayFolder: ColonnesCalculees

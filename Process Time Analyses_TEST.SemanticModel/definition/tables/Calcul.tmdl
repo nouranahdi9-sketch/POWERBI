@@ -623,9 +623,7 @@ table Calcul
 	/// ou par la dernière semaine de données si rien n'est sélectionné.
 	measure 'Durée moyenne du cycle (h)' =
 			
-			VAR _fin = CALCULATE ( MAX ( fact_process_time_analyses[date_fin] ) )
-			VAR _jour_fin = DATE ( YEAR ( _fin ), MONTH ( _fin ), DAY ( _fin ) )
-			VAR _semaine_fin = _jour_fin - WEEKDAY ( _jour_fin, 2 ) + 1
+			VAR _semaine_fin = CALCULATE ( MAX ( fact_process_time_analyses[Debut_semaine_fin] ) )
 			VAR _semaine = SELECTEDVALUE ( Semaines[Début semaine] )
 			RETURN
 			    IF (
@@ -636,8 +634,7 @@ table Calcul
 			                fact_process_time_analyses[month_name_mesure], fact_process_time_analyses[month_num_mesure] ),
 			            REMOVEFILTERS ( dim_month ),
 			            REMOVEFILTERS ( dim_trad_month ),
-			            fact_process_time_analyses[date_fin] >= _semaine,
-			            fact_process_time_analyses[date_fin] < _semaine + 7
+			            TREATAS ( { _semaine }, fact_process_time_analyses[Debut_semaine_fin] )
 			        )
 			    )
 		formatString: 0.00
@@ -646,9 +643,7 @@ table Calcul
 
 	measure 'Objectif métier 12 semaines (h)' =
 			
-			VAR _fin = CALCULATE ( MAX ( fact_process_time_analyses[date_fin] ) )
-			VAR _jour_fin = DATE ( YEAR ( _fin ), MONTH ( _fin ), DAY ( _fin ) )
-			VAR _semaine_fin = _jour_fin - WEEKDAY ( _jour_fin, 2 ) + 1
+			VAR _semaine_fin = CALCULATE ( MAX ( fact_process_time_analyses[Debut_semaine_fin] ) )
 			VAR _semaine = SELECTEDVALUE ( Semaines[Début semaine] )
 			RETURN
 			    IF (
@@ -659,8 +654,7 @@ table Calcul
 			                fact_process_time_analyses[month_name_mesure], fact_process_time_analyses[month_num_mesure] ),
 			            REMOVEFILTERS ( dim_month ),
 			            REMOVEFILTERS ( dim_trad_month ),
-			            fact_process_time_analyses[date_fin] >= _semaine,
-			            fact_process_time_analyses[date_fin] < _semaine + 7
+			            TREATAS ( { _semaine }, fact_process_time_analyses[Debut_semaine_fin] )
 			        )
 			    )
 		formatString: 0.00
