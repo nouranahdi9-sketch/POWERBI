@@ -1,0 +1,105 @@
+// Évolution TRS : tests de non-régression à lancer dans la vue Requête DAX de Power BI Desktop
+// (une requête à la fois). Chaque requête compare les nouvelles mesures aux anciennes.
+
+// ---------------------------------------------------------------------------
+// Test 1 : graphes de l'onglet Synthèse (durée et objectif par batch et par mesure)
+// Attendu : ecarts_duree = 0 et ecarts_objectif = 0
+// ---------------------------------------------------------------------------
+EVALUATE
+VAR t =
+    SUMMARIZECOLUMNS (
+        dim_trs_measure[key],
+        dim_batches_specifications[batch_number],
+        TREATAS ( { "batch_cycle_duration", "transfer", "waiting" }, fact_process_time_analyses[measure_type] ),
+        "nouveau", [Synthese_Duree_h],
+        "ancien", AVERAGE ( fact_process_time_analyses[mesure_value_h] ),
+        "obj_nouveau", [Synthese_Objectif_metier_h],
+        "obj_ancien", AVERAGE ( fact_process_time_analyses[target_business_h] )
+    )
+RETURN
+    ROW (
+        "combinaisons", COUNTROWS ( t ),
+        "ecarts_duree", COUNTROWS ( FILTER ( t, ROUND ( [nouveau] - [ancien], 6 ) <> 0 ) ),
+        "ecarts_objectif", COUNTROWS ( FILTER ( t, ROUND ( [obj_nouveau] - [obj_ancien], 6 ) <> 0 ) )
+    )
+
+// ---------------------------------------------------------------------------
+// Test 2 : temps perdu (carte de Synthèse macro, racine de l'arbre) et unicité des notes
+// Attendu : temps_perdu_h_mesure = temps_perdu_h_colonne ; notes = notes_distinctes
+// ---------------------------------------------------------------------------
+EVALUATE
+ROW (
+    "temps_perdu_carte", [Synthese_Temps_perdu_hhmm],
+    "temps_perdu_h_mesure", [Temps total perdu (h)],
+    "temps_perdu_h_colonne", SUM ( fact_batch_note[Gap_Heures] ),
+    "notes", COUNTROWS ( fact_batch_note ),
+    "notes_distinctes", DISTINCTCOUNT ( fact_batch_note[id_batch_note] ),
+    "notes_avec_temps_perdu", [Synthese_Nb_notes_temps_perdu]
+)
+
+// ---------------------------------------------------------------------------
+// Test 3 : multi-impact, par impact
+// Attendu : notes_par_filtre = lignes_liaison pour chaque impact
+// (le filtre Impact retrouve bien toutes les notes qui ont cet impact)
+// ---------------------------------------------------------------------------
+EVALUATE
+ADDCOLUMNS (
+    VALUES ( dim_batch_note_impact[id_batch_note_category] ),
+    "notes_par_filtre", CALCULATE ( COUNTROWS ( fact_batch_note ) ),
+    "lignes_liaison", CALCULATE ( COUNTROWS ( fact_batch_note_impact ) ),
+    "temps_perdu_h", CALCULATE ( SUM ( fact_batch_note[Gap_Heures] ) )
+)
+
+// ---------------------------------------------------------------------------
+// Test 4 : multi-impact, notes à plusieurs impacts
+// Attendu : la colonne impacts liste tous les impacts de la note (ex. « Energie, Essais, Qualite »)
+// Hors rôle Translation, les libellés des 4 langues s'affichent à la suite : c'est normal.
+// ---------------------------------------------------------------------------
+EVALUATE
+TOPN (
+    10,
+    FILTER (
+        SUMMARIZECOLUMNS (
+            fact_batch_note[id_batch_note],
+            fact_batch_note[note],
+            "nb_impacts", CALCULATE ( COUNTROWS ( fact_batch_note_impact ) ),
+            "impacts", [Impact]
+        ),
+        [nb_impacts] > 1
+    ),
+    [nb_impacts], DESC
+)
+
+// ---------------------------------------------------------------------------
+// Test 5 : cartes de l'onglet Measures
+// Attendu : ecarts = 0 ; message_si_tout = texte « Choisir une mesure… » ; carte_si_tout vide
+// ---------------------------------------------------------------------------
+EVALUATE
+VAR t =
+    SUMMARIZECOLUMNS (
+        dim_trs_measure[key],
+        "moy_n", [Carte Moyenne hh:mm], "moy_a", [Batch-cycle Moyenne hh:mm],
+        "min_n", [Carte Min hh:mm], "min_a", [Min hh:mm],
+        "max_n", [Carte Max hh:mm], "max_a", [Max hh:mm],
+        "bmin_n", [Carte Batch min], "bmin_a", [BatchNumber_MinMesureValue],
+        "bmax_n", [Carte Batch max], "bmax_a", [BatchNumber_MaxMesureValue]
+    )
+RETURN
+    ROW (
+        "mesures", COUNTROWS ( t ),
+        "ecarts", COUNTROWS ( FILTER ( t, [moy_n] <> [moy_a] || [min_n] <> [min_a] || [max_n] <> [max_a] || [bmin_n] <> [bmin_a] || [bmax_n] <> [bmax_a] ) ),
+        "message_si_tout", [Carte_Message],
+        "carte_si_tout", [Carte Moyenne hh:mm]
+    )
+
+// ---------------------------------------------------------------------------
+// Test 6 : tableau des temps de cycle moyens (Synthèse macro et Cycle time)
+// Attendu : les 3 temps de cycle (trempe, germination, touraille) avec une moyenne
+// ---------------------------------------------------------------------------
+EVALUATE
+SUMMARIZECOLUMNS (
+    dim_trad_trs_measure[label],
+    TREATAS ( { "batch_cycle_duration" }, fact_process_time_analyses[measure_type] ),
+    TREATAS ( { "germination", "kilning", "kilning_total", "steeping" }, fact_process_time_analyses[categorie] ),
+    "moyenne", [Moyenne hh:mm]
+)
