@@ -84,6 +84,20 @@
               },
               "queryRef": "Calcul.Synthese_Objectif_metier_h",
               "nativeQueryRef": "Synthese_Objectif_metier_h"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calcul"
+                    }
+                  },
+                  "Property": "Batch avec note de temps perdu"
+                }
+              },
+              "queryRef": "Calcul.Batch avec note de temps perdu",
+              "nativeQueryRef": "Batch avec note de temps perdu"
             }
           ]
         }
@@ -244,6 +258,24 @@
           "selector": {
             "metadata": "Calcul.Synthese_Objectif_metier_h"
           }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#E66C37'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Calcul.Batch avec note de temps perdu"
+          }
         }
       ],
       "lineStyles": [
@@ -284,6 +316,41 @@
           },
           "selector": {
             "metadata": "Calcul.Synthese_Objectif_metier_h"
+          }
+        },
+        {
+          "properties": {
+            "strokeWidth": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "showMarker": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "markerShape": {
+              "expr": {
+                "Literal": {
+                  "Value": "'circle'"
+                }
+              }
+            },
+            "markerSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "6D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Calcul.Batch avec note de temps perdu"
           }
         }
       ],

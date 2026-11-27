@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
   "name": "35c56eff13c3065b0856",
   "position": {
-    "x": 331.29628298224168,
+    "x": 331.2962829822417,
     "y": 480.37961032425045,
     "z": 17000,
     "height": 235.22036091739162,
-    "width": 949.16385074412244,
+    "width": 949.1638507441224,
     "tabOrder": 17000
   },
   "visual": {
@@ -20,72 +20,15 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "fact_process_time_analyses"
+                      "Entity": "Semaines"
                     }
                   },
-                  "Property": "week_mesure"
+                  "Property": "Semaine"
                 }
               },
-              "queryRef": "fact_process_time_analyses.week_mesure",
-              "nativeQueryRef": "week_mesure",
-              "active": false
-            },
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "fact_process_time_analyses"
-                    }
-                  },
-                  "Property": "month_name_mesure"
-                }
-              },
-              "queryRef": "fact_process_time_analyses.month_name_mesure",
-              "nativeQueryRef": "month_name_mesure",
+              "queryRef": "Semaines.Semaine",
+              "nativeQueryRef": "Semaine",
               "active": true
-            }
-          ]
-        },
-        "Tooltips": {
-          "projections": [
-            {
-              "field": {
-                "Aggregation": {
-                  "Expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "fact_process_time_analyses"
-                        }
-                      },
-                      "Property": "month_num_mesure"
-                    }
-                  },
-                  "Function": 1
-                }
-              },
-              "queryRef": "Sum(fact_process_time_analyses.month_num_mesure)",
-              "nativeQueryRef": "Average of month_num_mesure"
-            },
-            {
-              "field": {
-                "Aggregation": {
-                  "Expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "fact_process_time_analyses"
-                        }
-                      },
-                      "Property": "ColonneDateMoisTri"
-                    }
-                  },
-                  "Function": 3
-                }
-              },
-              "queryRef": "Min(fact_process_time_analyses.ColonneDateMoisTri)",
-              "nativeQueryRef": "ColonneDateMoisTri (le plus ancien)"
             }
           ]
         },
@@ -93,41 +36,31 @@
           "projections": [
             {
               "field": {
-                "Aggregation": {
+                "Measure": {
                   "Expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "fact_process_time_analyses"
-                        }
-                      },
-                      "Property": "mesure_value_h"
+                    "SourceRef": {
+                      "Entity": "Calcul"
                     }
                   },
-                  "Function": 1
+                  "Property": "Durée moyenne du cycle (h)"
                 }
               },
-              "queryRef": "Sum(fact_process_time_analyses.mesure_value_h)",
-              "nativeQueryRef": "Moyenne de mesure_value_h"
+              "queryRef": "Calcul.Durée moyenne du cycle (h)",
+              "nativeQueryRef": "Durée moyenne du cycle (h)"
             },
             {
               "field": {
-                "Aggregation": {
+                "Measure": {
                   "Expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "fact_process_time_analyses"
-                        }
-                      },
-                      "Property": "target_business_h"
+                    "SourceRef": {
+                      "Entity": "Calcul"
                     }
                   },
-                  "Function": 1
+                  "Property": "Objectif métier 12 semaines (h)"
                 }
               },
-              "queryRef": "Sum(fact_process_time_analyses.target_business_h)",
-              "nativeQueryRef": "Moyenne de target_business_h"
+              "queryRef": "Calcul.Objectif métier 12 semaines (h)",
+              "nativeQueryRef": "Objectif métier 12 semaines (h)"
             }
           ]
         }
@@ -136,18 +69,13 @@
         "sort": [
           {
             "field": {
-              "Aggregation": {
+              "Column": {
                 "Expression": {
-                  "Column": {
-                    "Expression": {
-                      "SourceRef": {
-                        "Entity": "fact_process_time_analyses"
-                      }
-                    },
-                    "Property": "ColonneDateMoisTri"
+                  "SourceRef": {
+                    "Entity": "Semaines"
                   }
                 },
-                "Function": 3
+                "Property": "Semaine"
               }
             },
             "direction": "Ascending"
@@ -375,61 +303,6 @@
           }
         },
         "type": "Advanced"
-      },
-      {
-        "name": "52b311f64e2963b08d0b",
-        "ordinal": 7,
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "fact_process_time_analyses"
-              }
-            },
-            "Property": "Last12s_measure"
-          }
-        },
-        "type": "Categorical",
-        "filter": {
-          "Version": 2,
-          "From": [
-            {
-              "Name": "f",
-              "Entity": "fact_process_time_analyses",
-              "Type": 0
-            }
-          ],
-          "Where": [
-            {
-              "Condition": {
-                "In": {
-                  "Expressions": [
-                    {
-                      "Column": {
-                        "Expression": {
-                          "SourceRef": {
-                            "Source": "f"
-                          }
-                        },
-                        "Property": "Last12s_measure"
-                      }
-                    }
-                  ],
-                  "Values": [
-                    [
-                      {
-                        "Literal": {
-                          "Value": "1L"
-                        }
-                      }
-                    ]
-                  ]
-                }
-              }
-            }
-          ]
-        },
-        "howCreated": "User"
       },
       {
         "name": "be72917402fb7e3f1d9f",

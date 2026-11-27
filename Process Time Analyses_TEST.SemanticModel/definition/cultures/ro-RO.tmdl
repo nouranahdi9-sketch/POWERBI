@@ -116,6 +116,9 @@ cultureInfo ro-RO
 			table Periode
 				column Label
 					caption: Ultimele ore
+			table Semaines
+				column Semaine
+					caption: Săptămână
 			table Calcul
 				measure BatchNumber_MaxMesureValue
 					caption: Șarjă cu durată maximă
@@ -155,6 +158,14 @@ cultureInfo ro-RO
 					caption: Timp total pierdut (h)
 				measure Synthese_Duree_h
 					caption: Durată (h)
+				measure 'Durée moyenne du cycle (h)'
+					caption: Durata medie a ciclului (h)
+				measure 'Objectif métier 12 semaines (h)'
+					caption: Țintă de business (h)
+				measure 'Temps perdu (h) - Top 10'
+					caption: Timp total pierdut (h)
+				measure 'Batch avec note de temps perdu'
+					caption: Șarjă cu notă de timp pierdut
 				measure Synthese_Objectif_metier_h
 					caption: Țintă de business (h)
 				measure Synthese_Temps_perdu_hhmm

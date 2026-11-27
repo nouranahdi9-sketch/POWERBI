@@ -1,0 +1,43 @@
+/// Semaines (lundi de début) présentes dans les données : axe de la courbe 12 semaines de Synthèse macro.
+/// Sans relation : les filtres Année / Mois / Semaine ne réduisent pas l'axe, ils fixent la dernière semaine affichée.
+table Semaines
+	lineageTag: 5bfd8243-ee94-4ddd-9dae-8b99b845b418
+
+	column 'Début semaine'
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 99dd779b-7ddd-452b-b33c-97163d3cbc2a
+		summarizeBy: none
+		sourceColumn: [Début semaine]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Semaine
+		dataType: string
+		lineageTag: 44f9c069-0e49-45ce-b721-1b168521c204
+		summarizeBy: none
+		sourceColumn: [Semaine]
+		sortByColumn: 'Début semaine'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Semaines = calculated
+		mode: import
+		source =
+				VAR _debuts =
+				    DISTINCT (
+				        SELECTCOLUMNS (
+				            FILTER ( fact_process_time_analyses, NOT ISBLANK ( fact_process_time_analyses[date_fin] ) ),
+				            "Début semaine",
+				                VAR _d = fact_process_time_analyses[date_fin]
+				                VAR _jour = DATE ( YEAR ( _d ), MONTH ( _d ), DAY ( _d ) )
+				                RETURN _jour - WEEKDAY ( _jour, 2 ) + 1
+				        )
+				    )
+				RETURN
+				    ADDCOLUMNS (
+				        _debuts,
+				        "Semaine", "S" & FORMAT ( WEEKNUM ( [Début semaine], 21 ), "00" ) & " " & YEAR ( [Début semaine] + 3 )
+				    )
+
+	annotation PBI_Id = 39766c1465c16e9ba949e7e0ea7d3215

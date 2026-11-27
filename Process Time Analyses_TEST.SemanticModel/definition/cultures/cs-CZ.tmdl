@@ -116,6 +116,9 @@ cultureInfo cs-CZ
 			table Periode
 				column Label
 					caption: Poslední hodiny
+			table Semaines
+				column Semaine
+					caption: Týden
 			table Calcul
 				measure BatchNumber_MaxMesureValue
 					caption: Hromada s nejdelší dobou trvání
@@ -155,6 +158,14 @@ cultureInfo cs-CZ
 					caption: Celkový ztracený čas (h)
 				measure Synthese_Duree_h
 					caption: Doba trvání (h)
+				measure 'Durée moyenne du cycle (h)'
+					caption: Průměrná doba cyklu (h)
+				measure 'Objectif métier 12 semaines (h)'
+					caption: Obchodní cíl (h)
+				measure 'Temps perdu (h) - Top 10'
+					caption: Celkový ztracený čas (h)
+				measure 'Batch avec note de temps perdu'
+					caption: Hromada s poznámkou o ztraceném čase
 				measure Synthese_Objectif_metier_h
 					caption: Obchodní cíl (h)
 				measure Synthese_Temps_perdu_hhmm

@@ -22,16 +22,6 @@
   },
   "visualInteractions": [
     {
-      "source": "b249f842ea0bb7006ac7",
-      "target": "35c56eff13c3065b0856",
-      "type": "NoFilter"
-    },
-    {
-      "source": "f0833c047cc86ce22b49",
-      "target": "35c56eff13c3065b0856",
-      "type": "NoFilter"
-    },
-    {
       "source": "84d5aaaf43e36bb302a7",
       "target": "137346f584d6ad0b8029",
       "type": "NoFilter"

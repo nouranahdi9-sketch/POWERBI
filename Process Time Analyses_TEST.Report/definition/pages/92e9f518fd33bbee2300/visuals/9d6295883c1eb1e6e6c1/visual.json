@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
   "name": "9d6295883c1eb1e6e6c1",
   "position": {
-    "x": 331.29628298224168,
+    "x": 331.2962829822417,
     "y": 195.4648069595226,
     "z": 11000,
     "height": 225.28147242792434,
-    "width": 949.16385074412244,
+    "width": 949.1638507441224,
     "tabOrder": 11000
   },
   "visual": {
@@ -71,22 +71,17 @@
           "projections": [
             {
               "field": {
-                "Aggregation": {
+                "Measure": {
                   "Expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "fact_batch_note"
-                        }
-                      },
-                      "Property": "Gap_Heures"
+                    "SourceRef": {
+                      "Entity": "Calcul"
                     }
                   },
-                  "Function": 0
+                  "Property": "Temps perdu (h) - Top 10"
                 }
               },
-              "queryRef": "Sum(fact_batch_note.Gap_Heures)",
-              "nativeQueryRef": "Somme de Gap_Heures"
+              "queryRef": "Calcul.Temps perdu (h) - Top 10",
+              "nativeQueryRef": "Temps perdu (h) - Top 10"
             }
           ]
         }
@@ -95,18 +90,13 @@
         "sort": [
           {
             "field": {
-              "Aggregation": {
+              "Measure": {
                 "Expression": {
-                  "Column": {
-                    "Expression": {
-                      "SourceRef": {
-                        "Entity": "fact_batch_note"
-                      }
-                    },
-                    "Property": "Gap_Heures"
+                  "SourceRef": {
+                    "Entity": "Calcul"
                   }
                 },
-                "Function": 0
+                "Property": "Temps perdu (h) - Top 10"
               }
             },
             "direction": "Descending"
@@ -208,13 +198,6 @@
               "expr": {
                 "Literal": {
                   "Value": "false"
-                }
-              }
-            },
-            "titleText": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Total time lost (h)'"
                 }
               }
             },

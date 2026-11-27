@@ -618,6 +618,87 @@ table Calcul
 		displayFolder: Mesures\Synthese
 		lineageTag: 98b51f2b-670a-4f71-ae4c-713058baaa4a
 
+	/// Courbe 12 semaines de Synthèse macro : moyenne de la semaine de l'axe (table Semaines),
+	/// pour les 12 semaines qui finissent par la dernière semaine sélectionnée (Année / Mois / Semaine),
+	/// ou par la dernière semaine de données si rien n'est sélectionné.
+	measure 'Durée moyenne du cycle (h)' =
+			
+			VAR _fin = CALCULATE ( MAX ( fact_process_time_analyses[date_fin] ) )
+			VAR _jour_fin = DATE ( YEAR ( _fin ), MONTH ( _fin ), DAY ( _fin ) )
+			VAR _semaine_fin = _jour_fin - WEEKDAY ( _jour_fin, 2 ) + 1
+			VAR _semaine = SELECTEDVALUE ( Semaines[Début semaine] )
+			RETURN
+			    IF (
+			        NOT ISBLANK ( _semaine ) && _semaine <= _semaine_fin && _semaine > _semaine_fin - 84,
+			        CALCULATE (
+			            AVERAGE ( fact_process_time_analyses[mesure_value_h] ),
+			            REMOVEFILTERS ( fact_process_time_analyses[year_mesure], fact_process_time_analyses[week_mesure],
+			                fact_process_time_analyses[month_name_mesure], fact_process_time_analyses[month_num_mesure] ),
+			            REMOVEFILTERS ( dim_month ),
+			            REMOVEFILTERS ( dim_trad_month ),
+			            fact_process_time_analyses[date_fin] >= _semaine,
+			            fact_process_time_analyses[date_fin] < _semaine + 7
+			        )
+			    )
+		formatString: 0.00
+		displayFolder: Mesures\Synthese
+		lineageTag: 2c1ad8da-bfe4-451f-a2c0-d25c64de7c64
+
+	measure 'Objectif métier 12 semaines (h)' =
+			
+			VAR _fin = CALCULATE ( MAX ( fact_process_time_analyses[date_fin] ) )
+			VAR _jour_fin = DATE ( YEAR ( _fin ), MONTH ( _fin ), DAY ( _fin ) )
+			VAR _semaine_fin = _jour_fin - WEEKDAY ( _jour_fin, 2 ) + 1
+			VAR _semaine = SELECTEDVALUE ( Semaines[Début semaine] )
+			RETURN
+			    IF (
+			        NOT ISBLANK ( _semaine ) && _semaine <= _semaine_fin && _semaine > _semaine_fin - 84,
+			        CALCULATE (
+			            AVERAGE ( fact_process_time_analyses[target_business_h] ),
+			            REMOVEFILTERS ( fact_process_time_analyses[year_mesure], fact_process_time_analyses[week_mesure],
+			                fact_process_time_analyses[month_name_mesure], fact_process_time_analyses[month_num_mesure] ),
+			            REMOVEFILTERS ( dim_month ),
+			            REMOVEFILTERS ( dim_trad_month ),
+			            fact_process_time_analyses[date_fin] >= _semaine,
+			            fact_process_time_analyses[date_fin] < _semaine + 7
+			        )
+			    )
+		formatString: 0.00
+		displayFolder: Mesures\Synthese
+		lineageTag: 696daddd-a219-4010-a139-89a6d7bbecbb
+
+	/// Histogramme de Synthèse macro : temps perdu des 10 premiers éléments du niveau choisi
+	/// (boutons Localisation / Impact / Événement / Détail du paramètre de champ Niveau notes).
+	measure 'Temps perdu (h) - Top 10' =
+			
+			VAR _niveau = SELECTEDVALUE ( 'Niveau notes'[Niveau notes Ordre] )
+			VAR _valeur = SUM ( fact_batch_note[Gap_Heures] )
+			VAR _rang =
+			    SWITCH (
+			        _niveau,
+			        0, RANKX ( ALLSELECTED ( dim_trad_batch_note_location[label] ), CALCULATE ( SUM ( fact_batch_note[Gap_Heures] ) ), , DESC ),
+			        1, RANKX ( ALLSELECTED ( dim_trad_batch_note_impact[label] ), CALCULATE ( SUM ( fact_batch_note[Gap_Heures] ) ), , DESC ),
+			        2, RANKX ( ALLSELECTED ( dim_trad_batch_note_event[label] ), CALCULATE ( SUM ( fact_batch_note[Gap_Heures] ) ), , DESC ),
+			        3, RANKX ( ALLSELECTED ( dim_trad_batch_note_detail[label] ), CALCULATE ( SUM ( fact_batch_note[Gap_Heures] ) ), , DESC )
+			    )
+			RETURN
+			    IF ( NOT ISBLANK ( _valeur ) && _rang <= 10, _valeur )
+		formatString: #,0
+		displayFolder: Mesures\Synthese
+		lineageTag: ac8ab4a3-95ce-4966-b8dc-592a341bafcb
+
+	/// Graphes de Synthèse : durée du batch quand il a au moins une note avec du temps perdu
+	/// (points orange, comme les batches en orange de la maquette).
+	measure 'Batch avec note de temps perdu' =
+			
+			VAR _duree = [Synthese_Duree_h]
+			VAR _notes = CALCULATE ( COUNTROWS ( fact_batch_note ), fact_batch_note[gap_minutes] > 0 )
+			RETURN
+			    IF ( NOT ISBLANK ( _duree ) && _notes > 0, _duree )
+		formatString: 0.00
+		displayFolder: Mesures\Synthese
+		lineageTag: 66ca46b0-a20d-4a18-82e3-8623914f6a70
+
 	measure Synthese_Duree_h =
 			
 			IF (

@@ -116,6 +116,9 @@ cultureInfo fr-FR
 			table Periode
 				column Label
 					caption: Dernières heures
+			table Semaines
+				column Semaine
+					caption: Semaine
 			table Calcul
 				measure BatchNumber_MaxMesureValue
 					caption: Batch de durée max
@@ -155,6 +158,14 @@ cultureInfo fr-FR
 					caption: Temps total perdu (h)
 				measure Synthese_Duree_h
 					caption: Durée (h)
+				measure 'Durée moyenne du cycle (h)'
+					caption: Durée moyenne du cycle (h)
+				measure 'Objectif métier 12 semaines (h)'
+					caption: Objectif métier (h)
+				measure 'Temps perdu (h) - Top 10'
+					caption: Temps total perdu (h)
+				measure 'Batch avec note de temps perdu'
+					caption: Batch avec note de temps perdu
 				measure Synthese_Objectif_metier_h
 					caption: Objectif métier (h)
 				measure Synthese_Temps_perdu_hhmm
