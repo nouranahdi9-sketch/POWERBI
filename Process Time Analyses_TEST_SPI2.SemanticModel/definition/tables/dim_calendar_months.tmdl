@@ -1,0 +1,70 @@
+table dim_calendar_months
+	lineageTag: d0aff680-88e1-49b5-a045-1098d3613562
+
+	column month_num
+		dataType: int64
+		formatString: 0
+		lineageTag: 48e97374-4fae-4efd-a193-715bbd162848
+		summarizeBy: sum
+		sourceColumn: month_num
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_fr
+		dataType: string
+		lineageTag: 334342eb-6096-4f10-a5d3-5e6293955ca6
+		summarizeBy: none
+		sourceColumn: month_fr
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_eng
+		dataType: string
+		lineageTag: 01dfc56c-a327-4b6d-9ff0-675347b25913
+		summarizeBy: none
+		sourceColumn: month_eng
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 148dc57f-4750-4636-956d-fc36f4fa441f
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: fcaf0b7c-e863-4e47-80b7-2633588a2e93
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 4b2316c6-fddb-4557-8fe4-710bddaba349
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_calendar_months = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_preprd_Database = Source{[Name="mal_maite_bi_preprd",Kind="Database"]}[Data],
+				    process_time_analyses_Schema = mal_maite_bi_preprd_Database{[Name="process_time_analyses",Kind="Schema"]}[Data],
+				    dim_calendar_months_Table = process_time_analyses_Schema{[Name="dim_calendar_months",Kind="Table"]}[Data]
+				in
+				    dim_calendar_months_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

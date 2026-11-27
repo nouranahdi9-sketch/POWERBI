@@ -1,0 +1,45 @@
+table dim_month
+	lineageTag: 7a1cddf2-756f-49e4-a0d6-004d568bd9b2
+
+	column month_num
+		dataType: int64
+		formatString: 0
+		lineageTag: 084d1628-b208-4824-b7ae-80889c5b5432
+		summarizeBy: none
+		sourceColumn: month_num
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 46c0b56b-241c-4cd0-9f14-a5e9b2dcb46f
+		summarizeBy: none
+		sourceColumn: deleted
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f8c4092e-e930-4702-aca3-1c8507511b53
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_month = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-5761093891575298.18.azuredatabricks.net", "sql/protocolv1/o/5761093891575298/0612-144800-uikjvj67", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    mal_maite_bi_preprd_Database = Source{[Name="mal_maite_bi_preprd",Kind="Database"]}[Data],
+				    common_Schema = mal_maite_bi_preprd_Database{[Name="common",Kind="Schema"]}[Data],
+				    dim_month_Table = common_Schema{[Name="dim_month",Kind="Table"]}[Data]
+				in
+				    dim_month_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+
