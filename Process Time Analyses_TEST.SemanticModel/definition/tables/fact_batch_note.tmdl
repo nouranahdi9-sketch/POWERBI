@@ -186,6 +186,38 @@ table fact_batch_note
 
 		annotation SummarizationSetBy = Automatic
 
+	column impact
+		dataType: string
+		lineageTag: c9ef0bbb-4c29-4d9e-b059-c72075aaacb0
+		summarizeBy: none
+		sourceColumn: impact
+
+		annotation SummarizationSetBy = Automatic
+
+	column key_impact
+		dataType: string
+		lineageTag: 7b613223-6a59-437a-a1ee-fd2bdbbd1575
+		summarizeBy: none
+		sourceColumn: key_impact
+
+		annotation SummarizationSetBy = Automatic
+
+	column impacts
+		dataType: string
+		lineageTag: 71198833-0307-41b9-bc0f-6e41f8e5bdf7
+		summarizeBy: none
+		sourceColumn: impacts
+
+		annotation SummarizationSetBy = Automatic
+
+	column key_impacts
+		dataType: string
+		lineageTag: 93a36679-4b6f-4cce-9794-75328a3a4825
+		summarizeBy: none
+		sourceColumn: key_impacts
+
+		annotation SummarizationSetBy = Automatic
+
 	partition fact_batch_note = m
 		mode: import
 		source =

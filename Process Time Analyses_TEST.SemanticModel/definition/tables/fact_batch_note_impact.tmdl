@@ -41,3 +41,4 @@ table fact_batch_note_impact
 				    Dedoublonne
 
 	annotation PBI_ResultType = Table
+

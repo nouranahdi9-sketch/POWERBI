@@ -129,26 +129,6 @@ cultureInfo fr-FR
 					caption: Delta moy. (BI)
 				measure Moyenne_target_business_hh:mm
 					caption: Objectif moyen (métier)
-				measure Synthese_Duree_h
-					caption: Durée (h)
-				measure Synthese_Temps_perdu_hhmm
-					caption: Temps perdu
-				measure Synthese_Nb_notes_temps_perdu
-					caption: notes avec temps perdu
-				measure 'Carte Moyenne hh:mm'
-					caption: Moyenne
-				measure 'Carte Min hh:mm'
-					caption: Min
-				measure 'Carte Max hh:mm'
-					caption: Max
-				measure 'Carte Batch min'
-					caption: Batch de durée min
-				measure 'Carte Batch max'
-					caption: Batch de durée max
-				measure 'Temps total perdu (h)'
-					caption: Temps total perdu (h)
-				measure Synthese_Objectif_metier_h
-					caption: Objectif métier (h)
 				measure Moyenne_top_20_hh:mm
 					caption: Objectif moy. (BI)
 				measure 'Max hh:mm'
@@ -171,6 +151,26 @@ cultureInfo fr-FR
 					caption: Détail
 				measure Impact
 					caption: Impact
+				measure 'Temps total perdu (h)'
+					caption: Temps total perdu (h)
+				measure Synthese_Duree_h
+					caption: Durée (h)
+				measure Synthese_Objectif_metier_h
+					caption: Objectif métier (h)
+				measure Synthese_Temps_perdu_hhmm
+					caption: Temps perdu
+				measure Synthese_Nb_notes_temps_perdu
+					caption: notes avec temps perdu
+				measure 'Carte Moyenne hh:mm'
+					caption: Moyenne
+				measure 'Carte Min hh:mm'
+					caption: Min
+				measure 'Carte Max hh:mm'
+					caption: Max
+				measure 'Carte Batch min'
+					caption: Batch de durée min
+				measure 'Carte Batch max'
+					caption: Batch de durée max
 			table dim_trad_variety
 				column label
 					caption: Variété

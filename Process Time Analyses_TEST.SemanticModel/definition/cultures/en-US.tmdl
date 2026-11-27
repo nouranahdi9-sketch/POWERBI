@@ -129,26 +129,6 @@ cultureInfo en-US
 					caption: avg. Delta (BI)
 				measure Moyenne_target_business_hh:mm
 					caption: Average Business Target
-				measure Synthese_Duree_h
-					caption: Duration (h)
-				measure Synthese_Temps_perdu_hhmm
-					caption: Lost time
-				measure Synthese_Nb_notes_temps_perdu
-					caption: notes with lost time
-				measure 'Carte Moyenne hh:mm'
-					caption: Average
-				measure 'Carte Min hh:mm'
-					caption: Min
-				measure 'Carte Max hh:mm'
-					caption: Max
-				measure 'Carte Batch min'
-					caption: Batch of min duration
-				measure 'Carte Batch max'
-					caption: Batch of max duration
-				measure 'Temps total perdu (h)'
-					caption: Total time lost (h)
-				measure Synthese_Objectif_metier_h
-					caption: Business target (h)
 				measure Moyenne_top_20_hh:mm
 					caption: avg. Target (BI)
 				measure 'Max hh:mm'
@@ -171,6 +151,26 @@ cultureInfo en-US
 					caption: Detail
 				measure Impact
 					caption: Impact
+				measure 'Temps total perdu (h)'
+					caption: Total time lost (h)
+				measure Synthese_Duree_h
+					caption: Duration (h)
+				measure Synthese_Objectif_metier_h
+					caption: Business target (h)
+				measure Synthese_Temps_perdu_hhmm
+					caption: Lost time
+				measure Synthese_Nb_notes_temps_perdu
+					caption: notes with lost time
+				measure 'Carte Moyenne hh:mm'
+					caption: Average
+				measure 'Carte Min hh:mm'
+					caption: Min
+				measure 'Carte Max hh:mm'
+					caption: Max
+				measure 'Carte Batch min'
+					caption: Batch of min duration
+				measure 'Carte Batch max'
+					caption: Batch of max duration
 			table dim_trad_variety
 				column label
 					caption: Variety
@@ -462,16 +462,6 @@ cultureInfo en-US
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.727
-			          }
-			        },
-			        {
-			          "Batch": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
 			          }
 			        }
 			      ]
@@ -4488,6 +4478,16 @@ cultureInfo en-US
 			            },
 			            "Weight": 0.571
 			          }
+			        },
+			        {
+			          "Détail": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ]
 			    },
@@ -6195,16 +6195,6 @@ cultureInfo en-US
 			            "State": "Generated",
 			            "Weight": 0.99
 			          }
-			        },
-			        {
-			          "Target (BI)": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
 			        }
 			      ]
 			    },
@@ -6228,16 +6218,6 @@ cultureInfo en-US
 			            "State": "Generated",
 			            "Weight": 0.99
 			          }
-			        },
-			        {
-			          "Duration": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
 			        }
 			      ]
 			    },
@@ -6260,16 +6240,6 @@ cultureInfo en-US
 			            "Type": "Noun",
 			            "State": "Generated",
 			            "Weight": 0.99
-			          }
-			        },
-			        {
-			          "Delta": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
 			          }
 			        }
 			      ]
@@ -6393,16 +6363,6 @@ cultureInfo en-US
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.492
-			          }
-			        },
-			        {
-			          "Measure": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
 			          }
 			        }
 			      ]
@@ -19622,16 +19582,6 @@ cultureInfo en-US
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.571
-			          }
-			        },
-			        {
-			          "Last hours": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
 			          }
 			        }
 			      ]

@@ -77,5 +77,23 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "f84c62927b7d9e04f321",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Calcul"
+              }
+            },
+            "Property": "Synthese_Temps_perdu_hhmm"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

@@ -4,10 +4,10 @@
   "position": {
     "x": 980,
     "y": 425,
-    "z": 12000,
+    "z": 15000,
     "height": 55,
     "width": 300,
-    "tabOrder": 12000
+    "tabOrder": 15000
   },
   "visual": {
     "visualType": "slicer",
@@ -290,20 +290,6 @@
           ]
         },
         "howCreated": "User"
-      },
-      {
-        "name": "0af823df18410dc8da3c",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "dim_trad_trs_measure"
-              }
-            },
-            "Property": "label_cycle_time"
-          }
-        },
-        "type": "Categorical"
       }
     ]
   }
