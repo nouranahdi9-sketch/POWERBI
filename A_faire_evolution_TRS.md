@@ -73,3 +73,16 @@ Clés de l'onglet Synthèse macro (même table, même ReportCode), textes propos
 |---|---|---|
 | 1 | Les temps de cycle ont changé de clé dans les données : `duree_temps_cycle_trempe/germination/touraille` → `steep_cycle_duration`, `germ_cycle_duration`, `kiln_cycle_duration`. Tant que le job des traductions n'est pas relancé, ils n'ont plus de libellé et les visuels par mesure sont vides (tableau et liste des cycles de Synthèse macro, Cycle time) | Corrigé en preprod le 26/11 (job `main_translations` relancé) |
 | 2 | MEP : relancer le job `main_translations` en PROD après la mise à jour du registre `trs_nomenclature` / `trs_translation`, avant d'actualiser le rapport | À faire à la MEP |
+
+## Tests de non-régression DAX (`dax/tests_non_regression.dax`), le 27/11 en preprod
+
+| Test | Résultat |
+|---|---|
+| 1. Graphes de Synthèse vs ancien calcul (93 299 couples batch x mesure) | OK, aucun écart |
+| 2. Temps perdu (racine de l'arbre, carte) et unicité des notes | OK (6 233,93 h ; 2 780 notes, aucune en double) |
+| 3. Filtre Impact, par impact | OK (notes trouvées = lignes de liaison pour chaque impact) |
+| 4. Notes à plusieurs impacts | OK (2 notes de test, tous leurs impacts listés) |
+| 5. Cartes de Measures vs anciennes cartes | OK pour les 74 mesures ; seul écart sur la ligne vide (8 lignes aux anciennes clés duree_temps_cycle_*, sans mesure correspondante) |
+| 6. Tableau des temps de cycle | OK (trempe 25:20, germination 25:51, touraille 26:28, dans les 4 langues) |
+
+Reste : vérifications visuelles de `Liste_verification_evolution_TRS.docx`, puis suppression des onglets masqués.
